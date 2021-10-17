@@ -1,0 +1,8 @@
+=> CREATING THE NODE SERVER:
+  $ mkdir backend
+  $ npm init -y
+
+=> INSTALLING DEPENDENCIES:
+  npm i express mysql2 body-parser express-validator bcryptjs jsonwebtoken
+  npm i -f fsevents@2.3.2
+  npm i -D nodemon

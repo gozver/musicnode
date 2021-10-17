@@ -1,0 +1,14 @@
+# dependencies
+/node_modules
+
+# folders
+apps/
+backups/
+guides/
+
+# compressed files
+*.rar
+*.zip
+
+# info files
+rm.angular.txt

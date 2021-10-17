@@ -1,0 +1,10 @@
+old/
+
+*.rar
+*.zip
+*.docx
+*.xlsx
+*.pptx
+*.png
+
+convalidacion-ftc.pdf
