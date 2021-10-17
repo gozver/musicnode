@@ -21,4 +21,4 @@ import { SingupFormComponent } from './singup-form/singup-form.component';
     SingupFormComponent
   ]
 })
-export class UserModule { }
+export class UserComponentsModule { }

@@ -4,8 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 // angular app
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from '@app/app.component';
+import { AppRoutingModule } from '@app/app-routing.module';
 
 // angular material
 import { MatButtonModule } from '@angular/material/button';
@@ -16,16 +16,18 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 // custom components
-import { HomeComponent } from './features/components/home/home.component';
+import { HomeComponent } from '@private/home/home.component';
 
 // custom Modules
-import { UserModule } from '@features/components/user/user.module';
+import { UserComponentsModule } from '@private/user/components/user-components.module';
 import { ComponentsModule } from '@shared/components/components.module';
+import { LoginComponent } from './private/user/pages/login/login.component';
+import { SignupComponent } from './private/user/pages/signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,    
-    HomeComponent,    
+    HomeComponent, LoginComponent, SignupComponent,    
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,7 @@ import { ComponentsModule } from '@shared/components/components.module';
     MatListModule,
     MatToolbarModule,
 
-    UserModule,
+    UserComponentsModule,
     ComponentsModule
   ],
   providers: [],
