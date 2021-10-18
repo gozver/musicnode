@@ -3,13 +3,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // custom modules
-import { UserComponentsModule } from '../components/user-components.module';
-import { ComponentsModule } from '@shared/components/components.module';
+import { UserRoutingModule } from './user-routing.module';
 
 // custom components
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-
 
 @NgModule({
   declarations: [
@@ -18,9 +16,7 @@ import { SignupComponent } from './signup/signup.component';
   ],
   imports: [
     CommonModule,
-
-    UserComponentsModule,
-    ComponentsModule
+    UserRoutingModule,
   ]
 })
 export class UserModule { }
