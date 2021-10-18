@@ -8,6 +8,11 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoadingComponent } from './loading/loading.component';
 
+// angular material
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -16,7 +21,11 @@ import { LoadingComponent } from './loading/loading.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule
   ],
   exports: [
     HeaderComponent,
