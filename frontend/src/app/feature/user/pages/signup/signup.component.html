@@ -1,1 +1,17 @@
-<p>signup works!</p>
+<app-singup-form 
+  [signupForm]=signupForm
+>
+</app-singup-form>
+
+<div class="btn-ctnr">
+  <button 
+    mat-button color="primary"
+    aria-label="Save"
+    mat-rised-button
+    mat-fab
+    [disabled]="signupForm.invalid"
+    (click)="signup()"
+  >
+    <mat-icon>save</mat-icon>
+  </button>
+</div>

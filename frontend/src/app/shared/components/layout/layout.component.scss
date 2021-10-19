@@ -6,8 +6,8 @@ mat-toolbar {
 mat-sidenav-container {
   margin: auto;
   max-width: 1200px;
-  min-width: 400px;
   height: calc(100vh - 65px);
+  background: #f5f7fa;
   
   mat-sidenav {
     background: #002b5c;
@@ -67,7 +67,8 @@ mat-sidenav-container {
       height: calc(100vh - 98px);
       max-width: 1150px;
       margin: 16px;
-      border-radius: 10px;
+      padding: 0 30px;
+      border-radius: 10px;      
     }
   }
 }

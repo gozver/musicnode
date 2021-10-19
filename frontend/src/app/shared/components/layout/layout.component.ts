@@ -9,8 +9,7 @@ import { BreakpointObserver } from '@angular/cdk/layout'
 })
 export class LayoutComponent {
 
-  // viewchild => property decorator that configures a view query
-  // we use it to reference the MatSidenav element in the template
+  // viewchild => we use viewchild to reference the MatSidenav element in the template
   // ! => tells typescript the sidenav variable will be initialized later (strinct mode)
   @ViewChild(MatSidenav) sidenav!: MatSidenav; 
   
@@ -18,17 +17,19 @@ export class LayoutComponent {
     private bpObserver: BreakpointObserver
   ) { }
 
-  // view queries are set before the ngafterviewinit callback is called
   ngAfterViewInit() {
-    // if max-width <= 800px it means we are in a small screen
-    this.bpObserver.observe(['(max-width: 800px)']).subscribe((res) => {
-      if (res.matches) {  // width <= 800px
-        this.sidenav.mode = 'over';
-        this.sidenav.close();
-      } else {            // width > 800px
-        this.sidenav.mode = 'side';
-        this.sidenav.open();
-      }
-    });
+    // angular lifecicle hook: https://www.youtube.com/watch?v=O47uUnJjbJc&t=9s
+    setTimeout(() => {
+      this.bpObserver.observe(['(max-width: 800px)']).subscribe((res) => {
+        // if max-width <= 800px it means we are in a small screen
+        if (res.matches) {
+          this.sidenav.mode = 'over';
+          this.sidenav.close();
+        } else {
+          this.sidenav.mode = 'side';
+          this.sidenav.open();
+        }
+      });
+    }, 0);
   }
 }

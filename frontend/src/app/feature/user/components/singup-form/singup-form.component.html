@@ -1,1 +1,45 @@
-<p>singup-form works!</p>
+<form [formGroup]="signupForm" class="signup-form" novalidate>
+  <mat-form-field class="input">
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Enter first name" formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field class="input">
+    <mat-label>Surname</mat-label>
+    <input matInput placeholder="Enter last name" formControlName="surname" />
+  </mat-form-field>
+
+  <mat-form-field class="input">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="Enter email" formControlName="email" />
+  </mat-form-field>
+
+  <mat-form-field class="input">
+    <mat-label>Phone</mat-label>
+    <input matInput placeholder="Enter phone" formControlName="phone" type="number" />
+  </mat-form-field>
+
+  <mat-form-field class="input">
+    <mat-label>Password</mat-label>
+    <input matInput placeholder="Enter password" formControlName="password" type="password" />
+  </mat-form-field>
+
+  <mat-form-field class="input">
+    <mat-label>Avatar</mat-label>
+    <input matInput placeholder="Enter image" formControlName="avatar" type="url" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Role</mat-label>
+    <mat-select formControlName="role">      
+      <mat-option value="band">Band</mat-option>
+      <mat-option value="company">Company</mat-option>
+      <mat-option value="admin">Administrator</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="input" *ngIf="sf.role.value==='admin'">
+    <mat-label>Administrator code</mat-label>
+    <input matInput placeholder="Enter administrator code" formControlName="adminCode" type="number" />
+  </mat-form-field>
+</form>
