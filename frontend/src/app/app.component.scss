@@ -1,18 +1,4 @@
-$blue: #1976d2;
-$red: rgb(221, 0, 49);
-$white: #fff;
-$dark-gray: #333;
-
-$font1: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-$font2: Roboto, "Helvetica Neue", sans-serif;
-
-* {
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.container {
-  width: 1150px;
-  margin: 20px auto;
+main {
+  background-color: #fafafa;
+  color: rgba(0,0,0,.87);
 }

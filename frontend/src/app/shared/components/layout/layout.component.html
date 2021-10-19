@@ -1,0 +1,52 @@
+<mat-toolbar>
+    <button mat-icon-button *ngIf="sidenav.mode==='over'" (click)="sidenav.toggle()">
+      <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+      <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+    </button>
+
+    Musicnode
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav">
+    <img class="avatar mat-elevation-z8" src="assets/images/me.jpg" />
+
+    <h4 class="user">Lolo Gonzalez</h4>
+    <p class="role">Bajista</p>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button" routerLink="/home">
+        <mat-icon>home</mat-icon>
+        <a routerLink="/home">Home</a>
+    </button>
+
+    <button mat-button class="menu-button">
+        <mat-icon>person</mat-icon>
+        <a routerLink="/user/login">Profile</a>
+    </button>
+
+    <button mat-button class="menu-button" routerLink="/user/signup">
+      <mat-icon>storefront</mat-icon>
+      <a routerLink="/user/sigup">Market</a>
+    </button>
+
+    <button mat-button class="menu-button" routerLink="/user/signup">
+        <mat-icon>info</mat-icon>
+        <a routerLink="/user/sigup">About</a>
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button">
+        <mat-icon>help</mat-icon>
+        <span>Help</span>
+    </button>
+  </mat-sidenav>
+  
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z4" [style.marginLeft]="(sidenav.opened ? '32px' : '16px')">
+      <router-outlet></router-outlet>
+    </div>  
+  </mat-sidenav-content>
+</mat-sidenav-container>

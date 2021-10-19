@@ -1,7 +1,7 @@
 // angular modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // angular app
 import { AppComponent } from '@app/app.component';
@@ -17,9 +17,10 @@ import { ComponentsModule } from './shared/components/components.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NoopAnimationsModule,
+    BrowserAnimationsModule,
 
     ComponentsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
