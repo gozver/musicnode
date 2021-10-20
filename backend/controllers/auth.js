@@ -7,13 +7,16 @@ exports.signup = async (req, res, next) => {
   const errors = validationResult(req);
   
   // if errors, return errors in a json response
-  if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+  if (!errors.isEmpty()) {
+    console.log('--> Validation errors:', errors.errors);
+
+    return res.status(400).json({ errors: errors.array() });
+  }
 
   // if no errors, continue
   const name = req.body.name;
   const surname = req.body.surname;
   const email = req.body.email;
-  const dni = req.body.dni;
   const phone = req.body.phone;
   const password = req.body.password;
   
@@ -24,8 +27,7 @@ exports.signup = async (req, res, next) => {
     const user = { 
       name: name,
       surname: surname,
-      email: email,
-      dni: dni,
+      email: email,      
       phone: phone,
       password: hashedPwd      
     };

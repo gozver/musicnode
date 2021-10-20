@@ -23,10 +23,8 @@ router.post(
       if (user[0].length > 0) return Promise.reject('The email already exists!');
     })
     .normalizeEmail(),
-  body('dni')
-    .not()
-    .isEmpty(),
   body('phone')
+    .trim()
     .not()
     .isEmpty(),
   body('password')

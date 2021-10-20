@@ -7,9 +7,9 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./singup-form.component.scss']
 })
 export class SingupFormComponent {
-  get sf() {
-    return this.signupForm.controls;
-  }
+  // get sfc() {
+  //   return this.signupForm.controls;
+  // }
 
   @Input() signupForm!: FormGroup;
 }

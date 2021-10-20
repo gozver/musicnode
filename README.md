@@ -24,4 +24,4 @@ Run `npm run serve` to run the server with nodemon. The app will automatically r
 - [Angular CLI](https://github.com/angular/angular-cli) version 12.2.10.
 
 ## Frontend development server
-Run `npm start` to run the server and. The app will automatically navigate to `http://localhost:4200/` and reload if you change any of the source files.
+Run `npm start` to run the server and. The app will automatically navigate to `http://localhost:4200/` and will reload if you change any of the source files.

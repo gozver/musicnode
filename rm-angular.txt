@@ -1,0 +1,88 @@
+=> INSTALLING ANGULAR:
+  $ npm i -g @angular/cli
+  $ npm i -g @angular/cli@latest
+
+=> CREATING A NEW PROJECT:
+  $ ng new name_app
+
+=> CREATING A NEW PROJECT WITH ROUTING & SCSS:
+ $ ng new name_app --routing --style=scss
+
+=> CREATING A NEW PROJECT WITHOUT THE 'spec.ts' FILES:
+  $ ng new name_app --skip-tests
+
+=> RUNNING FRONTEND SERVER
+  $ ng serve 
+  $ ng serve --open
+
+=> CREATING A DIST FOLDER FOR PRODUCTION
+  $ ng build --prod
+
+------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
+
+=> CREATING A 'npm start' SCRIPT => 'ng serve -open'
+  - add to package.json:
+  .....
+    "scripts": {
+      "start": "ng serve -o"
+    },
+  .....
+
+------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
+
+=> INSTALLING ANGULAR MATERIAL
+  $ ng add @angular/material
+  - Select this options: 
+    - custom theme: Indigo/Pink, 
+    - typography: yes,
+    - set up browser animations: no
+
+------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
+
+- CREATE A COMPONENT:
+ng g c components/componentName || ng generate component components/componentName
+
+- CREATE A MODULE FROM WHICH THE COMPONENT WILL BE EXPORTED:
+ng generate m components/moduleName --flat || ng generate module components/moduleName 
+
+Note: con --flat para no generar una campeta llamada moduleName
+      sin --flat genera el modulo dentro de una carpeta llamada moduleName
+
+- CREATE A 'home' COMPONENT WITH MODULE AND ROUTING
+ng g c pages/home
+ng g m pages/home --routing
+
+- THE ROUTE FOR THIS COMPONENT WILL BE:
+{ 
+  path: '',
+  loadChildren: () => import('./pages/home/home-routing.module').then(m => m.HomeRoutingModule)
+}
+
+- CREATE A SEVICE:
+ng g s /shared/services/user --skip-tests
+
+------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
+
+- CHECK THAT ROUTES ARE RENDERED IN app.component.html:
+<router-outlet></router-outlet>
+
+------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
+
+- INSTALLING A JSON SERVER:
+npm install -g json-server
+json-server --watch db.json --delay 500
+
+------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
+
+- NGRX TRANSLATE:
+npm i @ngx-translate/core --save
+npm i @ngx-translate/http-loader --save
+    
+------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------

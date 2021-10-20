@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const errorController = require('./controllers/error');
 
@@ -6,15 +7,18 @@ const app = express();
 
 const port = process.env.PORT || 3000; // environment PORT or 3000 if there isn't
 
+// app.use(method()) => methods used as a middleware
 app.use(express.json());      // method to recognize the incoming request object as a JSON object
 app.use(express.urlencoded({  // method to recognize the incoming request object as strings or arrays. 
   extended: false
 }));
 
+app.use(cors()); // cross-origin resource sharing (intercambio de recursos de origen cruzado)
+
 // set response headers
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, DESTROY');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
@@ -28,7 +32,7 @@ app.use(errorController.get500);
 
 // bind and listen the connections on the specified host and port
 app.listen(port, (err) => {
-  if (err) console.log('Error in server setup')
+  if (err) console.log('--> Error in server setup');
 
-  console.log(`Server listening on port ${port}`);
+  console.log(`--> Server listening on port ${port}`);
 });

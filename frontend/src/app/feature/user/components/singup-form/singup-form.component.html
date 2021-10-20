@@ -1,4 +1,6 @@
 <form [formGroup]="signupForm" class="signup-form" novalidate>
+  <h1>Signup</h1>
+
   <mat-form-field class="input">
     <mat-label>Name</mat-label>
     <input matInput placeholder="Enter first name" formControlName="name" />
@@ -16,20 +18,21 @@
 
   <mat-form-field class="input">
     <mat-label>Phone</mat-label>
-    <input matInput placeholder="Enter phone" formControlName="phone" type="number" />
+    <input matInput placeholder="Enter phone" formControlName="phone" />
   </mat-form-field>
 
   <mat-form-field class="input">
     <mat-label>Password</mat-label>
     <input matInput placeholder="Enter password" formControlName="password" type="password" />
   </mat-form-field>
+</form>
 
-  <mat-form-field class="input">
+<!-- <mat-form-field class="input">
     <mat-label>Avatar</mat-label>
     <input matInput placeholder="Enter image" formControlName="avatar" type="url" />
-  </mat-form-field>
+  </mat-form-field> -->
 
-  <mat-form-field appearance="fill">
+  <!-- <mat-form-field appearance="fill">
     <mat-label>Role</mat-label>
     <mat-select formControlName="role">      
       <mat-option value="band">Band</mat-option>
@@ -38,8 +41,7 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field class="input" *ngIf="sf.role.value==='admin'">
+  <mat-form-field class="input" *ngIf="sfc.role.value==='admin'">
     <mat-label>Administrator code</mat-label>
     <input matInput placeholder="Enter administrator code" formControlName="adminCode" type="number" />
-  </mat-form-field>
-</form>
+  </mat-form-field> -->

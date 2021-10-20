@@ -4,20 +4,19 @@ mat-toolbar {
 }
 
 mat-sidenav-container {
-  margin: auto;
-  max-width: 1200px;
-  height: calc(100vh - 65px);
   background: #f5f7fa;
+  max-width: 1200px;
+  margin: auto;
   
   mat-sidenav {
     background: #002b5c;
     color: #fff;
-    margin: 16px;
-    padding: 16px;
     width: 200px;
-    border-radius: 10px;
-    border-right: none;
+    padding: 16px;
     text-align: center;
+    
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 
     .avatar {
       margin-top: 16px;
@@ -32,16 +31,14 @@ mat-sidenav-container {
       font-weight: normal;
     }
   
-    .role {
-        margin-top: 2px;
-        font-size: 0.7rem;
-        color: lightgrey;
+    .role {        
+      color: lightgrey;
     }
   
     mat-divider {
-        margin-top: 16px;
-        margin-bottom: 16px;
-        background-color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.5);
+      margin-top: 16px;
+      margin-bottom: 16px;
     }
     
     .menu-button {
@@ -64,19 +61,9 @@ mat-sidenav-container {
 
   mat-sidenav-content {
     .content {
-      height: calc(100vh - 98px);
-      max-width: 1150px;
-      margin: 16px;
-      padding: 0 30px;
-      border-radius: 10px;      
+      height: calc(100vh - 64px);
+      padding: 20px;
+      border-right: 1px solid #ccc;
     }
   }
-}
-
-ml-16 {
-  margin-left: 16px !important;
-}
-
-ml-32 {
-  margin-left: 32px !important;
 }
