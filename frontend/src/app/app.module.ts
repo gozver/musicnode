@@ -22,7 +22,6 @@ import { ComponentsModule } from './shared/components/components.module';
     HttpClientModule,
 
     ComponentsModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]

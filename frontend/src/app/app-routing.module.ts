@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: () => import('@feature/user/pages/user.module').then(m => m.UserModule)
   },
   {
+    path: 'ad',
+    loadChildren: () => import('@feature/ad/pages/ad.module').then(m => m.AdModule)
+  },
+  {
     path: '**', // Any other path
     redirectTo: 'home'
   }

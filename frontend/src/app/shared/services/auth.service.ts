@@ -8,9 +8,9 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { first, tap, catchError } from 'rxjs/operators';
 
 // custom
-import { environment } from '@environments/environment';
 import { User } from '../interfaces/user.interface'
 import { ErrorHandlerService } from './error-handler.service';
+import { environment } from '@environments/environment';
 
 @Injectable({
   providedIn: 'root' // so we don't have to import it in the module

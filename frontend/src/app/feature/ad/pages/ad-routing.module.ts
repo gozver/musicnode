@@ -3,20 +3,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // custom components
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+import { AdListComponent } from './ad-list/ad-list.component';
 
 const routes: Routes = [
   {
     path: '', // empty path because the path is defined by the parent
     children: [
       { 
-        path: 'login',
-        component: LoginComponent
-      },
-      { 
-        path: 'signup',
-        component: SignupComponent
+        path: '',
+        component: AdListComponent
       },
       {
         path: '**', // Any other path
@@ -30,4 +25,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)], // Children or secundaries routes
   exports: [RouterModule]
 })
-export class UserRoutingModule { }
+export class AdRoutingModule { }

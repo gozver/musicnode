@@ -9,7 +9,7 @@ Add animated gifs to show the final proyect
 
 ### Main Technologies:
 - Front: Angular (Angular Material, RxJS, NgRx), HTML, Sass, JavaScript and TypeScript
-- Backend: Node.js/Express 
+- Backend: Node.js/Express and Sequelize ORM
 - Database: MariaDB
 
 ## Backend

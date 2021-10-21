@@ -1,0 +1,30 @@
+mat-card {
+  box-shadow: none !important;
+  border: 1px solid #e5e7eb;
+  font-size: 16px;
+  margin-bottom: 1rem;
+
+  .title {
+    font-weight: bold;
+  }
+
+  .meta {
+    font-size: 10px;    
+  }
+
+  .description {
+    margin-top: 1rem;
+  }
+
+  .btn-ctnr {
+    margin-top: 1rem;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f7fa;
+      box-shadow: none;
+    }
+  }
+}
