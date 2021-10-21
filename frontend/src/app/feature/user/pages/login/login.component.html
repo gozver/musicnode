@@ -1,1 +1,18 @@
-<p>login works!</p>
+<app-login-form
+  [loginForm]=loginForm
+>
+</app-login-form>
+
+<div class="btn-ctnr">
+  <button
+    title="login"
+    mat-button color="primary"
+    aria-label="Save"
+    mat-rised-button
+    mat-fab
+    [disabled]="loginForm.invalid"
+    (click)="login()"
+  >
+    <mat-icon>login</mat-icon>
+  </button>
+</div>

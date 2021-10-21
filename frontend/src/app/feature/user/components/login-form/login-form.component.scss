@@ -1,0 +1,16 @@
+.login-form {
+  background: #fff;
+  margin: auto;
+  padding: 30px 60px 15px 60px;
+
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  h1 {
+    margin: 10px 0;
+    font-weight: 500;
+  }
+  mat-form-field {
+    width: 100%;
+  }
+}
