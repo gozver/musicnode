@@ -1,6 +1,9 @@
 {
-  "host": "localhost",
-  "user": "admin",
-  "password": "admin",
-  "database": "musicnode"
+  "db": {
+    "host": "localhost",
+    "user": "admin",
+    "password": "admin",
+    "database": "musicnode"
+  },
+  "secret-key": "esternocleidomastoideo"
 }
