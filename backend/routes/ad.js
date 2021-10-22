@@ -2,26 +2,25 @@ const express = require('express');
 const { body } = require('express-validator');
 const router = express.Router();
 const adController = require('../controllers/ad');
+const authMiddleware = require('../middleware/auth');
 
-router.get('/', adController.findAll);
+
+router.get('/', authMiddleware, adController.findAll);
 
 router.post(
   '/',
   
   // validations: https://express-validator.github.io/docs/
-  body('user_id')
-    .not()
-    .isEmpty(),
-  body('title')
-    .not()
-    .isEmpty(),
-  body('description')
-    .not()
-    .isEmpty(),
+  [
+  authMiddleware,
+  body('user_id').not().isEmpty(),
+  body('title').not().isEmpty(),
+  body('description').not().isEmpty()
+  ],
   
   adController.create
 );
 
-router.delete('/:id', adController.delete);
+router.delete('/:id', authMiddleware, adController.delete);
 
 module.exports = router;
