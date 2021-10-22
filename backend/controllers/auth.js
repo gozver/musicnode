@@ -21,6 +21,7 @@ exports.login = async (req, res, next) => {
 
     // password incorrect
     const dbUser = user[0][0];
+
     const pwdIsEqual = await bcrypt.compare(password, dbUser.password);
 
     if (!pwdIsEqual) {
@@ -35,7 +36,7 @@ exports.login = async (req, res, next) => {
         email: dbUser.email,
         userId: dbUser.id
       }, 
-      config.secret-key, 
+      config.secretKey,
       { 
         expiresIn: '1h' 
       }
@@ -59,7 +60,7 @@ exports.signup = async (req, res, next) => {
   
   // if errors, return errors in a json response
   if (!errors.isEmpty()) {
-    console.log('--> Validation errors:', errors.errors);
+    console.log('Validation errors:', errors.errors);
 
     return res.status(400).json({ errors: errors.array() });
   }
@@ -86,7 +87,7 @@ exports.signup = async (req, res, next) => {
     // save the user
     await User.save(user);
 
-    res.status(201).json({ msg: 'Signup success!' });
+    res.status(201).json({ message: 'Signup success!' });
   } catch (err) {
     if (!err.statusCode) err.statusCode = 500;
 

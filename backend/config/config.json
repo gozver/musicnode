@@ -5,5 +5,5 @@
     "password": "admin",
     "database": "musicnode"
   },
-  "secret-key": "esternocleidomastoideo"
+  "secretKey": "esternocleidomastoideo"
 }

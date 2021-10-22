@@ -46,8 +46,7 @@ mat-sidenav-container {
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      font-size: 1rem;
-
+      
       mat-icon {
         margin-right: 10px;
       }
@@ -55,13 +54,14 @@ mat-sidenav-container {
       a {
         color: #fff;
         text-decoration: none;
+        font-size: 1rem;        
       }
     }
   }
 
   mat-sidenav-content {
     .content {
-      height: calc(100vh - 64px);
+      height: calc(100vh - 105px);
       padding: 20px;
       border-right: 1px solid #ccc;
     }

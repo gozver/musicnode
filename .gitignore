@@ -6,6 +6,10 @@ apps/
 backups/
 guides/
 
-# files
+# compressed files
 *.rar
 *.zip
+
+# txt files
+rm.angular.txt
+rm.node.txt

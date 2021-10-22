@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
+const adRoutes = require('./routes/ad');
 const errorController = require('./controllers/error');
 
 const app = express();
@@ -18,13 +19,14 @@ app.use(cors()); // cross-origin resource sharing (intercambio de recursos de or
 // set response headers
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
 
 // if there is a host:3000/auth POST request, we validate de input and handle it properly
 app.use('/auth', authRoutes);
+app.use('/ad', adRoutes);
 
 // if doesn't reach the endpoint 'host:3000/auth' we handle the error
 app.use(errorController.get400);
@@ -32,7 +34,7 @@ app.use(errorController.get500);
 
 // bind and listen the connections on the specified host and port
 app.listen(port, (err) => {
-  if (err) console.log('--> Error in server setup');
+  if (err) console.log('Error in server setup');
 
-  console.log(`--> Server listening on port ${port}`);
+  console.log(`Server watching on port ${port}`);
 });

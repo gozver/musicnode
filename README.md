@@ -17,11 +17,11 @@ Add animated gifs to show the final proyect
 - [Express](https://expressjs.com/) version 14.15.0.  
 
 ## Backend development server
-Run `npm start` to run the server.  
-Run `npm run serve` to run the server with nodemon. The app will automatically reload if you change any of the source files.
+Run `npm run serve` to run the server.  
+Run `npm run dev` to run the server with nodemon. The app will automatically reload if you change any of the source files.
 
 # Frontend
 - [Angular CLI](https://github.com/angular/angular-cli) version 12.2.10.
 
-## Frontend development server
-Run `npm start` to run the server and. The app will automatically navigate to `http://localhost:4200/` and will reload if you change any of the source files.
+## Frontend development server  
+Run `npm start` to run the server. The app will automatically navigate to `http://localhost:4200/` and will reload if you change any of the source files.
