@@ -5,7 +5,8 @@ const adController = require('../controllers/ad');
 const authMiddleware = require('../middleware/auth');
 
 
-router.get('/', authMiddleware, adController.findAll);
+// router.get('/', authMiddleware, adController.findAll);
+router.get('/', adController.findAll);
 
 router.post(
   '/',
