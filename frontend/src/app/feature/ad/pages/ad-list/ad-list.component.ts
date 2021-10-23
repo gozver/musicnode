@@ -15,7 +15,7 @@ import { User } from '@shared/interfaces/user.interface';
 })
 export class AdListComponent implements OnInit {
   adsList$!: Observable<Ad[]>;
-  userId!: Pick<User, 'id'>
+  userId!: Pick<User, 'id'>;
 
   constructor(
     private readonly adService: AdService,

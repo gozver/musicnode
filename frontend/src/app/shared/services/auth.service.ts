@@ -50,6 +50,7 @@ export class AuthService {
         tap(( tokenObj: { token: string, userId: Pick<User, 'id'> }) => {
           this.userId = tokenObj.userId;
           localStorage.setItem('token', tokenObj.token); // save token in local storage
+          
           this.isUserLogedIn$.next(true);
           this.router.navigate(['home']);
         }),

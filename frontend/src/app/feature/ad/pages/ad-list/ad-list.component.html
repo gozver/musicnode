@@ -2,5 +2,7 @@
   (newAd)="createAd($event)"
 ></app-ad-create>
 
-
-<app-ad *ngFor="let ad of adsList$ | async"></app-ad>
+<div *ngFor="let ad of adsList$ | async">
+  <app-ad [ad]=ad></app-ad>
+</div>
+  
