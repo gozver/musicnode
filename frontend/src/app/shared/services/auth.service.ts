@@ -17,8 +17,10 @@ import { environment } from '@environments/environment';
 })
 export class AuthService {
 
-  // BehaviorSubject: requires an initial value and emits the current value to new subscribers
-  isUserLogedIn$ = new BehaviorSubject<boolean>(false);
+  // BehaviorSubject is a type of subject. 
+  // a subject is a type of observable that requires an initial value and emits it current value to new subscribers
+  // we can force this special observable to change it value depending on whether the user is logged in or not
+  userIsLoggedIn$ = new BehaviorSubject<boolean>(false);
   userId!: Pick<User, 'id'>;
 
   httpOptions: { headers: HttpHeaders} = {
@@ -51,7 +53,7 @@ export class AuthService {
           this.userId = tokenObj.userId;
           localStorage.setItem('token', tokenObj.token); // save token in local storage
           
-          this.isUserLogedIn$.next(true);
+          this.userIsLoggedIn$.next(true);
           this.router.navigate(['home']);
         }),
         catchError(this.errorHandlerService.handleError<{ token: string, userId: Pick<User, "id"> }>('login'))

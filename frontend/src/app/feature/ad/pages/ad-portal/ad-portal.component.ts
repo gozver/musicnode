@@ -9,11 +9,11 @@ import { Ad } from '@shared/interfaces/ad.interface';
 import { User } from '@shared/interfaces/user.interface';
 
 @Component({
-  selector: 'app-ad-list',
-  templateUrl: './ad-list.component.html',
-  styleUrls: ['./ad-list.component.scss']
+  selector: 'app-ad-portal',
+  templateUrl: './ad-portal.component.html',
+  styleUrls: ['./ad-portal.component.scss']
 })
-export class AdListComponent implements OnInit {
+export class AdPortalComponent implements OnInit {
   adsList$!: Observable<Ad[]>;
   userId!: Pick<User, 'id'>;
 

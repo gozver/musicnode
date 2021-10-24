@@ -34,7 +34,7 @@ app.use(errorController.get500);
 
 // bind and listen the connections on the specified host and port
 app.listen(port, (err) => {
-  if (err) console.log('Error in server setup');
+  if (err) console.log('error in server setup');
 
   console.log(`Server watching on port ${port}`);
 });

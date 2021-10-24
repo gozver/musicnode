@@ -30,17 +30,17 @@ exports.login = async (req, res, next) => {
       throw error;
     }
 
+    const params = { 
+      email: dbUser.email,
+      userId: dbUser.id 
+    };
+
+    const expiresIn = { 
+      expiresIn: '24h'
+    };
+
     // email and password are correct => create a jwt
-    const token = jwt.sign(
-      {
-        email: dbUser.email,
-        userId: dbUser.id
-      }, 
-      config.secretKey,
-      { 
-        expiresIn: '1h' 
-      }
-    );
+    const token = jwt.sign(params, config.secretKey, expiresIn);
   
     // return response to the client
     res.status(200).json({ 

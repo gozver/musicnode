@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // custom components
-import { AdListComponent } from './ad-list/ad-list.component';
+import { AdPortalComponent } from './ad-portal/ad-portal.component';
 
 const routes: Routes = [
   {
@@ -11,11 +11,7 @@ const routes: Routes = [
     children: [
       { 
         path: '',
-        component: AdListComponent
-      },
-      {
-        path: '**', // Any other path
-        redirectTo: 'login' 
+        component: AdPortalComponent
       }
     ]
   }

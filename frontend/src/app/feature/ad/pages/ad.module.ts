@@ -12,11 +12,11 @@ import { AdRoutingModule } from './ad-routing.module';
 import { AdComponentsModule } from '../components/ad-components.module';
 
 // custom components
-import { AdListComponent } from './ad-list/ad-list.component';
+import { AdPortalComponent } from './ad-portal/ad-portal.component';
 
 @NgModule({
   declarations: [
-    AdListComponent
+    AdPortalComponent
   ],
   imports: [
     CommonModule,

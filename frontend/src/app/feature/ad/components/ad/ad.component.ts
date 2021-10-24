@@ -9,4 +9,8 @@ import { Ad } from '@shared/interfaces/ad.interface';
 })
 export class AdComponent {
   @Input() ad!: Ad;
+
+  deleteAd(id: any): void {
+    console.log(id)
+  }
 }
