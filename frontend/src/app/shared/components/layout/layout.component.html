@@ -16,27 +16,27 @@
 
     <mat-divider></mat-divider>
 
-    <button mat-button class="menu-button">
+    <button mat-button class="menu-button" *ngIf="!isAuthenticated">
       <mat-icon class="material-icons-outlined">person</mat-icon>
       <a routerLink="/user/login">Login</a>
     </button>
 
-    <button mat-button class="menu-button">
+    <button mat-button class="menu-button" *ngIf="!isAuthenticated">
       <mat-icon class="material-icons-outlined">how_to_reg</mat-icon>
       <a routerLink="/user/signup">Signup</a>
     </button>
   
-    <button mat-button class="menu-button">
+    <button mat-button class="menu-button" *ngIf="isAuthenticated">
         <mat-icon class="material-icons-outlined">home</mat-icon>        
         <a routerLink="/home">Home</a>
     </button>
 
-    <button mat-button class="menu-button">
+    <button mat-button class="menu-button" *ngIf="isAuthenticated">
       <mat-icon class="material-icons-outlined">account_circle</mat-icon>
         <a routerLink="/home">Profile</a>
     </button>
 
-    <button mat-button class="menu-button">
+    <button mat-button class="menu-button" *ngIf="isAuthenticated">
       <mat-icon class="material-icons-outlined">storefront</mat-icon>
       <a routerLink="/ad">Market</a>
     </button>
@@ -53,7 +53,7 @@
       <a routerLink="/home">Help</a>
     </button>
 
-    <button mat-button class="menu-button">
+    <button mat-button class="menu-button" *ngIf="isAuthenticated" (click)="logout()">
       <mat-icon class="material-icons-outlined">logout</mat-icon>
       <a routerLink="/home">Logout</a>
     </button>
