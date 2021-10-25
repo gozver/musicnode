@@ -12,10 +12,10 @@ router.post(
   
   // validations: https://express-validator.github.io/docs/
   [
-  authMiddleware,
-  body('user_id').not().isEmpty(),
-  body('title').not().isEmpty(),
-  body('description').not().isEmpty()
+    authMiddleware,
+    body('user_id').not().isEmpty(),
+    body('title').not().isEmpty(),
+    body('description').not().isEmpty()
   ],
   
   adController.create

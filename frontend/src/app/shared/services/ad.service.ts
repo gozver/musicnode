@@ -33,20 +33,14 @@ export class AdService {
     );
   }
 
-  createAd(adForm: Partial<Ad>, userId: Pick<User, 'id'>): Observable<Ad> {
-    const data = {
-      userId: userId,
-      title: adForm.title,
-      description: adForm.description
-    };
+  // createAd(user_id, title, description): Observable<any> {
+  //   return this.http.post<Ad>(`${environment.apiUrl}/ad`, { user_id: user_id, title: title, description: description }, this.httpOptions).pipe(
+  //     catchError(this.errorHandlerService.handleError<Ad>('createAd'))
+  //   );
+  // }
 
-    return this.http.post<Ad>(`${environment.apiUrl}/ad`, data, this.httpOptions).pipe(
-      catchError(this.errorHandlerService.handleError<Ad>('createAd'))
-    );
-  }
-
-  deleteAd(adId: Pick<Ad, 'id'>): Observable<{}> {
-    return this.http.delete<Ad>(`${environment.apiUrl}/${adId}`, this.httpOptions).pipe(
+  deleteAd(adId: number): Observable<any> {
+    return this.http.delete<any>(`${environment.apiUrl}/ad/${adId}`, this.httpOptions).pipe(
       first(), // to make sure that only happens the 1st occurrence so we don't have to unsubscribe
       catchError(this.errorHandlerService.handleError<Ad>('deleteAd'))
     );

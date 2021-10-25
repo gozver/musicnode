@@ -12,15 +12,7 @@ exports.login = async (req, res, next) => {
   try {
     // find the user
     const user = await User.find(email);
-
-    console.log(user[0][0].id);
-    console.log(user[0][0].name);
-    console.log(user[0][0].surname);
-    console.log(user[0][0].email);
-    console.log(user[0][0].phone);
-
-    console.log(user[0].length);
-
+    
     // user not found in the database
     if (user[0].length !== 1) {
       const error = new Error('The email do not exists in the database');
@@ -30,8 +22,6 @@ exports.login = async (req, res, next) => {
 
     // check the password
     const pwdIsEqual = await bcrypt.compare(password, user[0][0].password);
-
-    console.log('pwdIsEqual: ', pwdIsEqual)
     
     // password incorrect
     if (!pwdIsEqual) {
@@ -56,7 +46,7 @@ exports.login = async (req, res, next) => {
     // return response to the client
     res.status(200).json({ 
       token: token,
-      userId: user[0][0].id,
+      id: user[0][0].id,
       name: user[0][0].name,
       surname: user[0][0].surname,
       email: user[0][0].email,

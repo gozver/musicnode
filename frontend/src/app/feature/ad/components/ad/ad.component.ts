@@ -1,5 +1,11 @@
-import { Component, Input } from '@angular/core';
+// Angular
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
+// Services
+import { AdService } from '@app/shared/services/ad.service';
+import { AuthService } from '@app/shared/services/auth.service';
+
+// Interfaces
 import { Ad } from '@shared/interfaces/ad.interface';
 
 @Component({
@@ -8,9 +14,21 @@ import { Ad } from '@shared/interfaces/ad.interface';
   styleUrls: ['./ad.component.scss']
 })
 export class AdComponent {
-  // @Input() ad!: Ad;
+  @Input() ad: Ad;
+  @Output() delete = new EventEmitter<number>();
 
-  // deleteAd(id: any): void {
-  //   console.log(id)
-  // }
+  userId: number;
+
+  constructor(    
+    private readonly adService: AdService,
+    private readonly authService: AuthService
+  ) { }
+
+  ngOnInit(): void {
+    this.userId = this.authService.userId$.value;
+  }
+
+  deleteAd(adId: number): void {
+    this.delete.emit(adId);
+  }
 }

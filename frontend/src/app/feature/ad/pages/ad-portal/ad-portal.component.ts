@@ -1,12 +1,12 @@
+// Angular
 import { Component, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs'
-
+// Services
 import { AdService } from '@app/shared/services/ad.service';
 import { AuthService } from '@app/shared/services/auth.service';
 
+// Interfaces
 import { Ad } from '@shared/interfaces/ad.interface';
-import { User } from '@shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-ad-portal',
@@ -14,8 +14,8 @@ import { User } from '@shared/interfaces/user.interface';
   styleUrls: ['./ad-portal.component.scss']
 })
 export class AdPortalComponent implements OnInit {
-  // adsList$!: Observable<Ad[]>;
-  // userId!: Pick<User, 'id'>;
+  adsList: Ad[] = [];
+  userId: number;
 
   constructor(
     private readonly adService: AdService,
@@ -23,20 +23,22 @@ export class AdPortalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.adsList$ = this.getAds();
-    // this.userId = this.authService.userId;
+    this.adService.getAds().subscribe((adsList) => {
+      this.adsList = adsList;
+    })
   }
 
-  // getAds(): Observable<Ad[]> {
-  //   return this.adService.getAds();
+  // createAd(userId: number, title: string, description: string): void {
+  //   // Insert the element in the database
+  //   this.adService.createAd({ user_id: userId, title: title, description: description }).subscribe();
+  //   // Ad the element at the begining of the adList array
+  //   this.adsList.unshift(newAd);
   // }
 
-  // createAd(newAd: any): void {
-  //   console.log(newAd);
-  //   this.adsList$ = this.getAds();
-  // }
-
-  // delete(adId: Pick<Ad, 'id'>): void {
-  //   this.adService.deleteAd(adId).subscribe(() => this.adsList$ = this.getAds());
-  // }
+  deleteAd(adId: number): void {
+    // Delete the element from the database
+    this.adService.deleteAd(adId).subscribe();
+    // Delete the element from the adList array
+    this.adsList = this.adsList.filter(item => item.id !== adId);
+  }
 }

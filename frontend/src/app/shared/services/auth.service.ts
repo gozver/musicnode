@@ -36,11 +36,7 @@ export class AuthService {
 
   // User related properties
   isLogged$ = new BehaviorSubject<boolean>(this.checkLoginStatus());
-  name$ = new BehaviorSubject<string>(localStorage.getItem('name'));
-  surname$ = new BehaviorSubject<string>(localStorage.getItem('surname'));
-  userId: number;
-
-  // userId!: Pick<User, 'id'>;
+  userId$ = new BehaviorSubject<number>(this.getUserId());
 
   // HTTP headers
   httpOptions: { headers: HttpHeaders} = {
@@ -52,30 +48,38 @@ export class AuthService {
     })
   };
 
-  // Login method
+  signup(params: User): Observable<User> {
+    return this.http.post<User>(`${environment.apiUrl}/auth/signup`, params, this.httpOptions)
+      .pipe(
+        first(), // only the first value
+        catchError(this.errorHandlerService.handleError<any>('signup', 'no response for this error'))
+      );
+  }
+
   login(email: string, password: string): Observable<User> {
 
     // pipe() let you combine multiple functions into a single function
     // pipe() runs the composed functions in sequence
+    
     return this.http.post<User>(`${environment.apiUrl}/auth/login`, { email, password }, this.httpOptions).pipe(
       map(user => {
 
         // Login successful if there is a JWT in the response
         if (user && user.token) {
-          
-          // Send isAuthenticated$ with its value set to true to the next operation  
+
+          // Send isAuthenticated$ and userId$ to the next operation  
           this.isLogged$.next(true);
+          this.userId$.next(user.id);
           
           // Store user details and JWT in local storage to keep user logged in between page refreshes
-          localStorage.setItem('isLogged', '1');          
+          localStorage.setItem('isLogged', '1');
+          localStorage.setItem('userId', JSON.stringify(user.id));
+
           localStorage.setItem('token', user.token);          
           localStorage.setItem('name', user.name);
           localStorage.setItem('surname', user.surname);
           localStorage.setItem('email', user.email);
           localStorage.setItem('phone', user.phone);
-
-          this.name$.next(localStorage.getItem('name'));
-          this.surname$.next(localStorage.getItem('surname'));
 
           // Redirect to home page
           this.router.navigate(['home']);
@@ -104,46 +108,8 @@ export class AuthService {
     return (isLogged === '1');
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // login(email: Pick<User, 'email'>, password: Pick<User, 'password'>): Observable<{ token: string, userId: Pick<User, 'id'> }> {
-  //   return this.http.post<{ token: string, userId: Pick<User, "id"> }>(`${environment.apiUrl}/auth/login`, { email, password }, this.httpOptions).pipe(
-  //     // first(), // only the first value
-  //     // tap(( tokenObj: { token: string, userId: Pick<User, 'id'> }) => {
-  //     //   this.userId = tokenObj.userId;
-  //     //   localStorage.setItem('token', tokenObj.token); // save token in local storage
-        
-  //     //   this.userIsLoggedIn$.next(true);
-  //     //   this.router.navigate(['home']);
-  //     // }),
-  //     catchError(this.errorHandlerService.handleError<{ token: string, userId: Pick<User, "id"> }>('login'))
-  //   );
-  // }
-  
-
-
-  signup(params: User): Observable<User> {
-    return this.http.post<User>(`${environment.apiUrl}/auth/signup`, params, this.httpOptions)
-      .pipe(
-        first(), // only the first value
-        catchError(this.errorHandlerService.handleError<any>('signup', 'no response for this error'))
-      );
+  getUserId(): number {
+    const userId = localStorage.getItem('userId')
+    return parseInt(userId);
   }
 }

@@ -50,6 +50,7 @@ exports.create = async (req, res, next) => {
 exports.delete = async (req, res, next) => {
   try {
     const deleteResponse = await Ad.deleteAd(req.params.id); // [adsList] => desectructure
+    
     res.status(200).json(deleteResponse);
   } catch (err) {
     if (!err.statusCode) err.statusCode = 500;

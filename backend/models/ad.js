@@ -12,7 +12,7 @@ module.exports = class Ad {
   }
   
   static fetchAds() {
-    return db.execute('SELECT * FROM ads');
+    return db.execute('SELECT * FROM ads ORDER BY updated_at DESC');
   }
 
   static createAd(ad) {
