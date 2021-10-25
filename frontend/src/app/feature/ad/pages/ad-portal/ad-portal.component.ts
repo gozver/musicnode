@@ -14,8 +14,8 @@ import { User } from '@shared/interfaces/user.interface';
   styleUrls: ['./ad-portal.component.scss']
 })
 export class AdPortalComponent implements OnInit {
-  adsList$!: Observable<Ad[]>;
-  userId!: Pick<User, 'id'>;
+  // adsList$!: Observable<Ad[]>;
+  // userId!: Pick<User, 'id'>;
 
   constructor(
     private readonly adService: AdService,
@@ -23,20 +23,20 @@ export class AdPortalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.adsList$ = this.getAds();
-    this.userId = this.authService.userId;
+    // this.adsList$ = this.getAds();
+    // this.userId = this.authService.userId;
   }
 
-  getAds(): Observable<Ad[]> {
-    return this.adService.getAds();
-  }
+  // getAds(): Observable<Ad[]> {
+  //   return this.adService.getAds();
+  // }
 
-  createAd(newAd: any): void {
-    console.log(newAd);
-    this.adsList$ = this.getAds();
-  }
+  // createAd(newAd: any): void {
+  //   console.log(newAd);
+  //   this.adsList$ = this.getAds();
+  // }
 
-  delete(adId: Pick<Ad, 'id'>): void {
-    this.adService.deleteAd(adId).subscribe(() => this.adsList$ = this.getAds());
-  }
+  // delete(adId: Pick<Ad, 'id'>): void {
+  //   this.adService.deleteAd(adId).subscribe(() => this.adsList$ = this.getAds());
+  // }
 }

@@ -1,6 +1,36 @@
 mat-toolbar {
   background: #002b5c;
   color: #fff;
+
+  .content {
+    width: 1198px;
+    margin: auto;
+    display: flex;
+  }
+
+  .title-ctnr {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 50%;    
+
+    button {
+      margin-bottom: 3px;
+    }
+  }
+
+  .links-ctnr {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 50%;
+    font-size: 16px;    
+
+    .link {
+      margin-left: 20px;
+      cursor: pointer;
+    }
+  }
 }
 
 mat-sidenav-container {

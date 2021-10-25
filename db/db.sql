@@ -34,3 +34,6 @@ CREATE TABLE `musicnode`.`ads` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES `musicnode`.`users`(`id`)
 );
+
+INSERT INTO `musicnode`.`ads` (user_id, title, description)
+VALUES (1, 'Title 1', 'Description 1');

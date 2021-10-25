@@ -7,5 +7,5 @@ import { FormGroup, NgForm } from '@angular/forms';
   styleUrls: ['./ad-form.component.scss']
 })
 export class AdFormComponent {
-  @Input() adForm!: FormGroup;
+  // @Input() adForm!: FormGroup;
 }

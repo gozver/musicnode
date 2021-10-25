@@ -10,7 +10,16 @@ exports.login = async (req, res, next) => {
   const password = req.body.password;
 
   try {
+    // find the user
     const user = await User.find(email);
+
+    console.log(user[0][0].id);
+    console.log(user[0][0].name);
+    console.log(user[0][0].surname);
+    console.log(user[0][0].email);
+    console.log(user[0][0].phone);
+
+    console.log(user[0].length);
 
     // user not found in the database
     if (user[0].length !== 1) {
@@ -19,34 +28,41 @@ exports.login = async (req, res, next) => {
       throw error;
     }
 
+    // check the password
+    const pwdIsEqual = await bcrypt.compare(password, user[0][0].password);
+
+    console.log('pwdIsEqual: ', pwdIsEqual)
+    
     // password incorrect
-    const dbUser = user[0][0];
-
-    const pwdIsEqual = await bcrypt.compare(password, dbUser.password);
-
     if (!pwdIsEqual) {
       const error = new Error('The Password is not correct');
       error.statusCode = 401;
       throw error;
     }
 
+    // email and password are correct
     const params = { 
-      email: dbUser.email,
-      userId: dbUser.id 
+      email: user[0][0].email,
+      userId: user[0][0].id 
     };
 
     const expiresIn = { 
       expiresIn: '24h'
     };
 
-    // email and password are correct => create a jwt
+    // create a jwt
     const token = jwt.sign(params, config.secretKey, expiresIn);
   
     // return response to the client
     res.status(200).json({ 
       token: token,
-      userId: dbUser.id
+      userId: user[0][0].id,
+      name: user[0][0].name,
+      surname: user[0][0].surname,
+      email: user[0][0].email,
+      phone: user[0][0].phone
     });
+    
   } catch (err) {
     if (!err.statusCode) err.statusCode = 500;
 

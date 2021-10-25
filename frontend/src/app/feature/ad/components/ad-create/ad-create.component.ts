@@ -9,27 +9,27 @@ import { Ad } from '@shared/interfaces/ad.interface';
   styleUrls: ['./ad-create.component.scss']
 })
 export class AdCreateComponent implements OnInit {
-  @Output() newAd = new EventEmitter<Ad>();
+  // @Output() newAd = new EventEmitter<Ad>();
 
-  adForm!: FormGroup;
+  // adForm!: FormGroup;
 
-  constructor(
-    private readonly fb: FormBuilder,
-  ) { }
+  // constructor(
+  //   private readonly fb: FormBuilder,
+  // ) { }
 
   ngOnInit(): void {
-    this.initAdForm();
+  //   this.initAdForm();
   }
 
-  initAdForm(): void {
-    this.adForm = this.fb.group({
-      title:        [ '', Validators.required ],
-      description:  [ '', Validators.required ],
-    });
-  }
+  // initAdForm(): void {
+  //   this.adForm = this.fb.group({
+  //     title:        [ '', Validators.required ],
+  //     description:  [ '', Validators.required ],
+  //   });
+  // }
 
-  createAd(): void {
-    this.newAd.emit(this.adForm.value);
-    this.adForm.reset();    
-  }
+  // createAd(): void {
+  //   this.newAd.emit(this.adForm.value);
+  //   this.adForm.reset();    
+  // }
 }

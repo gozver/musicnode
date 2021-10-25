@@ -1,5 +1,7 @@
+# folders
 old/
 
+# generic files
 *.rar
 *.zip
 *.docx
@@ -7,4 +9,5 @@ old/
 *.pptx
 *.png
 
-convalidacion-ftc.pdf
+# specific files
+ftc_convalidation.pfd

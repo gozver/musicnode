@@ -8,7 +8,7 @@ import { AuthService } from '@shared/services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
+  loginForm: FormGroup;
   
   constructor(
     private readonly fb: FormBuilder,
@@ -29,6 +29,6 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.authService
       .login(this.loginForm.value.email, this.loginForm.value.password)
-      .subscribe((res) => console.log(res));
+      .subscribe();
   }
 }

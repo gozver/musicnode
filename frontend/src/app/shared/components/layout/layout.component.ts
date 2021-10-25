@@ -29,22 +29,16 @@ export class LayoutComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.authService.userIsLoggedIn$.subscribe((isLoggedIn) => {
-      this.isAuthenticated = isLoggedIn;
+    this.authService.isLogged$.subscribe((isLogged) => {
+      this.isAuthenticated = isLogged;
     });
   }
 
-  logout(): void {
-    localStorage.removeItem('token');
-    this.authService.userIsLoggedIn$.next(false);
-    this.router.navigate(['/user/login']);
-  }
-
-  ngAfterViewInit() {    
+  ngAfterViewInit() {
+    // max-width: 800px => small screens
     this.bpObserver.observe(['(max-width: 800px)']).subscribe((res) => {
       // angular lifecicle hook: https://www.youtube.com/watch?v=O47uUnJjbJc&t=9s    
       Promise.resolve().then(() => {
-        // if max-width <= 800px it means we are in a small screen
         if (res.matches) {
           this.sidenav.mode = 'over';
           this.sidenav.close();

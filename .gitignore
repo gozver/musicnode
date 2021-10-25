@@ -3,13 +3,10 @@
 
 # folders
 apps/
-backups/
-guides/
+bak/
+info/
 
 # compressed files
 *.rar
 *.zip
 
-# txt files
-rm.angular.txt
-rm.node.txt

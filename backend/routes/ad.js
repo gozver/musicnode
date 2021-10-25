@@ -6,7 +6,6 @@ const authMiddleware = require('../middleware/auth');
 
 
 router.get('/', authMiddleware, adController.findAll);
-// router.get('/', adController.findAll);
 
 router.post(
   '/',

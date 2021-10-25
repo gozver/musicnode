@@ -1,21 +1,35 @@
 <mat-toolbar>
-    <button mat-icon-button *ngIf="sidenav.mode==='over'" (click)="sidenav.toggle()">
-      <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
-      <mat-icon *ngIf="sidenav.opened">close</mat-icon>
-    </button>
+  <div class="content">
+    <div class="title-ctnr">
+      <button mat-icon-button *ngIf="sidenav.mode==='over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+        <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+      </button>
+      
+      <div class="title">
+        Musicnode
+      </div>
+    </div>
 
-    Musicnode
+    <div class="links-ctnr">
+      <div class="link" routerLink="/user/login" *ngIf="!isAuthenticated">Login</div>
+      <div class="link" routerLink="/user/signup" *ngIf="!isAuthenticated">Signup</div>
+      <div class="link" *ngIf="isAuthenticated" (click)="authService.logout()">Logout</div>
+    </div>
+  </div>
 </mat-toolbar>
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav">
-    <img class="avatar mat-elevation-z8" src="assets/images/me.jpg" />
+    <span *ngIf="isAuthenticated">
+      <img class="avatar mat-elevation-z8" src="assets/images/me.jpg" />
 
-    <h4 class="user">Lolo Gonzalez</h4>
-    <p class="role">Bajista</p>
-
-    <mat-divider></mat-divider>
-
+      <h4 class="user">Lolo Gonzalez</h4>
+      <p class="role">Bajista</p>  
+      
+      <mat-divider></mat-divider>
+    </span>    
+    
     <button mat-button class="menu-button" *ngIf="!isAuthenticated">
       <mat-icon class="material-icons-outlined">person</mat-icon>
       <a routerLink="/user/login">Login</a>
@@ -53,10 +67,12 @@
       <a routerLink="/home">Help</a>
     </button>
 
-    <button mat-button class="menu-button" *ngIf="isAuthenticated" (click)="logout()">
+    <button mat-button class="menu-button" *ngIf="isAuthenticated" (click)="authService.logout()">
       <mat-icon class="material-icons-outlined">logout</mat-icon>
       <a routerLink="/home">Logout</a>
     </button>
+
+    <mat-divider></mat-divider>
   </mat-sidenav>
   
   <mat-sidenav-content>

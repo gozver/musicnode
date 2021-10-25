@@ -18,10 +18,10 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     loadChildren: () => import('@feature/ad/pages/ad.module').then(m => m.AdModule)
   },
-  // {
-  //   path: '**', // Any other path    
-  //   redirectTo: 'pageNotFound'
-  // }
+  {
+    path: '**', // Any other path    
+    redirectTo: '/home'
+  }
 ];
 
 @NgModule({

@@ -8,9 +8,9 @@ import { Ad } from '@shared/interfaces/ad.interface';
   styleUrls: ['./ad.component.scss']
 })
 export class AdComponent {
-  @Input() ad!: Ad;
+  // @Input() ad!: Ad;
 
-  deleteAd(id: any): void {
-    console.log(id)
-  }
+  // deleteAd(id: any): void {
+  //   console.log(id)
+  // }
 }
