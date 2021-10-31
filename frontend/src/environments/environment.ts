@@ -3,7 +3,7 @@ export const environment = {
   apiUrl: 'http://localhost:3000',
   headers: {
     'Access-Control-Allow-Origin': '*',
-    'Content-type': 'application/json',      
+    'Content-type': 'application/json',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization'
   }

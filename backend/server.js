@@ -1,24 +1,30 @@
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan');
+
 const authRoutes = require('./routes/auth');
 const adRoutes = require('./routes/ad');
 const errorController = require('./controllers/error');
 
 const app = express();
 
-const port = process.env.PORT || 3000; // environment PORT or 3000 if there isn't
+// environment PORT or 3000 if there isn't
+const port = process.env.PORT || 3000;
 
 // app.use(method()) => methods used as a middleware
+
 app.use(express.json());      // method to recognize the incoming request object as a JSON object
 app.use(express.urlencoded({  // method to recognize the incoming request object as strings or arrays. 
   extended: false
 }));
 
-app.use(cors()); // cross-origin resource sharing (intercambio de recursos de origen cruzado)
+app.use(morgan('common'));    // backend logger
+app.use(cors());              // cross-origin resource sharing (intercambio de recursos de origen cruzado)
 
 // set response headers
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Content-type', 'application/json');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();

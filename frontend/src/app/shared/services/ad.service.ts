@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // RxJS
 import { Observable } from 'rxjs';
-import { first, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 // Services, interfaces and environment variables
 import { Ad } from '../interfaces/ad.interface'
@@ -37,9 +37,9 @@ export class AdService {
     );
   }
 
+  // When Sequelize => Observable<number> 
   deleteAd(adId: number): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}/ad/${adId}`, this.httpOptions).pipe(
-      // first(), // to make sure that only happens the 1st occurrence so we don't have to unsubscribe
       catchError(this.errorHandlerService.handleError<Ad>('deleteAd'))
     );
   }
