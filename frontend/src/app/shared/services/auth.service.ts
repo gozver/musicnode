@@ -1,4 +1,4 @@
-// Angular 
+// Angular
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -49,11 +49,9 @@ export class AuthService {
   };
 
   signup(params: User): Observable<User> {
-    return this.http.post<User>(`${environment.apiUrl}/auth/signup`, params, this.httpOptions)
-      .pipe(
-        first(), // only the first value
-        catchError(this.errorHandlerService.handleError<any>('signup', 'no response for this error'))
-      );
+    return this.http.post<User>(`${environment.apiUrl}/auth/signup`, params, this.httpOptions).pipe(      
+      catchError(this.errorHandlerService.handleError<any>('signup'))
+    );
   }
 
   login(email: string, password: string): Observable<User> {
@@ -75,7 +73,7 @@ export class AuthService {
           localStorage.setItem('isLogged', '1');
           localStorage.setItem('userId', JSON.stringify(user.id));
 
-          localStorage.setItem('token', user.token);          
+          localStorage.setItem('token', user.token);
           localStorage.setItem('name', user.name);
           localStorage.setItem('surname', user.surname);
           localStorage.setItem('email', user.email);
@@ -87,6 +85,7 @@ export class AuthService {
 
         return user;
       }),
+      catchError(this.errorHandlerService.handleError<any>('login'))
     );
   }
 

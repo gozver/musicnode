@@ -28,16 +28,16 @@ export class AdPortalComponent implements OnInit {
     })
   }
 
-  // createAd(userId: number, title: string, description: string): void {
-  //   // Insert the element in the database
-  //   this.adService.createAd({ user_id: userId, title: title, description: description }).subscribe();
-  //   // Ad the element at the begining of the adList array
-  //   this.adsList.unshift(newAd);
-  // }
+  createAd(ad: Ad): void {
+    // Insert the element in the database
+    this.adService.createAd(ad).subscribe(res => console.log("Response:", res));
+    // Ad the element at the begining of the adList array    
+    this.adsList = [ad, ...this.adsList]
+  }
 
   deleteAd(adId: number): void {
     // Delete the element from the database
-    this.adService.deleteAd(adId).subscribe();
+    this.adService.deleteAd(adId).subscribe(res => console.log("Response:", res));
     // Delete the element from the adList array
     this.adsList = this.adsList.filter(item => item.id !== adId);
   }

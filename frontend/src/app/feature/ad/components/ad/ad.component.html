@@ -1,6 +1,6 @@
 <mat-card>
   <div class="title">{{ ad.title }}</div>
-  <div class="meta">{{ ad.created_at }}</div>
+  <div class="meta">{{ ad.createdAt | date:'dd/MM/yyyy' }}</div>
   <div class="description">{{ ad.description }}</div>
 
   <div class="btn-ctnr">
@@ -12,7 +12,7 @@
       aria-label="Delete"
       title="Delete"
       (click)="deleteAd(ad.id)"
-      *ngIf="userId===ad.user_id"
+      *ngIf="userId===ad.userId"
     >
       <mat-icon color="warn">delete</mat-icon>
     </button>

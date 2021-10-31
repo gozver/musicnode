@@ -25,13 +25,13 @@ exports.create = async (req, res, next) => {
   }
 
   // if no errors, continue
-  const user_id = req.body.user_id;
+  const userId = req.body.userId;
   const title = req.body.title;
   const description = req.body.description;
   
   try {
     const ad = { 
-      user_id,
+      userId,
       title,
       description
     };

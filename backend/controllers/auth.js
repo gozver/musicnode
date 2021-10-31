@@ -14,10 +14,11 @@ exports.login = async (req, res, next) => {
     const user = await User.find(email);
     
     // user not found in the database
-    if (user[0].length !== 1) {
-      const error = new Error('The email do not exists in the database');
-      error.statusCode = 401;
-      throw error;
+    if (user[0].length !== 1) {      
+      const err = new Error();
+      err.statusCode = 401;
+      err.message = 'The email do not exists in the database';
+      next(err);
     }
 
     // check the password
@@ -25,9 +26,10 @@ exports.login = async (req, res, next) => {
     
     // password incorrect
     if (!pwdIsEqual) {
-      const error = new Error('The Password is not correct');
-      error.statusCode = 401;
-      throw error;
+      const err = new Error();
+      err.statusCode = 401;
+      err.message = 'The password is not correct';
+      next(err);
     }
 
     // email and password are correct
@@ -83,16 +85,17 @@ exports.signup = async (req, res, next) => {
     const hashedPwd = await bcrypt.hash(password, 12) // hash the password 12 times
     
     const user = { 
-      name: name,
-      surname: surname,
-      email: email,      
-      phone: phone,
+      name,
+      surname,
+      email,
+      phone,
       password: hashedPwd      
     };
 
     // save the user
     await User.save(user);
 
+    // return response to the client
     res.status(201).json({ message: 'Signup success!' });
   } catch (err) {
     if (!err.statusCode) err.statusCode = 500;

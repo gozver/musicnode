@@ -9,8 +9,8 @@ import { AuthService } from '@shared/services/auth.service';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-  signupForm!: FormGroup;
-  roleForm!: FormGroup;
+  signupForm: FormGroup;
+  roleForm: FormGroup;
 
   constructor(
     private readonly fb: FormBuilder,

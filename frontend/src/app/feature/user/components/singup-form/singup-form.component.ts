@@ -7,5 +7,5 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./singup-form.component.scss']
 })
 export class SingupFormComponent {
-  @Input() signupForm!: FormGroup;
+  @Input() signupForm: FormGroup;
 }

@@ -1,5 +1,5 @@
-import { Component, Input, ViewChild } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-ad-form',
@@ -7,5 +7,5 @@ import { FormGroup, NgForm } from '@angular/forms';
   styleUrls: ['./ad-form.component.scss']
 })
 export class AdFormComponent {
-  @Input() adForm!: FormGroup;
+  @Input() adForm: FormGroup;
 }

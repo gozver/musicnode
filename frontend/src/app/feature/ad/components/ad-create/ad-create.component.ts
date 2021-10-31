@@ -18,30 +18,33 @@ export class AdCreateComponent implements OnInit {
 
   adForm: FormGroup;
   userId: number;
+  createdAt: Date;
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly authService: AuthService
   ) { }
 
-  ngOnInit(): void {
-    this.initAdForm();
+  ngOnInit(): void {    
     this.userId = this.authService.userId$.value;
+    this.createdAt = new Date();
+    this.initAdForm();
   }
 
   initAdForm(): void {
     this.adForm = this.fb.group({
+      userId:       '',
       title:        [ '', Validators.required ],
       description:  [ '', Validators.required ],
+      createdAt:    ''
     });
   }
 
   createAd(): void {
-    // this.newAd.emit({ 
-    //   userId: this.userId,
-    //   title: this.adForm.value.title,
-    //   description: this.adForm.value.description,
-    // });
-    // this.adForm.reset();
+    this.adForm.value.userId = this.authService.userId$.value;
+    this.adForm.value.createdAt = new Date();
+
+    this.newAd.emit(this.adForm.value);
+    this.adForm.reset();
   }
 }

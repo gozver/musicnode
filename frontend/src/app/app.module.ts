@@ -1,8 +1,9 @@
 // angular modules
 import { NgModule } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // angular app
 import { AppComponent } from '@app/app.component';
@@ -26,13 +27,16 @@ import { AuthInterceptorService } from '@shared/services/auth-interceptor.servic
 
     ComponentsModule
   ],
-  providers: [{ 
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptorService,
-    multi: true 
-    // multi: true => allow multiple providers spread across many files
-    // to provide configuration information to a common token
-  }],
+  providers: [
+    { 
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true 
+      // multi: true => allow multiple providers spread across many files
+      // to provide configuration information to a common token
+    },
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

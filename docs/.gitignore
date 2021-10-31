@@ -8,6 +8,7 @@ old/
 *.xlsx
 *.pptx
 *.png
+*.txt
 
 # specific files
 ftc_convalidation.pfd

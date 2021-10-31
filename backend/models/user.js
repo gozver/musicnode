@@ -8,9 +8,9 @@ module.exports = class User {
     this.email = email;
     this.phone = phone;
     this.password = password;    
-    this.created_at = created_at;
-    this.updated_at = updated_at;
-    this.deleted_at = deleted_at;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+    this.deletedAt = deletedAt;
   }
 
   // set the hability to find an user by the email

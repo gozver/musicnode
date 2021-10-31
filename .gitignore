@@ -3,10 +3,14 @@
 
 # folders
 apps/
-bak/
-info/
+backups/
+guides/
 
 # compressed files
 *.rar
 *.zip
+
+# editor
+/.vscode
+/.settings
 

@@ -31,7 +31,8 @@ router.post(
     .isEmpty(),
   body('password')
     .trim()
-    .isLength({ min: 6 }), 
+    .isLength({ min: 6 })
+    .withMessage('Please enter a valid password'),
   
   authController.signup
 );
