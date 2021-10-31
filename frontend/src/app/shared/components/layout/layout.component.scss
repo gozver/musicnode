@@ -12,7 +12,17 @@ mat-toolbar {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    width: 50%;    
+    width: 50%;
+
+    .title {
+      display: flex;
+      align-items: center;
+      
+      .logo {
+        width: 30px;
+        padding-right: 10px;
+      }
+    }
 
     button {
       margin-bottom: 3px;

@@ -1,6 +1,8 @@
+// Angular
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+// Services
 import { AuthService } from '@shared/services/auth.service';
 
 @Component({
@@ -34,8 +36,13 @@ export class SignupComponent implements OnInit {
   }
 
   signup(): void {
-    this.authService.signup(this.signupForm.value)
-      .subscribe(res => console.log("Response:", res));
+    this.authService
+      .signup(this.signupForm.value)
+      .subscribe(() => {
+        this.authService
+          .login(this.signupForm.value.email, this.signupForm.value.password)
+          .subscribe();
+      });
   }
 
   initRoleForm(): void {

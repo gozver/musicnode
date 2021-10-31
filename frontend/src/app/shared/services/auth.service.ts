@@ -4,8 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 // RxJS
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
-import { first, tap, map, catchError } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 // Services, interfaces and environment variables
 import { ErrorHandlerService } from './error-handler.service';
@@ -40,12 +40,7 @@ export class AuthService {
 
   // HTTP headers
   httpOptions: { headers: HttpHeaders} = {
-    headers: new HttpHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'Content-type': 'application/json',      
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-    })
+    headers: new HttpHeaders(environment.headers)
   };
 
   signup(params: User): Observable<User> {
@@ -72,12 +67,8 @@ export class AuthService {
           // Store user details and JWT in local storage to keep user logged in between page refreshes
           localStorage.setItem('isLogged', '1');
           localStorage.setItem('userId', JSON.stringify(user.id));
-
           localStorage.setItem('token', user.token);
-          localStorage.setItem('name', user.name);
-          localStorage.setItem('surname', user.surname);
-          localStorage.setItem('email', user.email);
-          localStorage.setItem('phone', user.phone);
+          
 
           // Redirect to home page
           this.router.navigate(['home']);
@@ -93,11 +84,8 @@ export class AuthService {
     this.isLogged$.next(false);
     
     localStorage.removeItem('isLogged');
-    localStorage.removeItem('token');
-    localStorage.removeItem('name');
-    localStorage.removeItem('surname');
-    localStorage.removeItem('email');
-    localStorage.removeItem('phone');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('token');    
 
     this.router.navigate(['/user/login']);
   }

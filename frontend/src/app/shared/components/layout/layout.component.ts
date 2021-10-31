@@ -1,6 +1,5 @@
 // angular
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout'
 
 // angular material
@@ -8,7 +7,6 @@ import { MatSidenav } from '@angular/material/sidenav';
 
 // custom services
 import { AuthService } from '@shared/services/auth.service';
-
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -24,7 +22,6 @@ export class LayoutComponent implements OnInit {
   
   constructor(
     private readonly authService: AuthService,
-    private readonly router: Router,
     private readonly bpObserver: BreakpointObserver
   ) { }
 
