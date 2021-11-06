@@ -12,13 +12,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // app.use(method()) => methods used as a middleware
-
 app.use(express.json());      // method to recognize the incoming request object as a JSON object
 app.use(express.urlencoded({  // method to recognize the incoming request object as strings or arrays. 
   extended: false
 }));
-
-app.use(morgan('common'));    // backend logger
+app.use(morgan('dev'));       // HTTP request logger middleware
 app.use(cors());              // cross-origin resource sharing (intercambio de recursos de origen cruzado)
 
 // set response headers
@@ -39,8 +37,6 @@ app.use(errorController.get400);
 app.use(errorController.get500);
 
 // bind and listen the connections on the specified host and port
-app.listen(port, (err) => {
-  if (err) console.log('error in server setup');
-
-  console.log(`Server watching on port ${port}`);
+app.listen(port, () => {
+  console.log(`> server watching on port ${port}`);
 });

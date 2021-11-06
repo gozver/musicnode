@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 
 // custom components
 import { LayoutComponent } from './layout/layout.component';
-import { LoadingComponent } from './loading/loading.component';
+import { LoaderComponent } from './loader/loader.component';
 
 // angular material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -13,11 +13,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     LayoutComponent,
-    LoadingComponent
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -27,11 +28,12 @@ import { MatDividerModule } from '@angular/material/divider';
     MatSidenavModule,
     MatIconModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     LayoutComponent,
-    LoadingComponent
+    LoaderComponent
   ]
 })
 export class ComponentsModule { }

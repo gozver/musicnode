@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <div class="content">
+  <div class="toolbar-ctnr">
     <div class="title-ctnr">
       <button mat-icon-button *ngIf="sidenav.mode==='over'" (click)="sidenav.toggle()">
         <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
@@ -52,6 +52,11 @@
     </button>
 
     <button mat-button class="menu-button" *ngIf="isAuthenticated">
+      <mat-icon class="material-icons-outlined">message</mat-icon>
+      <a routerLink="/home">Messenger</a>
+    </button>
+
+    <button mat-button class="menu-button" *ngIf="isAuthenticated">
       <mat-icon class="material-icons-outlined">storefront</mat-icon>
       <a routerLink="/ad">Market</a>
     </button>
@@ -82,7 +87,9 @@
   </mat-sidenav>
   
   <mat-sidenav-content>
-    <div class="content"> <!-- mat-elevation-z4 [style.marginLeft]="(sidenav.opened ? '32px' : '16px')" -->
+    <div class="sidenav-ctnr"> <!-- [style.marginLeft]="(sidenav.opened ? '32px' : '16px')" -->
+      <app-loader></app-loader>
+
       <router-outlet></router-outlet>
     </div>  
   </mat-sidenav-content>

@@ -68,7 +68,7 @@ exports.signup = async (req, res, next) => {
   
   // if errors, return errors in a json response
   if (!errors.isEmpty()) {
-    console.log('Validation errors:', errors.errors);
+    console.log('> validation errors:', errors.errors);
 
     return res.status(400).json({ errors: errors.array() });
   }

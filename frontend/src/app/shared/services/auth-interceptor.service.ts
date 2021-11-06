@@ -1,8 +1,8 @@
-// angular
+// Angular
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 
-// rxjs
+// RxJS
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,9 +12,9 @@ export class AuthInterceptorService implements HttpInterceptor {
   /**
    * @param req 
    * @param next
-   * an interceptor is a service that inspect/modify all request made from the client to the server
+   * @description An interceptor is a service that inspect/modify all requests made from the client to the server
    */
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     // get the token from localstorage
     const token = localStorage.getItem('token');
     
@@ -23,7 +23,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
     if (token) {
       clonedReq = req.clone({
-        headers: req.headers.set('Authorization', `Bearer ${token}`)        
+        headers: req.headers.set('Authorization', `Bearer ${token}`)
       });
     }
 

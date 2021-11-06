@@ -15,7 +15,6 @@ import { environment } from '@environments/environment';
   providedIn: 'root'
 })
 export class AdService {
-
   httpOptions: { headers: HttpHeaders} = {
     headers: new HttpHeaders(environment.headers)
   };
@@ -26,7 +25,7 @@ export class AdService {
   ) { }
 
   getAds(): Observable<Ad[]> {
-    return this.http.get<Ad[]>(`${environment.apiUrl}/ad`, { responseType: 'json'}).pipe(
+    return this.http.get<Ad[]>(`${environment.apiUrl}/ad`, this.httpOptions).pipe(
       catchError(this.errorHandlerService.handleError<Ad[]>('getAds', []))
     );
   }
