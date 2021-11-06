@@ -7,21 +7,29 @@ Musicnode is a professional business drive network for musicians and music event
 ### To do:
 Add animated gifs to show the final proyect
 
-### Main Technologies:
+### Technologies:
 - Front: Angular (Angular Material, RxJS, NgRx), HTML, Sass, JavaScript and TypeScript
 - Backend: Node.js/Express and Sequelize ORM
 - Database: MariaDB
 
-## Backend
-- [Node](https://nodejs.org/en/) version 4.17.1.  
-- [Express](https://expressjs.com/) version 14.15.0.  
+## Frontend technologies:
+- [TypeScript](https://www.typescriptlang.org/) version 4.3.5.
+- [Sass](https://sass-lang.com/) version 1.36.0.
+- [Angular CLI](https://angular.io/cli) version 12.2.10.
+- [Angular Material](https://material.angular.io/) version 12.2.10.
+- [RxJS](https://rxjs.dev/) version 6.6.0.
 
-## Backend development server
+## Frontend development server:
+Run `npm start` to run the server. The app will automatically navigate to `http://localhost:4200/` and will reload if you change any of the source files.
+
+## Backend technologies:
+- [Node.js](https://nodejs.org/en/) version 4.17.1.
+- [Express](https://expressjs.com/) version 14.15.0.
+- [Node Engine](https://nodejs.org/en/) version 14.15.0.
+
+## Backend development server:
 Run `npm run serve` to run the server.  
 Run `npm run dev` to run the server with nodemon. The app will automatically reload if you change any of the source files.
 
-## Frontend
-- [Angular CLI](https://github.com/angular/angular-cli) version 12.2.10.
-
-## Frontend development server  
-Run `npm start` to run the server. The app will automatically navigate to `http://localhost:4200/` and will reload if you change any of the source files.
+## Database technologies:
+- [MariaDB](https://mariadb.org/) version 10.4.21.
