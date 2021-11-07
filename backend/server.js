@@ -7,6 +7,7 @@ const adRoutes = require('./routes/ad');
 const errorController = require('./controllers/error');
 
 const app = express();
+const sequelize = require('./config/database');
 
 // environment PORT or 3000 if there isn't
 const port = process.env.PORT || 3000;
@@ -28,15 +29,23 @@ app.use((req, res, next) => {
   next();
 });
 
-// if there is a host:3000/auth POST request, we validate de input and handle it properly
-app.use('/auth', authRoutes);
-app.use('/ad', adRoutes);
+// // routes: localhost:3000/route
+// app.use('/auth', authRoutes);
+// app.use('/ad', adRoutes);
 
-// if doesn't reach the endpoint 'host:3000/auth' we handle the error
-app.use(errorController.get400);
-app.use(errorController.get500);
+// // if doesn't reach the endpoint we handle the error
+// app.use(errorController.get400);
+// app.use(errorController.get500);
 
 // bind and listen the connections on the specified host and port
 app.listen(port, () => {
   console.log(`> server watching on port ${port}`);
+
+  // database connection
+  sequelize.authenticate()
+    .then(() => console.log('> database connection success'))
+    .catch(err => {
+      console.log('> database connection error:');
+      console.log(err);
+    });
 });

@@ -25,11 +25,9 @@ Run `npm start` to run the server. The app will automatically navigate to `http:
 ## Backend technologies:
 - [Node.js](https://nodejs.org/en/) version 4.17.1.
 - [Express](https://expressjs.com/) version 14.15.0.
+- [Sequelize](https://sequelize.org/master/manual/getting-started.html) version 6.9.0.  
 - [Node Engine](https://nodejs.org/en/) version 14.15.0.
 
 ## Backend development server:
 Run `npm run serve` to run the server.  
 Run `npm run dev` to run the server with nodemon. The app will automatically reload if you change any of the source files.
-
-## Database technologies:
-- [MariaDB](https://mariadb.org/) version 10.4.21.
