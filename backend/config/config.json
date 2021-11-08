@@ -1,9 +1,10 @@
 {
   "db": {
     "host": "localhost",
+    "database": "musicnode",
     "username": "admin",
     "password": "admin",
-    "database": "musicnode"
+    "dialect": "mysql"
   },
   "secretKey": "esternocleidomastoideo"
 }
