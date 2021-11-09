@@ -18,7 +18,7 @@ User.init({
   surname: {
     type: DataTypes.STRING,
     validate: {
-        notEmpty: true
+      notEmpty: true
     }
   },
   email: {

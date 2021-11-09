@@ -5,7 +5,7 @@ const Ad = require('../models/ad');
 // create: localhost:3000/ad
 router.post('/', (req, res) => {
   Ad.create({
-      user_id: req.body.userId,
+      userId: req.body.userId,
       title: req.body.title,
       description: req.body.description
     })
@@ -50,7 +50,6 @@ router.delete('/:id', (req, res) => {
   }).then(data => res.json(data))
     .catch(error => res.json(error));
 });
-
 
 module.exports = router;
 

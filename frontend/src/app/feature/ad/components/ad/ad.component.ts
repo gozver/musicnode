@@ -2,7 +2,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 // Services
-import { AdService } from '@app/shared/services/ad.service';
 import { AuthService } from '@app/shared/services/auth.service';
 
 // Interfaces
@@ -19,8 +18,7 @@ export class AdComponent {
 
   userId: number;
 
-  constructor(    
-    private readonly adService: AdService,
+  constructor(        
     private readonly authService: AuthService
   ) { }
 

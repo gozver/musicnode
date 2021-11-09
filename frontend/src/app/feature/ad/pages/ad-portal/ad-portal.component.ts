@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 
 // Services
 import { AdService } from '@app/shared/services/ad.service';
-import { AuthService } from '@app/shared/services/auth.service';
 
 // Interfaces
 import { Ad } from '@shared/interfaces/ad.interface';
@@ -18,26 +17,27 @@ export class AdPortalComponent implements OnInit {
   userId: number;
 
   constructor(
-    private readonly adService: AdService,
-    private readonly authService: AuthService
+    private readonly adService: AdService
   ) { }
 
   ngOnInit(): void {
-    this.adService.getAds().subscribe((adsList) => {
-      this.adsList = adsList;
-    })
+    this.adService.getAds().subscribe((adsList) => this.adsList = adsList);
   }
 
   createAd(ad: Ad): void {
     // Insert the element in the database
-    this.adService.createAd(ad).subscribe(res => console.log("Response:", res));
-    // Ad the element at the begining of the adList array    
-    this.adsList = [ad, ...this.adsList]
+    this.adService.createAd(ad).subscribe(res => {
+      console.log("--> Create ad response:", res);
+
+      // Add the new created ad to the adList array
+      this.adsList = [ad, ...this.adsList]
+    });
   }
 
   deleteAd(adId: number): void {
     // Delete the element from the database
-    this.adService.deleteAd(adId).subscribe(res => console.log("Response:", res));
+    this.adService.deleteAd(adId).subscribe(res => console.log("--> Delete ad response:", res));
+    
     // Delete the element from the adList array
     this.adsList = this.adsList.filter(item => item.id !== adId);
   }

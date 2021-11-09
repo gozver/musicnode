@@ -3,7 +3,7 @@
 ></app-ad-create>
 
 <div *ngFor="let ad of adsList">
-  <app-ad 
+  <app-ad
     [ad]=ad
     (delete)="deleteAd($event)"
   ></app-ad>

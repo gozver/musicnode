@@ -10,7 +10,7 @@ Add animated gifs to show the final proyect
 ### Technologies:
 - Front: Angular (Angular Material, RxJS, NgRx), HTML, Sass, JavaScript and TypeScript
 - Backend: Node.js/Express and Sequelize ORM
-- Database: MariaDB
+- Database: SQL
 
 ## Frontend technologies:
 - [TypeScript](https://www.typescriptlang.org/) version 4.3.5.
@@ -25,7 +25,8 @@ Run `npm start` to run the server. The app will automatically navigate to `http:
 ## Backend technologies:
 - [Node.js](https://nodejs.org/en/) version 4.17.1.
 - [Express](https://expressjs.com/) version 14.15.0.
-- [Sequelize](https://sequelize.org/master/manual/getting-started.html) version 6.9.0.  
+- [Sequelize](https://sequelize.org/master/manual/getting-started.html) version 6.9.0.
+<br/>
 - [Node Engine](https://nodejs.org/en/) version 14.15.0.
 
 ## Backend development server:

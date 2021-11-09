@@ -9,7 +9,7 @@ Ad.init({
     primaryKey: true,
     autoIncrement: true
   },
-  user_id: {
+  userId: {
     type: DataTypes.INTEGER,
     validate: {
       notEmpty: true
