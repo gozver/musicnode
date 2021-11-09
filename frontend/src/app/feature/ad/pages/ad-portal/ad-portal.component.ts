@@ -37,7 +37,7 @@ export class AdPortalComponent implements OnInit {
       console.log(res);
       
       // If the ad is inserted in the db, add it to the adList array
-      if (res) this.adsList = [ad, ...this.adsList];
+      if (res) this.adsList = [res, ...this.adsList];
     });
   }
 

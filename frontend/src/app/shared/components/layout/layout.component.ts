@@ -7,6 +7,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 
 // custom services
 import { AuthService } from '@shared/services/auth.service';
+
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -31,6 +32,17 @@ export class LayoutComponent implements OnInit {
     });
   }
 
+  closeIfIsMobileView(): void {
+    if (this.sidenav.mode === 'over') {
+      this.sidenav.close();
+    }
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.sidenav.close();
+  }
+
   ngAfterViewInit() {
     // max-width: 800px => small screens
     this.bpObserver.observe(['(max-width: 800px)']).subscribe((res) => {
@@ -43,7 +55,7 @@ export class LayoutComponent implements OnInit {
           this.sidenav.mode = 'side';
           this.sidenav.open();
         }
-      });      
+      });
     });
   }
 }
