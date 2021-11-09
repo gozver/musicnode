@@ -11,6 +11,8 @@ CREATE TABLE `musicnode`.`user` (
   PRIMARY KEY (`id`)
 );
 
+-- ||||||||||||||||||||||||||||||||||||||||||||||| --
+
 CREATE TABLE `musicnode`.`roles` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `userId` INT NOT NULL,

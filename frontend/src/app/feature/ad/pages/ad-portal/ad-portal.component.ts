@@ -21,22 +21,32 @@ export class AdPortalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.adService.getAds().subscribe((adsList) => this.adsList = adsList);
+    // Get all ads from the database
+    this.adService.getAds().subscribe((adsList) => {
+      this.adsList = adsList
+      
+      console.log('--> adsList:');
+      console.log(this.adsList);
+    });
   }
 
   createAd(ad: Ad): void {
     // Insert the element in the database
     this.adService.createAd(ad).subscribe(res => {
-      console.log("--> Create ad response:", res);
-
+      console.log('--> Create ad response:');
+      console.log(res);
+      
       // Add the new created ad to the adList array
-      this.adsList = [ad, ...this.adsList]
+      this.adsList = [ad, ...this.adsList];
     });
   }
 
   deleteAd(adId: number): void {
     // Delete the element from the database
-    this.adService.deleteAd(adId).subscribe(res => console.log("--> Delete ad response:", res));
+    this.adService.deleteAd(adId).subscribe(res => {
+      console.log('--> Delete ad response:');
+      console.log(res);
+    });
     
     // Delete the element from the adList array
     this.adsList = this.adsList.filter(item => item.id !== adId);
