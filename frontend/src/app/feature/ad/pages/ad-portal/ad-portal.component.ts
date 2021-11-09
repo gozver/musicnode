@@ -36,8 +36,8 @@ export class AdPortalComponent implements OnInit {
       console.log('--> Create ad response:');
       console.log(res);
       
-      // Add the new created ad to the adList array
-      this.adsList = [ad, ...this.adsList];
+      // If the ad is inserted in the db, add it to the adList array
+      if (res) this.adsList = [ad, ...this.adsList];
     });
   }
 
@@ -46,9 +46,10 @@ export class AdPortalComponent implements OnInit {
     this.adService.deleteAd(adId).subscribe(res => {
       console.log('--> Delete ad response:');
       console.log(res);
+
+      // If the ad is deleted in the db, remove from the adList array
+      if (res) this.adsList = this.adsList.filter(item => item.id !== adId);
     });
     
-    // Delete the element from the adList array
-    this.adsList = this.adsList.filter(item => item.id !== adId);
   }
 }

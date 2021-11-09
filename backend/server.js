@@ -4,6 +4,7 @@ const morgan = require('morgan');
 
 const authRoutes = require('./routes/auth');
 const adRoutes = require('./routes/ad');
+const errorController = require('./controllers/error');
 
 const app = express();
 const sequelize = require('./config/database');
@@ -32,12 +33,15 @@ app.use((req, res, next) => {
 app.use('/auth', authRoutes);
 app.use('/ad', adRoutes);
 
+// if doesn't reach the endpoint we handle the error
+app.use(errorController.get400);
+app.use(errorController.get500);
+
 // bind and listen the connections on the specified host and port
 app.listen(port, () => {
   console.log(`--> server watching on port ${port}`);
 
-  // database connection
-  sequelize
+  sequelize        // database connection
     .sync({        // create table if not exist
       force: false // do not drop tables in each query
     })
@@ -49,15 +53,3 @@ app.listen(port, () => {
       console.log(err);
     });
 });
-
-// const authRoutes = require('./routes/auth');
-// const adRoutes = require('./routes/ad');
-// const errorController = require('./controllers/error');
-
-// // routes: localhost:3000/route
-// app.use('/auth', authRoutes);
-// app.use('/ad', adRoutes);
-
-// // if doesn't reach the endpoint we handle the error
-// app.use(errorController.get400);
-// app.use(errorController.get500);
