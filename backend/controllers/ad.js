@@ -1,5 +1,4 @@
 const Ad = require('../models/ad');
-const { validationResult } = require('express-validator');
 
 exports.create = async (req, res, next) => {
   // // check for errors
