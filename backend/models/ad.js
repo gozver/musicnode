@@ -28,8 +28,8 @@ Ad.init({
     }
   },
 }, { 
-  sequelize,      // db
-  modelName: 'ad' // model
+  sequelize,
+  modelName: 'ad'
 });
 
 module.exports = Ad;
