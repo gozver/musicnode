@@ -13,14 +13,13 @@ User.init({
     type: DataTypes.STRING,
     validate: {
       notEmpty: true,
-      len: [2, 50]
+      // len: [2, 50]
     }
   },
   surname: {
     type: DataTypes.STRING,
     validate: {
-      notEmpty: true,
-      len: [2, 50]
+      notEmpty: true
     }
   },
   email: {
@@ -36,11 +35,6 @@ User.init({
     type: DataTypes.STRING,
     allowNull: false
   },
-  // avatar: {
-  //   type: DataTypes.STRING,
-  //   allowNull: true,
-  //   defaultValue: 'assets/images/user.png'
-  // },
   password: {
     type: DataTypes.STRING,
     allowNull: false,
