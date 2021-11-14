@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-class Role extends Model {}
+class Company extends Model {}
 
 Role.init({
   id: {
@@ -9,30 +9,36 @@ Role.init({
     primaryKey: true,
     autoIncrement: true
   },
-  userId: {
-    type: DataTypes.INTEGER,
-    validate: { notEmpty: false }
-  },
-  bandId: {
-    type: DataTypes.INTEGER,
-    validate: { notEmpty: false }
-  },
-  companyId: {
-    type: DataTypes.INTEGER,
-    validate: { notEmpty: false }
-  },
-  role: {
+  name: {
     type: DataTypes.STRING,
     validate: { notEmpty: false }
+  },
+  description: {
+    type: DataTypes.TEXT,
+    validate: { notEmpty: false }
+  },
+  phone: {
+    type: DataTypes.STRING,
+    validate: { notEmpty: false }
+  },
+  email: {
+    type: DataTypes.STRING,
+    unique: true,
+    allowNull: false,
+    validate: { notEmpty: true, isEmail: true }
   },
   avatar: {
     type: DataTypes.STRING,
     allowNull: true,
     defaultValue: 'assets/images/user.png'
   },
+  address: {
+    type: DataTypes.STRING,
+    validate: { notEmpty: false }
+  },
 }, { 
   sequelize,
-  modelName: 'role'
+  modelName: 'company'
 });
 
-module.exports = Role;
+module.exports = Company;

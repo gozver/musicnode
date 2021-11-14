@@ -11,21 +11,15 @@ Ad.init({
   },
   userId: {
     type: DataTypes.INTEGER,
-    validate: {
-      notEmpty: true
-    }
+    validate: { notEmpty: true }
   },
   title: {
     type: DataTypes.STRING,
-    validate: {
-      notEmpty: true
-    }
+    validate: { notEmpty: true }
   },
   description: {
     type: DataTypes.TEXT,
-    validate: {
-      notEmpty: true
-    }
+    validate: { notEmpty: true }
   },
 }, { 
   sequelize,
