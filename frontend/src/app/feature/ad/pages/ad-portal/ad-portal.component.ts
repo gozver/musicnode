@@ -22,10 +22,10 @@ export class AdPortalComponent implements OnInit {
 
   ngOnInit(): void {
     // Get all ads from the database
-    this.adService.getAds().subscribe((adsList) => {
-      this.adsList = adsList
+    this.adService.getAds().subscribe(res => {
+      this.adsList = res;
       
-      console.log('--> adsList:');
+      console.log('--> Get ads response:');
       console.log(this.adsList);
     });
   }
@@ -50,6 +50,5 @@ export class AdPortalComponent implements OnInit {
       // If the ad is deleted in the db, remove from the adList array
       if (res) this.adsList = this.adsList.filter(item => item.id !== adId);
     });
-    
   }
 }

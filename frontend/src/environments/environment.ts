@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000',
+  apiUrl: 'http://localhost:3000/api',
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Content-type': 'application/json',

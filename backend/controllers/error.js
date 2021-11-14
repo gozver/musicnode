@@ -8,6 +8,7 @@ exports.get500 = (err, req, res, next) => {
   res.status(err.statusCode || 500);
   res.json({
     err: {
+      code: err.statusCode,
       message: err.message,
       data: err.data
     }

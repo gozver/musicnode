@@ -1,9 +1,14 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const path = require('path');
 
+const homeUrl = '../public';
+const apiUrl = require('./routes');
+const errorController = require('../controllers/error');
+
+// app.use(method()) => methods used as a middleware
 module.exports = (app) => {
-  // middlewares: app.use(method()) => methods used as a middleware
   app.use(express.json());      // method to recognize the incoming request object as a JSON object
   app.use(express.urlencoded({  // method to recognize the incoming request object as strings or arrays
     extended: true              // allow nested objects
@@ -19,4 +24,14 @@ module.exports = (app) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
   });
+
+  // serve static files in express
+  app.use(express.static(path.join(__dirname, homeUrl)));
+
+  // routes: localhost:3000/route
+  app.use('/api', apiUrl);
+
+  // if doesn't reach the endpoint we handle the error
+  app.use(errorController.get400);
+  app.use(errorController.get500);
 }

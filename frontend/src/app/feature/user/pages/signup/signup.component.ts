@@ -36,13 +36,25 @@ export class SignupComponent implements OnInit {
   }
 
   signup(): void {
-    this.authService
-      .signup(this.signupForm.value)
-      .subscribe(() => {
-        this.authService
-          .login(this.signupForm.value.email, this.signupForm.value.password)
-          .subscribe();
-      });
+    try {
+      this.authService
+        .signup(this.signupForm.value)
+        .subscribe((res) => {
+          if (res) {
+            console.log('--> Signup response:');
+            console.log(res);
+
+            this.authService
+              .login(this.signupForm.value.email, this.signupForm.value.password)
+              .subscribe(res => {
+                console.log('--> Login response:');
+                console.log(res);
+              });
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   initRoleForm(): void {

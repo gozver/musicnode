@@ -10,7 +10,7 @@ const sequelize = new Sequelize(
     dialect: config.db.dialect, // mysql
     logging: console.log,       // show executed queries log on screen.
     keepDefaultTimezone: false, // no default zone
-    timezone:"+01:00",          // spain default zone
+    timezone: "+01:00",         // spain default zone
     define: {
       timestamps: true,         // timestamps for tables
       paranoid: false,          // paranoid table: no hard deletion, instead deletedAt get a timestamp value      

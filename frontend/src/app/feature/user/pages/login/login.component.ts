@@ -32,6 +32,9 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.authService
       .login(this.loginForm.value.email, this.loginForm.value.password)
-      .subscribe();
+      .subscribe(res => {
+        console.log('--> Login response:');
+        console.log(res);
+      });
   }
 }

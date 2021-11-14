@@ -1,22 +1,13 @@
 const express = require('express');
 
-const environment = require('./config/environment');
 const sequelize = require('./config/database');
+const environment = require('./config/environment');
 
-const adRoutes = require('./routes/ad');
-const authRoutes = require('./routes/auth');
-const errorController = require('./controllers/error');
-
+// consume express
 const app = express();
+
+// middlewares
 environment(app);
-
-// routes: localhost:3000/route
-app.use('/auth', authRoutes);
-app.use('/ad', adRoutes);
-
-// if doesn't reach the endpoint we handle the error
-app.use(errorController.get400);
-app.use(errorController.get500);
 
 // environment PORT or 3000 if there isn't
 const port = process.env.PORT || 3000;
@@ -27,7 +18,7 @@ app.listen(port, () => {
 
   // sequelize.authenticate() => create db connection
   // sequelize.sync()         => create db connection and tables if do not exist
-  sequelize.authenticate()
+  sequelize.sync()
     .then(() => console.log('--> database connection success'))
     .catch(err => {
       console.log('--> database connection error:');

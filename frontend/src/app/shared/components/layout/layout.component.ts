@@ -1,11 +1,9 @@
 // angular
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout'
-
-// angular material
 import { MatSidenav } from '@angular/material/sidenav';
 
-// custom services
+// services
 import { AuthService } from '@shared/services/auth.service';
 
 @Component({
