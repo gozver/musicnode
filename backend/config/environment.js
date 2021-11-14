@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-const path = require('path');
 
+const path = require('path');
 const homeUrl = '../public';
 const apiUrl = require('./routes');
 const errorController = require('../controllers/error');

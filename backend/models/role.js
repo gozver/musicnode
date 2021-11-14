@@ -9,18 +9,6 @@ Role.init({
     primaryKey: true,
     autoIncrement: true
   },
-  userId: {
-    type: DataTypes.INTEGER,
-    validate: { notEmpty: false }
-  },
-  bandId: {
-    type: DataTypes.INTEGER,
-    validate: { notEmpty: false }
-  },
-  companyId: {
-    type: DataTypes.INTEGER,
-    validate: { notEmpty: false }
-  },
   role: {
     type: DataTypes.STRING,
     validate: { notEmpty: false }
@@ -30,6 +18,18 @@ Role.init({
     allowNull: true,
     defaultValue: 'assets/images/user.png'
   },
+  // userId: {
+  //   type: DataTypes.INTEGER,
+  //   validate: { notEmpty: false }
+  // },
+  // bandId: {
+  //   type: DataTypes.INTEGER,
+  //   validate: { notEmpty: false }
+  // },
+  // companyId: {
+  //   type: DataTypes.INTEGER,
+  //   validate: { notEmpty: false }
+  // },
 }, { 
   sequelize,
   modelName: 'role'

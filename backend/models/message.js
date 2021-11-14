@@ -1,29 +1,21 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-class Ad extends Model {}
+class Message extends Model {}
 
-Ad.init({
+Message.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  title: {
+  body: {
     type: DataTypes.STRING,
-    validate: {
-      notEmpty: true
-    }
-  },
-  description: {
-    type: DataTypes.TEXT,
-    validate: {
-      notEmpty: true
-    }
-  },
+    validate: { notEmpty: false }
+  }
 }, { 
   sequelize,
-  modelName: 'ad'
+  modelName: 'message'
 });
 
-module.exports = Ad;
+module.exports = Message;

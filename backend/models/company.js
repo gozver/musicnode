@@ -3,7 +3,7 @@ const sequelize = require('../config/database');
 
 class Company extends Model {}
 
-Role.init({
+Company.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,

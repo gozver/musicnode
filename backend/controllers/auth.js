@@ -70,11 +70,13 @@ exports.signup = async (req, res, next) => {
 
   // check if the email exists
   await User.findOne(whereString)
-    .then(() => {
-      const err = new Error();
-      err.statusCode = 401;
-      err.message = 'The email already exists in the database';
-      next(err);
+    .then((res) => {
+      if (res) {
+        const err = new Error();
+        err.statusCode = 401;
+        err.message = 'The email already exists in the database';
+        next(err);
+      }
     });
 
   // if no exists, continue

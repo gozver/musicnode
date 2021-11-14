@@ -3,7 +3,7 @@ const sequelize = require('../config/database');
 
 class Band extends Model {}
 
-Role.init({
+Band.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
