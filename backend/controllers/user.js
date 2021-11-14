@@ -1,5 +1,5 @@
-const Role = require('../models/role');
 const User = require('../models/user');
+const Role = require('../models/role');
 
 exports.findAll = async (req, res, next) => {
   User.findAll({
@@ -8,8 +8,7 @@ exports.findAll = async (req, res, next) => {
       model: Role,
       attributes: ['id', 'role', 'avatar']
     }
-  })
-    .then(data => res.json(data))
+  }).then(data => res.json(data))
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;
       next(err); // go to error controller

@@ -20,7 +20,7 @@ app.listen(port, () => {
   // sequelize.authenticate()         => creates db connection
   // sequelize.sync()                 => creates db connection and db tables if do not exist (do nothing if exist)
   // sequelize.sync({ force: true })  => creates db connection and db tables dropping them first if already exist
-  sequelize.sync()
+  sequelize.authenticate()
     .then(() => console.log('--> database connection success'))
     .catch(err => {
       console.log('--> database connection error:');

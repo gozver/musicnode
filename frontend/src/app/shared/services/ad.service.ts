@@ -25,7 +25,7 @@ export class AdService {
   ) { }
 
   getAds(): Observable<Ad[]> {
-    return this.http.get<Ad[]>(`${environment.apiUrl}/ads`, this.httpOptions).pipe(
+    return this.http.get<Ad[]>(`${environment.apiUrl}/ad`, this.httpOptions).pipe(
       catchError(this.errorHandlerService.handleError<Ad[]>('getAds', []))
     );
   }

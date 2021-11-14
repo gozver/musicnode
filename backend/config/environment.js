@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const path = require('path');
 const homeUrl = '../public';
 const apiUrl = require('./routes');
-const errorController = require('../controllers/error');
+const controllers = require('../controllers');
 
 // app.use(method()) => methods used as a middleware
 module.exports = (app) => {
@@ -32,6 +32,6 @@ module.exports = (app) => {
   app.use('/api', apiUrl);
 
   // if doesn't reach the endpoint we handle the error
-  app.use(errorController.get400);
-  app.use(errorController.get500);
+  app.use(controllers.error.get400);
+  app.use(controllers.error.get500);
 }
