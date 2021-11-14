@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const authMiddleware = require('../middleware/auth');
+const middleware = require('../middlewares');
 
 const controllers = require('../controllers');
 
@@ -21,10 +21,10 @@ router.get    ('/users',  controllers.user.findAll);
 router.get    ('/roles',  controllers.role.findAll);
 
 // ad
-router.post   ('/ad',     authMiddleware, controllers.ad.create);
-router.get    ('/ads',    authMiddleware, controllers.ad.findAll);
-router.get    ('/ad/:id', authMiddleware, controllers.ad.findByPk);
-router.patch  ('/ad/:id', authMiddleware, controllers.ad.update);
-router.delete ('/ad/:id', authMiddleware, controllers.ad.delete);
+router.post   ('/ad',     middleware.auth, controllers.ad.create);
+router.get    ('/ads',    middleware.auth, controllers.ad.findAll);
+router.get    ('/ad/:id', middleware.auth, controllers.ad.findByPk);
+router.patch  ('/ad/:id', middleware.auth, controllers.ad.update);
+router.delete ('/ad/:id', middleware.auth, controllers.ad.delete);
 
 module.exports = router;
