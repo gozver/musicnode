@@ -1,7 +1,7 @@
 const express = require('express');
 
-const sequelize = require('./config/database');
-const associations = require('./config/associations');
+const sequelize = require('./config/db');
+const retaionships = require('./config/relationships');
 const environment = require('./config/environment');
 
 // consume express
@@ -20,10 +20,10 @@ app.listen(port, () => {
   // sequelize.authenticate()         => creates db connection
   // sequelize.sync()                 => creates db connection and db tables if do not exist (do nothing if exist)
   // sequelize.sync({ force: true })  => creates db connection and db tables dropping them first if already exist
-  sequelize.authenticate()
-    .then(() => console.log('--> database connection success'))
+  sequelize.sync({ force: true })
+    .then(() => console.log('--> db connection success'))
     .catch(err => {
-      console.log('--> database connection error:');
+      console.log('--> db connection error:');
       console.log(err);
     });
 });

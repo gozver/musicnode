@@ -1,7 +1,7 @@
 {
   "db": {
     "host": "localhost",
-    "database": "musicnode",
+    "db": "musicnode",
     "username": "admin",
     "password": "admin",
     "dialect": "mysql"

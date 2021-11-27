@@ -53,7 +53,7 @@ exports.login = async (req, res, next) => {
       // create error
       const err = new Error();
       err.statusCode = 401;
-      err.message = 'The email do not exists in the database';
+      err.message = 'The email do not exists in the db';
 
       // print error and send it to error controller
       console.log('--> error:');
@@ -74,7 +74,7 @@ exports.signup = async (req, res, next) => {
       if (res) {
         const err = new Error();
         err.statusCode = 401;
-        err.message = 'The email already exists in the database';
+        err.message = 'The email already exists in the db';
         next(err);
       }
     });
@@ -96,7 +96,7 @@ exports.signup = async (req, res, next) => {
     password: hashedPwd
   };
 
-  // save the user in the database
+  // save the user in the db
   await User.create(user)
     .then(() => {
       // return response to the client
