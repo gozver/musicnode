@@ -1,21 +1,21 @@
-const Ad = require('../models/ad');
-const Band = require('../models/band');
-const Company = require('../models/company');
-const Message = require('../models/message');
-const Role = require('../models/role');
-const User = require('../models/user');
+const models = require('../models');
 
-User.hasMany(Ad,   { as: 'user', foreignKey: 'userId' }); // one to many => this line adds a userId key to ad table
-Ad.belongsTo(User, { as: 'user' });                       // one to one  => this line adds a userId key to ad table
+// one to many 
+models.user.hasMany(models.ad, { foreignKey: 'userId' }); // adds a userId key to ad table
+models.ad.belongsTo(models.user);                         // adds a userId key to ad table
 
-User.hasMany(Message);    // 1 user has 0 or many messages
-Message.belongsTo(User);  // 1 message belongs to 1 user
+// one to many
+models.user.hasMany(models.message, { foreignKey: 'userId' }); // adds a userId key to ad table
+models.message.belongsTo(models.user);                         // one to one  => this line adds a userId key to ad table
 
-User.hasMany(Role);       // 1 user has 1 or many roles
-Role.belongsTo(User);     // 1 role belongs to 1 user
+// many to many (magic method)
+models.user.belongsToMany(models['role'], { through: 'user_role' }); // creates a user_role table in the db
+models.role.belongsToMany(models['user'], { through: 'user_role' }); // creates a user_role table in the db
 
-Role.hasOne(Band);        // 1 role has 0 or 1 band
-Band.belongsTo(Role);     // 1 band belongs to 1 role
+// one to one
+models.role.hasOne(models['band'], { foreignKey: 'roleId' }); // adds a userId key to ad table
+models.band.belongsTo(models['role']);                        // adds a userId key to ad table
 
-Role.hasOne(Company);     // 1 role has 0 or 1 company
-Company.belongsTo(Role);  // 1 company belongs to 1 role
+// one to one
+models.role.hasOne(models['company'], { foreignKey: 'roleId' }); // adds a roleId to ad table
+models.company.belongsTo(models['role']);                        // adds a roleId to ad table

@@ -4,15 +4,14 @@ const Company = require('../models/company');
 
 exports.findAll = async (req, res, next) => {
   Role.findAll({
-    attributes: ['id', 'role', 'avatar'],
-    include: {
-      model: Band,
-      attributes: ['id', 'name', 'description', 'phone', 'email', 'avatar', 'address']
-    },
-    include: {
-      model: Company,
-      attributes: ['id', 'name']
-    }
+    attributes: ['id', 'type'],
+    // include: [{
+    //   model: Band,
+    //   attributes: ['id', 'name', 'description', 'phone', 'email', 'avatar', 'address']
+    // }, {
+    //   model: Company,
+    //   attributes: ['id', 'name']
+    // }],
   })
     .then(data => res.json(data))
     .catch(err => {

@@ -6,7 +6,7 @@ exports.findAll = async (req, res, next) => {
     attributes: ['id', 'name', 'surname', 'email', 'phone'],
     include: {
       model: Role,
-      attributes: ['id', 'role', 'avatar']
+      attributes: ['id', 'type']
     }
   }).then(data => res.json(data))
     .catch(err => {

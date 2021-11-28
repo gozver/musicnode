@@ -2,10 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 
-const path = require('path');
-const homeUrl = '../public';
-const apiUrl = require('./routes');
+const routes = require('./routes');
 const controllers = require('../controllers');
+
+// const path = require('path');
+// const homeUrl = '../public';
 
 // app.use(method()) => methods used as a middleware
 module.exports = (app) => {
@@ -26,10 +27,10 @@ module.exports = (app) => {
   });
 
   // serve static files in express
-  app.use(express.static(path.join(__dirname, homeUrl)));
+  // app.use(express.static(path.join(__dirname, homeUrl)));
 
   // routes: localhost:3000/route
-  app.use('/api', apiUrl);
+  app.use('/api', routes);
 
   // if doesn't reach the endpoint we handle the error
   app.use(controllers.error.get400);
