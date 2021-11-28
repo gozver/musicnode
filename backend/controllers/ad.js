@@ -1,5 +1,4 @@
-const Ad = require('../models/ad');
-const User = require('../models/user');
+const models = require('../models');
 
 exports.create = async (req, res, next) => {
   const ad = { 
@@ -8,7 +7,7 @@ exports.create = async (req, res, next) => {
     description: req.body.description
   };
 
-  Ad.create(ad)
+  models.ad.create(ad)
     .then(data => res.json(data))
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;
@@ -17,10 +16,10 @@ exports.create = async (req, res, next) => {
 }
 
 exports.findAll = async (req, res, next) => {
-  Ad.findAll({
+  models.ad.findAll({
     attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt'],
     include: {
-      model: User,
+      model: models.user,
       attributes: ['id', 'name', 'surname', 'phone', 'email']
     },
     order: [['created_at','DESC']]
@@ -32,7 +31,7 @@ exports.findAll = async (req, res, next) => {
 }
 
 exports.findOne = async (req, res, next) => {  
-  Ad.findOne({
+  models.ad.findOne({
     where: {
       id: req.params.id
     }
@@ -44,7 +43,7 @@ exports.findOne = async (req, res, next) => {
 }
 
 exports.update = async (req, res, next) => {
-  Ad.update({
+  models.ad.update({
     userId: req.body.userId,
     title: req.body.title,
     description: req.body.description,
@@ -60,7 +59,7 @@ exports.update = async (req, res, next) => {
 }
 
 exports.delete = async (req, res, next) => {
-  Ad.destroy({
+  models.ad.destroy({
     where: {
       id: req.params.id
     }

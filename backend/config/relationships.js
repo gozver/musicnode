@@ -6,7 +6,7 @@ models.ad.belongsTo(models.user);                         // adds a userId key t
 
 // one to many
 models.user.hasMany(models.message, { foreignKey: 'userId' }); // adds a userId key to ad table
-models.message.belongsTo(models.user);                         // one to one  => this line adds a userId key to ad table
+models.message.belongsTo(models.user);                         // adds a userId key to ad table
 
 // many to many (magic method)
 models.user.belongsToMany(models['role'], { through: 'user_role' }); // creates a user_role table in the db

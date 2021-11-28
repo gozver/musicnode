@@ -1,11 +1,10 @@
-const User = require('../models/user');
-const Role = require('../models/role');
+const models = require('../models');
 
 exports.findAll = async (req, res, next) => {
-  User.findAll({
+  models.user.findAll({
     attributes: ['id', 'name', 'surname', 'email', 'phone'],
     include: {
-      model: Role,
+      model: models.role,
       attributes: ['id', 'type']
     }
   }).then(data => res.json(data))

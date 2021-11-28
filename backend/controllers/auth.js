@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const config = require('../config/config.json');
-const User = require('../models/user');
+const models = require('../models');
 
 exports.login = async (req, res, next) => {
   const email = req.body.email;
@@ -11,7 +11,7 @@ exports.login = async (req, res, next) => {
     where: { email }
   };
   
-  await User.findOne(whereString)
+  await models.user.findOne(whereString)
     // user found
     .then(async (user) => {
       // check the password
@@ -69,7 +69,7 @@ exports.signup = async (req, res, next) => {
   };
 
   // check if the email exists
-  await User.findOne(whereString)
+  await models.user.findOne(whereString)
     .then((res) => {
       if (res) {
         const err = new Error();
@@ -97,7 +97,7 @@ exports.signup = async (req, res, next) => {
   };
 
   // save the user in the db
-  await User.create(user)
+  await models.user.create(user)
     .then(() => {
       // return response to the client
       res.status(201).json('User created!');
