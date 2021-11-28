@@ -5,6 +5,7 @@
 apps/
 backups/
 guides/
+db/
 
 # compressed files
 *.rar

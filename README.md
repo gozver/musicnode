@@ -2,7 +2,7 @@
 Web Application Development Final Proyect (IES Trassierra).
 
 ### Description:
-Musicnode is a professional business drive network for musicians and music events management companies or free market contractors.  
+Professional business drive network for musicians and music events management companies or free market contractors.  
 
 ### To do:
 Add animated gifs to show the final proyect
@@ -18,6 +18,7 @@ Add animated gifs to show the final proyect
 - [Angular CLI](https://angular.io/cli) version 12.2.10.
 - [Angular Material](https://material.angular.io/) version 12.2.10.
 - [RxJS](https://rxjs.dev/) version 6.6.0.
+- [Node Engine](https://nodejs.org/en/) version 14.15.0.
 
 ## Frontend development server:
 Run `npm start` to run the server. The app will automatically navigate to `http://localhost:4200/` and will reload if you change any of the source files.
@@ -30,4 +31,5 @@ Run `npm start` to run the server. The app will automatically navigate to `http:
 
 ## Backend development server:
 Run `npm run serve` to run the server.  
-Run `npm run dev` to run the server with nodemon. The app will automatically reload if you change any of the source files.
+Run `npm run dev` to run the server with nodemon. The app will automatically reload if you change any of the source files.  
+Run `node seed` to insert demo data into the database.
