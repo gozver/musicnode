@@ -1,16 +1,29 @@
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
+// @import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
+
+// Global variables
+$primary: hsl(212, 99%, 33%);
+$primary-shadow: #e7f3ff;
+
+$alert: #f02849;
+$alert-shadow: #ffe7e7;
+
+$success: #42b72a;
+$lightgray1: #f0f2f5; // #f5f7fa;
+$lightgray2: #dddfe2;
 
 * {
   box-sizing: border-box;
 }
 
-html, body { 
-  height: 100%; 
+html,
+body {
+  height: 100%;
 }
 
 body {
   margin: 0;
-  padding: 0; 
+  padding: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: #fff;
+  // background: $lightgray1;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

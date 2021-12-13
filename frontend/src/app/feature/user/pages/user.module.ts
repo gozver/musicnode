@@ -4,8 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 // angular material
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { MaterialModule } from '@shared/modules/material.module';
 
 // custom modules
 import { UserRoutingModule } from './user-routing.module';
@@ -25,12 +24,10 @@ import { SignupComponent } from './signup/signup.component';
     CommonModule,
     ReactiveFormsModule,
     
+    MaterialModule,
     UserRoutingModule,
     UserComponentsModule,
     ComponentsModule,
-
-    MatButtonModule,
-    MatIconModule
   ]
 })
 export class UserModule { }

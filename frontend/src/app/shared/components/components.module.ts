@@ -1,22 +1,21 @@
-// angular modules
+// Angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-// custom components
+// Angular Material
+import { MaterialModule } from '@shared/modules/material.module';
+
+// Custom Components
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LoaderComponent } from './loader/loader.component';
 
-// angular material
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
 @NgModule({
   declarations: [
+    HeaderComponent,
+    SidebarComponent,
     LayoutComponent,
     LoaderComponent
   ],
@@ -24,14 +23,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     CommonModule,
     RouterModule,
 
-    MatToolbarModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatProgressSpinnerModule
+    MaterialModule
   ],
   exports: [
+    HeaderComponent,
+    SidebarComponent,
     LayoutComponent,
     LoaderComponent
   ]

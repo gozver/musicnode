@@ -1,4 +1,137 @@
-<app-singup-form
+<article>
+  <section class="top_ctr">
+    <div class="title">
+      musicnode
+    </div>
+
+    <div class="text">
+      Professional business drive network for musicians and music events management companies or free market contractors.
+    </div>
+  </section>
+
+  <section class="bottom_ctr">
+    <div class="card">
+      <div class="card-content">
+
+        <form [formGroup]="signupForm" novalidate>
+          <div class="row">
+            <input
+              name="name"
+              formControlName="name"
+              placeholder="Name"
+              autocomplete="on" />
+    
+            <input
+              name="surname"
+              formControlName="surname"
+              placeholder="Surname"
+              autocomplete="on" />  
+          </div>
+
+          <div class="row">
+            <input name="email"
+              formControlName="email"
+              placeholder="Email"
+              autocomplete="on" />
+            
+            <input
+              name="avatar"
+              placeholder="Avatar" />
+            
+            <input 
+              name="password"
+              formControlName="password"
+              placeholder="password"
+              autocomplete="on"
+              type="password"/>
+          </div>
+
+          <div class="row">
+            <select name="roles" id="roles">
+              <option class="option" value="band">Band</option>
+              <option value="company">Company</option>
+              <option value="admin">Admin</option>
+            </select>
+            
+            <input
+              name="band"
+              placeholder="Band Name" />
+          </div>
+        </form>
+
+        <!-- [disabled]="loginForm.invalid" -->
+        <button class="login-btn" title="Log In">
+          Sign Up
+        </button>
+      </div>
+    </div>
+  
+    <p class="tagline">
+      <span>Login or create an account to access all the platform features.</span>
+    </p>    
+  </section>
+</article>
+
+<!-- <div class="signup"> -->
+  <!-- <div class="header">
+    <h1>Sign Up</h1>
+    <p>It's quick and ease</p>
+  </div>
+
+  <div class="body">
+    <form [formGroup]="signupForm">
+      <div class="row1">
+        <input
+          name="name"
+          formControlName="name"
+          placeholder="Name"
+          autocomplete="on" />
+
+        <input
+          name="surname"
+          formControlName="surname"
+          placeholder="Surname"
+          autocomplete="on" />  
+      </div>
+
+      <div class="row2">
+        <input name="email"
+          formControlName="email"
+          placeholder="Email"
+          autocomplete="on" />
+        
+        <input
+          name="avatar"
+          placeholder="Avatar" /> -->
+        
+        <!-- <input 
+          name="avatar"
+          formControlName="avatar"
+          placeholder="Avatar" /> -->
+        
+        <!-- <input 
+          name="password"
+          formControlName="password"
+          placeholder="password"
+          autocomplete="on"
+          type="password"/> -->
+      <!-- </div> -->
+
+      <!-- <p>By clicking Sign Up, you agree to our Terms. Learn how we collect, use and share your data in our Data Policy and how we use cookies and similar technology in our Cookies Policy. You may receive SMS Notifications from us and can opt out any time.</p>
+
+      <button
+        class="create-account-btn"
+        title="signup"
+        (click)="signup()"
+        [mat-dialog-close]="signupForm.value"
+      >
+        Sign Up
+      </button> -->
+    <!-- </form>
+  </div>
+</div> -->
+
+<!-- <app-singup-form
   [signupForm]=signupForm
 >
 </app-singup-form>
@@ -17,4 +150,4 @@
   >
     <mat-icon>save</mat-icon>
   </button>
-</div>
+</div> -->

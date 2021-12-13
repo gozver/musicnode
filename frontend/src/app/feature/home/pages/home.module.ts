@@ -1,13 +1,16 @@
-// angular modules
+// Angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-// custom modules
+// Angular Material
+import { MaterialModule } from '@shared/modules/material.module';
+
+// Custom Modules
 import { HomeRoutingModule } from './home-routing.module';
 
-// custom components
+// Custom Components
 import { HomeComponent } from './home/home.component';
-
 
 @NgModule({
   declarations: [
@@ -15,10 +18,12 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule,
+    MaterialModule,
+    FormsModule,
+    HomeRoutingModule
   ],
   exports: [
-    HomeComponent
+    // HomeComponent
   ]
 })
 export class HomeModule { }

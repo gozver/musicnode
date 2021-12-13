@@ -5,11 +5,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+// Angular Material
+import { MaterialModule } from '@shared/modules/material.module';
+
 // App
 import { AppComponent } from '@app/app.component';
 import { AppRoutingModule } from '@app/app-routing.module';
 
-// Shared modules
+// Shared Modules
 import { ComponentsModule } from '@shared/components/components.module';
 
 // Interceptors
@@ -26,7 +29,8 @@ import { LoaderInterceptorService } from '@shared/services/loader-interceptor.se
     AppRoutingModule,
     HttpClientModule,
 
-    ComponentsModule
+    ComponentsModule,
+    MaterialModule
   ],
   providers: [
     { 

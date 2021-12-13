@@ -1,19 +1,34 @@
-<app-login-form
-  [loginForm]=loginForm
->
-</app-login-form>
+<!-- Bem Naming Convention: -->
+<!-- Source: http://getbem.com/naming/ -->
 
-<div class="btn-ctnr">
-  <button
-    mat-button
-    title="login"
-    aria-label="Save"
-    color="primary"
-    mat-rised-button
-    mat-fab
-    [disabled]="loginForm.invalid"
-    (click)="login()"
-  >
-    <mat-icon>login</mat-icon>
-  </button>
-</div>
+<article>
+  <section class="top_ctr">
+    <div class="title">
+      musicnode
+    </div>
+
+    <div class="text">
+      <h1>Professional business drive network for musicians and music events management companies or free market contractors.</h1>
+    </div>
+  </section>
+
+  <section class="bottom_ctr">
+    <div class="card">
+      <div class="card-content">
+        <app-login-form 
+          [loginForm]=loginForm
+          [loginError]=loginError
+        ></app-login-form>
+
+        <!-- [disabled]="loginForm.invalid" -->
+        <button class="login-btn" (click)="login()" title="Log In">
+          Log In
+        </button>
+      </div>
+    </div>
+
+    <p class="tagline">
+      <span>Login or create an account to access all the platform features.</span>
+    </p>    
+  </section>
+</article>

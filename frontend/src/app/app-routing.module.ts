@@ -3,10 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuardService } from './shared/services/auth-guard.service';
 
+/**
+ * @loadChildren => Lazy loading feature modules: https://angular.io/guide/lazy-loading-ngmodules
+ * @AuthGuardService => AuthGuard middleware: redirects to LoginComponent if the user is not logged in
+ */
 const routes: Routes = [
   {
-    path: 'user',
-    loadChildren: () => import('@feature/user/pages/user.module').then(m => m.UserModule)
+    path: '',
+    canActivate: [AuthGuardService],
+    loadChildren: () => import('@feature/home/pages/home.module').then(m => m.HomeModule)
   },
   {
     path: 'home',
@@ -14,19 +19,23 @@ const routes: Routes = [
     loadChildren: () => import('@feature/home/pages/home.module').then(m => m.HomeModule)
   },
   {
-    path: 'ad',
-    canActivate: [AuthGuardService],
-    loadChildren: () => import('@feature/ad/pages/ad.module').then(m => m.AdModule)
+    path: 'user',
+    loadChildren: () => import('@feature/user/pages/user.module').then(m => m.UserModule)
   },
-  {
-    path: '**', // Any other path    
-    redirectTo: '/home'
-  }
+  // {
+  //   path: 'ad',
+  //   canActivate: [AuthGuardService],
+  //   loadChildren: () => import('@feature/ad/pages/ad.module').then(m => m.AdModule)
+  // },
+  // {
+  //   path: '**', // Any other path    
+  //   redirectTo: '/home'
+  // }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes) // Main routes
+    RouterModule.forRoot(routes)
   ],
   exports: [
     RouterModule

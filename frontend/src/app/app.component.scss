@@ -1,3 +1,9 @@
+mat-card {
+  display: none;
+}
+
 main {
-  background: #f5f7fa;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }

@@ -1,1 +1,67 @@
-<p>home works!</p>
+<div class="body">
+  <div class="middle-ctr">
+    <div class="home__body__contentMiddle__top">
+      
+      <!--IMAGE CARDS-->      
+      <mat-card *ngFor="let i of imagesList" class="image-card">
+        <img alt="bg"class="bg" src="{{ i }}">
+
+        <mat-card-content>
+          <img alt="avatar" class="avatar" src="assets/img/user.jpg" width="50px">
+          <span class="card-name">Lolo Gonzalez</span>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="home__body__contentMiddle__center">
+      <mat-card class="post-message">
+        <mat-card-header class="post-message-header" style="padding-bottom: 20px; border-bottom: 1px solid lightgray;">
+          <img alt="" mat-card-avatar src="assets/img/me.jpg">
+          <!-- <img alt="" mat-card-avatar [src]="user?.avatar"> -->
+
+          <form #form="ngForm" (ngSubmit)="postMessage()">
+            <input class="on-your-mind" name="message" ngModel placeholder="What's on your mind?" type="text">
+            <button style="display: none;" type="submit"></button>
+          </form>
+        </mat-card-header>
+
+        <mat-card-content class="card-body">
+          <div>
+            <mat-icon color="accent">videocam</mat-icon>
+            <span>Live Video</span>
+          </div>
+
+          <div>
+            <mat-icon color="primary">photo_album</mat-icon>
+            <span>Photo/Video</span>
+          </div>
+
+          <div>
+            <mat-icon color="warn">mood</mat-icon>
+            <span>Feeling/Activity</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Loop Through All Posts From Database and Display -->
+      <mat-card class="posts">
+      <!-- <mat-card *ngFor="let p of posts" class="posts"> -->
+        <mat-card-header class="posts__header">
+          <img alt="title" mat-card-avatar src="assets/img/me.jpg">
+          <!-- <img alt="{{ p?.title }}" mat-card-avatar [src]="p?.avatar"> -->
+          <div class="posts__header__right">
+            <span>21/21/2021</span>
+            <!-- <span>{{ p?.time?.seconds * 1000 | date:'shortTime' }}</span> -->
+            <h3>Title</h3>
+            <!-- <h3>{{ p?.title }}</h3> -->
+          </div>
+        </mat-card-header>
+        <mat-card-content class="posts__body">
+          <p>Body</p>
+          <!-- <p>{{ p?.message }}</p> -->
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+    

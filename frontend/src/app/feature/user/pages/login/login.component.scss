@@ -1,11 +1,113 @@
-.btn-ctnr {
-  background: #fff;
-  margin: auto;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  padding: 0 20px 20px 20px;
+@import 'src/styles';
 
+article {
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    
+    &.top_ctr {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  
+      .title {
+        margin-top: 50px;
+        // font-family: Tahoma;
+        font-size: 62px;
+        font-weight: bold;
+        color: $primary;
+      }
+
+      img {
+        width: 290px;
+        margin-bottom: 20px;
+        margin-top: 50px;
+      }
+
+      .text {
+        text-align: center;
+        
+        h1 {
+          font-size: 16px;
+          font-weight: normal;
+        }
+      }
+    }
+  
+    &.bottom_ctr {
+      width: 100%;
+      margin-top: 25px;
+      
+      .card {        
+        max-width: 100%;
+        padding: 10px;
+        margin-bottom: 30px;
+        border: 1px solid #dddfe2;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+        background: #fff;
+
+        @media (min-width: 900px) {
+          margin-right: 20px;
+        }
+  
+        .card-content {
+          display: flex;
+          flex-direction: column;
+          padding: 5px;
+  
+          form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+  
+            input {
+              padding: 20px;
+              outline: none;
+              border: 1px solid #dddfe2;
+              border-radius: 5px;
+  
+              &::placeholder {
+                font-size: 16px;
+                font-weight: normal;
+              }
+            }
+          }
+
+          .login-btn {
+            padding: 15px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            background: $primary;
+            color: #fff;
+          }
+        }
+  
+        a {
+          text-decoration: none;
+          text-align: center;
+          border-bottom: 1px solid $lightgray2;
+          margin-bottom: 20px;
+          padding-bottom: 20px;
+          cursor: pointer;
+          color: $primary;
+        }
+      }
+  
+      .tagline {
+        text-align: center;
+      }
+    }
+  }
 }

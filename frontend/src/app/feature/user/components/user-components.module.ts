@@ -5,9 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 // angular material
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatIconModule } from '@angular/material/icon';
+import { MaterialModule } from '@shared/modules/material.module';
 
 // custom components
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -24,11 +22,8 @@ import { ComponentsModule } from '@shared/components/components.module';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-
-    MatInputModule,
-    MatSelectModule,    
-    MatIconModule,
-
+    
+    MaterialModule,
     ComponentsModule,
   ],
   exports: [

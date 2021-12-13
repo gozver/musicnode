@@ -38,7 +38,8 @@ export class LayoutComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
-    this.sidenav.close();
+    
+    this.closeIfIsMobileView();
   }
 
   ngAfterViewInit() {

@@ -1,17 +1,35 @@
-.login-form {
-  background: #fff;
-  margin: auto;
-  padding: 30px 60px 15px 60px;
+@import 'src/styles';
 
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
-  h1 {
-    margin: 10px 0;
-    font-weight: 500;
-  }
-  
-  mat-form-field {
-    width: 100%;
+  input {
+    font-size: 16px;
+    padding: 14px 16px;
+    border: 1px solid #dddfe2;
+    border-radius: 5px;
+    outline: none;
+
+    &:focus {
+      border: 1px solid $primary !important;
+      box-shadow: 0 0 0 2px $primary-shadow !important;
+    }
+
+    &.border-blue {
+      border: 1px solid $primary;
+      box-shadow: 0 0 0 2px $primary-shadow;
+    }
+
+    &.border-red {
+      border: 1px solid $alert;
+      box-shadow: 0 0 0 2px $alert-shadow;
+    }
+
+    &::placeholder {
+      font-size: 16px;
+      font-weight: normal;
+    }
   }
 }
