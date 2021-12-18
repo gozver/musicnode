@@ -1,14 +1,11 @@
-export interface Band {
+export interface Company {
   id: number,
   name: string,
   desc: string,
   phone: string,
-  price: string,
-  type: string,
-  scope: string,
   email: string,
-  video: string,
   avatar: string,
+  address: string,
   createdAt: Date;
   updatedAt: Date;
 }

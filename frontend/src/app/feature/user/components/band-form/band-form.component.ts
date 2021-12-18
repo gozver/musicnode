@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -6,17 +6,12 @@ import { FormGroup } from '@angular/forms';
   templateUrl: './band-form.component.html',
   styleUrls: ['./band-form.component.scss']
 })
-export class BandFormComponent implements OnInit {
+export class BandFormComponent {
   @Input() bandForm: FormGroup;
-  @Input() BandFormError: boolean;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  @Input() bandFormError: boolean;
 
   checkSignUpError(): string {
-    if (this.BandFormError)
+    if (this.bandFormError)
       return 'border-red';
     
     return 'border-gray'

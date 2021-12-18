@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 // Services
 import { AuthService } from '@shared/services/auth.service';
 import { BandService } from '@app/shared/services/band.service';
-import { RoleService } from '@app/shared/services/role.service';
+import { CompanyService } from '@app/shared/services/company.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,27 +17,32 @@ export class SignupComponent implements OnInit {
   signupStep: number;
 
   signupForm: FormGroup;
-  bandForm: FormGroup;
-  
   signupFormError: boolean;
+
+  bandForm: FormGroup;
   bandFormError: boolean;
+
+  companyForm: FormGroup;
+  companyFormError: boolean;
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly bandService: BandService,
-    private readonly roleService: RoleService
-  ) { }
+    private readonly companyService: CompanyService
+    ) { }
 
   ngOnInit(): void {
     this.signupStep = 1;
     
     this.signupFormError = false;
-    this.initSignupForm();
-
     this.bandFormError = false;
+    this.companyFormError = false;
+    
+    this.initSignupForm();
     this.initBandForm();
+    this.initCompanyForm();
   }
 
   initSignupForm(): void {
@@ -56,22 +61,34 @@ export class SignupComponent implements OnInit {
       name:   [ '', Validators.required ],
       desc:   [ '', Validators.required ],
       phone:  [ '', Validators.required ],
+      email:  [ '', Validators.required ],
       price:  [ '', Validators.required ],
       type:   [ '', Validators.required ],
       scope:  [ '', Validators.required ],
-      email:  [ '', Validators.required ],
       video:  [ '', Validators.required ],
-      // avatar: [ '', Validators.required ]
+      // avatar: '',
+    });
+  }
+
+  initCompanyForm(): void {
+    this.companyForm = this.fb.group({
+      name:    [ '', Validators.required ],
+      desc:    [ '', Validators.required ],
+      phone:   [ '', Validators.required ],
+      email:   [ '', Validators.required ],
+      address: [ '', Validators.required ],
+      // avatar: '',
     });
   }
 
   goToStep1(): void {
     this.signupStep = 1;
-    this.signupForm.reset();
-    this.bandForm.reset();
   }
 
   goToStep2(): void {
+    console.log('--> this.signupForm.value.roleId:');
+    console.log(this.signupForm.value.roleId);
+
     if (this.signupForm.status === 'VALID') {
       this.signupFormError = false;
       this.signupStep = 2;
@@ -87,16 +104,26 @@ export class SignupComponent implements OnInit {
       .signup(this.signupForm.value)
       .subscribe((signupRes) => {
         if (signupRes) {
-          console.log('--> Signup response:');
-          console.log(signupRes);
-
           // create band
-          this.bandService
-            .create(this.bandForm.value)
-            .subscribe(createBandRes => {
-              console.log('--> Create band response:');
-              console.log(createBandRes);
-            });
+          if (parseInt(this.signupForm.value.roleId) === 1) {
+            this.bandService
+              .create(this.bandForm.value)
+              .subscribe(createBandRes => {
+                console.log('--> Create band response:');
+                console.log(createBandRes);
+
+                this.clearData();
+              });
+          } else if (this.signupForm.value.roleId === 2) {
+            this.companyService
+              .create(this.companyForm.value)
+              .subscribe(createComapnyRes => {
+                console.log('--> Create company response:');
+                console.log(createComapnyRes);
+
+                this.clearData();
+              });
+          }
 
           // login
           this.authService
@@ -112,5 +139,12 @@ export class SignupComponent implements OnInit {
           this.signupFormError = true;
         }
       });
+  }
+
+  clearData(): void {
+    this.signupStep = 1;
+    this.signupForm.reset();
+    this.bandForm.reset();
+    this.companyForm.reset();
   }
 }

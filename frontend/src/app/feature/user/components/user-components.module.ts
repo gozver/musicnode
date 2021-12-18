@@ -11,14 +11,17 @@ import { MaterialModule } from '@shared/modules/material.module';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { SingupFormComponent } from './singup-form/singup-form.component';
 import { BandFormComponent } from './band-form/band-form.component';
+import { CompanyFormComponent } from './company-form/company-form.component';
 
 import { ComponentsModule } from '@shared/components/components.module';
+
 
 @NgModule({
   declarations: [
     LoginFormComponent,
     SingupFormComponent,
-    BandFormComponent
+    BandFormComponent,
+    CompanyFormComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +34,8 @@ import { ComponentsModule } from '@shared/components/components.module';
   exports: [
     LoginFormComponent,
     SingupFormComponent,
-    BandFormComponent
+    BandFormComponent,
+    CompanyFormComponent
   ]
 })
 export class UserComponentsModule { }

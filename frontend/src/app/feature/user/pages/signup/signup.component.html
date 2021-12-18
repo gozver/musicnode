@@ -2,13 +2,15 @@
   <section class="top_ctr">
     <div class="title">musicnode</div>
     <div class="text">Professional business drive network for musicians and music events management companies or free market contractors.</div>
-    <div class="subtitle" *ngIf="signupStep === 1">Signup step 1: user data</div>
-    <div class="subtitle" *ngIf="signupStep === 2">Signup step 2: band data</div>
+    <div class="subtitle" *ngIf="signupStep === 1">Signup: User Data</div>
+    <div class="subtitle" *ngIf="signupStep === 2 && signupForm.value.roleId === 1">Signup: band data</div>
+    <div class="subtitle" *ngIf="signupStep === 2 && signupForm.value.roleId === 2">Signup: company data</div>
   </section>
 
   <section class="bottom_ctr">
     <div class="card">
       <div class="card-content">
+        <!-- ini step 1 -->
         <app-singup-form
           [signupForm]=signupForm
           [signupFormError]=signupFormError
@@ -16,23 +18,32 @@
         ></app-singup-form>
 
         <!-- [disabled]="loginForm.invalid" -->
-        <button (click)="goToStep2()" title="Next" *ngIf="signupStep === 1">
+        <button (click)="goToStep2()" title="Next" *ngIf="signupStep === 1" >
           Next
         </button>
+        <!-- end step 1 -->
 
+        <!-- ini step 2 -->
         <app-band-form
           [bandForm]=bandForm
           [bandFormError]=bandFormError
           *ngIf="signupStep === 2 && signupForm.value.roleId === 1"
         ></app-band-form>
 
-        <button (click)="signup()" title="Signup (Step 2)" *ngIf="signupStep === 2 && signupForm.value.roleId === 1">
+        <app-company-form
+          [companyForm]=companyForm
+          [companyFormError]=companyFormError
+          *ngIf="signupStep === 2 && signupForm.value.roleId === 2"
+        ></app-company-form>
+
+        <button (click)="signup()" title="Signup" *ngIf="signupStep === 2" >
           Signup
         </button>
 
         <button (click)="goToStep1()" title="Go Back" *ngIf="signupStep === 2">
           Go Back
         </button>
+        <!-- end step 2 -->
       </div>
     </div>
   

@@ -4,24 +4,26 @@ const router = express.Router();
 const middlewares = require('../middlewares');
 const controllers = require('../controllers');
 
-// no middleware in find all to get the endpoints data from the browser
+// NOTE: no middleware in find all to allow
+// get the endpoints data from the browser => 'http://127.0.0.1:3000/model'
 
 router
   // auth
   .post   ('/auth/login',  controllers.auth.login)
   .post   ('/auth/signup', controllers.auth.signup)
 
-  // role: no findAll auth middleware to allow access to 'http://127.0.0.1:3000/role/band' from chrome
+  // role
   .get    ('/role', controllers.role.findAll)
 
-  // band: no findAll auth middleware to allow access to 'http://127.0.0.1:3000/band/band' from chrome
+  // band
   .get    ('/band', controllers.band.findAll)
   .post   ('/band', controllers.band.create)
 
-  // company: no findAll auth middleware to allow access to 'http://127.0.0.1:3000/company/band' from chrome
+  // company
   .get    ('/company', controllers.company.findAll)
+  .post   ('/company', controllers.company.create)
 
-  // ad: no findAll auth middleware to allow access to 'http://127.0.0.1:3000/ad/band' from chrome
+  // ad
   .get    ('/ad',                       controllers.ad.findAll)
   .post   ('/ad',     middlewares.auth, controllers.ad.create)
   .get    ('/ad/:id', middlewares.auth, controllers.ad.findOne)

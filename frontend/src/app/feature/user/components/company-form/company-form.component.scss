@@ -1,0 +1,41 @@
+@import 'src/styles';
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  input, textarea {
+    font-size: 16px;
+    padding: 14px 16px;
+    border: 1px solid #dddfe2;
+    border-radius: 5px;
+    outline: none;
+
+    &:focus {
+      border: 1px solid $primary !important;
+      box-shadow: 0 0 0 2px $primary-shadow !important;
+    }
+
+    &.border-blue {
+      border: 1px solid $primary;
+      box-shadow: 0 0 0 2px $primary-shadow;
+    }
+
+    &.border-red {
+      border: 1px solid $alert;
+      box-shadow: 0 0 0 2px $alert-shadow;
+    }
+
+    &::placeholder {
+      font-size: 16px;
+      font-weight: normal;
+    }
+  }
+  
+  textarea {
+    &::placeholder {
+      font-family: Roboto, "Helvetica Neue", sans-serif;
+    }
+  }
+}
