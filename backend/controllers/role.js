@@ -20,7 +20,7 @@ exports.create = async (req, res, next) => {
 
 exports.findAll = async (req, res, next) => {
   models.role.findAll({
-    attributes: ['id', 'type'],
+    // attributes: ['id', 'name'],
     // include: [{
     //   model: models.band,
     //   attributes: ['id', 'name', 'description', 'phone', 'email', 'avatar', 'price', 'type', 'scope', 'video']

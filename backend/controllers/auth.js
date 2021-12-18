@@ -96,7 +96,7 @@ exports.signup = async (req, res, next) => {
       userId = user.id;
 
       // return response to the client
-      res.status(201).json('User created!');
+      res.status(201).json(user);
     })
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;
@@ -114,7 +114,21 @@ exports.signup = async (req, res, next) => {
 
   // save the USER ROLE relationship in the db
   await models.userRole.create({ 
-    userId: user.id,
+    userId: userId,
     roleId: roleId
   });
 };
+
+exports.findAll = async (req, res, next) => {
+  models.user.findAll({
+    attributes: ['id', 'name', 'surname', 'email', 'phone'],
+    include: {
+      model: models.role,
+      attributes: ['id', 'type']
+    }
+  }).then(data => res.json(data))
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
+      next(err); // go to error controller
+    });
+}

@@ -27,11 +27,11 @@ exports.create = async (req, res, next) => {
 
 exports.findAll = async (req, res, next) => {
   models.band.findAll({
-    attributes: ['id', 'name', 'description', 'phone', 'email', 'avatar', 'price', 'type', 'scope', 'video'],
-    include: {
-      model: models.role,
-      attributes: ['id', 'type']
-    }
+    // attributes: ['id', 'name', 'desc', 'phone', 'email', 'avatar', 'price', 'type', 'scope', 'video'],
+    // include: {
+    //   model: models.role,
+    //   attributes: ['id', 'name']
+    // }
   }).then(data => res.json(data))
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;

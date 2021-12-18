@@ -8,9 +8,6 @@ import { AuthService } from '@shared/services/auth.service';
 import { BandService } from '@app/shared/services/band.service';
 import { RoleService } from '@app/shared/services/role.service';
 
-// Models
-import { Band } from '@shared/interfaces/band.interface';
-
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -20,7 +17,6 @@ export class SignupComponent implements OnInit {
   signupStep: number;
 
   signupForm: FormGroup;
-  roleForm: FormGroup;
   bandForm: FormGroup;
   
   signupFormError: boolean;
@@ -40,8 +36,6 @@ export class SignupComponent implements OnInit {
     this.signupFormError = false;
     this.initSignupForm();
 
-    this.initRoleForm();
-
     this.bandFormError = false;
     this.initBandForm();
   }
@@ -57,12 +51,6 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  initRoleForm(): void {
-    this.bandForm = this.fb.group({
-      name:   [ '', Validators.required ]
-    });
-  }
-
   initBandForm(): void {
     this.bandForm = this.fb.group({
       name:   [ '', Validators.required ],
@@ -73,7 +61,7 @@ export class SignupComponent implements OnInit {
       scope:  [ '', Validators.required ],
       email:  [ '', Validators.required ],
       video:  [ '', Validators.required ],
-      avatar: [ '', Validators.required ]
+      // avatar: [ '', Validators.required ]
     });
   }
 
@@ -102,35 +90,24 @@ export class SignupComponent implements OnInit {
           console.log('--> Signup response:');
           console.log(signupRes);
 
+          // create band
+          this.bandService
+            .create(this.bandForm.value)
+            .subscribe(createBandRes => {
+              console.log('--> Create band response:');
+              console.log(createBandRes);
+            });
+
           // login
-          // this.authService
-          //   .login(
-          //     this.signupForm.value.email,
-          //     this.signupForm.value.password
-          //   )
-            // .subscribe(loginRes => {
-            //   console.log('--> Login response:');
-            //   console.log(loginRes);
-            // });
-          
-          // // create role
-          // console.log('--> this.signupForm.value.role:');
-          // console.log(this.signupForm.value.role);
-
-          // this.roleService
-          //   .create(this.signupForm.value.role, loginRes.id)
-          //   .subscribe(res => {
-          //     console.log('--> Create role response:');
-          //     console.log(res);
-          //   });
-
-          // // create band
-          // this.bandService
-          //   .create(this.bandForm.value)
-          //   .subscribe(res => {
-          //     console.log('--> Create band response:');
-          //     console.log(res);
-          //   });
+          this.authService
+            .login(
+              this.signupForm.value.email,
+              this.signupForm.value.password
+            )
+            .subscribe(loginRes => {
+              console.log('--> Login response:');
+              console.log(loginRes);
+            });
         } else {
           this.signupFormError = true;
         }

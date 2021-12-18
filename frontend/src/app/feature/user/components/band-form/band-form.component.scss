@@ -32,4 +32,10 @@ form {
       font-weight: normal;
     }
   }
+  
+  textarea {
+    &::placeholder {
+      font-family: Roboto, "Helvetica Neue", sans-serif;
+    }
+  }
 }

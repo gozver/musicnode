@@ -14,14 +14,12 @@ export class ErrorHandlerService {
    handleError<T>(operation = 'operation', result?: T) { // T => generic type
     return (error: any): Observable<T> => {
       // Send the error to remote logging infrastructure
-      console.error('--> Error:', error);
-
       console.error(`--> Code: ${error.error.err.code}`);
-      console.error('--> Message');
+      console.error(`--> Message`);
       console.error(error.error.err.message);
-
-      // better job of transforming error for user consumption
       console.error(`--> Operation: ${operation}`);
+
+      console.error(`--> Full error object:`, error);
 
       // Let the app keep running by returning an empty result.
       return of (result as T);

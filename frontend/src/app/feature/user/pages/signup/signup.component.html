@@ -3,6 +3,7 @@
     <div class="title">musicnode</div>
     <div class="text">Professional business drive network for musicians and music events management companies or free market contractors.</div>
     <div class="subtitle" *ngIf="signupStep === 1">Signup step 1: user data</div>
+    <div class="subtitle" *ngIf="signupStep === 2">Signup step 2: band data</div>
   </section>
 
   <section class="bottom_ctr">
@@ -22,17 +23,16 @@
         <app-band-form
           [bandForm]=bandForm
           [bandFormError]=bandFormError
-          *ngIf="signupStep === 2 && signupForm.value.role === 'band'"
+          *ngIf="signupStep === 2 && signupForm.value.roleId === 1"
         ></app-band-form>
 
-        <button (click)="signup()" title="Signup (Step 2)" *ngIf="signupStep === 2 && signupForm.value.role === 'band'">
-          Signup (Step 2)
+        <button (click)="signup()" title="Signup (Step 2)" *ngIf="signupStep === 2 && signupForm.value.roleId === 1">
+          Signup
         </button>
 
-        <button (click)="goToStep1()" title="Go Back" *ngIf="signupStep === 2 && signupForm.value.role === 'band'">
+        <button (click)="goToStep1()" title="Go Back" *ngIf="signupStep === 2">
           Go Back
         </button>
-
       </div>
     </div>
   

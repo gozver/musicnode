@@ -4,6 +4,5 @@ module.exports = {
   'band': require('./band'),
   'company': require('./company'),
   'error': require('./error'),
-  'role': require('./role'),
-  'user': require('./user')
+  'role': require('./role')
 }

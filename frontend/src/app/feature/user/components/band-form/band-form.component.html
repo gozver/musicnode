@@ -6,11 +6,12 @@
   <input name="scope"  formControlName="scope"  autocomplete="on" [ngClass]="checkSignUpError()" placeholder="Scope" />
   <input name="email"  formControlName="email"  autocomplete="on" [ngClass]="checkSignUpError()" placeholder="Email" />
   <input name="video"  formControlName="video"  autocomplete="on" [ngClass]="checkSignUpError()" placeholder="Video" />
-  <input name="avatar" formControlName="avatar" autocomplete="on" [ngClass]="checkSignUpError()" placeholder="Avatar" />
+  <!-- <input name="avatar" formControlName="avatar" autocomplete="on" [ngClass]="checkSignUpError()" placeholder="Avatar" /> -->
 
   <textarea 
     name="desc"
     formControlName="desc"
+    autocomplete="on"
     [ngClass]="checkSignUpError()"
     placeholder="Description"
     rows="4" cols="50">

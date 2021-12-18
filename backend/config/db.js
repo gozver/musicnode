@@ -1,8 +1,8 @@
 const { Sequelize } = require('sequelize');
 const config = require('./config.json');
 
-const sequelize = new Sequelize(
-  config.db.db,
+const db = new Sequelize(
+  config.db.database,
   config.db.username,
   config.db.password, 
   {
@@ -20,4 +20,4 @@ const sequelize = new Sequelize(
   }
 );
 
-module.exports = sequelize;
+module.exports = db;
