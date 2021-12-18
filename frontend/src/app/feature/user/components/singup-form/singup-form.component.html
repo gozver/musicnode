@@ -1,47 +1,12 @@
-<form [formGroup]="signupForm" class="signup-form" novalidate>
-  <h1>Signup</h1>
-
-  <mat-form-field class="input">
-    <mat-label>Name</mat-label>
-    <input matInput placeholder="Enter first name" formControlName="name" autocomplete="on" />
-  </mat-form-field>
-
-  <mat-form-field class="input">
-    <mat-label>Surname</mat-label>
-    <input matInput placeholder="Enter last name" formControlName="surname" autocomplete="on" />
-  </mat-form-field>
-
-  <mat-form-field class="input">
-    <mat-label>Email</mat-label>
-    <input matInput placeholder="Enter email" formControlName="email" autocomplete="on" />
-  </mat-form-field>
-
-  <mat-form-field class="input">
-    <mat-label>Phone</mat-label>
-    <input matInput placeholder="Enter phone" formControlName="phone" autocomplete="on" />
-  </mat-form-field>
-
-  <mat-form-field class="input">
-    <mat-label>Password</mat-label>
-    <input matInput placeholder="Enter password" formControlName="password" type="password" autocomplete="on" />
-  </mat-form-field>
+<form [formGroup]="signupForm" novalidate>
+  <input name="name"     formControlName="name"     placeholder="Name"     [ngClass]="checkSignUpError()" autocomplete="on" />
+  <input name="surname"  formControlName="surname"  placeholder="Surname"  [ngClass]="checkSignUpError()" autocomplete="on" />
+  <input name="email"    formControlName="email"    placeholder="Email"    [ngClass]="checkSignUpError()" autocomplete="on" />
+  <input name="phone"    formControlName="phone"    placeholder="Phone"    [ngClass]="checkSignUpError()" autocomplete="on" />
+  <input name="password" formControlName="password" placeholder="Password" [ngClass]="checkSignUpError()" autocomplete="on" type="password" />
+  
+  <select name="roleId" formControlName="roleId" [ngClass]="checkSignUpError()">
+    <option [ngValue]="null" [selected]="true" hidden>Role</option>
+    <option *ngFor="let item of rolesList" [ngValue]="item.id">{{ item.value }}</option>
+ </select>
 </form>
-
-<!-- <mat-form-field class="input">
-    <mat-label>Avatar</mat-label>
-    <input matInput placeholder="Enter image" formControlName="avatar" type="url" />
-  </mat-form-field> -->
-
-  <!-- <mat-form-field appearance="fill">
-    <mat-label>Role</mat-label>
-    <mat-select formControlName="role">      
-      <mat-option value="band">Band</mat-option>
-      <mat-option value="company">Company</mat-option>
-      <mat-option value="admin">Administrator</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field class="input" *ngIf="sfc.role.value==='admin'">
-    <mat-label>Administrator code</mat-label>
-    <input matInput placeholder="Enter administrator code" formControlName="adminCode" type="number" />
-  </mat-form-field> -->

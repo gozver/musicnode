@@ -17,31 +17,23 @@ article {
   
       .title {
         margin-top: 50px;
-        // font-family: Tahoma;
         font-size: 62px;
         font-weight: bold;
         color: $primary;
       }
 
-      img {
-        width: 290px;
-        margin-bottom: 20px;
-        margin-top: 50px;
-      }
-
       .text {
         text-align: center;
-        
-        h1 {
-          font-size: 16px;
-          font-weight: normal;
-        }
+        font-size: 16px;
+        font-weight: normal;
+        padding-top: 15px;
+        padding-bottom: 15px;
       }
     }
   
     &.bottom_ctr {
       width: 100%;
-      margin-top: 25px;
+      margin-top: 20px;
       
       .card {        
         max-width: 100%;
@@ -51,38 +43,15 @@ article {
         border-radius: 8px;
         box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
         background: #fff;
-
-        @media (min-width: 900px) {
-          margin-right: 20px;
-        }
   
         .card-content {
           display: flex;
           flex-direction: column;
           padding: 5px;
   
-          form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-  
-            input {
-              padding: 20px;
-              outline: none;
-              border: 1px solid #dddfe2;
-              border-radius: 5px;
-  
-              &::placeholder {
-                font-size: 16px;
-                font-weight: normal;
-              }
-            }
-          }
-
-          .login-btn {
+          button {
             padding: 15px;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            margin-top: 15px;
             outline: none;
             border: none;
             border-radius: 5px;

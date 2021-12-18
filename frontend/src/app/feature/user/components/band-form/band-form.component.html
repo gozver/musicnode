@@ -1,0 +1,18 @@
+<form [formGroup]="bandForm" novalidate>
+  <input name="name"   formControlName="name"   autocomplete="on" [ngClass]="checkSignUpError()" placeholder="Name" />
+  <input name="phone"  formControlName="phone"  autocomplete="on" [ngClass]="checkSignUpError()" placeholder="Phone" />
+  <input name="price"  formControlName="price"  autocomplete="on" [ngClass]="checkSignUpError()" placeholder="Price" />
+  <input name="type"   formControlName="type"   autocomplete="on" [ngClass]="checkSignUpError()" placeholder="Type" />
+  <input name="scope"  formControlName="scope"  autocomplete="on" [ngClass]="checkSignUpError()" placeholder="Scope" />
+  <input name="email"  formControlName="email"  autocomplete="on" [ngClass]="checkSignUpError()" placeholder="Email" />
+  <input name="video"  formControlName="video"  autocomplete="on" [ngClass]="checkSignUpError()" placeholder="Video" />
+  <input name="avatar" formControlName="avatar" autocomplete="on" [ngClass]="checkSignUpError()" placeholder="Avatar" />
+
+  <textarea 
+    name="desc"
+    formControlName="desc"
+    [ngClass]="checkSignUpError()"
+    placeholder="Description"
+    rows="4" cols="50">
+  </textarea>
+</form>

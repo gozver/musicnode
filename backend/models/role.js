@@ -4,15 +4,8 @@ const sequelize = require('../config/db');
 class Role extends Model {}
 
 Role.init({
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
-  type: {
-    type: DataTypes.STRING,
-    validate: { notEmpty: false }
-  }
+  id:   { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  name: { type: DataTypes.STRING,  allowNull: false, validate: { notEmpty: false } }
 }, { 
   sequelize,
   modelName: 'role'

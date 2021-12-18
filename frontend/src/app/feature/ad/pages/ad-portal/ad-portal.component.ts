@@ -1,10 +1,8 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
 
-// Services
+// Services and interfaces
 import { AdService } from '@app/shared/services/ad.service';
-
-// Interfaces
 import { Ad } from '@shared/interfaces/ad.interface';
 
 @Component({

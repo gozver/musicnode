@@ -64,9 +64,7 @@ exports.login = async (req, res, next) => {
 
 exports.signup = async (req, res, next) => {
   const email = req.body.email;
-  const whereString = {
-    where: { email }
-  };
+  const whereString = { where: { email } };
 
   // check if the email exists
   await models.user.findOne(whereString)
@@ -79,26 +77,24 @@ exports.signup = async (req, res, next) => {
       }
     });
 
-  // if no exists, continue
+  // if the email does not exist, continue
   const name = req.body.name;
   const surname = req.body.surname;  
   const phone = req.body.phone;
   const password = req.body.password;
+  const roleId = req.body.roleId;
+
+  let userId;
   
   // hash the password 12 times
   const hashedPwd = await bcrypt.hash(password, 12)
   
-  const user = {
-    name,
-    surname,
-    email,
-    phone,
-    password: hashedPwd
-  };
-
   // save the user in the db
-  await models.user.create(user)
-    .then(() => {
+  await models.user.create({ name, surname, email, phone, password: hashedPwd })
+    .then((user) => {
+      // save the userId to operate with later
+      userId = user.id;
+
       // return response to the client
       res.status(201).json('User created!');
     })
@@ -110,4 +106,15 @@ exports.signup = async (req, res, next) => {
       console.log(err);
       next(err);
     });
+
+  // create the roles in the db: comment these 3 methods after creating the 1st user
+  await models.role.create({ name: 'band' });
+  await models.role.create({ name: 'company' });
+  await models.role.create({ name: 'admin'});
+
+  // save the USER ROLE relationship in the db
+  await models.userRole.create({ 
+    userId: user.id,
+    roleId: roleId
+  });
 };

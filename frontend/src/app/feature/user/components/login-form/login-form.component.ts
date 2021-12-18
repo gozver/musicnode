@@ -16,9 +16,6 @@ export class LoginFormComponent implements OnInit {
     this.hide = true;
   }
 
-  /**
-   * @description Hide or show user password
-   */
   tooglePassword(): void {
     this.hide = !this.hide;
   }
@@ -26,7 +23,7 @@ export class LoginFormComponent implements OnInit {
   checkLoginError() {
     if (this.loginError)
       return 'border-red';
-    else 
-      return 'border-gray'
+    
+    return 'border-gray'
   }
 }

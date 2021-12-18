@@ -17,7 +17,8 @@ export class ErrorHandlerService {
       console.error('--> Error:', error);
 
       console.error(`--> Code: ${error.error.err.code}`);
-      console.error(`--> Message: ${error.error.err.message}`);
+      console.error('--> Message');
+      console.error(error.error.err.message);
 
       // better job of transforming error for user consumption
       console.error(`--> Operation: ${operation}`);

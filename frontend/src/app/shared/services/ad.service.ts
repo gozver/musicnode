@@ -32,7 +32,7 @@ export class AdService {
 
   createAd(params: Ad): Observable<Ad> {
     return this.http.post<Ad>(`${environment.apiUrl}/ad`, params, this.httpOptions).pipe(
-      catchError(this.errorHandlerService.handleError<Ad>('createAd', null))      
+      catchError(this.errorHandlerService.handleError<Ad>('createAd', null))
     );
   }
 

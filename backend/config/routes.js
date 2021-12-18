@@ -23,9 +23,11 @@ router
 
   // role
   .get    ('/role', controllers.role.findAll)
+  // .post   ('/role', controllers.role.create)
 
   // band
   .get    ('/band', controllers.band.findAll)
+  .post   ('/band', controllers.band.create)
 
   // company
   .get    ('/company', controllers.company.findAll);

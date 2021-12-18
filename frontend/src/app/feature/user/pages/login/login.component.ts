@@ -12,8 +12,8 @@ import { AuthService } from '@shared/services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginError: boolean;
   loginForm: FormGroup;
+  loginError: boolean;
   
   constructor(
     private readonly fb: FormBuilder,
