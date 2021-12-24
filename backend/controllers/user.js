@@ -1,7 +1,7 @@
 const models = require('../models');
 
 exports.findAll = async (req, res, next) => {
-  models.role.findAll()
+  models.user.findAll()
     .then(data => res.json(data))
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;

@@ -1,9 +1,9 @@
-// angular
+// Angular
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout'
 import { MatSidenav } from '@angular/material/sidenav';
 
-// services
+// Services
 import { AuthService } from '@shared/services/auth.service';
 
 @Component({
@@ -38,7 +38,7 @@ export class LayoutComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
-    
+
     this.closeIfIsMobileView();
   }
 

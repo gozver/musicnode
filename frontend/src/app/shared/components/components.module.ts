@@ -7,14 +7,12 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@shared/modules/material.module';
 
 // Custom Components
-import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
-    HeaderComponent,
     SidebarComponent,
     LayoutComponent,
     LoaderComponent
@@ -26,7 +24,6 @@ import { LoaderComponent } from './loader/loader.component';
     MaterialModule
   ],
   exports: [
-    HeaderComponent,
     SidebarComponent,
     LayoutComponent,
     LoaderComponent

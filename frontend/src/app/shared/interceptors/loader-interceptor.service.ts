@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 // Services
-import { LoaderService } from './loader.service';
+import { LoaderService } from '@shared/services/loader.service';
 
 @Injectable({
   providedIn: 'root'

@@ -16,8 +16,8 @@ import { AppRoutingModule } from '@app/app-routing.module';
 import { ComponentsModule } from '@shared/components/components.module';
 
 // Interceptors
-import { AuthInterceptorService } from '@shared/services/auth-interceptor.service';
-import { LoaderInterceptorService } from '@shared/services/loader-interceptor.service';
+import { AuthInterceptorService } from '@shared/interceptors/auth-interceptor.service';
+import { LoaderInterceptorService } from '@shared/interceptors/loader-interceptor.service';
 
 @NgModule({
   declarations: [

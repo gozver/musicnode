@@ -16,7 +16,8 @@ import { MatDividerModule } from '@angular/material/divider';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
-// import { MatBadgeModule } from '@angular/material/badge';
+
+import { MatBadgeModule } from '@angular/material/badge';
 // import { MatSelectModule } from '@angular/material/select';
 // import { MatDialogModule } from '@angular/material/dialog';
 
@@ -35,7 +36,8 @@ const modules: any[] = [
   
   MatCardModule,
   MatMenuModule,
-  // MatBadgeModule,
+
+  MatBadgeModule,
   // MatSelectModule,
   // MatDialogModule
 ];

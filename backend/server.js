@@ -21,7 +21,7 @@ app.listen(port, () => {
   // db.authenticate()        => creates db connection
   // db.sync()                => creates db connection and db tables if do not exist (do nothing if exist)
   // db.sync({ force: true }) => creates db connection and db tables dropping them first if already exist
-  db.sync({ force: true })
+  db.authenticate()
     .then(() => console.log('--> db connection success'))
     .catch(err => {
       console.log('--> db connection error:');

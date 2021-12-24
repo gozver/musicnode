@@ -2,9 +2,9 @@ const models = require('../models');
 
 exports.create = async (req, res, next) => {
   const ad = { 
-    userId: req.body.userId,
     title: req.body.title,
-    description: req.body.description
+    desc: req.body.desc,
+    userId: req.body.userId
   };
 
   models.ad.create(ad)
@@ -17,7 +17,7 @@ exports.create = async (req, res, next) => {
 
 exports.findAll = async (req, res, next) => {
   models.ad.findAll({
-    attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt'],
+    attributes: ['id', 'title', 'desc', 'createdAt', 'updatedAt'],
     include: {
       model: models.user,
       attributes: ['id', 'name', 'surname', 'phone', 'email']

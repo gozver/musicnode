@@ -12,15 +12,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 // custom components
-import { AdFormComponent } from './ad-form/ad-form.component';
 import { AdCreateComponent } from './ad-create/ad-create.component';
-import { AdComponent } from './ad/ad.component';
+import { AdFormComponent } from './ad-form/ad-form.component';
+import { AdCardComponent } from './ad-card/ad-card.component';
 
 @NgModule({
   declarations: [
     AdFormComponent,
     AdCreateComponent,
-    AdComponent
+    AdCardComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +36,7 @@ import { AdComponent } from './ad/ad.component';
   exports: [
     AdFormComponent,
     AdCreateComponent,
-    AdComponent
+    AdCardComponent
   ]
 })
 export class AdComponentsModule { }

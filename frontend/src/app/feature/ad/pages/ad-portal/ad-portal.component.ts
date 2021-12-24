@@ -1,7 +1,7 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
 
-// Services and interfaces
+// Services and Interfaces
 import { AdService } from '@app/shared/services/ad.service';
 import { Ad } from '@shared/interfaces/ad.interface';
 

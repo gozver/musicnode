@@ -32,9 +32,9 @@ export class AdCreateComponent implements OnInit {
 
   initAdForm(): void {
     this.adForm = this.fb.group({
-      userId:       null,
-      title:        [ '', Validators.required ],
-      description:  [ '', Validators.required ]
+      title:  [ '', Validators.required ],
+      desc:   [ '', Validators.required ],
+      userId: null
     });
   }
 

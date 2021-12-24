@@ -24,16 +24,16 @@
   <mat-sidenav #sidenav="matSidenav">
     <span *ngIf="isAuthenticated">
       <img class="avatar mat-elevation-z8" src="assets/img/user.png" />
-
-      <h4 class="user">Name Surname</h4>
-      <p class="role">Role</p>  
       
+      <h4 class="user">Name Surname</h4>
+      <p class="role">Role</p>
+
       <mat-divider></mat-divider>
     </span>
 
     <span *ngIf="!isAuthenticated">
       <img class="avatar mat-elevation-z8" src="assets/img/user.png" />
-
+      
       <h4 class="user">Guest</h4>
       
       <mat-divider></mat-divider>

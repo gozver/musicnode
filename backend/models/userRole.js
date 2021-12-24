@@ -4,7 +4,7 @@ const sequelize = require('../config/db');
 class UserRole extends Model {}
 
 UserRole.init({
-  id:        { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  id:        { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true },
   userId:    { type: DataTypes.INTEGER, allowNull: false },
   roleId:    { type: DataTypes.INTEGER, allowNull: false },
   bandId:    { type: DataTypes.INTEGER, allowNull: true  },

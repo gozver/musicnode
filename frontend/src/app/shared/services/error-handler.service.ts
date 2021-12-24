@@ -15,11 +15,11 @@ export class ErrorHandlerService {
     return (error: any): Observable<T> => {
       // Send the error to remote logging infrastructure
       console.error(`--> Code: ${error.error.err.code}`);
-      console.error(`--> Message`);
+      console.error(`--> Error message:`);
       console.error(error.error.err.message);
       console.error(`--> Operation: ${operation}`);
-
-      console.error(`--> Full error object:`, error);
+      console.error(`--> Error object:`);
+      console.error(error);
 
       // Let the app keep running by returning an empty result.
       return of (result as T);

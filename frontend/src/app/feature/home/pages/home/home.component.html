@@ -1,67 +1,142 @@
-<div class="body">
-  <div class="middle-ctr">
-    <div class="home__body__contentMiddle__top">
+<div class="main-ctnr">
+  <header>
+    <div class="left-ctnr">
+      <img src="assets/img/facebook-head.svg" alt="logo" mat-card-avatar width="50px">
       
-      <!--IMAGE CARDS-->      
-      <mat-card *ngFor="let i of imagesList" class="image-card">
-        <img alt="bg"class="bg" src="{{ i }}">
+      <div class="search-ctnr">
+        <mat-icon class="search-icon">search_outline</mat-icon>
+
+        <!-- <input placeholder="Search ..."> -->
+      </div>
+    </div>
+    
+    <!-- <div class="middle-ctnr">
+      <div class="item active">
+        <mat-icon>home</mat-icon>
+      </div>
+      
+      <div class="item">
+        <mat-icon>ondemand_video</mat-icon>
+      </div>
+  
+      <div class="item">
+        <mat-icon>store</mat-icon>
+      </div>
+      
+      <div class="item">
+        <mat-icon>group</mat-icon>
+      </div>
+  
+      <div class="item active">
+        <mat-icon>flag</mat-icon>
+      </div>
+    </div> -->
+  
+    <div class="right-ctnr">
+      <!-- <div>
+        <img alt="" mat-card-avatar [src]="user?.avatar">
+        <span class="name">{{ user?.firstName || 'Indranil'}}</span>
+      </div> -->
+  
+      <div>
+        <mat-icon>add</mat-icon>
+      </div>
+  
+      <div>
+        <mat-icon
+          matBadge="4"
+          matBadgeColor="primary"
+          matBadgeOverlap="false"
+          matBadgePosition="above after"
+        >
+          forum
+        </mat-icon>
+      </div>
+  
+      <div>
+        <mat-icon
+          matBadge="3"
+          matBadgeColor="warn"
+          matBadgeOverlap="false">
+            notifications
+        </mat-icon>
+      </div>
+  
+      <div>
+        <!-- <mat-icon [matMenuTriggerFor]="expand_more">menu</mat-icon> -->
+        <mat-icon [matMenuTriggerFor]="menu">menu</mat-icon>
+  
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+          <!-- <button mat-menu-item (click)="logout()"> -->
+            <mat-icon>exit_to_app</mat-icon> 
+            <span>Logout &nbsp;&nbsp;&nbsp;</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </header>
+
+  <div class="top-ctnr">
+    <div class="cards">    
+      <mat-card class="card-img" *ngFor="let i of imagesList">
+        <img class="bg" alt="bg" src="{{ i }}">
 
         <mat-card-content>
-          <img alt="avatar" class="avatar" src="assets/img/user.jpg" width="50px">
+          <img class="avatar" alt="avatar" src="assets/img/user.jpg" width="50px">
           <span class="card-name">Lolo Gonzalez</span>
         </mat-card-content>
       </mat-card>
     </div>
+  </div>
 
-    <div class="home__body__contentMiddle__center">
-      <mat-card class="post-message">
-        <mat-card-header class="post-message-header" style="padding-bottom: 20px; border-bottom: 1px solid lightgray;">
-          <img alt="" mat-card-avatar src="assets/img/me.jpg">
-          <!-- <img alt="" mat-card-avatar [src]="user?.avatar"> -->
+  <div class="middle-ctnr">
+    <mat-card class="create">
+      <mat-card-header class="create">
+        <img alt="" mat-card-avatar src="assets/img/me.jpg">
+        <!-- <img alt="" mat-card-avatar [src]="user?.avatar"> -->
 
-          <form #form="ngForm" (ngSubmit)="postMessage()">
-            <input class="on-your-mind" name="message" ngModel placeholder="What's on your mind?" type="text">
-            <button style="display: none;" type="submit"></button>
-          </form>
-        </mat-card-header>
+        <form #form="ngForm" (ngSubmit)="postMessage()">
+          <input class="on-your-mind" name="message" ngModel placeholder="What's on your mind?" type="text">
+          <button style="display: none;" type="submit"></button>
+        </form>
+      </mat-card-header>
 
-        <mat-card-content class="card-body">
-          <div>
-            <mat-icon color="accent">videocam</mat-icon>
-            <span>Live Video</span>
-          </div>
+      <mat-card-content class="create">
+        <div>
+          <mat-icon color="accent">videocam</mat-icon>
+          <span>Live Video</span>
+        </div>
 
-          <div>
-            <mat-icon color="primary">photo_album</mat-icon>
-            <span>Photo/Video</span>
-          </div>
+        <div>
+          <mat-icon color="primary">photo_album</mat-icon>
+          <span>Photo/Video</span>
+        </div>
 
-          <div>
-            <mat-icon color="warn">mood</mat-icon>
-            <span>Feeling/Activity</span>
-          </div>
-        </mat-card-content>
-      </mat-card>
+        <div>
+          <mat-icon color="warn">mood</mat-icon>
+          <span>Feeling/Activity</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
-      <!-- Loop Through All Posts From Database and Display -->
-      <mat-card class="posts">
-      <!-- <mat-card *ngFor="let p of posts" class="posts"> -->
-        <mat-card-header class="posts__header">
-          <img alt="title" mat-card-avatar src="assets/img/me.jpg">
-          <!-- <img alt="{{ p?.title }}" mat-card-avatar [src]="p?.avatar"> -->
-          <div class="posts__header__right">
-            <span>21/21/2021</span>
-            <!-- <span>{{ p?.time?.seconds * 1000 | date:'shortTime' }}</span> -->
-            <h3>Title</h3>
-            <!-- <h3>{{ p?.title }}</h3> -->
-          </div>
-        </mat-card-header>
-        <mat-card-content class="posts__body">
-          <p>Body</p>
-          <!-- <p>{{ p?.message }}</p> -->
-        </mat-card-content>
-      </mat-card>
-    </div>
+    <mat-card class="list">
+    <!-- <mat-card *ngFor="let p of posts" class="posts"> -->
+      <mat-card-header>
+        <img alt="title" mat-card-avatar src="assets/img/me.jpg">
+        <!-- <img alt="{{ p?.title }}" mat-card-avatar [src]="p?.avatar"> -->
+        <div class="right">
+          <span>21/21/2021</span>
+          <!-- <span>{{ p?.time?.seconds * 1000 | date:'shortTime' }}</span> -->
+          <h3>Title</h3>
+          <!-- <h3>{{ p?.title }}</h3> -->
+        </div>
+      </mat-card-header>
+      <mat-card-content class="posts__body">
+        <p>Body</p>
+        <!-- <p>{{ p?.message }}</p> -->
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>
     

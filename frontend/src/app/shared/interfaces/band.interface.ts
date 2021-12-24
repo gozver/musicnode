@@ -3,12 +3,12 @@ export interface Band {
   name: string,
   desc: string,
   phone: string,
+  email: string,
+  avatar: string,
   price: string,
   type: string,
   scope: string,
-  email: string,
   video: string,
-  avatar: string,
   createdAt: Date;
   updatedAt: Date;
 }

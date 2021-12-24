@@ -8,11 +8,11 @@ import { AuthService } from '@app/shared/services/auth.service';
 import { Ad } from '@shared/interfaces/ad.interface';
 
 @Component({
-  selector: 'app-ad',
-  templateUrl: './ad.component.html',
-  styleUrls: ['./ad.component.scss']
+  selector: 'app-ad-card',
+  templateUrl: './ad-card.component.html',
+  styleUrls: ['./ad-card.component.scss']
 })
-export class AdComponent {
+export class AdCardComponent {
   @Input() ad: Ad;
   @Output() delete = new EventEmitter<number>();
 

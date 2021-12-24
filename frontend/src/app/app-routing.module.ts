@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuardService } from './shared/services/auth-guard.service';
+import { AuthGuardService } from './shared/guards/auth-guard.service';
 
 /**
  * @loadChildren => Lazy loading feature modules: https://angular.io/guide/lazy-loading-ngmodules
@@ -22,11 +22,11 @@ const routes: Routes = [
     path: 'user',
     loadChildren: () => import('@feature/user/pages/user.module').then(m => m.UserModule)
   },
-  // {
-  //   path: 'ad',
-  //   canActivate: [AuthGuardService],
-  //   loadChildren: () => import('@feature/ad/pages/ad.module').then(m => m.AdModule)
-  // },
+  {
+    path: 'ad',
+    canActivate: [AuthGuardService],
+    loadChildren: () => import('@feature/ad/pages/ad.module').then(m => m.AdModule)
+  },
   // {
   //   path: '**', // Any other path    
   //   redirectTo: '/home'

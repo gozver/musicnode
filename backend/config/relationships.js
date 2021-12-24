@@ -1,11 +1,38 @@
 const models = require('../models');
 
 // many to many
-models.user.belongsToMany(models.role, { through: 'user_role' });
-models.role.belongsToMany(models.user, { through: 'user_role' });
+models.user.belongsToMany(models.role, { 
+  through: 'user_role' 
+});
+
+models.role.belongsToMany(models.user, {
+  through: 'user_role'
+});
+
+// one to one
+models.userRole.belongsTo(models.band, { 
+  foreignKey: 'bandId',
+  onDelete: 'cascade',
+  onUpdate: 'cascade' 
+});
+
+models.band.hasOne(models.userRole);
+
+models.userRole.belongsTo(models.company, { 
+  foreignKey: 'bandId',
+  onDelete: 'cascade',
+  onUpdate: 'cascade' 
+});
+
+models.company.hasOne(models.userRole);
 
 // one to many 
-models.user.hasMany(models.ad, { foreignKey: 'userId' });
+models.user.hasMany(models.ad, {
+  foreignKey: 'userId',
+  onDelete: 'cascade',
+  onUpdate: 'cascade'
+});
+
 models.ad.belongsTo(models.user);
 
 // // one to one example

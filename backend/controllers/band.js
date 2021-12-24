@@ -26,13 +26,8 @@ exports.create = async (req, res, next) => {
 }
 
 exports.findAll = async (req, res, next) => {
-  models.band.findAll({
-    // attributes: ['id', 'name', 'desc', 'phone', 'email', 'avatar', 'price', 'type', 'scope', 'video'],
-    // include: {
-    //   model: models.role,
-    //   attributes: ['id', 'name']
-    // }
-  }).then(data => res.json(data))
+  models.band.findAll()
+    .then(data => res.json(data))
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;
       next(err); // go to error controller
