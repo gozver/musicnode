@@ -1,7 +1,9 @@
 export interface Ad {
   id: number,
   title: string,
-  desc: string
+  price: number,
+  location: string,
+  description: string,
   userId: number,
   createdAt: Date;
   updatedAt: Date;

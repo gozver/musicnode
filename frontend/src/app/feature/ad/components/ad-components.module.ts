@@ -1,42 +1,32 @@
-// angular modules
+// Angular Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
-// angular material
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatCardModule } from '@angular/material/card'
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+// Angular Material
+import { MaterialModule } from '@app/shared/modules/material.module';
 
-// custom components
-import { AdCreateComponent } from './ad-create/ad-create.component';
-import { AdFormComponent } from './ad-form/ad-form.component';
+// Custom Components
 import { AdCardComponent } from './ad-card/ad-card.component';
+import { AdDialogComponent } from './ad-dialog/ad-dialog.component';
 
 @NgModule({
+  entryComponents: [
+  ],
   declarations: [
-    AdFormComponent,
-    AdCreateComponent,
-    AdCardComponent
+    AdCardComponent,
+    AdDialogComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-
-    MatInputModule,
-    MatSelectModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule
+    MaterialModule
   ], 
   exports: [
-    AdFormComponent,
-    AdCreateComponent,
-    AdCardComponent
+    AdCardComponent,
+    AdDialogComponent
   ]
 })
 export class AdComponentsModule { }

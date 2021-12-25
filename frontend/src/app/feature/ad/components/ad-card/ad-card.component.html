@@ -1,7 +1,9 @@
-<mat-card>
-  <div class="title">{{ ad.title }}</div>
+<!-- <mat-card>
+  <div class="title">{{ ad.title }}</div> -->
+
   <!-- <div class="meta">{{ ad.createdAt }}</div> -->
-  <div class="meta">{{ ad.createdAt | date:'dd/MM/yyyy' }}</div>
+  
+  <!-- <div class="meta">{{ ad.createdAt | date:'dd/MM/yyyy' }}</div>
   <div class="description">{{ ad.desc }}</div>
 
   <div class="btn-ctnr">
@@ -18,4 +20,24 @@
       <mat-icon color="warn">delete</mat-icon>
     </button>
   </div>
-</mat-card>
+</mat-card> -->
+
+<div class="card">
+  <div class="card-header">
+    <div class="left">
+      <img alt="title" mat-card-avatar src="assets/img/me.jpg">
+      <!-- <img alt="{{ p?.title }}" mat-card-avatar [src]="p?.avatar"> -->
+    </div>
+    
+    <div class="right">
+      <span class="name">Lolo Gonzalez</span>
+      <span class="date">{{ ad.createdAt | date:'dd/MM/yyyy' }}</span>
+      <!-- <span>{{ p?.time?.seconds * 1000 | date:'shortTime' }}</span> -->
+    </div>
+  </div>
+
+  <div class="card-content">
+    <!-- <p>{{ ad.title }}</p> -->
+    <span class=body>{{ ad.description }}</span>
+  </div>
+</div>

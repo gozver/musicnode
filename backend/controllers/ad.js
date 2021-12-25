@@ -3,9 +3,13 @@ const models = require('../models');
 exports.create = async (req, res, next) => {
   const ad = { 
     title: req.body.title,
-    desc: req.body.desc,
+    price: req.body.price,
+    location: req.body.location,
+    description: req.body.description,
     userId: req.body.userId
   };
+
+  console.log(ad)
 
   models.ad.create(ad)
     .then(data => res.json(data))
@@ -17,7 +21,7 @@ exports.create = async (req, res, next) => {
 
 exports.findAll = async (req, res, next) => {
   models.ad.findAll({
-    attributes: ['id', 'title', 'desc', 'createdAt', 'updatedAt'],
+    attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt'],
     include: {
       model: models.user,
       attributes: ['id', 'name', 'surname', 'phone', 'email']

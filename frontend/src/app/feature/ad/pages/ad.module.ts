@@ -1,31 +1,27 @@
-// angular modules
+// Angular Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// angular material
-import { MatCardModule } from '@angular/material/card'
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+// Angular Material
+import { MaterialModule } from '@app/shared/modules/material.module';
 
-// custom modules
+// Custom Modules
 import { AdRoutingModule } from './ad-routing.module';
 import { AdComponentsModule } from '../components/ad-components.module';
 
-// custom components
-import { AdPortalComponent } from './ad-portal/ad-portal.component';
+// Custom Components
+import { AdComponent } from './ad/ad.component';
 
 @NgModule({
   declarations: [
-    AdPortalComponent
+    AdComponent
   ],
   imports: [
     CommonModule,
     AdRoutingModule,
 
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-
+    MaterialModule,
+    
     AdComponentsModule,
     AdRoutingModule
   ]
