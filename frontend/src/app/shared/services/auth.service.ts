@@ -34,6 +34,7 @@ export class AuthService {
   // User related properties
   isLogged$ = new BehaviorSubject<boolean>(this.getLoginStatus());
   userId$ = new BehaviorSubject<number>(this.getUserId());
+  currentUser$ = new BehaviorSubject<User>(this.getCurrentUser());
 
   // HTTP headers
   httpOptions: { headers: HttpHeaders} = {
@@ -56,10 +57,12 @@ export class AuthService {
           // Send isAuthenticated$ and userId$ to the next operation  
           this.isLogged$.next(true);
           this.userId$.next(user.id);
+          this.currentUser$.next(user);
           
           // Store user details and JWT in local storage to keep user logged in between page refreshes
           localStorage.setItem('isLogged', '1');
           localStorage.setItem('userId', JSON.stringify(user.id));
+          localStorage.setItem('user', JSON.stringify(user));
           localStorage.setItem('token', user.token);
           
           // Redirect to home page
@@ -77,6 +80,7 @@ export class AuthService {
     
     localStorage.removeItem('isLogged');
     localStorage.removeItem('userId');
+    localStorage.removeItem('user');
     localStorage.removeItem('token');    
 
     this.router.navigate(['/user/login']);
@@ -91,5 +95,10 @@ export class AuthService {
   private getUserId(): number {
     const userId = localStorage.getItem('userId')
     return parseInt(userId);
+  }
+
+  private getCurrentUser(): User {
+    const user = localStorage.getItem('user')
+    return JSON.parse(user);
   }
 }

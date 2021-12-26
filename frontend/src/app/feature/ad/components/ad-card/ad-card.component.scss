@@ -74,6 +74,11 @@
 
     button {
       width: 100px;
+      background: #eeaa24;
+      
+      &:hover {
+        background: #eeab24ee;
+      }
     }
   }
 }

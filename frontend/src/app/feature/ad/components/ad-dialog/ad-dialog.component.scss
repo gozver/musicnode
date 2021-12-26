@@ -1,6 +1,6 @@
 mat-dialog-content {
-  width: 500px;
-  height: 350px;
+  width: 31.25rem;
+  height: 21.875rem;
 
   @media (max-width: 625px) {
     width: 400px;
@@ -45,5 +45,26 @@ mat-dialog-actions {
 
   button {
     width: 100px;
+
+    &.primary {
+      color: #fff;
+      background: #06548b;
+      
+      &:hover {
+        background: #06548bee;
+      }
+
+      &:disabled {
+        background: #ccc;
+      }
+    }
+
+    &.warn {
+      background: #eeaa24;
+
+      &:hover {
+        background: #eeab24ee;
+      }
+    }
   }
 }

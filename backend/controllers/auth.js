@@ -45,7 +45,8 @@ exports.login = async (req, res, next) => {
         name: user.name,
         surname: user.surname,
         email: user.email,
-        phone: user.phone
+        phone: user.phone,
+        avatar: user.avatar
       });
     })
     // user not found

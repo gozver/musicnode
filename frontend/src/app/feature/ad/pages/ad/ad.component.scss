@@ -16,8 +16,12 @@
     margin-top: .5rem;
     margin-bottom: 1.5rem;
     
-    background: $primary;
     color: #fff;
+    background: #06548b;
+    
+    &:hover {
+      background: #06548bee;
+    }
 
     @media (max-width: 950px) {
       width: 100%;

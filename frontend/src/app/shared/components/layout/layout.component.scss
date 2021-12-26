@@ -1,5 +1,6 @@
 mat-toolbar {
   background: #002b5c;
+  background: #03365a;
   color: #fff;
 
   .toolbar-ctnr {
@@ -14,7 +15,6 @@ mat-toolbar {
       justify-content: flex-start;
       width: 50%;
       
-  
       .title {
         display: flex;
         align-items: center;
@@ -44,6 +44,7 @@ mat-toolbar {
       .link {
         margin: 0 10px;
         cursor: pointer;
+
       }
     }
   }
@@ -56,6 +57,8 @@ mat-sidenav-container {
   
   mat-sidenav {
     background: #002b5c;
+    background: #03365a;
+
     color: #fff;
     width: 200px;
     padding: 16px;
@@ -92,6 +95,10 @@ mat-sidenav-container {
       display: flex;
       align-items: center;
       justify-content: flex-start;
+      
+      &:hover {
+        background: #033050;
+      }
       
       mat-icon {
         margin-right: 10px;

@@ -8,6 +8,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 
 // Services
 import { AuthService } from '@shared/services/auth.service';
+import { User } from '@app/shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-layout',
@@ -20,6 +21,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
   isAuthenticated: boolean = false;
+  currentUser: User;
   
   constructor(
     private readonly authService: AuthService,
@@ -28,8 +30,18 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    this.authService.isLogged$.subscribe((isLogged) => {
+    this.authService.isLogged$.subscribe(isLogged => {
       this.isAuthenticated = isLogged;
+
+      console.log('--> isLogged$:');
+      console.log(isLogged);
+    });
+
+    this.authService.currentUser$.subscribe(currentUser => {
+      this.currentUser = currentUser;
+      
+      console.log('--> currentUser$:');
+      console.log(currentUser);
     });
   }
 
