@@ -20,7 +20,7 @@ export class AdService {
   };
 
   constructor(
-    private http: HttpClient,    
+    private http: HttpClient,
     private errorHandlerService: ErrorHandlerService
   ) { }
 

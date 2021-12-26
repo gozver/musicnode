@@ -1,8 +1,8 @@
-// angular modules
+// Angular
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-// custom components
+// Custom Components
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 

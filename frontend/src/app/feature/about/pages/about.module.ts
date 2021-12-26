@@ -5,21 +5,17 @@ import { CommonModule } from '@angular/common';
 // Angular Material
 import { MaterialModule } from '@app/shared/modules/material.module';
 
-// Custom Modules
-import { AdRoutingModule } from './ad-routing.module';
-import { AdComponentsModule } from '../components/ad-components.module';
-
-// Custom Components
-import { AdComponent } from './ad/ad.component';
+// Custom
+import { AboutRoutingModule } from './about-routing.module';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
-    AdComponent
+    AboutComponent
   ],
   imports: [
     CommonModule,
-    AdRoutingModule,
-    AdComponentsModule,
+    AboutRoutingModule,
 
     MaterialModule
   ]

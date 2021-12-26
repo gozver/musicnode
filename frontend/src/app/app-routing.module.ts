@@ -9,6 +9,15 @@ import { AuthGuardService } from './shared/guards/auth-guard.service';
  */
 const routes: Routes = [
   {
+    path: 'about',
+    loadChildren: () => import('@feature/about/pages/about.module').then(m => m.AdModule)
+  },
+  {
+    path: 'ad',
+    canActivate: [AuthGuardService],
+    loadChildren: () => import('@feature/ad/pages/ad.module').then(m => m.AdModule)
+  },
+  {
     path: '',
     canActivate: [AuthGuardService],
     loadChildren: () => import('@feature/home/pages/home.module').then(m => m.HomeModule)
@@ -21,11 +30,6 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () => import('@feature/user/pages/user.module').then(m => m.UserModule)
-  },
-  {
-    path: 'ad',
-    canActivate: [AuthGuardService],
-    loadChildren: () => import('@feature/ad/pages/ad.module').then(m => m.AdModule)
   },
   // {
   //   path: '**', // Any other path    

@@ -1,15 +1,13 @@
-// Angular
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-// Custom Components
-import { AdComponent } from './ad/ad.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [{
   path: '', // empty path because is defined by the parent
   children: [{ 
     path: '',
-    component: AdComponent
+    component: AboutComponent
   }]
 }];
 
@@ -17,4 +15,4 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)], // Children or secundaries routes
   exports: [RouterModule]
 })
-export class AdRoutingModule { }
+export class AboutRoutingModule { }

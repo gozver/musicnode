@@ -24,11 +24,11 @@ import { SignupComponent } from './signup/signup.component';
     CommonModule,
     ReactiveFormsModule,
     
-    MaterialModule,
-
     UserRoutingModule,
     UserComponentsModule,
     ComponentsModule,
+
+    MaterialModule
   ]
 })
 export class UserModule { }

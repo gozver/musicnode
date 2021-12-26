@@ -1,31 +1,7 @@
-<!-- <mat-card>
-  <div class="title">{{ ad.title }}</div> -->
-
-  <!-- <div class="meta">{{ ad.createdAt }}</div> -->
-  
-  <!-- <div class="meta">{{ ad.createdAt | date:'dd/MM/yyyy' }}</div>
-  <div class="description">{{ ad.desc }}</div>
-
-  <div class="btn-ctnr">
-    <button 
-      mat-icon-button
-      mat-rised-button
-      mat-fab
-      aria-hidden="false"
-      aria-label="Delete"
-      title="Delete"
-      (click)="deleteAd(ad.id)"
-      *ngIf="userId===ad.userId"
-    >
-      <mat-icon color="warn">delete</mat-icon>
-    </button>
-  </div>
-</mat-card> -->
-
 <div class="card">
   <div class="card-header">
     <div class="left">
-      <img alt="title" mat-card-avatar src="assets/img/me.jpg">
+      <img alt="title" src="assets/img/me.jpg">
       <!-- <img alt="{{ p?.title }}" mat-card-avatar [src]="p?.avatar"> -->
     </div>
     
@@ -37,7 +13,14 @@
   </div>
 
   <div class="card-content">
-    <!-- <p>{{ ad.title }}</p> -->
+    <span class=title>{{ ad.title }}</span>
+    <span class=price-location>{{ ad.price }}€ · {{ ad.location | uppercase}}</span>
     <span class=body>{{ ad.description }}</span>
+  </div>
+
+  <div class="btn-cntr">
+    <button mat-flat-button (click)="deleteAd(ad.id)" color="warn" title="Delete">
+      Delete
+    </button>
   </div>
 </div>

@@ -10,8 +10,10 @@ User.init({
   surname:  { type: DataTypes.STRING,  allowNull: false, validate: { notEmpty: true } },
   phone:    { type: DataTypes.STRING,  allowNull: false, validate: { notEmpty: true } },
   password: { type: DataTypes.STRING,  allowNull: false, validate: { notEmpty: true } },
-
+  
   email:    { type: DataTypes.STRING,  allowNull: false, validate: { notEmpty: true, isEmail: true }, unique: true },
+  
+  avatar:   { type: DataTypes.STRING,  allowNull: true,  defaultValue: 'assets/images/user.png' },
 }, { 
   sequelize, 
   modelName: 'user' 

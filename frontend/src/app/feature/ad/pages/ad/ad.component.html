@@ -1,10 +1,12 @@
-<button mat-button (click)="openDialog()">
-  Sell Something
-</button>
+<div class="main-ctnr">
+  <button mat-button (click)="openDialog()">
+    Sell Something
+  </button>
 
-<div *ngFor="let ad of adsList">
-  <app-ad-card
-    [ad]=ad
-    (delete)="deleteAd($event)"
-  ></app-ad-card>
+  <div *ngFor="let ad of adsList">
+    <app-ad-card
+      [ad]=ad
+      (delete)="deleteAd($event)"
+    ></app-ad-card>
+  </div>
 </div>

@@ -4,11 +4,11 @@
 
   border: 1px solid #dddfe2;
   border-radius: 8px;
-  box-shadow: 0 1px 2px #ddd;
+  box-shadow: 0 .4px 2px #b5b5b5;
 
-  max-width: 100%;
-  padding: 10px;
-  margin-bottom: 30px;
+  max-width: 43.75rem;
+  padding: 1rem .5rem 1rem 1rem;
+  margin-bottom: 1.5rem;
   background: #fff;
 
   .card-header{
@@ -18,7 +18,9 @@
     .left {
       img {
         width: 40px;
+        border-radius: 50px;
       }
+
       width: 50px;
       padding: 2.5px 5px;
       cursor: pointer;
@@ -49,40 +51,29 @@
     flex-direction: column;
     padding: 2px 5px;
 
+    .title {
+      font-size: 1rem;
+      font-weight: 500;
+      padding-bottom: 2.5px;
+    }
+
+    .price-location {
+      font-size: .75rem;
+      font-weight: 100;
+      padding-bottom: 5px;
+    }
+
     .body {
       font-size: .875rem;
       padding-bottom: .1rem;
     }
   }
+
+  .btn-cntr {
+    margin: 10px 2px 2px 2px;
+
+    button {
+      width: 100px;
+    }
+  }
 }
-
-// mat-card {
-//   box-shadow: none !important;
-//   border: 1px solid #e5e7eb;
-//   font-size: 16px;
-//   margin-bottom: 1rem;
-
-//   .title {
-//     font-weight: 500;
-//   }
-
-//   .meta {
-//     font-size: 10px;    
-//   }
-
-//   .description {
-//     margin-top: 1rem;
-//   }
-
-//   .btn-ctnr {
-//     margin-top: 1rem;
-
-//     button {
-//       display: flex;
-//       align-items: center;
-//       justify-content: center;
-//       background: #f5f7fa;
-//       box-shadow: none;
-//     }
-//   }
-// }

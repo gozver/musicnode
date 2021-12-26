@@ -38,9 +38,8 @@
       
       <mat-divider></mat-divider>
     </span>
-
-    
-    <button mat-button class="menu-button" (click)="closeIfIsMobileView()" *ngIf="!isAuthenticated">
+ 
+    <button mat-button id="menu-button" class="menu-button" (click)="closeIfIsMobileView()" *ngIf="!isAuthenticated">
       <mat-icon class="material-icons-outlined">person</mat-icon>
       <a routerLink="/user/login">Login</a>
     </button>
@@ -50,9 +49,9 @@
       <a routerLink="/user/signup">Signup</a>
     </button>
   
-    <button mat-button class="menu-button" (click)="closeIfIsMobileView()" *ngIf="isAuthenticated">
+    <button mat-button id="menu-button" class="menu-button" (click)="closeIfIsMobileView()" *ngIf="isAuthenticated">
         <mat-icon class="material-icons-outlined">home</mat-icon>
-        <a routerLink="/home">Home</a>
+        <a routerLink="/home" routerLinkActive="active-link">Home</a>
     </button>
 
     <button mat-button class="menu-button" (click)="closeIfIsMobileView()" *ngIf="isAuthenticated">
@@ -86,7 +85,7 @@
     
     <button mat-button class="menu-button" (click)="closeIfIsMobileView()">
       <mat-icon class="material-icons-outlined">info_outline</mat-icon>
-      <a routerLink="/home">About</a>
+      <a routerLink="/about">About</a>
     </button>
     
     <button mat-button class="menu-button" (click)="closeIfIsMobileView()">

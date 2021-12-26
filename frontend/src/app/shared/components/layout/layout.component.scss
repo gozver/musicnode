@@ -107,6 +107,10 @@ mat-sidenav-container {
 
   mat-sidenav-content {
     .sidenav-ctnr {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
       height: calc(100vh - 65px);
       padding: 20px;
       border-right: 1px solid #dddfe2;

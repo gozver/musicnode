@@ -21,7 +21,7 @@ exports.create = async (req, res, next) => {
 
 exports.findAll = async (req, res, next) => {
   models.ad.findAll({
-    attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt'],
+    attributes: ['id', 'title', 'price', 'location', 'description', 'createdAt', 'updatedAt'],
     include: {
       model: models.user,
       attributes: ['id', 'name', 'surname', 'phone', 'email']

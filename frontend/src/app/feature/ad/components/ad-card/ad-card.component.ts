@@ -13,7 +13,7 @@ import { Ad } from '@shared/interfaces/ad.interface';
   styleUrls: ['./ad-card.component.scss']
 })
 export class AdCardComponent {
-  @Input() ad: Ad;
+  @Input() ad: any;
   @Output() delete = new EventEmitter<number>();
 
   userId: number;

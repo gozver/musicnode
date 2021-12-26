@@ -1,6 +1,9 @@
 // Angular
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout'
+import { FocusMonitor } from '@angular/cdk/a11y';
+
+// Angular Material
 import { MatSidenav } from '@angular/material/sidenav';
 
 // Services
@@ -11,17 +14,17 @@ import { AuthService } from '@shared/services/auth.service';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
-
-  // viewchild => we use viewchild to reference the MatSidenav element in the template
+export class LayoutComponent implements OnInit, AfterViewInit {
   // ! => tells typescript the sidenav variable will be initialized later (strinct mode)
+  // viewchild => we use viewchild to reference the MatSidenav element in the template
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
   isAuthenticated: boolean = false;
   
   constructor(
     private readonly authService: AuthService,
-    private readonly bpObserver: BreakpointObserver
+    private readonly bpObserver: BreakpointObserver,
+    private readonly focusMonitor: FocusMonitor
   ) { }
 
   ngOnInit(): void {
@@ -43,9 +46,9 @@ export class LayoutComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    // max-width: 800px => small screens
+    // BreakpointObserver on small screens => max-width: 800px
     this.bpObserver.observe(['(max-width: 800px)']).subscribe((res) => {
-      // angular lifecicle hook: https://www.youtube.com/watch?v=O47uUnJjbJc&t=9s    
+      // Angular lifecicle hook: https://www.youtube.com/watch?v=O47uUnJjbJc&t=9s
       Promise.resolve().then(() => {
         if (res.matches) {
           this.sidenav.mode = 'over';
@@ -56,5 +59,9 @@ export class LayoutComponent implements OnInit {
         }
       });
     });
+
+    // Overwrite cdk-focused in Angular: 
+    // https://stackoverflow.com/questions/48953972/how-to-disable-or-overwrite-cdk-focused-in-angular
+    this.focusMonitor.stopMonitoring(document.getElementById('menu-button'));
   }
 }
