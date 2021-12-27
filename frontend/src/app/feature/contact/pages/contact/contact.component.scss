@@ -45,7 +45,7 @@
     .contact-form {
       font-size: 15px;
     
-      // white mat input background
+      // white mat-form-field background
       ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
         background-color: white;
         border-radius: 5px;
@@ -78,7 +78,7 @@
         background: #06548b;
         
         &:hover    { background: #06548bee; }
-        &:disabled { background: #ccc; }
+        &:disabled { background: #06548b83; }
       }
 
       &.warn {
@@ -99,7 +99,6 @@
     }
 
     .text {
-      // margin-top: 1.25rem;
       margin-bottom: 1.25rem;
     }
 

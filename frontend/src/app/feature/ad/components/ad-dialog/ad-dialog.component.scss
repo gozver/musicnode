@@ -51,14 +51,15 @@ mat-dialog-actions {
       background: #06548b;
       
       &:hover    { background: #06548bee; }
-      &:disabled { background: #ccc; }
+      &:disabled { background: #06548b83; }
     }
     
     &.warn {
       background: #eeaa24;
       
+      &:focus    { background: #eeaa24 !important; }
       &:hover    { background: #eeab24ee; }
-      &:disabled { background: #ccc; }
+      &:disabled { background: #eeab2483; }
     }
   }
 }

@@ -4,9 +4,7 @@ const morgan = require('morgan');
 
 const routes = require('./routes');
 const controllers = require('../controllers');
-
-// const path = require('path');
-// const homeUrl = '../public';
+const path = require('path');
 
 // app.use(method()) => methods used as a middleware
 module.exports = (app) => {
@@ -27,7 +25,7 @@ module.exports = (app) => {
   });
 
   // serve static files in express
-  // app.use(express.static(path.join(__dirname, homeUrl)));
+  app.use(express.static(path.join(__dirname, '../public')));
 
   // routes: localhost:3000/route
   app.use('/api', routes);

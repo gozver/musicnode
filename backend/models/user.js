@@ -13,7 +13,7 @@ User.init({
   
   email:    { type: DataTypes.STRING,  allowNull: false, validate: { notEmpty: true, isEmail: true }, unique: true },
   
-  avatar:   { type: DataTypes.STRING,  allowNull: true,  defaultValue: 'assets/images/user.png' },
+  avatar:   { type: DataTypes.STRING,  allowNull: true,  defaultValue: 'assets/img/user.png' },
 }, { 
   sequelize, 
   modelName: 'user' 

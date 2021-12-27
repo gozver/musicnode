@@ -16,7 +16,7 @@ import { User } from '@app/shared/interfaces/user.interface';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit, AfterViewInit {
-  // ! => tells typescript the sidenav variable will be initialized later (strinct mode)
+  // !         => tells typescript the sidenav variable will be initialized later (strinct mode)
   // viewchild => we use viewchild to reference the MatSidenav element in the template
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 

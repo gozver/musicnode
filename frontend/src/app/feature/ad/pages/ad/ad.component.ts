@@ -49,10 +49,10 @@ export class AdComponent implements OnInit {
 
   initAdForm(): void {
     this.adForm = this.fb.group({
-      title:       [ '',   Validators.required ],
-      price:       [ null, Validators.required ],
-      location:    [ '',   Validators.required ],
-      description: [ '',   Validators.required ],
+      title:       [ '',   [ Validators.required ]],
+      price:       [ null, [ Validators.required, Validators.pattern('^[0-9]*$') ]],
+      location:    [ '',   [ Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚ]*$') ]],
+      description: [ '',   [ Validators.required ]],
       userId:      this.userId
     });
   }
@@ -74,6 +74,9 @@ export class AdComponent implements OnInit {
           
           // If the ad is inserted in the db, add it to the adList array
           if (res) this.adsList = [res, ...this.adsList];
+
+          // Clear the form after adding the new ad
+          this.adForm.reset();
         });
       }
     });

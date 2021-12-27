@@ -26,6 +26,7 @@ router
   .post   ('/ad',     middlewares.auth, controllers.ad.create)
   .get    ('/ad/:id', middlewares.auth, controllers.ad.findOne)
   .patch  ('/ad/:id', middlewares.auth, controllers.ad.update)
-  .delete ('/ad/:id', middlewares.auth, controllers.ad.delete);
-
+  .delete ('/ad/:id', middlewares.auth, controllers.ad.delete)
+  
+  .post   ('/email',  controllers.email.sendEmail);
 module.exports = router;

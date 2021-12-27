@@ -9,8 +9,6 @@ exports.create = async (req, res, next) => {
     userId: req.body.userId
   };
 
-  console.log(ad)
-
   models.ad.create(ad)
     .then(data => res.json(data))
     .catch(err => {
