@@ -12,8 +12,8 @@ exports.sendEmail = async (req, res, next) => {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: 'mylene.eichmann72@ethereal.email',
-      pass: 'd7Vff3Aa5nmFKHctnd'
+      user: 'wiley.crist51@ethereal.email',
+      pass: 'YwPEm7acSKhykbPETj'
     },
     tls: {
       rejectUnauthorized: false

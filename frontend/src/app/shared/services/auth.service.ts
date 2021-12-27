@@ -8,8 +8,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 // Services, interfaces and environment variables
-import { ErrorHandlerService } from './error-handler.service';
 import { User } from '../interfaces/user.interface'
+import { ErrorHandlerService } from './error-handler.service';
 import { environment } from '@environments/environment';
 
 /**

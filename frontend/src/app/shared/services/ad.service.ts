@@ -30,14 +30,14 @@ export class AdService {
     );
   }
 
-  createAd(params: any): Observable<Ad> {
+  createAd(params: Ad): Observable<Ad> {
     return this.http.post<Ad>(`${environment.apiUrl}/ad`, params, this.httpOptions).pipe(
       catchError(this.errorHandlerService.handleError<Ad>('createAd', null))
     );
   }
 
   // When Sequelize => Observable<number> 
-  deleteAd(adId: number): Observable<any> {
+  deleteAd(adId: number): Observable<unknown> {
     return this.http.delete<any>(`${environment.apiUrl}/ad/${adId}`, this.httpOptions).pipe(
       catchError(this.errorHandlerService.handleError<Ad>('deleteAd'))
     );

@@ -42,15 +42,15 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
 
   initContactForm(): void {
-    let fullName = this.isAuthenticated ? `${this.currentUser.name} ${this.currentUser.surname}` : '';
+    let name  = this.isAuthenticated ? `${this.currentUser.name} ${this.currentUser.surname}` : '';
     let email = this.isAuthenticated ? this.currentUser.email : '';
     let phone = this.isAuthenticated ? this.currentUser.phone : '';
     
     this.contactForm = this.fb.group({
-      fullName: [ fullName, Validators.required ],
-      email:    [ email, [ Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$') ]],
-      phone:    [ phone, [ Validators.required, Validators.pattern('^[0-9]*$') ]],
-      message:  [ '',    [ Validators.required ]],
+      name:    [ name,  [ Validators.required ]],
+      email:   [ email, [ Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$') ]],
+      phone:   [ phone, [ Validators.required, Validators.pattern('^[0-9]*$') ]],
+      message: [ '',    [ Validators.required ]],
     });
   }
   
@@ -58,7 +58,7 @@ export class ContactComponent implements OnInit, OnDestroy {
     this.emailService.sendEmail(this.contactForm.value).subscribe(
       res => {
         this.contactForm.reset();
-        
+
         console.log('--> send email response:');
         console.log(res);
       },

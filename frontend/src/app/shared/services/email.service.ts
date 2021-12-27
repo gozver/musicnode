@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 // Services, interfaces and environment variables
-import { ErrorHandlerService } from './error-handler.service';
 import { Email } from '@shared/interfaces/email.interface';
+import { ErrorHandlerService } from './error-handler.service';
 import { environment } from '@environments/environment';
 
 @Injectable({
