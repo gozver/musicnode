@@ -1,1 +1,63 @@
-<p>contact works!</p>
+<section class="top-ctnr">
+  <div class=title>CONTACT US</div>
+  
+  <div class="subtitle">Let's connect</div>
+
+  <div class="text">
+    Our customer support and account management teams provide the best service in the industry. We're passionate about our products as well as our customers and it shows in the level of service that we provide. We're always happy to help find the solution for your needs. Is a solution doesn't already exist, we'll create a new solution that resolves your issue.
+  </div>
+</section>
+
+<section class="bottom-ctnr">
+  <div class="left_ctnr">
+    <p>Send us a message</p>
+    
+    <form [formGroup]="contactForm" class="contact-form">
+      <mat-form-field appearance="outline" class="input-headline">
+        <mat-label>Full Name</mat-label>
+        <input matInput placeholder="Full Name" formControlName="fullName" />
+        <mat-icon matSuffix><i class="material-icons">person_outline</i></mat-icon>
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline" class="input-headline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" formControlName="email" type="email" />
+        <mat-icon matSuffix>email</mat-icon>
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline" class="input-headline">
+        <mat-label>Phone</mat-label>
+        <input matInput placeholder="Phone" formControlName="phone" />
+        <mat-icon matSuffix>phone</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Message</mat-label>
+        <textarea matInput placeholder="Message" formControlName="message" rows="3"></textarea>
+        <mat-icon matSuffix class="message">message</mat-icon>
+      </mat-form-field>          
+    </form>
+
+    <!-- put focus on button: cdkFocusInitial -->
+    <button mat-flat-button color="warn" class="warn" title="Contact" (click)="sendMessage()" [disabled]="contactForm.invalid">
+      Contact
+    </button>
+  </div>
+
+  <div class="right-ctnr">
+    <div class="email align">
+      <span class="icon"><i class="material-icons">email</i></span>
+      <span class="text">musicnode@gmail.com</span>
+    </div>
+
+    <div class="phone align">
+      <span class="icon"><i class="material-icons">smartphone</i></span>
+      <span class="text">+34 695 123 456</span>
+    </div>
+
+    <div class="address align">
+      <span class="icon"><i class="material-icons">location_on</i></span>
+      <span class="text">123 Street Ln Musicnode Beach</span>
+    </div>
+  </div>
+</section>

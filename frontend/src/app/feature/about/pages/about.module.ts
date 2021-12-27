@@ -5,8 +5,11 @@ import { CommonModule } from '@angular/common';
 // Angular Material
 import { MaterialModule } from '@app/shared/modules/material.module';
 
-// Custom
+// Custom Modules
 import { AboutRoutingModule } from './about-routing.module';
+import { ComponentsModule } from '@shared/components/components.module';
+
+// Custom Components
 import { AboutComponent } from './about/about.component';
 
 @NgModule({
@@ -15,7 +18,9 @@ import { AboutComponent } from './about/about.component';
   ],
   imports: [
     CommonModule,
+    
     AboutRoutingModule,
+    ComponentsModule,
 
     MaterialModule
   ]

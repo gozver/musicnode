@@ -50,21 +50,15 @@ mat-dialog-actions {
       color: #fff;
       background: #06548b;
       
-      &:hover {
-        background: #06548bee;
-      }
-
-      &:disabled {
-        background: #ccc;
-      }
+      &:hover    { background: #06548bee; }
+      &:disabled { background: #ccc; }
     }
-
+    
     &.warn {
       background: #eeaa24;
-
-      &:hover {
-        background: #eeab24ee;
-      }
+      
+      &:hover    { background: #eeab24ee; }
+      &:disabled { background: #ccc; }
     }
   }
 }

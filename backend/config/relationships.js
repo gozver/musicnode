@@ -19,7 +19,7 @@ models.userRole.belongsTo(models.band, {
 models.band.hasOne(models.userRole);
 
 models.userRole.belongsTo(models.company, { 
-  foreignKey: 'bandId',
+  foreignKey: 'companyId',
   onDelete: 'cascade',
   onUpdate: 'cascade' 
 });

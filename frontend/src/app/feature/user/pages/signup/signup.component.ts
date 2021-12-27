@@ -1,7 +1,6 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 // Services
 import { AuthService } from '@shared/services/auth.service';
@@ -27,7 +26,6 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly router: Router,
     private readonly authService: AuthService,
     private readonly bandService: BandService,
     private readonly companyService: CompanyService

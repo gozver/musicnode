@@ -4,9 +4,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 // Services
 import { AuthService } from '@app/shared/services/auth.service';
 
-// Interfaces
-import { Ad } from '@shared/interfaces/ad.interface';
-
 @Component({
   selector: 'app-ad-card',
   templateUrl: './ad-card.component.html',

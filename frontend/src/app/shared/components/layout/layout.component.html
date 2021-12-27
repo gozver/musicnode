@@ -98,7 +98,7 @@
       <a routerLink="/home">Help</a>
     </button> -->
 
-    <mat-divider></mat-divider>
+    <mat-divider *ngIf="isAuthenticated"></mat-divider>
 
     <button mat-button class="menu-button" *ngIf="isAuthenticated" (click)="logout()">
       <mat-icon class="material-icons-outlined">logout</mat-icon>
