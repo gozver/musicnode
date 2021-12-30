@@ -1,0 +1,33 @@
+<div class="dialog">
+  <div class="title">
+    {{ data.title }}
+  </div>
+  
+  <div class="content">
+    <p>
+      <span class="param">Code: </span>
+      <span class="value">{{ data.code }}</span>
+    </p>
+    <p>
+      <span class="param">Operation: </span>
+      <span class="value">{{ data.operation }}</span>
+    </p>
+    <p>
+      <span class="param">Message: </span>
+      <span class="value">{{ data.message }}</span>
+    </p>
+  </div>
+
+  <!-- The dialog automatically focuses the first focusable element -->
+  <!-- We can avoid focusing the button by setting it's tabindex to -1 -->
+  <div class="btn-cntr">
+    <button
+      mat-flat-button
+      mat-dialog-close
+      tabindex=-1 
+      color="warn"
+      class="warn"
+      title="Cancel">Close
+    </button>
+  </div>
+</div>

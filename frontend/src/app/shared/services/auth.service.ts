@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 // RxJS
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 // Services, interfaces and environment variables
@@ -71,7 +71,8 @@ export class AuthService {
 
         return user;
       }),
-      catchError(this.errorHandlerService.handleError<any>('login'))
+      // // Send the error to ErrorHandler service
+      // catchError(this.errorHandlerService.handleError<any>('login'))
     );
   }
 

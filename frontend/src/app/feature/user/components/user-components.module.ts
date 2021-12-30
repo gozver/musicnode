@@ -16,7 +16,6 @@ import { CompanyFormComponent } from './company-form/company-form.component';
 // Custom Modules
 import { ComponentsModule } from '@shared/components/components.module';
 
-
 @NgModule({
   declarations: [
     LoginFormComponent,

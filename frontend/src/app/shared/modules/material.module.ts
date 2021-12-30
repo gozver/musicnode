@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatListModule } from  '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { MatMenuModule } from '@angular/material/menu';
@@ -31,6 +32,7 @@ const modules: any[] = [
   
   MatIconModule,
   MatBadgeModule,
+  MatListModule,
   MatProgressSpinnerModule,
 
   MatMenuModule,

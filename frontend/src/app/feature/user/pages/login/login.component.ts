@@ -3,8 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-// Services
+// Angular Material
+import { MatDialog } from '@angular/material/dialog';
+
+// Services and Components
 import { AuthService } from '@shared/services/auth.service';
+import { ErrorDialogComponent } from '@shared/components/error-dialog/error-dialog.component'
 
 @Component({
   selector: 'app-login',
@@ -18,6 +22,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
+    private readonly dialog: MatDialog,
     private readonly router: Router
   ) { }
 
@@ -36,14 +41,33 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.authService
       .login(this.loginForm.value.email, this.loginForm.value.password)
-      .subscribe(res => {
-        if (res) {
+      .subscribe(
+        res => {
           console.log('--> Login response:');
           console.log(res);
-        } else {
+        },
+        err => {
+          console.error('--> Login error:');
+          console.error(err);
+
+          /**
+           * @definition Opens a mat dialog
+           * @param1 Component to show inside the dialog
+           * @param2 Data sent to the component
+           */
+          this.dialog.open(
+            ErrorDialogComponent, { 
+            data: { 
+              title: 'Login Error',
+              operation: 'Login',
+              code: err.error.err.code,
+              message: err.error.err.message 
+            }
+          });
+          
           this.loginError = true;
         }
-      });
+      );
   }
 
   signup(): void { 

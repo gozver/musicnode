@@ -12,8 +12,6 @@ import { AdCardComponent } from './ad-card/ad-card.component';
 import { AdDialogComponent } from './ad-dialog/ad-dialog.component';
 
 @NgModule({
-  entryComponents: [
-  ],
   declarations: [
     AdCardComponent,
     AdDialogComponent

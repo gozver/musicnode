@@ -7,26 +7,26 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@shared/modules/material.module';
 
 // Custom Components
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LoaderComponent } from './loader/loader.component';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
 @NgModule({
   declarations: [
-    SidebarComponent,
     LayoutComponent,
-    LoaderComponent
+    LoaderComponent,
+    ErrorDialogComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-
+    
     MaterialModule
   ],
   exports: [
-    SidebarComponent,
     LayoutComponent,
-    LoaderComponent
+    LoaderComponent,
+    ErrorDialogComponent
   ]
 })
 export class ComponentsModule { }
