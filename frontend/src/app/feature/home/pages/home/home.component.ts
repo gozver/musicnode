@@ -1,3 +1,4 @@
+// Angular
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -15,7 +16,8 @@ export class HomeComponent implements OnInit {
     'https://upload.wikimedia.org/wikipedia/commons/9/9a/Swepac_FB_465%2C_RV70%2C_with_passing_lorry.jpg'
   ];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

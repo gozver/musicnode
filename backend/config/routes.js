@@ -28,5 +28,10 @@ router
   .patch  ('/ad/:id', middlewares.auth, controllers.ad.update)
   .delete ('/ad/:id', middlewares.auth, controllers.ad.delete)
   
-  .post   ('/email',  controllers.email.sendEmail);
+  .post   ('/email',  controllers.email.sendEmail)
+  
+  // 'http://localhost:3000/api/user-role'
+  .get    ('/user-role', controllers.userRole.findAll)
+  .get    ('/user-role/:userId', controllers.userRole.findByUserId);
+
 module.exports = router;

@@ -6,8 +6,9 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 // Angular Material
 import { MatSidenav } from '@angular/material/sidenav';
 
-// Services
+// Services and Models
 import { AuthService } from '@shared/services/auth.service';
+import { UserRoleService } from '@app/shared/services/user-role.service';
 import { User } from '@app/shared/interfaces/user.interface';
 
 @Component({
@@ -16,31 +17,52 @@ import { User } from '@app/shared/interfaces/user.interface';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit, AfterViewInit {
-  // !         => tells typescript the sidenav variable will be initialized later (strinct mode)
+  // ! => tells typescript the sidenav variable will be initialized later (strinct mode)
   // viewchild => we use viewchild to reference the MatSidenav element in the template
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
-  isAuthenticated: boolean = false;
+  isLogged: boolean = false;
+  hasRole: boolean = false;
+  userId: number = null;
   currentUser: User;
-  
+
   constructor(
     private readonly authService: AuthService,
+    private readonly userRoleService: UserRoleService, 
     private readonly bpObserver: BreakpointObserver,
     private readonly focusMonitor: FocusMonitor
   ) { }
 
   ngOnInit(): void {
     this.authService.isLogged$.subscribe(isLogged => {
-      this.isAuthenticated = isLogged;
+      this.isLogged = isLogged;
 
-      console.log('--> isLogged$:');
-      console.log(isLogged);
+      console.log(`--> isLogged: ${isLogged}`);
+    });
+
+    this.authService.userId$.subscribe(userId => {
+      this.userId = userId;
+
+      console.log(`--> userId: ${userId}`);
+
+      this.authService.hasRole$.subscribe(hasRole => {
+        this.hasRole = hasRole;
+  
+        console.log(`--> hasRole: ${hasRole}`);
+  
+        if( this.hasRole) {
+          this.userRoleService.findByUserId(this.userId).subscribe(res=> {
+            console.log(`--> ${this.currentUser.name.toLowerCase()} ${this.currentUser.surname.toLowerCase()} roles:`);
+            console.log(res);
+          }); 
+        }
+      });
     });
 
     this.authService.currentUser$.subscribe(currentUser => {
       this.currentUser = currentUser;
       
-      console.log('--> currentUser$:');
+      console.log('--> currentUser:');
       console.log(currentUser);
     });
   }

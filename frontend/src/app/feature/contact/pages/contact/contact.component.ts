@@ -13,7 +13,7 @@ import { User } from '@app/shared/interfaces/user.interface';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit, OnDestroy {
-  isAuthenticated: boolean = false;
+  isLogged: boolean = false;
   currentUser: User;
   contactForm: FormGroup;
 
@@ -25,9 +25,9 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.authService.isLogged$.subscribe(isLogged => {
-      this.isAuthenticated = isLogged;
+      this.isLogged = isLogged;
       
-      if (this.isAuthenticated) {
+      if (this.isLogged) {
         this.authService.currentUser$.subscribe(currentUser => {
           this.currentUser = currentUser;
         });
@@ -42,9 +42,9 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
 
   initContactForm(): void {
-    let name  = this.isAuthenticated ? `${this.currentUser.name} ${this.currentUser.surname}` : '';
-    let email = this.isAuthenticated ? this.currentUser.email : '';
-    let phone = this.isAuthenticated ? this.currentUser.phone : '';
+    let name  = this.isLogged ? `${this.currentUser.name} ${this.currentUser.surname}` : '';
+    let email = this.isLogged ? this.currentUser.email : '';
+    let phone = this.isLogged ? this.currentUser.phone : '';
     
     this.contactForm = this.fb.group({
       name:    [ name,  [ Validators.required ]],

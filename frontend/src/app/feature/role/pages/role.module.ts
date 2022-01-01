@@ -7,18 +7,19 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@shared/modules/material.module';
 
 // Custom Modules and Components
-import { HomeRoutingModule } from './home-routing.module';
-import { HomeComponent } from './home/home.component';
+import { RoleRoutingModule } from './role-routing.module';
+import { ManagerComponent } from './manager/manager.component';
+
 
 @NgModule({
   declarations: [
-    HomeComponent
+    ManagerComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
-    HomeRoutingModule
+    RoleRoutingModule
   ]
 })
-export class HomeModule { }
+export class RoleModule { }

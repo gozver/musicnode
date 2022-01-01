@@ -7,6 +7,7 @@ export interface User {
   phone: string;
   password: string;
   avatar: string;
+  hasRole: boolean;
   createdAt: Date;
   updatedAt: Date;
 }

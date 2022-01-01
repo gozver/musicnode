@@ -13,10 +13,9 @@ export class SingupFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.rolesList = [
-      { id: 1, name: 'band', value: 'Band' },
-      { id: 2, name: 'company', value: 'Company' },
-      { id: 3, name: 'contractor', value: 'Contractor' },
-      { id: 4, name: 'admin', value: 'Admin' }
+      { id: 1, value: 'Band or Company' },
+      { id: 3, value: 'Contractor' },
+      { id: 4, value: 'Admin' }
     ];
   }
 

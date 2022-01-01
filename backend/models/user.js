@@ -12,8 +12,8 @@ User.init({
   password: { type: DataTypes.STRING,  allowNull: false, validate: { notEmpty: true } },
   
   email:    { type: DataTypes.STRING,  allowNull: false, validate: { notEmpty: true, isEmail: true }, unique: true },
-  
   avatar:   { type: DataTypes.STRING,  allowNull: true,  defaultValue: 'assets/img/user.png' },
+  hasRole:  { type: DataTypes.BOOLEAN, allowNull: false }
 }, { 
   sequelize, 
   modelName: 'user' 

@@ -53,7 +53,7 @@ export class AdComponent implements OnInit {
       price:       [ null, [ Validators.required, Validators.pattern('^[0-9]*$') ]],
       location:    [ '',   [ Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚ]*$') ]],
       description: [ '',   [ Validators.required ]],
-      userId:      this.userId
+      userId:      null
     });
   }
 
@@ -67,6 +67,8 @@ export class AdComponent implements OnInit {
     // user taps on popup cancel button: result = false
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        this.adForm.value.userId = this.userId;
+
         // Insert the element in the database
         this.adService.createAd(this.adForm.value).subscribe(res => {
           console.log('--> Create ad response:');

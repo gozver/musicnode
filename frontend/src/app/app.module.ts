@@ -21,7 +21,7 @@ import { LoaderInterceptorService } from '@shared/interceptors/loader-intercepto
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
