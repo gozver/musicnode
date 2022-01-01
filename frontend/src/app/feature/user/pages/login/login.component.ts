@@ -17,7 +17,6 @@ import { ErrorDialogComponent } from '@shared/components/error-dialog/error-dial
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  loginError: boolean;
   
   constructor(
     private readonly fb: FormBuilder,
@@ -27,14 +26,16 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loginError = false;
     this.initLoginForm();
   }
 
   initLoginForm(): void {
+    const eRegex = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+    const pRegex = /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
+
     this.loginForm = this.fb.group({
-      email:     [ '', Validators.required ],
-      password:  [ '', Validators.required ],
+      email:    [ '', [ Validators.required, Validators.pattern(eRegex) ]],
+      password: [ '', [ Validators.required, /* Validators.pattern(pRegex) */, Validators.minLength(6) ]],
     });
   } 
 
@@ -43,8 +44,8 @@ export class LoginComponent implements OnInit {
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(
         res => {
-          console.log('--> Login response:');
-          console.log(res);
+          // console.log('--> Login response:');
+          // console.log(res);
         },
         err => {
           console.error('--> Login error:');
@@ -64,8 +65,6 @@ export class LoginComponent implements OnInit {
               message: err.error.err.message 
             }
           });
-          
-          this.loginError = true;
         }
       );
   }

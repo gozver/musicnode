@@ -54,7 +54,7 @@ exports.login = async (req, res, next) => {
       // create error
       const err = new Error();
       err.statusCode = 401;
-      err.message = 'The email do not exists in the db';
+      err.message = 'The email does not exist in the database';
 
       // print error and send it to error controller
       console.log('--> error:');
@@ -73,7 +73,7 @@ exports.signup = async (req, res, next) => {
       if (res) {
         const err = new Error();
         err.statusCode = 401;
-        err.message = 'The email already exists in the db';
+        err.message = 'The email already exists in the database';
         next(err);
       }
     });
@@ -84,38 +84,52 @@ exports.signup = async (req, res, next) => {
   const phone = req.body.phone;
   const password = req.body.password;
   const roleId = req.body.roleId;
+  const code = req.body.code;
 
   let userId;
   
-  // hash the password 12 times
-  const hashedPwd = await bcrypt.hash(password, 12)
-  
-  // save the user in the db
-  await models.user.create({ name, surname, email, phone, password: hashedPwd })
-    .then((user) => {
-      // save the userId to operate with later
-      userId = user.id;
+  // check if the email exists
+  if (parseInt(roleId) === 4 && parseInt(code) !== 123) {
+    const err = new Error();
+    err.statusCode = 401;
+    err.message = 'The administrator code is not correct';
+    next(err);
+  } else {
+    // hash the password 12 times
+    const hashedPwd = await bcrypt.hash(password, 12)
+    
+    // save the user in the db
+    await models.user.create({ name, surname, email, phone, password: hashedPwd })
+      .then((user) => {
+        // save the userId to operate with later
+        userId = user.id;
 
-      // return response to the client
-      res.status(201).json(user);
-    })
-    .catch(err => {
-      if (!err.statusCode) err.statusCode = 500;
+        // return response to the client
+        res.status(201).json(user);
+      })
+      .catch(err => {
+        if (!err.statusCode) err.statusCode = 500;
 
-      // print error and send it to error controller
-      console.log('--> error:');
-      console.log(err);
-      next(err);
-    });
+        // print error and send it to error controller
+        console.log('--> error:');
+        console.log(err);
+        next(err);
+      });
 
-  // create the roles in the db: comment these 3 methods after creating the 1st user
-  await models.role.create({ name: 'band' });
-  await models.role.create({ name: 'company' });
-  await models.role.create({ name: 'admin'});
+    // create the roles in the db: comment these 4 methods below after creating the 1st user
+    // await models.role.create({ code: 1, name: 'band' });
+    // await models.role.create({ code: 2, name: 'company' });
+    // await models.role.create({ code: 3, name: 'contractor'});
+    // await models.role.create({ code: 4, name: 'admin'});
 
-  // save the USER ROLE relationship in the db
-  await models.userRole.create({ 
-    userId: userId,
-    roleId: roleId
-  });
+    console.log(parseInt(code))
+    
+    if (parseInt(roleId) === 3 || parseInt(roleId) === 4) {
+      // save the USER ROLE relationship in the db
+      await models.userRole.create({ 
+        userId: userId,
+        roleId: roleId
+      });
+    }
+  }
 };

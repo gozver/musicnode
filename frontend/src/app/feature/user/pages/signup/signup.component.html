@@ -1,52 +1,30 @@
+<!-- Bem Naming Convention: -->
+<!-- Source: http://getbem.com/naming/ -->
+
 <article>
   <section class="top_ctr">
-    <div class="title">musicnode</div>
-    <div class="text">Professional business drive network for musicians and music events management companies or free market contractors.</div>
-    <div class="subtitle" *ngIf="signupStep === 1">Signup: User Data</div>
-    <div class="subtitle" *ngIf="signupStep === 2 && signupForm.value.roleId === 1">Signup: band data</div>
-    <div class="subtitle" *ngIf="signupStep === 2 && signupForm.value.roleId === 2">Signup: company data</div>
+    <div class="title">
+      musicnode
+    </div>
+    
+    <div class="text">
+      Professional business drive network for musicians and music events management companies or free market contractors.
+    </div>
   </section>
 
   <section class="bottom_ctr">
     <div class="card">
       <div class="card-content">
-        <!-- ini step 1 -->
         <app-singup-form
           [signupForm]=signupForm
-          [signupFormError]=signupFormError
-          *ngIf="signupStep === 1"
         ></app-singup-form>
 
-        <!-- [disabled]="loginForm.invalid" -->
-        <button (click)="goToStep2()" title="Next" *ngIf="signupStep === 1" >
-          Next
+        <button mat-flat-button class="primary" title="Sign Up" (click)="signup()" [disabled]="signupForm.invalid">
+          Sign Up
         </button>
-        <!-- end step 1 -->
-
-        <!-- ini step 2 -->
-        <app-band-form
-          [bandForm]=bandForm
-          [bandFormError]=bandFormError
-          *ngIf="signupStep === 2 && signupForm.value.roleId === 1"
-        ></app-band-form>
-
-        <app-company-form
-          [companyForm]=companyForm
-          [companyFormError]=companyFormError
-          *ngIf="signupStep === 2 && signupForm.value.roleId === 2"
-        ></app-company-form>
-
-        <button (click)="signup()" title="Signup" *ngIf="signupStep === 2" >
-          Signup
-        </button>
-
-        <button (click)="goToStep1()" title="Go Back" *ngIf="signupStep === 2">
-          Go Back
-        </button>
-        <!-- end step 2 -->
       </div>
     </div>
-  
+
     <p class="tagline">
       <span>Login or create an account to access all the platform features.</span>
     </p>    

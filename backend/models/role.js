@@ -5,6 +5,7 @@ class Role extends Model {}
 
 Role.init({
   id:   { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true },
+  code: { type: DataTypes.INTEGER, allowNull: false, validate: { notEmpty: false } },
   name: { type: DataTypes.STRING,  allowNull: false, validate: { notEmpty: false } }
 }, { 
   sequelize,

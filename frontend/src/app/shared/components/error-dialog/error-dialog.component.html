@@ -1,5 +1,5 @@
 <div class="dialog">
-  <div class="title">
+  <div class="header">
     {{ data.title }}
   </div>
   
@@ -9,10 +9,6 @@
       <span class="value">{{ data.code }}</span>
     </p>
     <p>
-      <span class="param">Operation: </span>
-      <span class="value">{{ data.operation }}</span>
-    </p>
-    <p>
       <span class="param">Message: </span>
       <span class="value">{{ data.message }}</span>
     </p>
@@ -20,14 +16,9 @@
 
   <!-- The dialog automatically focuses the first focusable element -->
   <!-- We can avoid focusing the button by setting it's tabindex to -1 -->
-  <div class="btn-cntr">
-    <button
-      mat-flat-button
-      mat-dialog-close
-      tabindex=-1 
-      color="warn"
-      class="warn"
-      title="Cancel">Close
+  <div class="footer">
+    <button mat-flat-button mat-dialog-close tabindex=-1  color="warn" title="Cancel">
+      Close
     </button>
   </div>
 </div>

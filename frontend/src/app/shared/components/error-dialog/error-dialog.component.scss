@@ -1,7 +1,7 @@
 .dialog {
   padding: 15px 15px 5px 15px;
 
-  .title {
+  .header {
     font-size: 26px;
     font-weight: 400;
   }
@@ -14,7 +14,7 @@
     }
   }
 
-  .btn-cntr {
+  .footer {
     display: flex;
     justify-content: flex-end;
     padding: 0;

@@ -1,7 +1,7 @@
 // @import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
 
-// Global variables
-$primary: hsl(212, 99%, 33%);
+// global variables
+$primary: #014fa7;
 $primary-shadow: #e7f3ff;
 
 $alert: #f02849;
@@ -25,4 +25,36 @@ body {
   padding: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background: #fff;
+}
+
+button {
+  &.primary {
+    color: #fff;
+    background: #06548b;
+    
+    &:disabled,
+    &[disabled]:hover { 
+      color: #fff;
+      background: #06548bc9; 
+    }
+
+    &:hover { 
+      background: #06548bee; 
+    }
+
+  }
+
+  &.warn {
+    background: #eeaa24;
+
+    &:disabled,
+    &[disabled]:hover {
+      color: #fff;
+      background: #eeab24bd; 
+    }
+    
+    &:hover { 
+      background: #eeab24ee; 
+    }
+  }
 }

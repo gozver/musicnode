@@ -1,12 +1,60 @@
-<form [formGroup]="signupForm" novalidate>
-  <input name="name"     formControlName="name"     placeholder="Name"     [ngClass]="checkSignUpError()" autocomplete="on" />
-  <input name="surname"  formControlName="surname"  placeholder="Surname"  [ngClass]="checkSignUpError()" autocomplete="on" />
-  <input name="email"    formControlName="email"    placeholder="Email"    [ngClass]="checkSignUpError()" autocomplete="on" />
-  <input name="phone"    formControlName="phone"    placeholder="Phone"    [ngClass]="checkSignUpError()" autocomplete="on" />
-  <input name="password" formControlName="password" placeholder="Password" [ngClass]="checkSignUpError()" autocomplete="on" type="password" />
+<form [formGroup]="signupForm">
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name" formControlName="name" autocomplete="on" />
+    <button mat-icon-button matSuffix [attr.aria-label]="'Name'" disabled>
+      <mat-icon matSuffix>person</mat-icon>
+    </button>
+  </mat-form-field>
   
-  <select name="roleId" formControlName="roleId" [ngClass]="checkSignUpError()">
-    <option [ngValue]="null" [selected]="true" hidden>Role</option>
-    <option *ngFor="let item of rolesList" [ngValue]="item.id">{{ item.value }}</option>
- </select>
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Surname</mat-label>
+    <input matInput placeholder="Surname" formControlName="surname" autocomplete="on" />
+    <button mat-icon-button matSuffix [attr.aria-label]="'Surname'" disabled>
+      <mat-icon matSuffix>person</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="Email" formControlName="email" autocomplete="on" type="email" />
+    <button mat-icon-button matSuffix [attr.aria-label]="'Email'" disabled>
+      <mat-icon matSuffix>alternate_email</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Phone</mat-label>
+    <input matInput placeholder="Phone" formControlName="phone" autocomplete="on" />
+    <button mat-icon-button matSuffix [attr.aria-label]="'Phone'" disabled>
+      <mat-icon matSuffix>phone</mat-icon>
+    </button>
+  </mat-form-field>
+  
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Password</mat-label>
+    <input matInput placeholder="Password" formControlName="password" autocomplete="on">
+    <button mat-icon-button matSuffix [attr.aria-label]="'Password'" disabled>
+      <mat-icon>password</mat-icon>
+    </button>
+  </mat-form-field>
+  
+  <mat-form-field appearance="outline" class="input-headline role">
+    <mat-label>Role</mat-label>
+    <mat-select formControlName="roleId" (selectionChange)="setCodeValidator()">
+      <mat-option *ngFor="let item of rolesList" value="{{ item.id }}">{{ item.value }}</mat-option>
+    </mat-select>
+    <button mat-icon-button matSuffix [attr.aria-label]="'Role'" disabled>
+      <mat-icon>category</mat-icon>
+    </button>
+  </mat-form-field>
+  
+  <!-- +value => parseInt(value) -->
+  <mat-form-field appearance="outline" class="input-headline" [ngClass]="+signupForm.value.roleId === 4 ? 'display' : 'hide'">
+    <mat-label>Code</mat-label>
+    <input matInput placeholder="Code" formControlName="code" autocomplete="on" (keyup)="setCodeValidator()">
+    <button mat-icon-button matSuffix [attr.aria-label]="'Code'" disabled>
+      <mat-icon>code</mat-icon>
+    </button>
+  </mat-form-field>
 </form>

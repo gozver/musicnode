@@ -19,7 +19,7 @@ article {
         margin-top: 50px;
         font-size: 62px;
         font-weight: bold;
-        color: $primary;
+        color: #014fa7;
       }
 
       .text {
@@ -50,27 +50,10 @@ article {
           padding: 5px;
   
           button {
-            padding: 15px;
-            margin-top: 15px;
-            outline: none;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            background: $primary;
-            color: #fff;
+            width: 100%;
+            margin-top: 8px;
+            padding: 8px;
           }
-        }
-  
-        a {
-          text-decoration: none;
-          text-align: center;
-          border-bottom: 1px solid $lightgray2;
-          margin-bottom: 20px;
-          padding-bottom: 20px;
-          cursor: pointer;
-          color: $primary;
         }
       }
   

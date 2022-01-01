@@ -43,9 +43,9 @@ export class AuthService {
 
   // Methods
   signup(params: User): Observable<User> {
-    return this.http.post<User>(`${environment.apiUrl}/auth/signup`, params, this.httpOptions).pipe(      
-      catchError(this.errorHandlerService.handleError<any>('signup'))
-    );
+    return this.http.post<User>(`${environment.apiUrl}/auth/signup`, params, this.httpOptions)
+    // Send the error to ErrorHandler service  
+    // .pipe(catchError(this.errorHandlerService.handleError<any>('signup')));
   }
 
   login(email: string, password: string): Observable<User> {
@@ -71,7 +71,7 @@ export class AuthService {
 
         return user;
       }),
-      // // Send the error to ErrorHandler service
+      // Send the error to ErrorHandler service
       // catchError(this.errorHandlerService.handleError<any>('login'))
     );
   }

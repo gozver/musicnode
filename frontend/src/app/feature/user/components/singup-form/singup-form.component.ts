@@ -8,7 +8,6 @@ import { FormGroup } from '@angular/forms';
 })
 export class SingupFormComponent implements OnInit {
   @Input() signupForm: FormGroup;
-  @Input() signupFormError: boolean;
 
   rolesList: any[];
 
@@ -16,14 +15,16 @@ export class SingupFormComponent implements OnInit {
     this.rolesList = [
       { id: 1, name: 'band', value: 'Band' },
       { id: 2, name: 'company', value: 'Company' },
-      { id: 3, name: 'admin', value: 'Admin' }
+      { id: 3, name: 'contractor', value: 'Contractor' },
+      { id: 4, name: 'admin', value: 'Admin' }
     ];
   }
-  
-  checkSignUpError(): string {
-    if (this.signupFormError)
-      return 'border-red';
-    
-    return 'border-gray'
+
+  setCodeValidator(): void {
+    if(+this.signupForm.value.roleId === 4 && this.signupForm.value.code === '') {
+      this.signupForm.controls['code'].setErrors({ 'incorrect': true });
+    } else {
+      this.signupForm.controls['code'].setErrors(null);
+    }
   }
 }

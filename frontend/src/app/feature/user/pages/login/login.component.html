@@ -17,11 +17,9 @@
       <div class="card-content">
         <app-login-form 
           [loginForm]=loginForm
-          [loginError]=loginError
         ></app-login-form>
 
-        <!-- [disabled]="loginForm.invalid" -->
-        <button class="login-btn" (click)="login()" title="Log In">
+        <button mat-flat-button class="primary" title="Log In" (click)="login()" [disabled]="loginForm.invalid">
           Log In
         </button>
       </div>

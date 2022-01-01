@@ -29,14 +29,6 @@ article {
         padding-top: 15px;
         padding-bottom: 15px;
       }
-
-      .subtitle{
-        color: $primary;
-        font-size: 28px;
-        font-weight: bold;
-        text-align: center;
-        margin: 5px 0;
-      }
     }
   
     &.bottom_ctr {
@@ -57,38 +49,10 @@ article {
           flex-direction: column;
           padding: 5px;
   
-          form {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-
-            input, 
-            select {
-              flex: 1;
-              font-size: 16px;
-              padding: 14px 16px;
-              border: 1px solid #dddfe2;
-              border-radius: 5px;
-              outline: none;
-            }
-
-            .option {
-              padding: 20px;
-              line-height: 35px;
-            }
-          }
-
           button {
-            padding: 15px;
-            margin-top: 15px;
-            outline: none;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            background: $primary;
-            color: #fff;
+            width: 100%;
+            margin-top: 8px;
+            padding: 8px;
           }
         }
   

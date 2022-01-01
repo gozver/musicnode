@@ -1,3 +1,5 @@
+@import 'src/styles';
+
 .top-ctnr {
   padding: 30px 30px 0 30px;
   color: #333;
@@ -73,20 +75,7 @@
       margin-top: 27px;
       padding: 8px;
 
-      &.primary {
-        color: #fff;
-        background: #06548b;
-        
-        &:hover    { background: #06548bee; }
-        &:disabled { background: #06548b83; }
-      }
-
-      &.warn {
-        background: #eeaa24;
-  
-        &:hover    { background: #eeab24ee; }
-        &:disabled { background: #eeab2483; }
-      }
+      
     }
   }
 
