@@ -32,6 +32,8 @@ router
   
   // 'http://localhost:3000/api/user-role'
   .get    ('/user-role', controllers.userRole.findAll)
-  .get    ('/user-role/:userId', controllers.userRole.findByUserId);
+  .get    ('/user-role/:userId', controllers.userRole.findByUserId)
+
+  .get    ('/user', middlewares.auth, controllers.user.findOne);
 
 module.exports = router;

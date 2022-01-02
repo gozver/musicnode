@@ -1,116 +1,130 @@
 @import 'src/styles';
 
-.top-ctnr {
+article {
   padding: 30px 30px 0 30px;
   color: #333;
 
-  .title {
-    font-size: 1.25rem;
-    font-weight: 500;
+  @media (max-width: 800px) {
+    padding: 30px 10px 10px 10px;
   }
 
-  .subtitle {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #eeaa24;
-
-    margin-top: 1.25rem;
-    margin-bottom: 1.25rem;
-  }
-}
-
-.bottom-ctnr {
-  display: flex;
-  flex-direction: row;
-
-  padding: 20px 30px 30px 30px;
-
-  @media (max-width: 1000px) {
-    flex-direction: column-reverse;
-    gap: 1rem;
-  }
-
-  .left_ctnr { 
-    align-self: center;
-    max-width: 50%;
-
-    @media (max-width: 1000px) {
-      max-width: 100%;
+  .top-ctnr {
+    @media (max-width: 800px) {
+      margin-bottom: 15px;
     }
     
-    p {
-      font-size: 30px;
-      margin: 10px 0 30px 0;
+    .title {
+      font-size: 1.25rem;
       font-weight: 500;
     }
 
-    .contact-form {
-      font-size: 15px;
-    
-      // white mat-form-field background
-      ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-        background-color: white;
-        border-radius: 5px;
-      }
+    .subtitle {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #eeaa24;
 
-      mat-form-field {
-        width: 100%;
-        height: 3.1rem;
-        margin-bottom: 20px;
-    
-        mat-icon {
-          color: #555;
-        }
-        
-        mat-icon.message {
-          padding-left: .625rem;
-          padding-right: 1.5rem;
-          transform: translateY(4px);
-        }
-      }
-    }
-
-    button {
-      width: 100%;
-      margin-top: 27px;
-      padding: 8px;
-
-      
+      margin-top: 1.25rem;
+      margin-bottom: 1.25rem;
     }
   }
 
-  .right-ctnr {
-    align-self: center;
-    margin: auto;
+  .bottom-ctnr {
+    display: flex;
+    flex-direction: row;
+
+    padding: 20px 0 30px 0;
 
     @media (max-width: 1000px) {
-      margin-left: 0;
+      flex-direction: column-reverse;
+      gap: 1rem;
     }
 
-    .text {
-      margin-bottom: 1.25rem;
+    @media (max-width: 800px) {
+      padding: 0 0 20px 0;
     }
-
-    .align {
-      display: flex;
-      align-items: flex-end;
-      margin-top: 0 !important;
     
-      &.email,
-      &.phone,
-      &.address {
-        margin-top: 1rem !important;
-        
-        .icon {
-          margin-right: .5rem;
+    .left_ctnr { 
+      align-self: center;
+      max-width: 50%;
 
-          i {
-            font-size: 1.8rem;
-          }
+      @media (max-width: 1000px) {
+        max-width: 100%;
+      }
+      
+      p {
+        font-size: 30px;
+        margin: 10px 0 30px 0;
+        font-weight: 500;
+      }
+
+      .contact-form {
+        font-size: 15px;
+      
+        // white mat-form-field background
+        ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+          background-color: white;
+          border-radius: 5px;
         }
 
-        .text {
-          margin-bottom: .5rem;
+        mat-form-field {
+          width: 100%;
+          height: 3.1rem;
+          margin-bottom: 20px;
+      
+          mat-icon {
+            color: #555;
+          }
+          
+          mat-icon.message {
+            padding-left: .625rem;
+            padding-right: 1.5rem;
+            transform: translateY(4px);
+          }
+        }
+      }
+
+      button {
+        width: 100%;
+        margin-top: 27px;
+        padding: 8px;
+
+        
+      }
+    }
+
+    .right-ctnr {
+      align-self: center;
+      margin: auto;
+
+      @media (max-width: 1000px) {
+        margin-left: 0;
+      }
+
+      .text {
+        margin-bottom: 1.25rem;
+      }
+
+      .align {
+        display: flex;
+        align-items: flex-end;
+        margin-top: 0 !important;
+      
+        &.email,
+        &.phone,
+        &.address {
+          margin-top: 1rem !important;
+          
+          .icon {
+            margin-right: .5rem;
+
+            i {
+              font-size: 1.8rem;
+            }
+          }
+
+          .text {
+            margin-bottom: .5rem;
+          }
         }
       }
     }

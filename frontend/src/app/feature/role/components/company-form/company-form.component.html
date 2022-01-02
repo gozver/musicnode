@@ -1,0 +1,43 @@
+<form [formGroup]="companyForm" novalidate>
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name" formControlName="name" autocomplete="on" />
+    <button mat-icon-button matSuffix [attr.aria-label]="'Name'" disabled>
+      <mat-icon matSuffix>person</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Description</mat-label>
+    <input matInput placeholder="Description" formControlName="desc" autocomplete="on" />
+    <button mat-icon-button matSuffix [attr.aria-label]="'Description'" disabled>
+      <mat-icon matSuffix>person</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Phone</mat-label>
+    <input matInput placeholder="Phone" formControlName="phone" autocomplete="on" />
+    <button mat-icon-button matSuffix [attr.aria-label]="'Phone'" disabled>
+      <mat-icon matSuffix>phone</mat-icon>
+    </button>
+  </mat-form-field>
+  
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="Email" formControlName="email" autocomplete="on" type="email" />
+    <button mat-icon-button matSuffix [attr.aria-label]="'Email'" disabled>
+      <mat-icon matSuffix>alternate_email</mat-icon>
+    </button>
+  </mat-form-field>
+  
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Address</mat-label>
+    <input matInput placeholder="Address" formControlName="address" autocomplete="on" />
+    <button mat-icon-button matSuffix [attr.aria-label]="'Address'" disabled>
+      <mat-icon matSuffix>phone</mat-icon>
+    </button>
+  </mat-form-field>
+</form>
+
+

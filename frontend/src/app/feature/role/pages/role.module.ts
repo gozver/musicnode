@@ -1,15 +1,18 @@
 // Angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // Angular Material
 import { MaterialModule } from '@shared/modules/material.module';
 
 // Custom Modules and Components
 import { RoleRoutingModule } from './role-routing.module';
-import { ManagerComponent } from './manager/manager.component';
+import { RoleComponentsModule } from '../components/role-components.module';
+import { ComponentsModule } from '@shared/components/components.module';
 
+// Custom Components
+import { ManagerComponent } from './manager/manager.component';
 
 @NgModule({
   declarations: [
@@ -17,9 +20,13 @@ import { ManagerComponent } from './manager/manager.component';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+
+    RoleRoutingModule,    
+    RoleComponentsModule,
+    ComponentsModule,
+
     MaterialModule,
-    FormsModule,
-    RoleRoutingModule
   ]
 })
 export class RoleModule { }

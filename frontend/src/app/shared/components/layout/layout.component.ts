@@ -6,10 +6,14 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 // Angular Material
 import { MatSidenav } from '@angular/material/sidenav';
 
+// RxJS
+import { Observable } from 'rxjs';
+
 // Services and Models
 import { AuthService } from '@shared/services/auth.service';
 import { UserRoleService } from '@app/shared/services/user-role.service';
 import { User } from '@app/shared/interfaces/user.interface';
+import { UserRole } from '@app/shared/interfaces/user-role.interface';
 
 @Component({
   selector: 'app-layout',
@@ -22,49 +26,35 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
   isLogged: boolean = false;
-  hasRole: boolean = false;
-  userId: number = null;
   currentUser: User;
+  userRoles: UserRole[];
+
+  data: Observable<any[]>[] = [];
 
   constructor(
+    private readonly bpObserver: BreakpointObserver,
+    private readonly focusMonitor: FocusMonitor,
     private readonly authService: AuthService,
     private readonly userRoleService: UserRoleService, 
-    private readonly bpObserver: BreakpointObserver,
-    private readonly focusMonitor: FocusMonitor
   ) { }
 
   ngOnInit(): void {
-    this.authService.isLogged$.subscribe(isLogged => {
-      this.isLogged = isLogged;
-
-      console.log(`--> isLogged: ${isLogged}`);
-    });
-
-    this.authService.userId$.subscribe(userId => {
-      this.userId = userId;
-
-      console.log(`--> userId: ${userId}`);
-
-      this.authService.hasRole$.subscribe(hasRole => {
-        this.hasRole = hasRole;
-  
-        console.log(`--> hasRole: ${hasRole}`);
-  
-        if( this.hasRole) {
-          this.userRoleService.findByUserId(this.userId).subscribe(res=> {
-            console.log(`--> ${this.currentUser.name.toLowerCase()} ${this.currentUser.surname.toLowerCase()} roles:`);
-            console.log(res);
-          }); 
-        }
-      });
-    });
-
+    this.authService.isLogged$.subscribe(isLogged => this.isLogged = isLogged);
     this.authService.currentUser$.subscribe(currentUser => {
       this.currentUser = currentUser;
-      
-      console.log('--> currentUser:');
-      console.log(currentUser);
+
+      if (this.currentUser.hasRole) {
+        this.userRoleService.findByUserId(this.currentUser.id).subscribe(userRoles=> {
+          this.userRoles = userRoles;
+          
+          console.log('--> userRoles:');
+          console.log(this.userRoles);
+        }); 
+      }
     });
+
+    console.log(`--> currentUser.id: ${this.currentUser.id}`);
+    console.log(`--> currentUser.hasRole: ${this.currentUser.hasRole}`);
   }
 
   closeIfIsMobileView(): void {
