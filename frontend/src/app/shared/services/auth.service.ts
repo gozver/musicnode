@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 // RxJS
-import { Observable, BehaviorSubject, of } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 // Services, interfaces and environment variables
@@ -45,7 +45,7 @@ export class AuthService {
   // Methods
   signup(params: User): Observable<User> {
     return this.http.post<User>(`${environment.apiUrl}/auth/signup`, params, this.httpOptions)
-    // Send the error to ErrorHandler service  
+    // Send error to ErrorHandler service
     // .pipe(catchError(this.errorHandlerService.handleError<any>('signup')));
   }
 
@@ -55,7 +55,7 @@ export class AuthService {
         // Login successful if there is a JWT in the response
         if (user && user.token) {
 
-          // Send isLogged$ and userId$ to the next operation  
+          // Send BehaviorSubjects values to the next operation  
           this.isLogged$.next(true);
           this.userId$.next(user.id);
           this.hasRole$.next(user.hasRole);
@@ -74,8 +74,25 @@ export class AuthService {
 
         return user;
       }),
-      // Send the error to ErrorHandler service
+      // Send error to ErrorHandler service
       // catchError(this.errorHandlerService.handleError<any>('login'))
+    );
+  }
+
+  updateHasRole(id: number, hasRole: boolean): Observable<User> {
+    return this.http.patch<User>(`${environment.apiUrl}/auth/updateHasRole`, { id, hasRole }, this.httpOptions).pipe(
+      map(res => {
+        this.hasRole$.next(hasRole);
+        localStorage.setItem('hasRole', JSON.stringify(hasRole));
+        
+        let user = this.getCurrentUser();
+        user.hasRole = hasRole
+        localStorage.setItem('user', JSON.stringify(user));
+
+        return res;
+      }),
+      // Send error to ErrorHandler service  
+      // .pipe(catchError(this.errorHandlerService.handleError<any>('updateHasRole'))
     );
   }
 
@@ -112,3 +129,23 @@ export class AuthService {
     return JSON.parse(user);
   }
 }
+
+// public getMovies(): Observable<Movie[]>{
+//   return this.http.get<Movie[]>(`${environment.apiUrl}/movies`);
+// }
+
+// public getMovieById(id: number): Observable<Movie> {
+//   return this.http.get<Movie>(`${environment.apiUrl}/movies/${id}`);
+// }
+
+// public updateMovie(movie: Movie, id: number): Observable<Movie>{
+//   return this.http.patch<Movie>(`${environment.apiUrl}/movies/${id}`, movie);
+// }
+
+// public createMovie(movie: Movie): Observable<Movie>{
+//   return this.http.post<Movie>(`${environment.apiUrl}/movies`, movie);
+// }
+
+// public deleteMovie(id: number): Observable<Movie>{
+//   return this.http.delete<Movie>(`${environment.apiUrl}/movies/${id}`);
+// }

@@ -4,6 +4,9 @@ form {
     height: 3.1rem;
     margin-bottom: 20px;
 
+    &.description {
+      margin-bottom: 56px;
+    }
     
     mat-icon {
       color: #bbb;

@@ -4,6 +4,23 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/config.json');
 const models = require('../models');
 
+exports.updateHasRole = async (req, res, next) => {
+  console.log('--> id: ', req.body.id)
+  console.log('--> hasRole:', req.body.hasRole)
+
+  models.user.update({
+    hasRole: req.body.hasRole
+  }, {
+    where: {
+      id: req.body.id
+    }
+  }).then(data => res.json(data))
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
+      next(err); // go to error controller
+    });
+}
+
 exports.login = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;

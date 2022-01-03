@@ -1,72 +1,40 @@
 // Angular
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout'
 import { FocusMonitor } from '@angular/cdk/a11y';
 
 // Angular Material
 import { MatSidenav } from '@angular/material/sidenav';
 
-// RxJS
-import { Observable } from 'rxjs';
-
 // Services and Models
 import { AuthService } from '@shared/services/auth.service';
-import { UserRoleService } from '@app/shared/services/user-role.service';
 import { User } from '@app/shared/interfaces/user.interface';
-import { UserRole } from '@app/shared/interfaces/user-role.interface';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit, AfterViewInit {
+export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   // ! => tells typescript the sidenav variable will be initialized later (strinct mode)
   // viewchild => we use viewchild to reference the MatSidenav element in the template
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
   isLogged: boolean = false;
+  hasRole: boolean = false;
   currentUser: User;
-  userRoles: UserRole[];
-
-  data: Observable<any[]>[] = [];
 
   constructor(
+    private cdRef: ChangeDetectorRef,
     private readonly bpObserver: BreakpointObserver,
     private readonly focusMonitor: FocusMonitor,
-    private readonly authService: AuthService,
-    private readonly userRoleService: UserRoleService, 
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
     this.authService.isLogged$.subscribe(isLogged => this.isLogged = isLogged);
-    this.authService.currentUser$.subscribe(currentUser => {
-      this.currentUser = currentUser;
-
-      if (this.currentUser.hasRole) {
-        this.userRoleService.findByUserId(this.currentUser.id).subscribe(userRoles=> {
-          this.userRoles = userRoles;
-          
-          console.log('--> userRoles:');
-          console.log(this.userRoles);
-        }); 
-      }
-    });
-
-    console.log(`--> currentUser.id: ${this.currentUser.id}`);
-    console.log(`--> currentUser.hasRole: ${this.currentUser.hasRole}`);
-  }
-
-  closeIfIsMobileView(): void {
-    if (this.sidenav.mode === 'over') {
-      this.sidenav.close();
-    }
-  }
-
-  logout(): void {
-    this.authService.logout();
-
-    this.closeIfIsMobileView();
+    this.authService.hasRole$.subscribe(hasRole => this.hasRole = hasRole);
+    this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
   }
 
   ngAfterViewInit() {
@@ -87,5 +55,27 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     // Overwrite cdk-focused in Angular: 
     // https://stackoverflow.com/questions/48953972/how-to-disable-or-overwrite-cdk-focused-in-angular
     this.focusMonitor.stopMonitoring(document.getElementById('menu-button'));
+  }
+
+  // So this component can detects when a BehaviorSubject changes in other components
+  ngAfterViewChecked() {
+    this.cdRef.detectChanges();
+  }
+
+  ngOnDestroy(): void {
+    this.authService.isLogged$.unsubscribe();
+    this.authService.hasRole$.unsubscribe();
+    this.authService.currentUser$.unsubscribe();
+  }
+
+  closeIfIsMobileView(): void {
+    if (this.sidenav.mode === 'over') {
+      this.sidenav.close();
+    }
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.closeIfIsMobileView();
   }
 }

@@ -2,14 +2,14 @@
   <section class="top-ctnr">
     <div class=title>ROLE MANAGER</div>
     
-    <div class="subtitle">Add a role</div>
+    <div class="subtitle" *ngIf="hasRole === false">Add a role</div>
 
-    <div class="text">
+    <div class="text" *ngIf="hasRole === false">
       You dont have any role yet. Please add a role to enjoy the full platform functionality.
     </div>
   </section>
 
-  <section class="no-role-ctnr" *ngIf="!currentUser.hasRole">
+  <section class="no-role-ctnr" *ngIf="hasRole === false">
     <div class="card">
       <div class="card-content">
         <form [formGroup]="roleForm" novalidate>
@@ -33,6 +33,24 @@
           [companyForm]=companyForm
           *ngIf="+roleForm.value.roleId === 2"
         ></app-company-form>
+
+        <button
+          mat-flat-button
+          class="primary"
+          (click)="createBand()"
+          [disabled]="bandForm.invalid"
+          *ngIf="+roleForm.value.roleId !== 2">
+          Create Role
+        </button>
+
+        <button
+          mat-flat-button
+          class="primary"
+          (click)="createCompany()"
+          [disabled]="companyForm.invalid"
+          *ngIf="+roleForm.value.roleId === 2">
+          Create Role
+        </button>
       </div>
     </div>
   </section>

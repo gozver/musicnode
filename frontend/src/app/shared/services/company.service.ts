@@ -26,6 +26,7 @@ export class CompanyService {
 
   create(params: Company): Observable<Company> {
     return this.http.post<Company>(`${environment.apiUrl}/company`, params, this.httpOptions).pipe(
+        // Send error to ErrorHandler service
       catchError(this.errorHandlerService.handleError<Company>('create', null))
     );
   }

@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@shared/services/auth.service';
 import { BandService } from '@app/shared/services/band.service';
 import { CompanyService } from '@app/shared/services/company.service';
+import { UserRoleService } from '@app/shared/services/user-role.service';
 
 // Models
 import { User } from '@app/shared/interfaces/user.interface';
@@ -19,7 +20,9 @@ export class ManagerComponent implements OnInit {
   roleForm: FormGroup;
   bandForm: FormGroup;
   companyForm: FormGroup;
-  currentUser: User;
+  userRoleForm: FormGroup;
+  userId: number;
+  hasRole: boolean;
 
   rolesList: any[];
 
@@ -27,11 +30,13 @@ export class ManagerComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
     private readonly bandService: BandService,
-    private readonly companyService: CompanyService
+    private readonly companyService: CompanyService,
+    private readonly userRoleService: UserRoleService
   ) { }
 
   ngOnInit(): void {
-    this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
+    this.authService.userId$.subscribe(userId => this.userId = userId);
+    this.authService.hasRole$.subscribe(hasRole => this.hasRole = hasRole);
 
     this.rolesList = [
       { id: 1, value: 'Band ' },
@@ -59,7 +64,7 @@ export class ManagerComponent implements OnInit {
       type:   [ '', Validators.required ],
       scope:  [ '', Validators.required ],
       video:  [ '', Validators.required ],
-      avatar: [ '' ]
+      userId: [ null ]
     });
   }
 
@@ -74,8 +79,53 @@ export class ManagerComponent implements OnInit {
     });
   }
 
-  printValue(): void {
-    console.log('--> this.roleForm.value.roleId:');
-    console.log(this.roleForm.value.roleId);
+  createBand(): void {
+    this.bandService.create(this.bandForm.value).subscribe(
+      res => {
+        console.log('--> res:');
+        console.log(res);
+
+        this.userRoleForm = this.fb.group({
+          userId: this.userId,
+          roleId: 1,
+          bandId: res.id,
+          companyId: null
+        });
+
+        this.userRoleService.create(this.userRoleForm.value).subscribe(
+          () => {
+            this.authService.updateHasRole(this.userId, true).subscribe(
+              err => console.log('--> update has role error:', err)
+            );
+          },
+          err => console.log('--> create user role error:', err)
+        );
+      }
+    );
+  }
+
+  createCompany(): void {
+    this.companyService.create(this.companyForm.value).subscribe(
+      res => {
+        console.log('--> res:');
+        console.log(res);
+
+        this.userRoleForm = this.fb.group({
+          userId: this.userId,
+          roleId: 2,
+          bandId: null,
+          companyId: res.id
+        });
+
+        this.userRoleService.create(this.userRoleForm.value).subscribe(
+          () => {
+            this.authService.updateHasRole(this.userId, true).subscribe(
+              err => console.log('--> update has role error:', err)
+            );
+          },
+          err => console.log('--> create user role error:', err)
+        );
+      }
+    );
   }
 }

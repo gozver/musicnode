@@ -4,8 +4,8 @@
 # folders
 apps/
 backups/
-guides/
 db/
+guides/
 
 # compressed files
 *.rar
