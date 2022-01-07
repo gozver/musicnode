@@ -26,7 +26,7 @@ export class EmailService {
 
   sendEmail(params: Email): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/email`, params, this.httpOptions).pipe(
-      catchError(this.errorHandlerService.handleError<Email>('create', null))
+      catchError(this.errorHandlerService.handleError<any>('create', null))
     );
   }
 }

@@ -11,7 +11,7 @@ import { AdService } from '@shared/services/ad.service';
 import { Ad } from '@shared/interfaces/ad.interface';
 
 // Custom Components
-import { AdDialogComponent } from '@feature/ad/components/ad-dialog/ad-dialog.component';
+import { AdDialogComponent } from '@features/ad/components/ad-dialog/ad-dialog.component';
 
 @Component({
   selector: 'app-ad',

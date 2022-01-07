@@ -3,10 +3,18 @@
     <div class=title>ROLE MANAGER</div>
     
     <div class="subtitle" *ngIf="hasRole === false">Add a role</div>
+    <div class="subtitle" *ngIf="hasRole === true">Role list</div>
+    
+    <div class="text">
+      <!-- The admin panel is where the content is created and the website is managed. This is the key to how a content management system (CMS) works. Essentially, a CMS is just a series of forms that take the place of manually creating files and uploading them to the server. They simplify that process. -->
+
+      The role manager is where an user can manage his roles. He can create a new one if he doesn't have any, can delete or modify the ones he has and most important can select the one he desire to have active while enjoying the platform features.
+    </div>
 
     <div class="text" *ngIf="hasRole === false">
-      You dont have any role yet. Please add a role to enjoy the full platform functionality.
+      You don't have any role yet. Please add a role to unlock all platform features.
     </div>
+    
   </section>
 
   <section class="no-role-ctnr" *ngIf="hasRole === false">

@@ -35,6 +35,15 @@ models.user.hasMany(models.ad, {
 
 models.ad.belongsTo(models.user);
 
+models.user.hasMany(models.message, {
+  foreignKey: 'userId',
+  foreignKey: 'recipient',
+  onDelete: 'cascade',
+  onUpdate: 'cascade'
+});
+
+models.message.belongsTo(models.user);
+
 // // one to one example
 // models.role.hasOne(models['company'], { foreignKey: 'roleId' });
 // models.company.belongsTo(models['role']);

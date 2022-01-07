@@ -1,4 +1,6 @@
 const express = require('express');
+const socket = require('socket.io');
+
 const environment = require('./config/environment');
 const db = require('./config/db');
 
@@ -8,14 +10,17 @@ require('./config/relationships');
 // consume express
 const app = express();
 
-// middlewares
+// environment setup
 environment(app);
+
+const http = require('http');
+const server = http.createServer(app);
 
 // environment PORT or 3000 if there isn't
 const port = process.env.PORT || 3000;
 
-// bind and listen the connections on the specified host and port
-app.listen(port, () => {
+// bind and listen for db connections on the specified host and port
+server.listen(port, () => {
   console.log(`--> server watching on port ${port}`);
 
   // db.authenticate()        => creates db connection
@@ -27,4 +32,16 @@ app.listen(port, () => {
       console.log('--> db connection error:');
       console.log(err);
     });
+});
+
+// consume socket
+const io = socket(server);
+
+// bind and listen for socket connections
+io.on('connection' , (socket) => {
+  console.log(`--> new socket connection: ${socket.id}`);
+
+  // on 'event name' function callback that create a web socket and emits the data throught it
+  socket.on('typing', data => io.sockets.emit('typing', data));
+  socket.on('chat',   data => io.sockets.emit('chat',   data));
 });

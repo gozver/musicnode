@@ -26,19 +26,19 @@ export class UserRoleService {
 
   getUserRoles(): Observable<UserRole[]> {
     return this.http.get<UserRole[]>(`${environment.apiUrl}/user-role`, this.httpOptions).pipe(
-      catchError(this.errorHandlerService.handleError<UserRole[]>('getUserRoles', []))
+      catchError(this.errorHandlerService.handleError<any>('getUserRoles', []))
     );
   }
 
   findByUserId(userId: number): Observable<UserRole[]> {
     return this.http.get<UserRole[]>(`${environment.apiUrl}/user-role/${userId}`, this.httpOptions).pipe(
-      catchError(this.errorHandlerService.handleError<UserRole[]>('findByUserId', []))
+      catchError(this.errorHandlerService.handleError<any>('findByUserId', []))
     );
   }
 
   create(params: UserRole): Observable<UserRole> {
     return this.http.post<UserRole>(`${environment.apiUrl}/user-role`, params, this.httpOptions).pipe(
-      catchError(this.errorHandlerService.handleError<UserRole>('create', null))
+      catchError(this.errorHandlerService.handleError<any>('create', null))
     );
   }
 }

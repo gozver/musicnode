@@ -8,9 +8,6 @@ import { BandService } from '@app/shared/services/band.service';
 import { CompanyService } from '@app/shared/services/company.service';
 import { UserRoleService } from '@app/shared/services/user-role.service';
 
-// Models
-import { User } from '@app/shared/interfaces/user.interface';
-
 @Component({
   selector: 'app-manager',
   templateUrl: './manager.component.html',
@@ -95,10 +92,11 @@ export class ManagerComponent implements OnInit {
         this.userRoleService.create(this.userRoleForm.value).subscribe(
           () => {
             this.authService.updateHasRole(this.userId, true).subscribe(
+              res => console.log('--> update has role response:', res),
               err => console.log('--> update has role error:', err)
             );
           },
-          err => console.log('--> create user role error:', err)
+          // err => console.log('--> create user role error:', err)
         );
       }
     );
@@ -120,10 +118,11 @@ export class ManagerComponent implements OnInit {
         this.userRoleService.create(this.userRoleForm.value).subscribe(
           () => {
             this.authService.updateHasRole(this.userId, true).subscribe(
+              res => console.log('--> update has role response:', res),
               err => console.log('--> update has role error:', err)
             );
           },
-          err => console.log('--> create user role error:', err)
+          // err => console.log('--> create user role error:', err)
         );
       }
     );

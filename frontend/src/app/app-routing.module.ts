@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuardService } from './shared/guards/auth-guard.service';
-import { RoleGuardService } from './shared/guards/role-guard.service';
+import { AuthGuardService } from './shared/guards/auth.guard';
+import { RoleGuardService } from './shared/guards/role.guard';
 
 /**
  * @loadChildren => Lazy loading feature modules: https://angular.io/guide/lazy-loading-ngmodules
@@ -10,29 +10,33 @@ import { RoleGuardService } from './shared/guards/role-guard.service';
  */
 const routes: Routes = [{
   path: 'user',
-  loadChildren: () => import('@feature/user/pages/user.module').then(m => m.UserModule)
+  loadChildren: () => import('@features/user/pages/user.module').then(m => m.UserModule)
 }, {
   path: '',
   canActivate: [AuthGuardService, RoleGuardService],
-  loadChildren: () => import('@feature/home/pages/home.module').then(m => m.HomeModule)
+  loadChildren: () => import('@features/home/pages/home.module').then(m => m.HomeModule)
 }, {
   path: 'home',
   canActivate: [AuthGuardService, RoleGuardService],
-  loadChildren: () => import('@feature/home/pages/home.module').then(m => m.HomeModule)
+  loadChildren: () => import('@features/home/pages/home.module').then(m => m.HomeModule)
 }, {
   path: 'role',
   canActivate: [AuthGuardService],
-  loadChildren: () => import('@feature/role/pages/role.module').then(m => m.RoleModule)
+  loadChildren: () => import('@features/role/pages/role.module').then(m => m.RoleModule)
+}, {
+  path: 'chat',
+  canActivate: [AuthGuardService],
+  loadChildren: () => import('@features/chat/pages/chat.module').then(m => m.MessageModule)
 }, {
   path: 'ad',
   canActivate: [AuthGuardService, RoleGuardService],
-  loadChildren: () => import('@feature/ad/pages/ad.module').then(m => m.AdModule)
+  loadChildren: () => import('@features/ad/pages/ad.module').then(m => m.AdModule)
 }, {
   path: 'about',
-  loadChildren: () => import('@feature/about/pages/about.module').then(m => m.AdModule)
+  loadChildren: () => import('@features/about/pages/about.module').then(m => m.AdModule)
 }, {
   path: 'contact',
-  loadChildren: () => import('@feature/contact/pages/contact.module').then(m => m.ContactModule)
+  loadChildren: () => import('@features/contact/pages/contact.module').then(m => m.ContactModule)
 }, {
   path: '**', // Any other path
   redirectTo: '/home'

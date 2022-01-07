@@ -140,7 +140,7 @@ exports.signup = async (req, res, next) => {
         next(err);
       });
 
-    // create roles in the db: comment these 4 methods below after creating the 1st user
+    // // create roles in the db: comment these 4 methods below after creating the 1st user
     // await models.role.create({ code: 1, name: 'band' });
     // await models.role.create({ code: 2, name: 'company' });
     // await models.role.create({ code: 3, name: 'contractor'});

@@ -2,10 +2,10 @@
 /node_modules
 
 # folders
-apps/
-backups/
-db/
-guides/
+_apps/
+_backups/
+_db/
+_guides/
 
 # compressed files
 *.rar

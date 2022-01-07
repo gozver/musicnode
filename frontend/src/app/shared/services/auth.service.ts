@@ -55,7 +55,7 @@ export class AuthService {
         // Login successful if there is a JWT in the response
         if (user && user.token) {
 
-          // Send BehaviorSubjects values to the next operation  
+          // Send BehaviorSubjects values to the next operation
           this.isLogged$.next(true);
           this.userId$.next(user.id);
           this.hasRole$.next(user.hasRole);

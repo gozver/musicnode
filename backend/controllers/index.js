@@ -5,6 +5,7 @@ module.exports = {
   'company': require('./company'),
   'email': require('./email'),
   'error': require('./error'),
+  'message': require('./message'),
   'role': require('./role'),
   'user': require('./user'),
   'userRole': require('./userRole')

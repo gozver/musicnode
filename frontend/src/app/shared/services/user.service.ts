@@ -26,13 +26,13 @@ export class UserService {
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${environment.apiUrl}/user`, this.httpOptions).pipe(
-      catchError(this.errorHandlerService.handleError<User[]>('getUsers', []))
+      catchError(this.errorHandlerService.handleError<any>('getUsers', []))
     );
   }
 
   getUser(id: number): Observable<User> {
     return this.http.get<User>(`${environment.apiUrl}/user/${id}`, this.httpOptions).pipe(
-      catchError(this.errorHandlerService.handleError<User>('getCurrentUser', null))
+      catchError(this.errorHandlerService.handleError<any>('getCurrentUser', null))
     );
   }
 }

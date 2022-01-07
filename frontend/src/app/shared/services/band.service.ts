@@ -27,7 +27,7 @@ export class BandService {
   create(params: Band): Observable<Band> {
     return this.http.post<Band>(`${environment.apiUrl}/band`, params, this.httpOptions).pipe(
       // Send error to ErrorHandler service
-      catchError(this.errorHandlerService.handleError<Band>('create', null))
+      catchError(this.errorHandlerService.handleError<any>('create', null))
     );
   }
 }

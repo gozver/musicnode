@@ -26,7 +26,7 @@ export class RoleService {
 
   create(name: string): Observable<Role> {
     return this.http.post<Role>(`${environment.apiUrl}/role`, name, this.httpOptions).pipe(
-      catchError(this.errorHandlerService.handleError<Role>('create', null))
+      catchError(this.errorHandlerService.handleError<any>('create', null))
     );
   }
 }
