@@ -9,7 +9,7 @@ Add animated gifs to show the final proyect
 
 ### Technologies:
 - Front: Angular (Angular Material, RxJS, NgRx), HTML, Sass, JavaScript and TypeScript
-- Backend: Node.js/Express and Sequelize ORM
+- Backend: Node.js/Express, Sequelize ORM and Socket.IO
 - Database: SQL
 
 ## Frontend technologies:
@@ -27,6 +27,7 @@ Run `npm start` to run the server. The app will automatically navigate to `http:
 - [Node.js](https://nodejs.org/en/) version 4.17.1.
 - [Express](https://expressjs.com/) version 14.15.0.
 - [Sequelize](https://sequelize.org/master/manual/getting-started.html) version 6.9.0.
+- [Socket.IO](https://socket.io/) version 4.4.1.
 - [Node Engine](https://nodejs.org/en/) version 14.15.0.
 
 ## Backend development server:

@@ -84,7 +84,6 @@ export class ChatComponent implements OnInit {
     this.feedback = '';
 
     const last = this.messagesList.slice(-1)[0].id;
-    console.log(last)
 
     this.chatService.emit('chat', {
       id: last + 1,
@@ -94,10 +93,6 @@ export class ChatComponent implements OnInit {
       createdAt: new Date(),
       updatedAt: new Date(),
     });
-
-    // this.message = '';
-
-    // insert the message in the db
   }
   
   updateMessage(data: any): void {
