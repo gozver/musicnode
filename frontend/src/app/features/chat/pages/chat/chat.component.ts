@@ -1,6 +1,5 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // RxJS
 import { Observable, combineLatest } from 'rxjs';
@@ -14,17 +13,13 @@ import { ChatService } from '@app/shared/services/chat.service';
 import { User } from '@shared/interfaces/user.interface';
 import { Message } from '@shared/interfaces/message.interface';
 
-
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-  messageForm: FormGroup;
-
   message: string;
-  userName: string;
   feedback: string;
 
   currentUser: User;
@@ -33,13 +28,14 @@ export class ChatComponent implements OnInit {
   messagesList: Message[] = [];
 
   constructor(
-    private readonly fb: FormBuilder,
     private readonly authService: AuthService,
     private readonly userService: UserService,
     private readonly chatService: ChatService,
   ) { }
 
   ngOnInit(): void {
+    this.feedback = '';
+
     this.authService.currentUser$
       .subscribe(currentUser => this.currentUser = currentUser);
     
@@ -55,6 +51,9 @@ export class ChatComponent implements OnInit {
 
   // Component functions
   selectUser(id: number): void {
+    this.message = '';
+    this.feedback = '';
+
     this.selectedUser = this.usersList.find(user => user.id === id);
 
     this.chatService.getMessages(this.currentUser.id, this.selectedUser.id).subscribe(messagesList => {
@@ -79,11 +78,11 @@ export class ChatComponent implements OnInit {
     }, 3000);
   }
 
-  // chat functions
+  // Chat functions
   sendMessage(): void {
     this.feedback = '';
 
-    const last = this.messagesList.slice(-1)[0].id;
+    const last = this.messagesList.length > 0 ? this.messagesList.slice(-1)[0].id : 1;
 
     this.chatService.emit('chat', {
       id: last + 1,
@@ -106,7 +105,7 @@ export class ChatComponent implements OnInit {
     console.log('--> this.messagesList:');
     console.log(this.messagesList);
     
-    // avoid to create the message in the broadcasted client
+    // avoid creating a duplicated message in the broadcasted client
     if (this.message) {
       // insert the new message into the db only from the current client
       this.chatService.createMessage(this.message, this.currentUser.id, this.selectedUser.id).subscribe();

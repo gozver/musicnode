@@ -5,5 +5,5 @@ module.exports = {
   'message': require('./message'),
   'role': require('./role'),
   'user': require('./user'),
-  'userRole': require('./userRole')
+  'userRole': require('./user-role')
 };

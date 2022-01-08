@@ -140,13 +140,7 @@ exports.signup = async (req, res, next) => {
         next(err);
       });
 
-    // // create roles in the db: comment these 4 methods below after creating the 1st user
-    // await models.role.create({ code: 1, name: 'band' });
-    // await models.role.create({ code: 2, name: 'company' });
-    // await models.role.create({ code: 3, name: 'contractor'});
-    // await models.role.create({ code: 4, name: 'admin'});
-
-    if (parseInt(roleId) === 3 || parseInt(roleId) === 4) {
+    if (parseInt(roleId) !== 4 || parseInt(roleId) !== 5) {
       // save the USER ROLE relationship in the db
       await models.userRole.create({ 
         userId: userId,

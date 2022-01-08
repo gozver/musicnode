@@ -20,7 +20,7 @@
     <div class="right-ctnr">
       <ng-container *ngIf="selectedUser">
         <div class="chat-header">
-          <img class="avatar" [src]="selectedUser?.avatar" [alt]="selectedUser?.name" />
+          <img class="avatar" [src]="selectedUser.avatar" [alt]="selectedUser.name" />
           <p class="username">{{ selectedUser.name }} {{ selectedUser.surname }}</p>
         </div>
   
@@ -30,7 +30,7 @@
               <p class="message-ctnr">{{ message.body }}</p>
             </div>
 
-            <div id="feedback" *ngIf="feedback?.length>0">
+            <div id="feedback" *ngIf="feedback.length>0">
               <p>{{feedback}}</p>
             </div>
           </ng-container>
