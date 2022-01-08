@@ -1,15 +1,9 @@
-// Angular
 import { Component, OnInit } from '@angular/core';
 
-// RxJS
-import { Observable, combineLatest } from 'rxjs';
-
-// Services
 import { AuthService } from '@shared/services/auth.service';
 import { UserService } from '@shared/services/user.service';
 import { ChatService } from '@app/shared/services/chat.service';
 
-// Models
 import { User } from '@shared/interfaces/user.interface';
 import { Message } from '@shared/interfaces/message.interface';
 
@@ -19,12 +13,14 @@ import { Message } from '@shared/interfaces/message.interface';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-  message: string;
-  feedback: string;
-
-  currentUser: User;
-  selectedUser: User;
+  // Users
+  currentUser: User = null;
+  selectedUser: User = null;
   usersList: User[] = [];
+  
+  // Messages
+  message: string = '';
+  feedback: string = '';
   messagesList: Message[] = [];
 
   constructor(
@@ -34,8 +30,11 @@ export class ChatComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.feedback = '';
+    this.getComponentData();
+  }
 
+  // Component functions
+  getComponentData(): void {
     this.authService.currentUser$
       .subscribe(currentUser => this.currentUser = currentUser);
     
@@ -49,7 +48,6 @@ export class ChatComponent implements OnInit {
       .subscribe((data) => this.updateMessage(data));
   }
 
-  // Component functions
   selectUser(id: number): void {
     this.message = '';
     this.feedback = '';
@@ -58,15 +56,13 @@ export class ChatComponent implements OnInit {
 
     this.chatService.getMessages(this.currentUser.id, this.selectedUser.id).subscribe(messagesList => {
       this.messagesList = messagesList;
-
-      console.log('--> messagesList:');
-      console.log(messagesList);
     });
   }
 
   // Typing functions
   sendFeedback(): void {
     console.log(`--> ${this.currentUser.name} is writing a message ...`);
+
     this.chatService.emit('typing', this.currentUser.name);
   }
 
@@ -81,6 +77,8 @@ export class ChatComponent implements OnInit {
   // Chat functions
   sendMessage(): void {
     this.feedback = '';
+
+    if (!!!this.message) return;
 
     const last = this.messagesList.length > 0 ? this.messagesList.slice(-1)[0].id : 1;
 

@@ -28,7 +28,9 @@ article {
     display: flex;
     flex-direction: row;
     gap: 2%;
-    margin-top: 30px;
+
+    margin-top: 35px;
+    font-size: 15px;
 
     @media (max-width: 800px) {
       flex-direction: column;
@@ -44,11 +46,11 @@ article {
       margin-left: 10px;
     }
    
-    .left-ctnr {
+    .users-ctnr {
       width: 250px;
 
       @media (min-width: 800px) {
-        min-width: 25%;
+        min-width: 220px;
       }
 
       @media (max-width: 800px) {
@@ -71,11 +73,9 @@ article {
       }
     }
   
-    .right-ctnr {
-      border-bottom: 1px solid #999;
-
+    .chat-ctnr {
       @media (min-width: 800px) {
-        min-width: 73%;
+        width: 73%;
       }
   
       display: flex;
@@ -90,6 +90,7 @@ article {
         background: #06548b;
         padding: 10px 20px;
         margin-bottom: 10px;
+        border-radius: 5px;
       }
   
       .chat-body {
@@ -97,17 +98,38 @@ article {
         flex-direction: column;
         justify-content: flex-end;
 
-        border: 1px solid black;
-        height: 300px;
+        border: 1px solid #dddfe2;
+        border-radius: 5px;
+        box-shadow: 0 0.1px 1px #dddfe2;
+        background: #fff;
+        
+        height: 400px;
         margin: 10px 0;
         padding: 10px;
         margin-bottom: 10px;
 
         .message-ctnr {
-          border: 1px solid #ccc;
+          padding: 12px 15px;
+          margin: 10px 5px;
           border-radius: 5px;
-          padding: 10px 15px;
-          margin: 10px 10px;
+          background: #f0f2f583;
+          max-width: 90%;
+        }
+
+        .feedback {
+          font-size: 14px;
+          font-style: italic;
+          margin: 5px 10px;
+        }
+
+        .left {
+          display: flex;
+          justify-content: flex-start;
+        }
+
+        .rigth {
+          display: flex;
+          justify-content: flex-end;
         }
       }
   
@@ -117,14 +139,25 @@ article {
         margin: 10px 0;
         
         input {
-          height: 40px;
           width: 80%;
-          margin-right: 10px;
-        }
-
-        button {
           height: 40px;
+          margin-right: 10px;
+          padding: 22px;
+          background: #fff;
+          border: 1px solid #dddfe2;
+          border-radius: 5px;
+          box-shadow: 0 0.1px 1px #dddfe2;
+          outline: none;
+
+          &::placeholder {
+            font-size: 14px;
+            font-family: Roboto, "Helvetica Neue", sans-serif;
+          }
+        }
+        
+        button {
           width: 20%;
+          border-radius: 5px;
         }
       }
     }
