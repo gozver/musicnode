@@ -41,7 +41,7 @@ export class ChatComponent implements OnInit {
     this.userService.getUsers()
       .subscribe(usersList => this.usersList = usersList.filter (user => user.id !== this.currentUser.id));
 
-    this.chatService.listen('typing')
+    this.chatService.listen('type')
       .subscribe((data) => this.updateFeedback(data));
     
     this.chatService.listen('chat')
@@ -59,11 +59,11 @@ export class ChatComponent implements OnInit {
     });
   }
 
-  // Typing functions
+  // type functions
   sendFeedback(): void {
     console.log(`--> ${this.currentUser.name} is writing a message ...`);
 
-    this.chatService.emit('typing', this.currentUser.name);
+    this.chatService.emit('type', this.currentUser.name);
   }
 
   updateFeedback(data: any): void {
@@ -110,5 +110,9 @@ export class ChatComponent implements OnInit {
     }
 
     this.message = '';
+  }
+  
+  sanitizeMessage(userId: number): boolean {
+    return userId === this.currentUser.id || userId === this.selectedUser.id;
   }
 }

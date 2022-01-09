@@ -58,6 +58,8 @@
         <a routerLink="/home">Profile</a>
     </button>
 
+    <mat-divider *ngIf="isLogged && hasRole"></mat-divider>
+
     <button mat-button class="menu-button" (click)="closeIfIsMobileView()" *ngIf="isLogged && hasRole">
       <mat-icon class="material-icons-outlined">message</mat-icon>
       <a routerLink="/chat">Messenger</a>
@@ -73,12 +75,12 @@
       <a routerLink="/role">Role Manager</a>
     </button>
 
-    <mat-divider></mat-divider>
+    <!-- <mat-divider></mat-divider>
     
     <button mat-button class="menu-button" (click)="closeIfIsMobileView()">
       <mat-icon class="material-icons-outlined">search</mat-icon>
       <a routerLink="/ad">Search</a>
-    </button>
+    </button> -->
 
     <button mat-button class="menu-button" (click)="closeIfIsMobileView()">
       <mat-icon class="material-icons-outlined">explore</mat-icon>

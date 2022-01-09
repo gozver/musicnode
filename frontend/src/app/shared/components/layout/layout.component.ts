@@ -1,12 +1,9 @@
-// Angular
-import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout'
 import { FocusMonitor } from '@angular/cdk/a11y';
 
-// Angular Material
 import { MatSidenav } from '@angular/material/sidenav';
 
-// Services and Models
 import { AuthService } from '@shared/services/auth.service';
 import { User } from '@app/shared/interfaces/user.interface';
 
@@ -15,8 +12,8 @@ import { User } from '@app/shared/interfaces/user.interface';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
-  // ! => tells typescript the sidenav variable will be initialized later (strinct mode)
+export class LayoutComponent implements OnInit, AfterViewInit {
+  // ! => tells typescript a variable will be initialized later (only in strinct mode)
   // viewchild => we use viewchild to reference the MatSidenav element in the template
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
@@ -32,12 +29,26 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.getComponentData();
+  }
+
+  ngAfterViewInit() {
+    this.setBreakPointObserver();
+    this.disableFirstActiveButton();
+  }
+
+  // So this component can detects changes in other components
+  ngAfterViewChecked() {
+    this.cdRef.detectChanges();
+  }
+
+  getComponentData(): void {
     this.authService.isLogged$.subscribe(isLogged => this.isLogged = isLogged);
     this.authService.hasRole$.subscribe(hasRole => this.hasRole = hasRole);
     this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
   }
 
-  ngAfterViewInit() {
+  setBreakPointObserver(): void {
     // BreakpointObserver on small screens => max-width: 800px
     this.bpObserver.observe(['(max-width: 800px)']).subscribe((res) => {
       // Angular lifecicle hook: https://www.youtube.com/watch?v=O47uUnJjbJc&t=9s
@@ -51,21 +62,12 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       });
     });
+  }
 
+  disableFirstActiveButton(): void {
     // Overwrite cdk-focused in Angular: 
     // https://stackoverflow.com/questions/48953972/how-to-disable-or-overwrite-cdk-focused-in-angular
     this.focusMonitor.stopMonitoring(document.getElementById('menu-button'));
-  }
-
-  // So this component can detects when a BehaviorSubject changes in other components
-  ngAfterViewChecked() {
-    this.cdRef.detectChanges();
-  }
-
-  ngOnDestroy(): void {
-    this.authService.isLogged$.unsubscribe();
-    this.authService.hasRole$.unsubscribe();
-    this.authService.currentUser$.unsubscribe();
   }
 
   closeIfIsMobileView(): void {

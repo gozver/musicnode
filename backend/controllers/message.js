@@ -10,9 +10,6 @@ exports.create = async (req, res, next) => {
     recipient: req.body.recipient
   };
 
-  console.log('--> message:');
-  console.log(message);
-
   models.message.create(message)
     .then(data => res.json(data))
     .catch(err => {

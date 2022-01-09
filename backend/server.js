@@ -42,6 +42,6 @@ io.on('connection' , (socket) => {
   console.log(`--> new socket connection: ${socket.id}`);
 
   // on 'event name' function callback that create a web socket and emits the data throught it
-  socket.on('typing', data => io.sockets.emit('typing', data));
-  socket.on('chat',   data => io.sockets.emit('chat',   data));
+  socket.on('type', data => io.sockets.emit('type', data));
+  socket.on('chat', data => io.sockets.emit('chat', data));
 });

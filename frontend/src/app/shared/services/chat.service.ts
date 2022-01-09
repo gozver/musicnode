@@ -28,7 +28,7 @@ export class ChatService {
     private http: HttpClient,
     private errorHandlerService: ErrorHandlerService
   ) { 
-    this.socket = io.connect('http://localhost:3000', { transports: ["websocket"] });
+    this.socket = io.connect(environment.serverUrl, { transports: ["websocket"] });
   }
 
   // When receiving an event, send the data to the next operation

@@ -27,7 +27,7 @@
         <div class="chat-body">
           <ng-container *ngIf="messagesList.length > 0">
             <div *ngFor="let message of messagesList" [ngClass]="currentUser.id === message.userId ? 'left' : 'rigth'">
-              <p class="message-ctnr" [ngClass]="currentUser.id === message.userId ? 'left' : 'rigth'">{{ message.body }}</p>
+              <p class="message-ctnr" [ngClass]="currentUser.id === message.userId ? 'left' : 'rigth'" *ngIf="sanitizeMessage(message.userId)">{{ message.body }}</p>
             </div>
 
             <div class="feedback-ctnr" *ngIf="feedback.length>0">
