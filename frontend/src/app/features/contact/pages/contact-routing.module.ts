@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [{
-  path: '', // empty path because is defined by the parent
+  path: '', // Empty path because is defined by the parent
   children: [{ 
     path: '',
     component: ContactComponent

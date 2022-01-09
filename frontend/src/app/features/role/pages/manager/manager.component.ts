@@ -84,7 +84,7 @@ export class ManagerComponent implements OnInit {
 
         this.userRoleForm = this.fb.group({
           userId: this.userId,
-          roleId: 1,
+          roleId: 2,
           bandId: res.id,
           companyId: null
         });
@@ -110,7 +110,7 @@ export class ManagerComponent implements OnInit {
 
         this.userRoleForm = this.fb.group({
           userId: this.userId,
-          roleId: 2,
+          roleId: 3,
           bandId: null,
           companyId: res.id
         });

@@ -13,14 +13,15 @@ export class SingupFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.rolesList = [
-      { id: 1, value: 'Band or Company' },
-      { id: 3, value: 'Independent Contractor' },
-      { id: 4, value: 'Administrator' }
+      { id: 1, value: 'Musician' },
+      { id: 2, value: 'Band or Company' },
+      { id: 4, value: 'Independent Contractor' },
+      { id: 5, value: 'Administrator' },
     ];
   }
 
   setCodeValidator(): void {
-    if(+this.signupForm.value.roleId === 4 && this.signupForm.value.code === '') {
+    if(+this.signupForm.value.roleId === 5 && this.signupForm.value.code === '') {
       this.signupForm.controls['code'].setErrors({ 'incorrect': true });
     } else {
       this.signupForm.controls['code'].setErrors(null);

@@ -13,7 +13,7 @@
     <div class="users-ctnr">
       <div class="user-card" *ngFor="let user of usersList" (click)="selectUser(user.id)">
         <img class="avatar" [src]="user.avatar" [alt]="user.name" />
-        <p class="username">{{ user.name }} {{ user.surname }}</p>
+        <p class="username">{{ user?.name }} {{ user?.surname }}</p>
       </div>
     </div>
   
@@ -21,17 +21,17 @@
       <ng-container *ngIf="selectedUser">
         <div class="chat-header">
           <img class="avatar" [src]="selectedUser.avatar" [alt]="selectedUser.name" />
-          <p class="username">{{ selectedUser.name }} {{ selectedUser.surname }}</p>
+          <p class="username">{{ selectedUser?.name }} {{ selectedUser?.surname }}</p>
         </div>
   
         <div class="chat-body">
           <ng-container *ngIf="messagesList.length > 0">
             <div *ngFor="let message of messagesList" [ngClass]="currentUser.id === message.userId ? 'left' : 'rigth'">
-              <p class="message-ctnr" [ngClass]="currentUser.id === message.userId ? 'left' : 'rigth'" *ngIf="sanitizeMessage(message.userId)">{{ message.body }}</p>
+              <p class="message-ctnr" [ngClass]="currentUser.id === message.userId ? 'left' : 'rigth'" *ngIf="sanitizeMessage(message.userId)">{{ message?.body }}</p>
             </div>
 
             <div class="feedback-ctnr" *ngIf="feedback.length>0">
-              <p class="feedback">{{feedback}}</p>
+              <p class="feedback">{{ feedback }}</p>
             </div>
           </ng-container>
         </div>

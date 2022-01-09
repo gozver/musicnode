@@ -1,16 +1,12 @@
-// Angular
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-// Angular Material
 import { MatDialog } from '@angular/material/dialog';
 
-// Services and Interfaces
 import { AuthService } from '@shared/services/auth.service';
 import { AdService } from '@shared/services/ad.service';
 import { Ad } from '@shared/interfaces/ad.interface';
 
-// Custom Components
 import { AdDialogComponent } from '@features/ad/components/ad-dialog/ad-dialog.component';
 
 @Component({
@@ -19,32 +15,21 @@ import { AdDialogComponent } from '@features/ad/components/ad-dialog/ad-dialog.c
   styleUrls: ['./ad.component.scss']
 })
 export class AdComponent implements OnInit {
-  adsList: Ad[] = [];
   userId: number;
 
   adForm: FormGroup;
+  adsList: Ad[] = [];
 
   constructor(
     private readonly authService: AuthService,
     private readonly adService: AdService,
     private readonly fb: FormBuilder,
     public dialog: MatDialog
-     
-    // private readonly adService: AdService
   ) { }
 
   ngOnInit(): void {
-    this.userId = this.authService.userId$.value;
-    
     this.initAdForm();
-
-    // Get all ads from the database
-    this.adService.getAds().subscribe(res => {
-      this.adsList = res;
-      
-      console.log('--> Get ads response:');
-      console.log(this.adsList);
-    });
+    this.getComponentData();
   }
 
   initAdForm(): void {
@@ -55,6 +40,11 @@ export class AdComponent implements OnInit {
       description: [ '',   [ Validators.required ]],
       userId:      null
     });
+  }
+
+  getComponentData(): void {
+    this.userId = this.authService.userId$.value;
+    this.adService.getAds().subscribe(ads => this.adsList = ads);
   }
 
   openDialog() {

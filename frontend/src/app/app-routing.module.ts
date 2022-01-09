@@ -20,17 +20,25 @@ const routes: Routes = [{
   canActivate: [AuthGuardService, RoleGuardService],
   loadChildren: () => import('@features/home/pages/home.module').then(m => m.HomeModule)
 }, {
-  path: 'role',
-  canActivate: [AuthGuardService],
-  loadChildren: () => import('@features/role/pages/role.module').then(m => m.RoleModule)
-}, {
-  path: 'chat',
-  canActivate: [AuthGuardService],
-  loadChildren: () => import('@features/chat/pages/chat.module').then(m => m.MessageModule)
+  path: 'profile',
+  canActivate: [AuthGuardService, RoleGuardService],
+  loadChildren: () => import('@features/profile/pages/profile.module').then(m => m.ProfileModule)
 }, {
   path: 'ad',
   canActivate: [AuthGuardService, RoleGuardService],
   loadChildren: () => import('@features/ad/pages/ad.module').then(m => m.AdModule)
+}, {
+  path: 'chat',
+  canActivate: [AuthGuardService, RoleGuardService],
+  loadChildren: () => import('@features/chat/pages/chat.module').then(m => m.MessageModule)
+}, {
+  path: 'role',
+  canActivate: [AuthGuardService],
+  loadChildren: () => import('@features/role/pages/role.module').then(m => m.RoleModule)
+}, {
+  path: 'explore',
+  canActivate: [AuthGuardService, RoleGuardService],
+  loadChildren: () => import('@features/explore/pages/explore.module').then(m => m.ExploreModule)
 }, {
   path: 'about',
   loadChildren: () => import('@features/about/pages/about.module').then(m => m.AdModule)

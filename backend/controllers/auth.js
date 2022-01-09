@@ -108,7 +108,7 @@ exports.signup = async (req, res, next) => {
   let hasRole;
   
   // check admin code if user select admin role
-  if (parseInt(roleId) === 4 && parseInt(code) !== 123) {
+  if (parseInt(roleId) === 5 && parseInt(code) !== 123) {
     const err = new Error();
     err.statusCode = 401;
     err.message = 'The administrator code is not correct';
@@ -118,7 +118,7 @@ exports.signup = async (req, res, next) => {
     const hashedPwd = await bcrypt.hash(password, 12)
     
     // check if the user has a role
-    parseInt(roleId) === 3 || parseInt(roleId) === 4
+    parseInt(roleId) === 1 || parseInt(roleId) === 4 || parseInt(roleId) === 5
       ? hasRole = true
       : hasRole = false;
     
@@ -140,7 +140,7 @@ exports.signup = async (req, res, next) => {
         next(err);
       });
 
-    if (parseInt(roleId) !== 4 || parseInt(roleId) !== 5) {
+    if (hasRole) {
       // save the USER ROLE relationship in the db
       await models.userRole.create({ 
         userId: userId,

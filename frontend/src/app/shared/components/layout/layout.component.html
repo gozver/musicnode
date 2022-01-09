@@ -23,9 +23,9 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav">
     <span *ngIf="isLogged">
-      <img class="avatar mat-elevation-z8" src="{{ currentUser.avatar }}" />
+      <img class="avatar mat-elevation-z8" src="{{ currentUser?.avatar }}" />
       
-      <h4 class="user">{{ currentUser.name }} {{ currentUser.surname }}</h4>
+      <h4 class="user">{{ currentUser?.name }} {{ currentUser?.surname }}</h4>
       <p class="role" *ngIf="hasRole">Role</p>
       <p class="role" *ngIf="!hasRole">No Role</p>
       <mat-divider></mat-divider>
@@ -49,25 +49,25 @@
     </button>
   
     <button mat-button id="menu-button" class="menu-button" (click)="closeIfIsMobileView()" *ngIf="isLogged && hasRole">
-        <mat-icon class="material-icons-outlined">home</mat-icon>
-        <a routerLink="/home" routerLinkActive="active-link">Home</a>
+      <mat-icon class="material-icons-outlined">home</mat-icon>
+      <a routerLink="/home" routerLinkActive="active-link">Home</a>
     </button>
 
     <button mat-button class="menu-button" (click)="closeIfIsMobileView()" *ngIf="isLogged && hasRole">
       <mat-icon class="material-icons-outlined">account_circle</mat-icon>
-        <a routerLink="/home">Profile</a>
+      <a routerLink="/profile/{{ currentUser?.id }}">Profile</a>
     </button>
 
     <mat-divider *ngIf="isLogged && hasRole"></mat-divider>
 
     <button mat-button class="menu-button" (click)="closeIfIsMobileView()" *ngIf="isLogged && hasRole">
-      <mat-icon class="material-icons-outlined">message</mat-icon>
-      <a routerLink="/chat">Messenger</a>
+      <mat-icon class="material-icons-outlined">storefront</mat-icon>
+      <a routerLink="/ad">Market</a>
     </button>
 
     <button mat-button class="menu-button" (click)="closeIfIsMobileView()" *ngIf="isLogged && hasRole">
-      <mat-icon class="material-icons-outlined">storefront</mat-icon>
-      <a routerLink="/ad">Market</a>
+      <mat-icon class="material-icons-outlined">message</mat-icon>
+      <a routerLink="/chat">Messenger</a>
     </button>
 
     <button mat-button class="menu-button" (click)="closeIfIsMobileView()" *ngIf="isLogged">
@@ -75,17 +75,15 @@
       <a routerLink="/role">Role Manager</a>
     </button>
 
-    <!-- <mat-divider></mat-divider>
-    
     <button mat-button class="menu-button" (click)="closeIfIsMobileView()">
+      <mat-icon class="material-icons-outlined">explore</mat-icon>
+      <a routerLink="/explore">Explore</a>
+    </button>
+
+    <!-- <button mat-button class="menu-button" (click)="closeIfIsMobileView()">
       <mat-icon class="material-icons-outlined">search</mat-icon>
       <a routerLink="/ad">Search</a>
     </button> -->
-
-    <button mat-button class="menu-button" (click)="closeIfIsMobileView()">
-      <mat-icon class="material-icons-outlined">explore</mat-icon>
-      <a routerLink="/ad">Explore</a>
-    </button>
 
     <mat-divider></mat-divider>
     

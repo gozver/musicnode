@@ -1,15 +1,12 @@
-// Angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// Angular Material
 import { MaterialModule } from '@app/shared/modules/material.module';
 
-// Custom Modules
 import { AdRoutingModule } from './ad-routing.module';
 import { AdComponentsModule } from '../components/ad-components.module';
+import { ComponentsModule } from '@shared/components/components.module';
 
-// Custom Components
 import { AdComponent } from './ad/ad.component';
 
 @NgModule({
@@ -18,10 +15,12 @@ import { AdComponent } from './ad/ad.component';
   ],
   imports: [
     CommonModule,
+    
+    MaterialModule,
+    
     AdRoutingModule,
     AdComponentsModule,
-
-    MaterialModule
+    ComponentsModule
   ]
 })
 export class AdModule { }

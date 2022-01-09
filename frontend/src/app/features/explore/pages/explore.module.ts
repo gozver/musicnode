@@ -4,27 +4,23 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@shared/modules/material.module';
 
-import { UserRoutingModule } from './user-routing.module';
-import { UserComponentsModule } from '../components/user-components.module';
+import { ExploreRoutingModule } from './explore-routing.module';
 import { ComponentsModule } from '@shared/components/components.module';
 
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+import { ExploreComponent } from './explore/explore.component'
 
 @NgModule({
   declarations: [
-    LoginComponent,
-    SignupComponent
+    ExploreComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     
     MaterialModule,
-    
-    UserRoutingModule,
-    UserComponentsModule,
+
+    ExploreRoutingModule,
     ComponentsModule
   ]
 })
-export class UserModule { }
+export class ExploreModule { }

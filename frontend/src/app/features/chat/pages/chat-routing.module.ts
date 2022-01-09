@@ -1,12 +1,10 @@
-// Angular
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-// Custom Components
 import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [{
-  path: '', // empty because the path is defined by the parent
+  path: '', // Empty because the path is defined by the parent
   children: [{ 
     path: '',
     component: ChatComponent

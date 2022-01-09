@@ -3,11 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
-// Angular Material
 import { MaterialModule } from '@shared/modules/material.module';
 
-// Custom Modules
-import { ComponentsModule } from '@shared/components/components.module';
 
 @NgModule({
   declarations: [],
@@ -15,10 +12,8 @@ import { ComponentsModule } from '@shared/components/components.module';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    
-    MaterialModule,
-    ComponentsModule,
+    MaterialModule
   ],
   exports: []
 })
-export class ChatComponentsModule { }
+export class ProfileComponentsModule { }

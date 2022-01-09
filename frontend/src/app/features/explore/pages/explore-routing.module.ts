@@ -1,17 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+import { ExploreComponent } from './explore/explore.component';
 
 const routes: Routes = [{
   path: '', // Empty because the path is defined by the parent
   children: [{ 
-    path: 'login',
-    component: LoginComponent
-  }, { 
-    path: 'signup',
-    component: SignupComponent
+    path: '',
+    component: ExploreComponent
   }]
 }];
 
@@ -19,4 +15,4 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)], // Children or secundaries routes
   exports: [RouterModule]
 })
-export class UserRoutingModule { }
+export class ExploreRoutingModule { }
