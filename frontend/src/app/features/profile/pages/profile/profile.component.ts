@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  profileId: number;
 
-  constructor() { }
+  constructor(private readonly route: ActivatedRoute) {
+    this.profileId = parseInt(this.route.snapshot.paramMap.get('id'));
+  }
 
   ngOnInit(): void {
+    console.log(this.profileId)
   }
 
 }

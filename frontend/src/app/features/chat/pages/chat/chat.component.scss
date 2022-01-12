@@ -120,6 +120,15 @@ article {
           font-size: 14px;
           font-style: italic;
           margin: 5px 10px;
+
+          animation-name: feedback;
+          animation-duration: 2s;
+          animation-iteration-count: 4;
+        }
+
+        @keyframes feedback {
+          from { color: #333;  }
+          to   { color: #fff;}
         }
 
         .left {

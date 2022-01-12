@@ -37,7 +37,7 @@
         </div>
   
         <div class="chat-footer">
-          <input id="message" placeholder="Type a message" [(ngModel)]="message" autocomplete="off" (keypress)="sendFeedback()" />
+          <input placeholder="Type a message" [(ngModel)]="message" autocomplete="off" (keypress)="sendFeedback()" />
           
           <button mat-flat-button color="warn" class="warn" (click)="sendMessage()">
             Send

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs';
 
 import { AuthService } from '@shared/services/auth.service';
 import { UserService } from '@shared/services/user.service';
-import { ChatService } from '@app/shared/services/chat.service';
+import { ChatService } from '@shared/services/chat.service';
 
 import { User } from '@shared/interfaces/user.interface';
 import { Message } from '@shared/interfaces/message.interface';
@@ -26,7 +27,7 @@ export class ChatComponent implements OnInit {
   constructor(
     private readonly authService: AuthService,
     private readonly userService: UserService,
-    private readonly chatService: ChatService,
+    private readonly chatService: ChatService
   ) { }
 
   ngOnInit(): void {
@@ -38,14 +39,22 @@ export class ChatComponent implements OnInit {
     this.authService.currentUser$
       .subscribe(currentUser => this.currentUser = currentUser);
     
-    this.userService.getUsers()
-      .subscribe(usersList => this.usersList = usersList.filter (user => user.id !== this.currentUser.id));
+    forkJoin({ 
+      usersList: this.userService.getUsers()
+    }).subscribe(({ 
+      usersList
+    }) => { 
+      this.usersList = usersList; 
+    });
+
+    // this.userService.getUsers()
+    //   .subscribe(usersList => this.usersList = usersList.filter (user => user.id !== this.currentUser.id));
 
     this.chatService.listen('type')
       .subscribe((data) => this.updateFeedback(data));
     
     this.chatService.listen('chat')
-      .subscribe((data) => this.updateMessage(data));
+      .subscribe((data) => this.updateMessage(data));  
   }
 
   selectUser(id: number): void {
@@ -61,17 +70,20 @@ export class ChatComponent implements OnInit {
 
   // type functions
   sendFeedback(): void {
-    console.log(`--> ${this.currentUser.name} is writing a message ...`);
-
-    this.chatService.emit('type', this.currentUser.name);
+    this.chatService.emit('type', {
+      userId: this.currentUser.id,
+      userName: this.currentUser.name
+    });
   }
 
   updateFeedback(data: any): void {
-    this.feedback = `${data} is writing a message ...`;
+    if (data.userId !== this.currentUser.id) {
+      this.feedback = `${data.userName} is writing a message ...`;
+    }
 
     setTimeout(() => { 
       this.feedback = '' 
-    }, 3000);
+    }, 8000);
   }
 
   // Chat functions
