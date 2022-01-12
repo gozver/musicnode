@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { forkJoin } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { AuthService } from '@shared/services/auth.service';
 import { UserService } from '@shared/services/user.service';
@@ -32,24 +34,20 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.getComponentData();
+    this.getSocketData();
   }
 
-  // Component functions
   getComponentData(): void {
-    this.authService.currentUser$
-      .subscribe(currentUser => this.currentUser = currentUser);
-    
-    forkJoin({ 
-      usersList: this.userService.getUsers()
-    }).subscribe(({ 
-      usersList
-    }) => { 
-      this.usersList = usersList; 
+    forkJoin([
+      this.authService.currentUser$.pipe(take(1)),
+      this.userService.getUsers()
+    ]).subscribe(([ currentUser, usersList ]) => { 
+      this.currentUser = currentUser;
+      this.usersList = usersList.filter(user => user.id !== this.currentUser.id);
     });
+  }
 
-    // this.userService.getUsers()
-    //   .subscribe(usersList => this.usersList = usersList.filter (user => user.id !== this.currentUser.id));
-
+  getSocketData(): void {
     this.chatService.listen('type')
       .subscribe((data) => this.updateFeedback(data));
     
@@ -58,14 +56,12 @@ export class ChatComponent implements OnInit {
   }
 
   selectUser(id: number): void {
-    this.message = '';
-    this.feedback = '';
+    this.message = this.feedback = '';
 
     this.selectedUser = this.usersList.find(user => user.id === id);
 
-    this.chatService.getMessages(this.currentUser.id, this.selectedUser.id).subscribe(messagesList => {
-      this.messagesList = messagesList;
-    });
+    this.chatService.getMessages(this.currentUser.id, this.selectedUser.id)
+      .subscribe(messagesList => this.messagesList = messagesList);
   }
 
   // type functions
@@ -82,7 +78,7 @@ export class ChatComponent implements OnInit {
     }
 
     setTimeout(() => { 
-      this.feedback = '' 
+      this.feedback = ''
     }, 8000);
   }
 
