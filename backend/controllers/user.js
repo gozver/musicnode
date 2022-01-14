@@ -1,5 +1,30 @@
 const models = require('../models');
 
+exports.updateAvatar = async (req, res, next) => {
+  console.log('--> req.body.id:');
+  console.log(req.body.id);
+
+  console.log('--> req.file:');
+  console.log(req.file);
+
+  const id = req.body.id;
+  const avatar = 'http://localhost:3000/' + req.file.filename;
+  
+  models.user.update({ 
+    avatar 
+  }, {
+    where: { id }
+  }).then(() => res.status(201).json(avatar))
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
+    });
+}
+
 exports.findAll = async (req, res, next) => {
   models.user.findAll()
     .then(data => res.json(data))

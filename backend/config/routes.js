@@ -4,6 +4,8 @@ const router = express.Router();
 const middlewares = require('../middlewares');
 const controllers = require('../controllers');
 
+const storage = require('../config/storage');
+
 // no auth middleware in find all to allow users to fetch the endpoints data from the browser
 // no auth middleware in methods that are used before login
 router
@@ -14,6 +16,7 @@ router
   // 'http://localhost:3000/api/user'
   .get    ('/user',                       controllers.user.findAll)
   .get    ('/user/:id', middlewares.auth, controllers.user.findOne)
+  .post   ('/user',     storage,          controllers.user.updateAvatar)
 
   // 'http://127.0.0.1:3000/api/role'
   .get    ('/role', controllers.role.findAll)

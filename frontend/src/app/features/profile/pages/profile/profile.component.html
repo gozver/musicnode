@@ -1,1 +1,22 @@
-<p>profile works!</p>
+<article>
+  <section class="header">
+    <h1>PROFILE</h1>
+    <form [formGroup]="userForm">
+      <div>
+        <input formControlName="name" placeholder="Name" value="{{ currentUser?.name }}" />
+      </div>
+
+      <div>
+        <input type="file" id="file" name="file" (change)="onFileSelected($event)" />
+        <label for="file">
+          <img class="avatar" [src]="imageData" [alt]="userForm.value.name">
+        </label>
+      </div>
+
+      <div>
+        <button (click)="updateImage()">Update Avatar</button>
+      </div>
+
+    </form>
+  </section>
+</article>

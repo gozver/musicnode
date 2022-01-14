@@ -8,7 +8,7 @@ Professional business drive network for musicians and music events management co
 Add animated gifs to show the final proyect
 
 ### Technologies:
-- Front: Angular (Angular Material, RxJS, NgRx), HTML, Sass, JavaScript and TypeScript
+- Front: Angular (Angular Material, RxJS), HTML, Sass, JavaScript and TypeScript
 - Backend: Node.js/Express, Sequelize ORM and Socket.IO
 - Database: SQL
 

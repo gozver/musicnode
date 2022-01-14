@@ -1,1 +1,20 @@
-<p>explore works!</p>
+<article>
+  <section class="header">
+    <h1>ALL PROFILES</h1>
+    <hr >
+  </section>
+
+  <section class="users-list" *ngIf="usersList.length > 0">
+    <div class="user" *ngFor="let user of usersList">
+      <img class="avatar" [src]="user.avatar" alt="{{ user.name }}">
+      
+      <div class="user-info">
+        <span>{{ user.name }} {{ user.surname }}</span>
+        <span class="email">{{ user.email }}</span>
+      </div>
+    </div>
+
+  </section>
+</article>
+
+

@@ -5,9 +5,6 @@ const config = require('../config/config.json');
 const models = require('../models');
 
 exports.updateHasRole = async (req, res, next) => {
-  console.log('--> id: ', req.body.id)
-  console.log('--> hasRole:', req.body.hasRole)
-
   models.user.update({
     hasRole: req.body.hasRole
   }, {
@@ -17,7 +14,11 @@ exports.updateHasRole = async (req, res, next) => {
   }).then(data => res.json(data))
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;
-      next(err); // go to error controller
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
     });
 }
 

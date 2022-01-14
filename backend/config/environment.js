@@ -15,17 +15,18 @@ module.exports = (app) => {
   app.use(morgan('dev'));       // http request logger middleware
   app.use(cors());              // cross-origin resource sharing
 
-  // set response headers
-  app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Content-type', 'application/json');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    next();
-  });
+  // // set response headers
+  // app.use((req, res, next) => {
+  //   res.setHeader('Access-Control-Allow-Origin', '*');
+  //   res.setHeader('Content-type', 'application/json');
+  //   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  //   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  //   next();
+  // });
 
   // serve static files in express
   app.use(express.static(path.join(__dirname, '../public')));
+  // app.use('../public2', express.static(path.join('public2')));
 
   // routes: localhost:3000/route
   app.use('/api', routes);

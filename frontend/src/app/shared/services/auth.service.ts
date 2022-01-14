@@ -130,6 +130,7 @@ export class AuthService {
   }
 }
 
+// HTTP request examples
 // public getMovies(): Observable<Movie[]>{
 //   return this.http.get<Movie[]>(`${environment.apiUrl}/movies`);
 // }

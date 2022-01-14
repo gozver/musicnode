@@ -33,13 +33,13 @@ export class SignupComponent implements OnInit {
     const pRegex = /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
     
     this.signupForm = this.fb.group({
-      name:      [ '',   [ Validators.required, /* Validators.minLength(3) */ ]],
-      surname:   [ '',   [ Validators.required, /* Validators.minLength(3) */ ]],
-      email:     [ '',   [ Validators.required, Validators.pattern(eRegex) ]],
-      phone:     [ '',   [ Validators.required, /* Validators.minLength(9) */ ]],
-      password:  [ '',   [ Validators.required, /* Validators.pattern(eRegex) */ ]],
-      roleId:    [ null, [ Validators.required ]],
-      code:      [ '' ]
+      name:     [ '',   [ Validators.required, /* Validators.minLength(3) */ ]],
+      surname:  [ '',   [ Validators.required, /* Validators.minLength(3) */ ]],
+      email:    [ '',   [ Validators.required, Validators.pattern(eRegex) ]],
+      phone:    [ '',   [ Validators.required, /* Validators.minLength(9) */ ]],
+      password: [ '',   [ Validators.required, /* Validators.pattern(eRegex) */ ]],
+      roleId:   [ null, [ Validators.required ]],
+      code:     [ '' ]
     });
   }
 

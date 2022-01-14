@@ -2,9 +2,6 @@ import { Component, ViewChild, OnInit, AfterViewInit, ChangeDetectorRef } from '
 import { BreakpointObserver } from '@angular/cdk/layout'
 import { FocusMonitor } from '@angular/cdk/a11y';
 
-import { forkJoin } from 'rxjs';
-import { take } from 'rxjs/operators';
-
 import { MatSidenav } from '@angular/material/sidenav';
 
 import { AuthService } from '@shared/services/auth.service';
@@ -46,19 +43,9 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   }
 
   getComponentData(): void {
-    forkJoin([
-      this.authService.isLogged$.pipe(take(1)),
-      this.authService.hasRole$.pipe(take(1)),
-      this.authService.currentUser$.pipe(take(1))
-    ]).subscribe(([ isLogged, hasRole, currentUser ]) => {
-      this.isLogged = isLogged;
-      this.hasRole = hasRole;
-      this.currentUser = currentUser;
-    });
-    
-    // this.authService.isLogged$.subscribe(isLogged => this.isLogged = isLogged);
-    // this.authService.hasRole$.subscribe(hasRole => this.hasRole = hasRole);
-    // this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
+    this.authService.isLogged$.subscribe(isLogged => this.isLogged = isLogged);
+    this.authService.hasRole$.subscribe(hasRole => this.hasRole = hasRole);
+    this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
   }
 
   setBreakPointObserver(): void {
@@ -93,4 +80,15 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.authService.logout();
     this.closeIfIsMobileView();
   }
+
+  // NOTE: BehaviorSubjects forkJoin
+  // forkJoin([
+  //   this.authService.isLogged$.pipe(take(1)),
+  //   this.authService.hasRole$.pipe(take(1)),
+  //   this.authService.currentUser$.pipe(take(1))
+  // ]).subscribe(([ isLogged, hasRole, currentUser ]) => {
+  //   this.isLogged = isLogged;
+  //   this.hasRole = hasRole;
+  //   this.currentUser = currentUser;
+  // });
 }

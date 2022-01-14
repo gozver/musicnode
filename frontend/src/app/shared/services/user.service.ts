@@ -35,4 +35,18 @@ export class UserService {
       catchError(this.errorHandlerService.handleError<any>('getCurrentUser', null))
     );
   }
+
+  updateAvatar(id: number, avatar: File): Observable<string> {
+    console.log('--> id:', id);
+    console.log('--> avatar:', avatar);
+
+    var formData = new FormData();
+    formData.append('id', id.toString());
+    formData.append('file', avatar, avatar.name);
+
+    return this.http.post<any>(`${environment.apiUrl}/user`, formData);
+    // ).pipe(
+    //   catchError(this.errorHandlerService.handleError<any>('updateAvatar', null))
+    // );
+  }
 }
