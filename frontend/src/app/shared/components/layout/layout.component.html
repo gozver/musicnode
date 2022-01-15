@@ -55,7 +55,7 @@
 
     <button mat-button class="menu-button" (click)="closeIfIsMobileView()" *ngIf="isLogged && hasRole">
       <mat-icon class="material-icons-outlined">account_circle</mat-icon>
-      <a routerLink="/profile/{{ currentUser?.id }}">Profile</a>
+      <a (click)="gotToProfileComponent()">Profile</a>
     </button>
 
     <mat-divider *ngIf="isLogged && hasRole"></mat-divider>

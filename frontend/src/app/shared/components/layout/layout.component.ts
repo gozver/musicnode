@@ -1,4 +1,5 @@
 import { Component, ViewChild, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout'
 import { FocusMonitor } from '@angular/cdk/a11y';
 
@@ -23,6 +24,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   constructor(
     private cdRef: ChangeDetectorRef,
+    private readonly router: Router,
     private readonly bpObserver: BreakpointObserver,
     private readonly focusMonitor: FocusMonitor,
     private readonly authService: AuthService
@@ -74,6 +76,12 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     if (this.sidenav.mode === 'over') {
       this.sidenav.close();
     }
+  }
+
+  gotToProfileComponent(): void {
+    this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+      this.router.navigate([`/profile/${this.currentUser.id}`]);
+    });
   }
 
   logout(): void {

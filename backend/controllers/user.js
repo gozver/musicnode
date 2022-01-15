@@ -1,4 +1,5 @@
 const models = require('../models');
+const config = require('../config/config.json');
 
 exports.updateAvatar = async (req, res, next) => {
   console.log('--> req.body.id:');
@@ -8,7 +9,7 @@ exports.updateAvatar = async (req, res, next) => {
   console.log(req.file);
 
   const id = req.body.id;
-  const avatar = 'http://localhost:3000/' + req.file.filename;
+  const avatar = config.serverUrl + req.file.filename;
   
   models.user.update({ 
     avatar 

@@ -18,7 +18,7 @@ router
   .get    ('/user/:id', middlewares.auth, controllers.user.findOne)
   .post   ('/user',     storage,          controllers.user.updateAvatar)
 
-  // 'http://127.0.0.1:3000/api/role'
+  // 'http://localhost:3000/api/role'
   .get    ('/role', controllers.role.findAll)
 
   // 'http://localhost:3000/api/user-role'
@@ -26,27 +26,27 @@ router
   .post   ('/user-role',         controllers.userRole.create)
   .get    ('/user-role/:userId', controllers.userRole.findByUserId)
 
-  // 'http://127.0.0.1:3000/api/band'
+  // 'http://localhost:3000/api/band'
   .get    ('/band',                   controllers.band.findAll)
   .post   ('/band', middlewares.auth, controllers.band.create)
 
-  // 'http://127.0.0.1:3000/api/company'
+  // 'http://localhost:3000/api/company'
   .get    ('/company',                   controllers.company.findAll)
   .post   ('/company', middlewares.auth, controllers.company.create)
 
-  // 'http://127.0.0.1:3000/api/ad'
+  // 'http://localhost:3000/api/ad'
   .get    ('/ad',                       controllers.ad.findAll)
   .post   ('/ad',     middlewares.auth, controllers.ad.create)
   .get    ('/ad/:id', middlewares.auth, controllers.ad.findOne)
   .patch  ('/ad/:id', middlewares.auth, controllers.ad.update)
   .delete ('/ad/:id', middlewares.auth, controllers.ad.delete)
   
-  // no 'http://127.0.0.1:3000/api/message'
+  // no 'http://localhost:3000/api/message'
   .get    ('/message',                            controllers.message.findAll)
   .get    ('/message/:from:to', middlewares.auth, controllers.message.findAllByUsersIds)
   .post   ('/message',          middlewares.auth, controllers.message.create)
 
-  // no 'http://127.0.0.1:3000/api/email'
+  // no 'http://localhost:3000/api/email'
   .post   ('/email',  controllers.email.sendEmail);
 
 module.exports = router;

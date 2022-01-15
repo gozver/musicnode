@@ -13,10 +13,13 @@ import { User } from '@app/shared/interfaces/user.interface';
 })
 export class ProfileComponent implements OnInit {
   profileId: number;
+  profileUser: User;
   
   userForm: FormGroup
   currentUser: User;
   imageData: string;
+
+  avatarSelected: boolean = false;
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -28,28 +31,31 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser)
-    this.initSignupForm();
-
-    this.imageData = this.currentUser.avatar;
-
-    console.log('--> this.profileId:');
-    console.log(this.profileId);
-  }
-
-  initSignupForm(): void {
-    this.userForm = new FormGroup({
-      name:   new FormControl(this.currentUser.name),
-      avatar: new FormControl(this.currentUser.avatar),
+    this.userService.getUser(this.profileId).subscribe(profileUser => { 
+      this.profileUser = profileUser;
+      
+      this.imageData = this.profileUser.avatar;
+      
+      this.initUserForm(this.profileUser);
     });
   }
 
-  /**
-   * setValue() to set a new value 
-   * patchValue() to update the current value
-   */
+  initUserForm(profileUser: User): void {
+    this.userForm = new FormGroup({
+      name:   new FormControl(profileUser.name),
+      avatar: new FormControl(profileUser.avatar),
+    });
+  }
+
+  isMyProfile(): boolean {
+    return this.currentUser.id === this.profileUser.id
+  }
+
   onFileSelected(event: Event): void {
     const file = (event.target as HTMLInputElement).files[0];
     const allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+    
+    this.avatarSelected = true;
     this.userForm.patchValue({ avatar: file });
 
     if (file && allowedMimeTypes.includes(file.type)) {
@@ -65,8 +71,11 @@ export class ProfileComponent implements OnInit {
 
   updateImage(): void {
     this.userService.updateAvatar(this.currentUser.id, this.userForm.value.avatar).subscribe(avatar => {
-      console.log(`--> avatar: ${avatar}`);
       this.imageData = avatar;
+      
+      this.currentUser.avatar = avatar;
+      this.authService.setCurrentUser(this.currentUser);
+      this.avatarSelected = false;
     });
   }
 }

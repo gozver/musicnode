@@ -1,20 +1,23 @@
 <article>
   <section class="header">
     <h1>PROFILE</h1>
-    <form [formGroup]="userForm">
-      <div>
-        <input formControlName="name" placeholder="Name" value="{{ currentUser?.name }}" />
-      </div>
+    <form [formGroup]="userForm" *ngIf="userForm">
+      <div>{{ profileUser?.name }} {{ profileUser?.surname }}</div>
 
       <div>
-        <input type="file" id="file" name="file" (change)="onFileSelected($event)" />
+        <input type="file" id="file" name="file" (change)="onFileSelected($event)" *ngIf="isMyProfile()" />
+
         <label for="file">
-          <img class="avatar" [src]="imageData" [alt]="userForm.value.name">
+          <img class="avatar" [src]="imageData" [alt]="profileUser?.name" [ngClass]="isMyProfile() ? 'pointer' : 'normal'">
         </label>
       </div>
 
       <div>
-        <button (click)="updateImage()">Update Avatar</button>
+        <!-- <button (click)="updateImage()" *ngIf="isMyProfile() && this.avatarSelected">Update Avatar</button> -->
+
+        <button mat-flat-button color="warn" class="warn" (click)="updateImage()" *ngIf="isMyProfile() && this.avatarSelected">
+          Update Avatar
+        </button>
       </div>
 
     </form>
