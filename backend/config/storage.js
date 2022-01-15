@@ -4,7 +4,7 @@ const multer = require('multer');
 // disk storage controls how to store files into disk
 const diskStorage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, 'public')
+    callback(null, 'public/avatars')
   },
   filename: (req, file, callback) => {
     const mimeType = file.mimetype.split('/');

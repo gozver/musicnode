@@ -12,6 +12,9 @@ const routes: Routes = [{
   }, { 
     path: ':id/edit',
     component: UpdateProfileComponent
+  }, {
+    path: '**', // Any other path
+    redirectTo: '/home'
   }]
 }];
 

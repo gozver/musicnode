@@ -1,25 +1,39 @@
 <article>
-  <section class="header">
-    <h1>PROFILE</h1>
-    <form [formGroup]="userForm" *ngIf="userForm">
-      <div>{{ profileUser?.name }} {{ profileUser?.surname }}</div>
+  <section class="top-ctnr">
+    <div class=title>PROFILE</div>
+    
+    <div class="subtitle">Let's get user info</div>
 
-      <div>
+    <div class="text">
+      From this section you can obtain information about platform users and get in touch with them.
+    </div>
+  </section>
+
+  <section class="middle-ctnr">
+    <form [formGroup]="userForm" class="userForm" *ngIf="userForm">
+      <div class="avatar">
         <input type="file" id="file" name="file" (change)="onFileSelected($event)" *ngIf="isMyProfile()" />
 
         <label for="file">
-          <img class="avatar" [src]="imageData" [alt]="profileUser?.name" [ngClass]="isMyProfile() ? 'pointer' : 'normal'">
+          <img [src]="imageData" [alt]="profileUser?.name" [ngClass]="isMyProfile() ? 'pointer' : 'normal'">
         </label>
       </div>
 
-      <div>
-        <!-- <button (click)="updateImage()" *ngIf="isMyProfile() && this.avatarSelected">Update Avatar</button> -->
+      <div class="user-data">
+        <div class="name">{{ profileUser?.name }} {{ profileUser?.surname }}</div>
+        <div class="email">{{ profileUser?.email }}</div>
+        <div class="phone">{{ profileUser?.phone }}</div>
 
-        <button mat-flat-button color="warn" class="warn" (click)="updateImage()" *ngIf="isMyProfile() && this.avatarSelected">
-          Update Avatar
+        <button mat-flat-button color="warn" class="warn" *ngIf="!isMyProfile()">
+          Message
         </button>
       </div>
-
     </form>
+
+    <div class="btn-ctnr">
+      <button mat-flat-button color="warn" class="warn" (click)="updateImage()" *ngIf="isMyProfile() && this.avatarSelected">
+        Update Avatar
+      </button>
+    </div>
   </section>
 </article>

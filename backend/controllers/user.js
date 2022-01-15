@@ -9,7 +9,7 @@ exports.updateAvatar = async (req, res, next) => {
   console.log(req.file);
 
   const id = req.body.id;
-  const avatar = config.serverUrl + req.file.filename;
+  const avatar = config.serverUrl + 'avatars/' + req.file.filename;
   
   models.user.update({ 
     avatar 

@@ -27,9 +27,7 @@ export class UserService {
   }
 
   getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${environment.apiUrl}/user/${id}`).pipe(
-      catchError(this.errorHandlerService.handleError<any>('getCurrentUser', null))
-    );
+    return this.http.get<User>(`${environment.apiUrl}/user/${id}`);
   }
 
   updateAvatar(id: number, avatar: File): Observable<string> {

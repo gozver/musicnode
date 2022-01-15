@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthService } from '@shared/services/auth.service';
 import { UserService } from '@shared/services/user.service';
@@ -22,22 +22,30 @@ export class ProfileComponent implements OnInit {
   avatarSelected: boolean = false;
 
   constructor(
-    private readonly route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute,
     private readonly authService: AuthService,
     private readonly userService: UserService
     ) {
-    this.profileId = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.profileId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
-    this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser)
-    this.userService.getUser(this.profileId).subscribe(profileUser => { 
-      this.profileUser = profileUser;
-      
-      this.imageData = this.profileUser.avatar;
-      
-      this.initUserForm(this.profileUser);
-    });
+    this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
+
+    this.userService.getUser(this.profileId).subscribe(
+      profileUser => { 
+        this.profileUser = profileUser;
+        this.imageData = this.profileUser.avatar;
+        this.initUserForm(this.profileUser);
+      }, 
+      error => {
+        console.error("--> the user doesn't exist");
+        console.error('--> error:', error);
+
+        this.router.navigate(['/home']);
+      }
+    );
   }
 
   initUserForm(profileUser: User): void {
@@ -48,7 +56,7 @@ export class ProfileComponent implements OnInit {
   }
 
   isMyProfile(): boolean {
-    return this.currentUser.id === this.profileUser.id
+    return this.currentUser.id === this.profileId
   }
 
   onFileSelected(event: Event): void {
@@ -72,6 +80,8 @@ export class ProfileComponent implements OnInit {
   updateImage(): void {
     this.userService.updateAvatar(this.currentUser.id, this.userForm.value.avatar).subscribe(avatar => {
       this.imageData = avatar;
+
+      console.log(avatar)
       
       this.currentUser.avatar = avatar;
       this.authService.setCurrentUser(this.currentUser);
