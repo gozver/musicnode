@@ -3,19 +3,19 @@ const db = require('./config/db');
 const models = require('./models');
 
 // import data
-const roles = require('./seeds/data/role');
-const adminUsers = require('./seeds/data/adminUser');
-const adminUserRoles = require('./seeds/data/adminUserRole');
-const contractorUsers = require('./seeds/data/contractorUser');
-const contractorUserRoles = require('./seeds/data/contractorUserRole');
-const musicianUsers = require('./seeds/data/musicianUser');
-const musicianUserRoles = require('./seeds/data/musicianUserRole');
-const bands = require('./seeds/data/band');
-const bandUsers = require('./seeds/data/bandUser');
-const bandUserRoles = require('./seeds/data/bandUserRole');
-const companies = require('./seeds/data/company');
-const companyUsers = require('./seeds/data/companyUser');
-const companyUserRoles = require('./seeds/data/companyUserRole');
+const roles = require('./seeds/role');
+const adminUsers = require('./seeds/adminUser');
+const adminUserRoles = require('./seeds/adminUserRole');
+const contractorUsers = require('./seeds/contractorUser');
+const contractorUserRoles = require('./seeds/contractorUserRole');
+const musicianUsers = require('./seeds/musicianUser');
+const musicianUserRoles = require('./seeds/musicianUserRole');
+const bands = require('./seeds/band');
+const bandUsers = require('./seeds/bandUser');
+const bandUserRoles = require('./seeds/bandUserRole');
+const companies = require('./seeds/company');
+const companyUsers = require('./seeds/companyUser');
+const companyUserRoles = require('./seeds/companyUserRole');
 
 // set relationships
 require('./config/relationships');

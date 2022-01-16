@@ -1,12 +1,9 @@
-// Angular
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-// RxJS
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-// Services, interfaces and environment variables
 import { User } from '../interfaces/user.interface'
 import { ErrorHandlerService } from './error-handler.service';
 import { environment } from '@environments/environment';

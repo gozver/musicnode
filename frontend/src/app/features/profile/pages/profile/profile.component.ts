@@ -80,12 +80,10 @@ export class ProfileComponent implements OnInit {
   updateImage(): void {
     this.userService.updateAvatar(this.currentUser.id, this.userForm.value.avatar).subscribe(avatar => {
       this.imageData = avatar;
-
-      console.log(avatar)
-      
       this.currentUser.avatar = avatar;
-      this.authService.setCurrentUser(this.currentUser);
       this.avatarSelected = false;
+      
+      this.authService.setCurrentUser(this.currentUser);
     });
   }
 }

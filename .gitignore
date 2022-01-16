@@ -5,6 +5,7 @@
 _apps/
 _backups/
 _db/
+_docs
 _guides/
 
 # compressed files

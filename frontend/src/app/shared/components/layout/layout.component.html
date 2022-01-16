@@ -22,23 +22,19 @@
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav">
-    <span *ngIf="isLogged">
-      <img class="avatar mat-elevation-z8" src="{{ currentUser?.avatar }}" />
+    <span>
+      <img class="avatar mat-elevation-z8" src="assets/img/user.png" *ngIf="!isLogged"/>
+      <img class="avatar mat-elevation-z8" src="{{ currentUser?.avatar }}" *ngIf="isLogged" />
       
-      <h4 class="user">{{ currentUser?.name }} {{ currentUser?.surname }}</h4>
-      <p class="role" *ngIf="hasRole">Role</p>
-      <p class="role" *ngIf="!hasRole">No Role</p>
+      <h4 class="user" *ngIf="!isLogged">Guest</h4>
+      <h4 class="user" *ngIf="isLogged">{{ currentUser?.name }} {{ currentUser?.surname }}</h4>
+      
+      <p class="role" *ngIf="isLogged && hasRole">Role</p>
+      <p class="role" *ngIf="isLogged && !hasRole">No Role</p>
       <mat-divider></mat-divider>
     </span>
 
-    <span *ngIf="!isLogged">
-      <img class="avatar mat-elevation-z8" src="assets/img/user.png" />
-      
-      <h4 class="user">Guest</h4>
-      <mat-divider></mat-divider>
-    </span>
- 
-    <button mat-button id="menu-button" class="menu-button" (click)="closeIfIsMobileView()" *ngIf="!isLogged">
+    <button mat-button class="menu-button" (click)="closeIfIsMobileView()" *ngIf="!isLogged">
       <mat-icon class="material-icons-outlined">person</mat-icon>
       <a routerLink="/user/login">Login</a>
     </button>
@@ -48,36 +44,36 @@
       <a routerLink="/user/signup">Signup</a>
     </button>
   
-    <button mat-button id="menu-button" class="menu-button" (click)="closeIfIsMobileView()" *ngIf="isLogged && hasRole">
+    <button mat-button class="menu-button" *ngIf="isLogged && hasRole" (click)="navigateTo('home')">
       <mat-icon class="material-icons-outlined">home</mat-icon>
-      <a routerLink="/home" routerLinkActive="active-link">Home</a>
+      <a>Home</a>
     </button>
 
-    <button mat-button class="menu-button" (click)="closeIfIsMobileView()" *ngIf="isLogged && hasRole">
+    <button mat-button class="menu-button" *ngIf="isLogged && hasRole" (click)="navigateByUrl('profile')">
       <mat-icon class="material-icons-outlined">account_circle</mat-icon>
-      <a (click)="gotToProfileComponent()">Profile</a>
+      <a>Profile</a>
     </button>
 
     <mat-divider *ngIf="isLogged && hasRole"></mat-divider>
 
-    <button mat-button class="menu-button" (click)="closeIfIsMobileView()" *ngIf="isLogged && hasRole">
-      <mat-icon class="material-icons-outlined">storefront</mat-icon>
-      <a routerLink="/ad">Market</a>
-    </button>
-
-    <button mat-button class="menu-button" (click)="closeIfIsMobileView()" *ngIf="isLogged && hasRole">
+    <button mat-button class="menu-button" *ngIf="isLogged && hasRole" (click)="navigateTo('chat')">
       <mat-icon class="material-icons-outlined">message</mat-icon>
-      <a routerLink="/chat">Messenger</a>
+      <a>Messenger</a>
     </button>
 
-    <button mat-button class="menu-button" (click)="closeIfIsMobileView()" *ngIf="isLogged">
-      <mat-icon class="material-icons-outlined">category</mat-icon>
-      <a routerLink="/role">Role Manager</a>
-    </button>
-
-    <button mat-button class="menu-button" (click)="closeIfIsMobileView()">
+    <button mat-button class="menu-button" *ngIf="isLogged && hasRole" (click)="navigateTo('explore')">
       <mat-icon class="material-icons-outlined">explore</mat-icon>
-      <a routerLink="/explore">Explore</a>
+      <a>Explore</a>
+    </button>
+
+    <button mat-button class="menu-button" *ngIf="isLogged && hasRole" (click)="navigateTo('ad')">
+      <mat-icon class="material-icons-outlined">storefront</mat-icon>
+      <a>Market</a>
+    </button>
+
+    <button mat-button class="menu-button" *ngIf="isLogged" (click)="navigateTo('role')">
+      <mat-icon class="material-icons-outlined">category</mat-icon>
+      <a>Role Manager</a>
     </button>
 
     <!-- <button mat-button class="menu-button" (click)="closeIfIsMobileView()">
@@ -106,7 +102,7 @@
 
     <button mat-button class="menu-button" *ngIf="isLogged" (click)="logout()">
       <mat-icon class="material-icons-outlined">logout</mat-icon>
-      <a routerLink="/home">Logout</a>
+      <a>Logout</a>
     </button>
 
     <mat-divider></mat-divider>

@@ -36,7 +36,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.setBreakPointObserver();
-    this.disableFirstActiveButton();
   }
 
   // So this component can detects changes in other components
@@ -66,26 +65,28 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     });
   }
 
-  disableFirstActiveButton(): void {
-    // Overwrite cdk-focused in Angular: 
-    // https://stackoverflow.com/questions/48953972/how-to-disable-or-overwrite-cdk-focused-in-angular
-    this.focusMonitor.stopMonitoring(document.getElementById('menu-button'));
-  }
-
   closeIfIsMobileView(): void {
     if (this.sidenav.mode === 'over') {
       this.sidenav.close();
     }
   }
 
-  gotToProfileComponent(): void {
-    this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-      this.router.navigate([`/profile/${this.currentUser.id}`]);
-    });
-  }
-
   logout(): void {
     this.authService.logout();
+    this.closeIfIsMobileView();
+  }
+
+  // Redirect functions (so the app redirects when clicking a button and not the <a> tag inside)
+  navigateTo(component: string): void {
+    this.router.navigate([`/${component}`]);
+    this.closeIfIsMobileView();
+  }
+
+  navigateByUrl(component: string): void {
+    this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+      this.router.navigate([`/${component}/${this.currentUser.id}`]);
+    });
+
     this.closeIfIsMobileView();
   }
 

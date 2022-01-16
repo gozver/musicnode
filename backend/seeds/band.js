@@ -1,5 +1,7 @@
+const config = require('../config/config.json');
+
 // avatar for all the users
-const avatar = 'asset/img/user.png'
+const avatar = `${config.serverUrl}/avatars/user.png`;
 
 // bands descriptions
 const aerosmithDesc = "We begin our gallery of Top 20 American Bands in Boston, Mass., a key site in the Revolutionary War – and home to all-American bad boys Aerosmith. Steven Tyler and Joe Perry certainly had their '70s-era struggles, both personal and professional, but they simply refused to stay down. And, in this land of second chances, no one has played the role of bootstrap underdog better than Aerosmith as they ultimately scored one of rock history's most dramatic comebacks late in the next decade.";
