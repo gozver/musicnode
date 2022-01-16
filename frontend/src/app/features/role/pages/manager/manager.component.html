@@ -3,7 +3,8 @@
     <div class=title>ROLE MANAGER</div>
     
     <div class="subtitle" *ngIf="!hasRole()">Add a role</div>
-    <div class="subtitle" *ngIf="hasRole()">Role list</div>
+    <!-- <div class="subtitle" *ngIf="hasRole()">Role list</div> -->
+    <div class="subtitle" *ngIf="hasRole()">Let's organize</div>
     
     <div class="text">
       <!-- The admin panel is where the content is created and the website is managed. This is the key to how a content management system (CMS) works. Essentially, a CMS is just a series of forms that take the place of manually creating files and uploading them to the server. They simplify that process. -->
@@ -24,7 +25,7 @@
           <mat-form-field appearance="outline" class="input-headline role">
             <mat-label>Role</mat-label>
             <mat-select formControlName="roleId" (changeEventChange)="printValue()">
-              <mat-option *ngFor="let item of selectRoleItems" value="{{ item.id }}">{{ item.value }}</mat-option>
+              <mat-option *ngFor="let item of selectNoRole" value="{{ item.id }}">{{ item.value }}</mat-option>
             </mat-select>
             <button mat-icon-button matSuffix [attr.aria-label]="'Role'" disabled>
               <mat-icon>category</mat-icon>
@@ -52,6 +53,68 @@
       </div>
     </div>
   </section>
-<article>
 
+  <section class="roles-ctnr" *ngIf="userRolesList.length > 0">
+    <h1>Roles List</h1>
+    
+    <div *ngFor="let userRole of userRolesList">
+      <div *ngIf="userRole.roleId === 1">
+        <p>This person has a musician role.</p>
+      </div>
+
+      <div *ngIf="userRole.roleId === 4">
+        <p>This person has an independent contractor role.</p>
+      </div>
+
+      <div *ngIf="userRole.roleId === 5">
+        <p>This person has an administrator role.</p>
+      </div>
+    </div>    
+  </section>
+
+  <section class="add-role-ctnr" *ngIf="hasRole()">
+    <h1>Add a Role</h1>
+
+    <div class="card">
+      <div class="card-content">
+        <form [formGroup]="roleForm" novalidate>
+          <mat-form-field appearance="outline" class="input-headline role">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="roleId" (changeEventChange)="printValue()">
+              <mat-option *ngFor="let item of selectAddRole" value="{{ item.id }}">{{ item.value }}</mat-option>
+            </mat-select>
+            <button mat-icon-button matSuffix [attr.aria-label]="'Role'" disabled>
+              <mat-icon>category</mat-icon>
+            </button>
+          </mat-form-field>
+        </form>
   
+        <!-- <app-band-form
+          [bandForm]=bandForm
+          *ngIf="+roleForm.value.roleId !== 2"
+        ></app-band-form>
+  
+        <app-company-form
+          [companyForm]=companyForm
+          *ngIf="+roleForm.value.roleId === 2"
+        ></app-company-form> -->
+  
+        <!-- <button mat-flat-button class="primary" *ngIf="+roleForm.value.roleId !== 2" (click)="createBand()" [disabled]="bandForm.invalid">
+          Create Role
+        </button>
+  
+        <button mat-flat-button class="primary" *ngIf="+roleForm.value.roleId === 2" (click)="createCompany()" [disabled]="companyForm.invalid">
+          Create Role
+        </button> -->
+
+        <button mat-flat-button class="primary" *ngIf="+roleForm.value.roleId === 4" [disabled]="roleForm.invalid" (click)="createContractorRole()">
+          Create Role
+        </button>
+
+        <button mat-flat-button class="primary" *ngIf="+roleForm.value.roleId === 5" [disabled]="roleForm.invalid" (click)="createAdminRole()">
+          Create Role
+        </button>
+      </div>
+    </div>
+  </section>
+<article>

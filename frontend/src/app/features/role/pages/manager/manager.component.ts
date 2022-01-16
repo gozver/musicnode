@@ -6,6 +6,7 @@ import { BandService } from '@shared/services/band.service';
 import { CompanyService } from '@shared/services/company.service';
 import { UserRoleService } from '@shared/services/user-role.service';
 import { User } from '@shared/interfaces/user.interface';
+import { UserRole } from '@shared/interfaces/user-role.interface';
 
 @Component({
   selector: 'app-manager',
@@ -13,14 +14,24 @@ import { User } from '@shared/interfaces/user.interface';
   styleUrls: ['./manager.component.scss']
 })
 export class ManagerComponent implements OnInit {
+  currentUser: User;
+
   roleForm: FormGroup;
   bandForm: FormGroup;
   companyForm: FormGroup;
   userRoleForm: FormGroup;
 
-  selectRoleItems: { id: number, value: string }[];
+  selectNoRole:  { id: number, value: string }[] = [
+    { id: 1, value: 'Band '   },
+    { id: 2, value: 'Company' },
+  ];
 
-  currentUser: User;
+  selectAddRole: { id: number, value: string }[] = [
+    { id: 4, value: 'Contractor ' },
+    { id: 5, value: 'Admin ' },
+  ];
+
+  userRolesList: UserRole[] = [];
 
   priceRegex: string = '^[0-9]+$';
   phoneRegex: string = '^[0-9\-]+$';
@@ -45,14 +56,16 @@ export class ManagerComponent implements OnInit {
   initComponentData(): void {
     this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
 
-    this.selectRoleItems = [
+    this.selectNoRole = [
       { id: 1, value: 'Band ' },
       { id: 2, value: 'Company' },
     ];
 
-    this.userRoleService.findByUserId(this.currentUser.id).subscribe(res => {
-      console.log('--> user role:');
-      console.log(res);
+    this.userRoleService.findByUserId(this.currentUser.id).subscribe(userRolesList => {
+      this.userRolesList = userRolesList
+
+      console.log('--> this.userRolesList:');
+      console.log(this.userRolesList);
     })
   }
 
@@ -120,5 +133,29 @@ export class ManagerComponent implements OnInit {
         this.authService.setCurrentUser(this.currentUser);
       });
     });
+  }
+
+  createContractorRole(): void {
+    this.userRoleForm = this.fb.group({
+      userId: this.currentUser.id,
+      roleId: 4,
+      bandId: null,
+      companyId: null
+    });
+
+    this.userRoleService.create(this.userRoleForm.value).subscribe(
+      ()=> this.roleForm.patchValue({ roleId: null })
+    );
+  }
+
+  createAdminRole(): void {
+    this.userRoleForm = this.fb.group({
+      userId: this.currentUser.id,
+      roleId: 5,
+      bandId: null,
+      companyId: null
+    });
+
+    this.userRoleService.create(this.userRoleForm.value).subscribe(()=> this.roleForm.patchValue({ roleId: null }));
   }
 }

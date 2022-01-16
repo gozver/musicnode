@@ -30,7 +30,12 @@ article {
     }
   }
 
-  .no-role-ctnr{
+  .add-role-ctnr {
+    margin-top: 30px;
+  }
+
+  .no-role-ctnr,
+  .add-role-ctnr {
     .card {
       display: flex;
       flex-direction: column;
