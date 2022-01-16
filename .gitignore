@@ -5,7 +5,7 @@
 _apps/
 _backups/
 _db/
-_docs/
+_documents/
 _guides/
 
 # compressed files
@@ -15,4 +15,3 @@ _guides/
 # editor
 /.vscode
 /.settings
-
