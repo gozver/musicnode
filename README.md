@@ -21,7 +21,7 @@ Add animated gifs to show the final proyect
 - [Node Engine](https://nodejs.org/en/) version 14.15.0.
 
 ## Frontend development server:
-Run `npm start` to run the server. The app will automatically navigate to `http://localhost:4200/` and will reload if you change any of the source files.
+- Run `npm start` to run the server. The app will automatically navigate to `http://localhost:4200/` and will reload if you change any of the source files.
 
 ## Backend technologies:
 - [Node.js](https://nodejs.org/en/) version 4.17.1.
@@ -31,6 +31,9 @@ Run `npm start` to run the server. The app will automatically navigate to `http:
 - [Node Engine](https://nodejs.org/en/) version 14.15.0.
 
 ## Backend development server:
-Run `npm run serve` to run the server.  
-Run `npm run dev` to run the server with nodemon. The app will automatically reload if you change any of the source files.  
-Run `npm run mock` to insert demo data into the database.
+- Run `npm run mocked-roles` before using the platform to insert roles into the database.
+- Run `npm run mocked-data` to insert demo data into the database.
+- Run `npm run dev` to run the server with nodemon. The app will automatically reload if you change any of the source files. <br/>
+
+NOTE: Roles are indispensable in order to use the platfrom so make sure you run `npm run mocked-roles` once before running the serve.
+
