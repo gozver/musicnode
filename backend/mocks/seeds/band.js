@@ -1,4 +1,4 @@
-const config = require('../config/config.json');
+const config = require('../../config/config.json');
 
 // avatar for all the users
 const avatar = `${config.serverUrl}/avatars/user.png`;

@@ -1,0 +1,15 @@
+module.exports = {
+  'adminUser': require('./adminUser'),
+  'adminUserRole': require('./adminUserRole'),
+  'band': require('./band'),
+  'bandUser': require('./bandUser'),
+  'bandUserRole': require('./bandUserRole'),
+  'company': require('./company'),
+  'companyUser': require('./companyUser'),
+  'companyUserRole': require('./companyUserRole'),
+  'contractorUser': require('./contractorUser'),
+  'contractorUserRole': require('./contractorUserRole'),
+  'musicianUser': require('./musicianUser'),
+  'musicianUserRole': require('./musicianUserRole'),
+  'role': require('./role'),
+}

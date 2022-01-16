@@ -1,4 +1,4 @@
-const config = require('../config/config.json');
+const config = require('../../config/config.json');
 
 // avatar and password for all the users (Abcd1234)
 const avatar = `${config.serverUrl}/avatars/user.png`;

@@ -9,7 +9,8 @@
   },
   "scripts": {
     "dev": "nodemon server.js",
-    "mock": "node seed"
+    "mocked-roles": "node ./mocks/mockRoles",
+    "mocked-data": "node ./mocks/mockData"
   },
   "keywords": [],
   "author": "",
