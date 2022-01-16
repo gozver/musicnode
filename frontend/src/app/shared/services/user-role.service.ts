@@ -1,12 +1,9 @@
-// Angular
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-// RxJS
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-// Services, interfaces and environment variables
 import { UserRole } from './../interfaces/user-role.interface';
 import { ErrorHandlerService } from './error-handler.service';
 import { environment } from '@environments/environment';
@@ -15,29 +12,25 @@ import { environment } from '@environments/environment';
   providedIn: 'root'
 })
 export class UserRoleService {
-  httpOptions: { headers: HttpHeaders} = {
-    headers: new HttpHeaders(environment.headers)
-  };
-
   constructor(
     private http: HttpClient,
     private errorHandlerService: ErrorHandlerService
   ) { }
 
   getUserRoles(): Observable<UserRole[]> {
-    return this.http.get<UserRole[]>(`${environment.apiUrl}/user-role`, this.httpOptions).pipe(
+    return this.http.get<UserRole[]>(`${environment.apiUrl}/user-role`).pipe(
       catchError(this.errorHandlerService.handleError<any>('getUserRoles', []))
     );
   }
 
   findByUserId(userId: number): Observable<UserRole[]> {
-    return this.http.get<UserRole[]>(`${environment.apiUrl}/user-role/${userId}`, this.httpOptions).pipe(
+    return this.http.get<UserRole[]>(`${environment.apiUrl}/user-role/${userId}`).pipe(
       catchError(this.errorHandlerService.handleError<any>('findByUserId', []))
     );
   }
 
   create(params: UserRole): Observable<UserRole> {
-    return this.http.post<UserRole>(`${environment.apiUrl}/user-role`, params, this.httpOptions).pipe(
+    return this.http.post<UserRole>(`${environment.apiUrl}/user-role`, params).pipe(
       catchError(this.errorHandlerService.handleError<any>('create', null))
     );
   }

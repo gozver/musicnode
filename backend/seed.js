@@ -32,78 +32,78 @@ db.sync({ force: true })
       await models.role.create(role);
     }
   })
-  .then(async () => {
-    // insert admin users in the db
-    for (let adminUser of adminUsers) {
-      await models.user.create(adminUser);
-    }
-  })
-  .then(async () => {
-    // insert admin userRoles in the db
-    for (let adminUserRole of adminUserRoles) {
-      await models.userRole.create(adminUserRole);
-    }
-  })
-  .then(async () => {
-    // insert contractor users in the db
-    for (let contractorUser of contractorUsers) {
-      await models.user.create(contractorUser);
-    }
-  })
-  .then(async () => {
-    // insert admin userRoles in the db
-    for (let contractorUserRole of contractorUserRoles) {
-      await models.userRole.create(contractorUserRole);
-    }
-  })
-  .then(async () => {
-    // insert musician users in the db
-    for (let musicianUser of musicianUsers) {
-      await models.user.create(musicianUser);
-    }
-  })
-  .then(async () => {
-    // insert musician userRoles in the db
-    for (let musicianUserRole of musicianUserRoles) {
-      await models.userRole.create(musicianUserRole);
-    }
-  })
-  .then(async () => {
-    // insert bands in the db
-    for (let band of bands) {
-      await models.band.create(band);
-    }
-  })
-  .then(async () => {
-    // insert band users in the db
-    for (let bandUser of bandUsers) {
-      await models.user.create(bandUser);
-    }
-  })
-  .then(async () => {
-    // insert band userRoles in the db
-    for (let bandUserRole of bandUserRoles) {
-      await models.userRole.create(bandUserRole);
-    }
-  })
-  .then(async () => {
-    // insert companies in the db
-    for (let company of companies) {
-      await models.company.create(company);
-    }
-  })
-  .then(async () => {
-    // insert company users in the db
-    for (let companyUser of companyUsers) {
-      await models.user.create(companyUser);
-    }
-  })
-  .then(async () => {
-    // insert company userRoles in the db
-    for (let companyUserRole of companyUserRoles) {
-      await models.userRole.create(companyUserRole);
-    }
-  });
+  // .then(async () => {
+  //   // insert admin users in the db
+  //   for (let adminUser of adminUsers) {
+  //     await models.user.create(adminUser);
+  //   }
+  // })
+  // .then(async () => {
+  //   // insert admin userRoles in the db
+  //   for (let adminUserRole of adminUserRoles) {
+  //     await models.userRole.create(adminUserRole);
+  //   }
+  // })
+  // .then(async () => {
+  //   // insert contractor users in the db
+  //   for (let contractorUser of contractorUsers) {
+  //     await models.user.create(contractorUser);
+  //   }
+  // })
+  // .then(async () => {
+  //   // insert admin userRoles in the db
+  //   for (let contractorUserRole of contractorUserRoles) {
+  //     await models.userRole.create(contractorUserRole);
+  //   }
+  // })
+  // .then(async () => {
+  //   // insert musician users in the db
+  //   for (let musicianUser of musicianUsers) {
+  //     await models.user.create(musicianUser);
+  //   }
+  // })
+  // .then(async () => {
+  //   // insert musician userRoles in the db
+  //   for (let musicianUserRole of musicianUserRoles) {
+  //     await models.userRole.create(musicianUserRole);
+  //   }
+  // })
+  // .then(async () => {
+  //   // insert bands in the db
+  //   for (let band of bands) {
+  //     await models.band.create(band);
+  //   }
+  // })
+  // .then(async () => {
+  //   // insert band users in the db
+  //   for (let bandUser of bandUsers) {
+  //     await models.user.create(bandUser);
+  //   }
+  // })
+  // .then(async () => {
+  //   // insert band userRoles in the db
+  //   for (let bandUserRole of bandUserRoles) {
+  //     await models.userRole.create(bandUserRole);
+  //   }
+  // })
+  // .then(async () => {
+  //   // insert companies in the db
+  //   for (let company of companies) {
+  //     await models.company.create(company);
+  //   }
+  // })
+  // .then(async () => {
+  //   // insert company users in the db
+  //   for (let companyUser of companyUsers) {
+  //     await models.user.create(companyUser);
+  //   }
+  // })
+  // .then(async () => {
+  //   // insert company userRoles in the db
+  //   for (let companyUserRole of companyUserRoles) {
+  //     await models.userRole.create(companyUserRole);
+  //   }
+  // });
 
 // const ads = [
 //   { title: 'Title 1',  description: 'Description 1',  userId: 1 },

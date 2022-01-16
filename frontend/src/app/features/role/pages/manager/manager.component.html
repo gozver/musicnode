@@ -2,8 +2,8 @@
   <section class="top-ctnr">
     <div class=title>ROLE MANAGER</div>
     
-    <div class="subtitle" *ngIf="hasRole === false">Add a role</div>
-    <div class="subtitle" *ngIf="hasRole === true">Role list</div>
+    <div class="subtitle" *ngIf="!hasRole()">Add a role</div>
+    <div class="subtitle" *ngIf="hasRole()">Role list</div>
     
     <div class="text">
       <!-- The admin panel is where the content is created and the website is managed. This is the key to how a content management system (CMS) works. Essentially, a CMS is just a series of forms that take the place of manually creating files and uploading them to the server. They simplify that process. -->
@@ -11,20 +11,20 @@
       The role manager is where an user can manage his roles. He can create a new one if he doesn't have any, can delete or modify the ones he has and most important can select the one he desire to have active while enjoying the platform features.
     </div>
 
-    <div class="text" *ngIf="hasRole === false">
+    <div class="text" *ngIf="!hasRole()">
       You don't have any role yet. Please add a role to unlock all platform features.
     </div>
     
   </section>
 
-  <section class="no-role-ctnr" *ngIf="hasRole === false">
+  <section class="no-role-ctnr" *ngIf="!hasRole()">
     <div class="card">
       <div class="card-content">
         <form [formGroup]="roleForm" novalidate>
           <mat-form-field appearance="outline" class="input-headline role">
             <mat-label>Role</mat-label>
             <mat-select formControlName="roleId" (changeEventChange)="printValue()">
-              <mat-option *ngFor="let item of rolesList" value="{{ item.id }}">{{ item.value }}</mat-option>
+              <mat-option *ngFor="let item of selectRoleItems" value="{{ item.id }}">{{ item.value }}</mat-option>
             </mat-select>
             <button mat-icon-button matSuffix [attr.aria-label]="'Role'" disabled>
               <mat-icon>category</mat-icon>
@@ -42,21 +42,11 @@
           *ngIf="+roleForm.value.roleId === 2"
         ></app-company-form>
 
-        <button
-          mat-flat-button
-          class="primary"
-          (click)="createBand()"
-          [disabled]="bandForm.invalid"
-          *ngIf="+roleForm.value.roleId !== 2">
+        <button mat-flat-button class="primary" *ngIf="+roleForm.value.roleId !== 2" (click)="createBand()" [disabled]="bandForm.invalid">
           Create Role
         </button>
 
-        <button
-          mat-flat-button
-          class="primary"
-          (click)="createCompany()"
-          [disabled]="companyForm.invalid"
-          *ngIf="+roleForm.value.roleId === 2">
+        <button mat-flat-button class="primary" *ngIf="+roleForm.value.roleId === 2" (click)="createCompany()" [disabled]="companyForm.invalid">
           Create Role
         </button>
       </div>

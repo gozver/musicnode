@@ -4,24 +4,6 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/config.json');
 const models = require('../models');
 
-exports.updateHasRole = async (req, res, next) => {
-  models.user.update({
-    hasRole: req.body.hasRole
-  }, {
-    where: {
-      id: req.body.id
-    }
-  }).then(data => res.json(data))
-    .catch(err => {
-      if (!err.statusCode) err.statusCode = 500;
-
-      // print error and send it to error controller
-      console.log('--> error:');
-      console.log(err);
-      next(err);
-    });
-}
-
 exports.login = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -118,7 +100,8 @@ exports.signup = async (req, res, next) => {
     // hash the password 12 times
     const hashedPwd = await bcrypt.hash(password, 12)
     
-    // check if the user has a role
+    // if the user is a musician, a contractor or an admin, create user-role
+    // if the user belogns to a band or a company, we'll create user-role later
     parseInt(roleId) === 1 || parseInt(roleId) === 4 || parseInt(roleId) === 5
       ? hasRole = true
       : hasRole = false;

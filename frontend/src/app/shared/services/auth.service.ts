@@ -17,10 +17,12 @@ export class AuthService {
     private router: Router
   ) { }
   
-  // User related properties
+  // User related properties (Guards)
   isLogged$ = new BehaviorSubject<boolean>(this.getIsLogged());
-  userId$ = new BehaviorSubject<number>(this.getUserId());
   hasRole$ = new BehaviorSubject<boolean>(this.getHasRole());
+
+  // User related properties (App)
+  userId$ = new BehaviorSubject<number>(this.getUserId());
   currentUser$ = new BehaviorSubject<User>(this.getCurrentUser());
 
   // Methods
@@ -54,22 +56,6 @@ export class AuthService {
         return user;
       })
     );
-  }
-
-  updateHasRole(id: number, hasRole: boolean): Observable<User> {
-    return this.http.patch<User>(`${environment.apiUrl}/auth/updateHasRole`, { id, hasRole })
-      .pipe(map(res => {
-        this.hasRole$.next(hasRole);
-        localStorage.setItem('hasRole', JSON.stringify(hasRole));
-        
-        let user = this.getCurrentUser();
-        user.hasRole = hasRole;
-
-        this.currentUser$.next(user);
-        localStorage.setItem('user', JSON.stringify(user));
-
-        return res;
-      }));
   }
 
   logout(): void {

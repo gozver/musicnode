@@ -1,7 +1,6 @@
 import { Component, ViewChild, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout'
-import { FocusMonitor } from '@angular/cdk/a11y';
 
 import { MatSidenav } from '@angular/material/sidenav';
 
@@ -19,14 +18,12 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
   isLogged: boolean = false;
-  hasRole: boolean = false;
   currentUser: User;
 
   constructor(
     private cdRef: ChangeDetectorRef,
     private readonly router: Router,
     private readonly bpObserver: BreakpointObserver,
-    private readonly focusMonitor: FocusMonitor,
     private readonly authService: AuthService
   ) { }
 
@@ -44,9 +41,12 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   }
 
   getComponentData(): void {
-    this.authService.isLogged$.subscribe(isLogged => this.isLogged = isLogged);
-    this.authService.hasRole$.subscribe(hasRole => this.hasRole = hasRole);
+    this.authService.isLogged$.subscribe(isLogged => this.isLogged = isLogged);    
     this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
+  }
+
+  hasRole(): boolean {
+    return this.currentUser.hasRole;
   }
 
   setBreakPointObserver(): void {
@@ -76,9 +76,9 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.closeIfIsMobileView();
   }
 
-  // Redirect functions (so the app redirects when clicking a button and not the <a> tag inside)
+  // Redirect functions (so the app redirects when clicking a button and not when when clicking an <a> tag)
   navigateTo(component: string): void {
-    this.router.navigate([`/${component}`]);
+    this.router.navigate([`${component}`]);
     this.closeIfIsMobileView();
   }
 
@@ -89,15 +89,4 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
     this.closeIfIsMobileView();
   }
-
-  // NOTE: BehaviorSubjects forkJoin
-  // forkJoin([
-  //   this.authService.isLogged$.pipe(take(1)),
-  //   this.authService.hasRole$.pipe(take(1)),
-  //   this.authService.currentUser$.pipe(take(1))
-  // ]).subscribe(([ isLogged, hasRole, currentUser ]) => {
-  //   this.isLogged = isLogged;
-  //   this.hasRole = hasRole;
-  //   this.currentUser = currentUser;
-  // });
 }

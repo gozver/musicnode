@@ -11,7 +11,6 @@ const storage = require('../config/storage');
 router
   .post   ('/auth/login',         controllers.auth.login)
   .post   ('/auth/signup',        controllers.auth.signup)
-  .patch  ('/auth/updateHasRole', controllers.auth.updateHasRole)
 
   // 'http://localhost:3000/api/user'
   .get    ('/user',                       controllers.user.findAll)

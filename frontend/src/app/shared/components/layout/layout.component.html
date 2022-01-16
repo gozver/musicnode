@@ -29,49 +29,49 @@
       <h4 class="user" *ngIf="!isLogged">Guest</h4>
       <h4 class="user" *ngIf="isLogged">{{ currentUser?.name }} {{ currentUser?.surname }}</h4>
       
-      <p class="role" *ngIf="isLogged && hasRole">Role</p>
-      <p class="role" *ngIf="isLogged && !hasRole">No Role</p>
+      <p class="role" *ngIf="isLogged && hasRole()">Role</p>
+      <p class="role" *ngIf="isLogged && !hasRole()">No Role</p>
       <mat-divider></mat-divider>
     </span>
 
-    <button mat-button class="menu-button" (click)="closeIfIsMobileView()" *ngIf="!isLogged">
+    <button mat-button class="menu-button" *ngIf="!isLogged" (click)="navigateTo('/user/login')">
       <mat-icon class="material-icons-outlined">person</mat-icon>
       <a routerLink="/user/login">Login</a>
     </button>
 
-    <button mat-button class="menu-button" (click)="closeIfIsMobileView()" *ngIf="!isLogged">
+    <button mat-button class="menu-button" *ngIf="!isLogged" (click)="navigateTo('/user/signup')">
       <mat-icon class="material-icons-outlined">how_to_reg</mat-icon>
-      <a routerLink="/user/signup">Signup</a>
+      <a>Signup</a>
     </button>
   
-    <button mat-button class="menu-button" *ngIf="isLogged && hasRole" (click)="navigateTo('home')">
+    <button mat-button class="menu-button" *ngIf="isLogged && hasRole()" (click)="navigateTo('/home')">
       <mat-icon class="material-icons-outlined">home</mat-icon>
       <a>Home</a>
     </button>
 
-    <button mat-button class="menu-button" *ngIf="isLogged && hasRole" (click)="navigateByUrl('profile')">
+    <button mat-button class="menu-button" *ngIf="isLogged && hasRole()" (click)="navigateByUrl('/profile')">
       <mat-icon class="material-icons-outlined">account_circle</mat-icon>
       <a>Profile</a>
     </button>
 
-    <mat-divider *ngIf="isLogged && hasRole"></mat-divider>
+    <mat-divider *ngIf="isLogged && hasRole()"></mat-divider>
 
-    <button mat-button class="menu-button" *ngIf="isLogged && hasRole" (click)="navigateTo('chat')">
+    <button mat-button class="menu-button" *ngIf="isLogged && hasRole()" (click)="navigateTo('/chat')">
       <mat-icon class="material-icons-outlined">message</mat-icon>
       <a>Messenger</a>
     </button>
 
-    <button mat-button class="menu-button" *ngIf="isLogged && hasRole" (click)="navigateTo('explore')">
+    <button mat-button class="menu-button" *ngIf="isLogged && hasRole()" (click)="navigateTo('/explore')">
       <mat-icon class="material-icons-outlined">explore</mat-icon>
       <a>Explore</a>
     </button>
 
-    <button mat-button class="menu-button" *ngIf="isLogged && hasRole" (click)="navigateTo('ad')">
+    <button mat-button class="menu-button" *ngIf="isLogged && hasRole()" (click)="navigateTo('/ad')">
       <mat-icon class="material-icons-outlined">storefront</mat-icon>
       <a>Market</a>
     </button>
 
-    <button mat-button class="menu-button" *ngIf="isLogged" (click)="navigateTo('role')">
+    <button mat-button class="menu-button" *ngIf="isLogged" (click)="navigateTo('/role')">
       <mat-icon class="material-icons-outlined">category</mat-icon>
       <a>Role Manager</a>
     </button>
@@ -83,14 +83,14 @@
 
     <mat-divider></mat-divider>
     
-    <button mat-button class="menu-button" (click)="closeIfIsMobileView()">
+    <button mat-button class="menu-button" (click)="navigateTo('/about')">
       <mat-icon class="material-icons-outlined">info_outline</mat-icon>
-      <a routerLink="/about">About</a>
+      <a>About</a>
     </button>
     
-    <button mat-button class="menu-button" (click)="closeIfIsMobileView()">
+    <button mat-button class="menu-button" (click)="navigateTo('/contact')">
       <mat-icon class="material-icons-outlined">call</mat-icon>
-      <a routerLink="/contact">Contact</a>
+      <a>Contact</a>
     </button>
 
     <!-- <button mat-button class="menu-button" (click)="closeIfIsMobileView()">

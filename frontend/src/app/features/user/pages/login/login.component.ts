@@ -1,7 +1,6 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 // Angular Material
 import { MatDialog } from '@angular/material/dialog';
@@ -21,8 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
-    private readonly dialog: MatDialog,
-    private readonly router: Router
+    private readonly dialog: MatDialog    
   ) { }
 
   ngOnInit(): void {
@@ -67,9 +65,5 @@ export class LoginComponent implements OnInit {
           });
         }
       );
-  }
-
-  signup(): void { 
-    this.router.navigate(['/user/signup']);
   }
 }
