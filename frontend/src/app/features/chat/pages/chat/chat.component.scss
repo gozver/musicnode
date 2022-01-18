@@ -116,21 +116,6 @@ article {
           max-width: 90%;
         }
 
-        .feedback {
-          font-size: 14px;
-          font-style: italic;
-          margin: 5px 10px;
-
-          animation-name: feedback;
-          animation-duration: 2s;
-          animation-iteration-count: 4;
-        }
-
-        @keyframes feedback {
-          from { color: #333;  }
-          to   { color: #fff;}
-        }
-
         .left {
           display: flex;
           justify-content: flex-start;
@@ -139,6 +124,37 @@ article {
         .rigth {
           display: flex;
           justify-content: flex-end;
+        }
+
+        .feedback-ctnr {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          .feedback {
+            font-size: 14px;
+            font-style: italic;
+            margin: 5px 10px;
+
+            // animation-name: feedback;
+            // animation-duration: 2s;
+            // animation-iteration-count: 4;
+          }
+
+          // @keyframes feedback {
+          //   from { 
+          //     color: #333;
+          //   }
+
+          //   to   {
+          //     color: #777; 
+          //   }
+          // }
+
+          img {
+            width: 14px;
+            transform: translate(-5px, 4px);
+          }
         }
       }
   

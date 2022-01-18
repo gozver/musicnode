@@ -74,12 +74,12 @@ export class ChatComponent implements OnInit {
 
   updateFeedback(data: any): void {
     if (data.userId !== this.currentUser.id) {
-      this.feedback = `${data.userName} is writing a message ...`;
+      this.feedback = `${data.userName} is writing a message`;
     }
 
     setTimeout(() => { 
       this.feedback = ''
-    }, 8000);
+    }, 6000);
   }
 
   // Chat functions

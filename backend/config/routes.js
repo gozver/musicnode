@@ -13,17 +13,18 @@ router
   .post   ('/auth/signup',        controllers.auth.signup)
 
   // 'http://localhost:3000/api/user'
-  .get    ('/user',                       controllers.user.findAll)
-  .get    ('/user/:id', middlewares.auth, controllers.user.findOne)
-  .post   ('/user',     storage,          controllers.user.updateAvatar)
+  .get    ('/user',                           controllers.user.findAll)
+  .get    ('/user/:id',     middlewares.auth, controllers.user.findOne)
+  .post   ('/user',         storage,          controllers.user.updateAvatar)
 
   // 'http://localhost:3000/api/role'
   .get    ('/role', controllers.role.findAll)
 
   // 'http://localhost:3000/api/user-role'
   .get    ('/user-role',         controllers.userRole.findAll)
-  .post   ('/user-role',         controllers.userRole.create)
-  .get    ('/user-role/:userId', controllers.userRole.findByUserId)
+  .get    ('/user-role/:userId', middlewares.auth, controllers.userRole.findByUserId)
+  .get    ('/user-role/role/:roleId', controllers.userRole.findByRoleId)
+  .post   ('/user-role',              controllers.userRole.create)
 
   // 'http://localhost:3000/api/band'
   .get    ('/band',                   controllers.band.findAll)

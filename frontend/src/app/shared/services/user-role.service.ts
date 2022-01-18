@@ -23,15 +23,21 @@ export class UserRoleService {
     );
   }
 
+  findByRoleId(roleId: number): Observable<UserRole[]> {
+    return this.http.get<UserRole[]>(`${environment.apiUrl}/user-role/role/${roleId}`).pipe(
+      catchError(this.errorHandlerService.handleError<any>('getUserRolesByRoleId', []))
+    );
+  }
+
   findByUserId(userId: number): Observable<UserRole[]> {
     return this.http.get<UserRole[]>(`${environment.apiUrl}/user-role/${userId}`).pipe(
       catchError(this.errorHandlerService.handleError<any>('findByUserId', []))
     );
   }
 
-  create(params: UserRole): Observable<UserRole> {
+  createUserRole(params: UserRole): Observable<UserRole> {
     return this.http.post<UserRole>(`${environment.apiUrl}/user-role`, params).pipe(
-      catchError(this.errorHandlerService.handleError<any>('create', null))
+      catchError(this.errorHandlerService.handleError<any>('createUserRole', null))
     );
   }
 }

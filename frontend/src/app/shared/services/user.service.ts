@@ -29,6 +29,7 @@ export class UserService {
 
   updateAvatar(id: number, avatar: File): Observable<string> {
     const formData = new FormData();
+
     formData.append('id', id.toString());
     formData.append('file', avatar, avatar.name);
 

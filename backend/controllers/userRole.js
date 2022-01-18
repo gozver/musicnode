@@ -29,6 +29,22 @@ exports.findAll = async (req, res, next) => {
     });
 }
 
+exports.findByRoleId = async (req, res, next) => {
+  const roleId = req.params.roleId;
+  const whereString = { where: { roleId } };
+
+  models.userRole.findAll(whereString)
+    .then(data => res.json(data))
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
+    });
+}
+
 exports.findByUserId = async (req, res, next) => {  
   models.userRole.findAll({
     where: {

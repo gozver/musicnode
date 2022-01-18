@@ -22,7 +22,7 @@ export class ManagerComponent implements OnInit {
   userRoleForm: FormGroup;
 
   selectNoRole:  { id: number, value: string }[] = [
-    { id: 1, value: 'Band '   },
+    { id: 1, value: 'Band'    },
     { id: 2, value: 'Company' },
   ];
 
@@ -104,7 +104,7 @@ export class ManagerComponent implements OnInit {
   }
 
   createBand(): void {
-    this.bandService.create(this.bandForm.value).subscribe(res => {
+    this.bandService.createBand(this.bandForm.value).subscribe(res => {
       this.userRoleForm = this.fb.group({
         userId: this.currentUser.id,
         roleId: 2,
@@ -112,7 +112,7 @@ export class ManagerComponent implements OnInit {
         companyId: null
       });
 
-      this.userRoleService.create(this.userRoleForm.value).subscribe(() => {
+      this.userRoleService.createUserRole(this.userRoleForm.value).subscribe(() => {
         this.currentUser.hasRole = true;
         this.authService.setCurrentUser(this.currentUser);
       });
@@ -120,7 +120,7 @@ export class ManagerComponent implements OnInit {
   }
 
   createCompany(): void {
-    this.companyService.create(this.companyForm.value).subscribe(res => {
+    this.companyService.createCompany(this.companyForm.value).subscribe(res => {
       this.userRoleForm = this.fb.group({
         userId: this.currentUser.id,
         roleId: 3,
@@ -128,7 +128,7 @@ export class ManagerComponent implements OnInit {
         companyId: res.id
       });
 
-      this.userRoleService.create(this.userRoleForm.value).subscribe(() => {
+      this.userRoleService.createUserRole(this.userRoleForm.value).subscribe(() => {
         this.currentUser.hasRole = true;
         this.authService.setCurrentUser(this.currentUser);
       });
@@ -143,7 +143,7 @@ export class ManagerComponent implements OnInit {
       companyId: null
     });
 
-    this.userRoleService.create(this.userRoleForm.value).subscribe(
+    this.userRoleService.createUserRole(this.userRoleForm.value).subscribe(
       ()=> this.roleForm.patchValue({ roleId: null })
     );
   }
@@ -156,6 +156,6 @@ export class ManagerComponent implements OnInit {
       companyId: null
     });
 
-    this.userRoleService.create(this.userRoleForm.value).subscribe(()=> this.roleForm.patchValue({ roleId: null }));
+    this.userRoleService.createUserRole(this.userRoleForm.value).subscribe(()=> this.roleForm.patchValue({ roleId: null }));
   }
 }

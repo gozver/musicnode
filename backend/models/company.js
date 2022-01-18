@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
+
 const sequelize = require('../config/db');
 
 class Company extends Model {}

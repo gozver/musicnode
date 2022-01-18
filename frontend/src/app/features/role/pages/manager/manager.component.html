@@ -20,37 +20,35 @@
 
   <section class="no-role-ctnr" *ngIf="!hasRole()">
     <div class="card">
-      <div class="card-content">
-        <form [formGroup]="roleForm" novalidate>
-          <mat-form-field appearance="outline" class="input-headline role">
-            <mat-label>Role</mat-label>
-            <mat-select formControlName="roleId" (changeEventChange)="printValue()">
-              <mat-option *ngFor="let item of selectNoRole" value="{{ item.id }}">{{ item.value }}</mat-option>
-            </mat-select>
-            <button mat-icon-button matSuffix [attr.aria-label]="'Role'" disabled>
-              <mat-icon>category</mat-icon>
-            </button>
-          </mat-form-field>
-        </form>
+      <form [formGroup]="roleForm" novalidate>
+        <mat-form-field appearance="outline" class="input-headline role">
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="roleId" (changeEventChange)="printValue()">
+            <mat-option *ngFor="let item of selectNoRole" value="{{ item.id }}">{{ item.value }}</mat-option>
+          </mat-select>
+          <button mat-icon-button matSuffix [attr.aria-label]="'Role'" disabled>
+            <mat-icon>category</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
 
-        <app-band-form
-          [bandForm]=bandForm
-          *ngIf="+roleForm.value.roleId !== 2"
-        ></app-band-form>
+      <app-band-form
+        [bandForm]=bandForm
+        *ngIf="+roleForm.value.roleId !== 2"
+      ></app-band-form>
 
-        <app-company-form
-          [companyForm]=companyForm
-          *ngIf="+roleForm.value.roleId === 2"
-        ></app-company-form>
+      <app-company-form
+        [companyForm]=companyForm
+        *ngIf="+roleForm.value.roleId === 2"
+      ></app-company-form>
 
-        <button mat-flat-button class="primary" *ngIf="+roleForm.value.roleId !== 2" (click)="createBand()" [disabled]="bandForm.invalid">
-          Create Role
-        </button>
+      <button mat-flat-button class="primary" *ngIf="+roleForm.value.roleId !== 2" (click)="createBand()" [disabled]="bandForm.invalid">
+        Create Role
+      </button>
 
-        <button mat-flat-button class="primary" *ngIf="+roleForm.value.roleId === 2" (click)="createCompany()" [disabled]="companyForm.invalid">
-          Create Role
-        </button>
-      </div>
+      <button mat-flat-button class="primary" *ngIf="+roleForm.value.roleId === 2" (click)="createCompany()" [disabled]="companyForm.invalid">
+        Create Role
+      </button>
     </div>
   </section>
 

@@ -1,7 +1,7 @@
 const config = require('../../config/config.json');
 
 // avatar for all the users
-const avatar = `${config.serverUrl}/avatars/user.jpg`;
+const avatar = `${config.serverUrl}/avatars/user.png`;
 
 // company descriptions
 const vnueDesc = "Vnue is a Music company and has headquarters in New York, New York, United States. Vnue has 1-10 employees. Vnue has raised $8.7M.";

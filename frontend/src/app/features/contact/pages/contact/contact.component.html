@@ -39,8 +39,7 @@
         </mat-form-field>          
       </form>
 
-      <!-- put focus on button: cdkFocusInitial -->
-      <button mat-flat-button color="warn" class="warn" title="Contact" (click)="sendMessage()" [disabled]="contactForm.invalid">
+      <button mat-flat-button color="warn" class="warn" (click)="sendMessage()" [disabled]="contactForm.invalid">
         Contact
       </button>
     </div>

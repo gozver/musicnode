@@ -1,12 +1,9 @@
-// Angular
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-// RxJS
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-// Services, interfaces and environment variables
 import { Company } from '../interfaces/company.interface'
 import { ErrorHandlerService } from './error-handler.service';
 import { environment } from '@environments/environment';
@@ -15,19 +12,20 @@ import { environment } from '@environments/environment';
   providedIn: 'root'
 })
 export class CompanyService {
-  httpOptions: { headers: HttpHeaders} = {
-    headers: new HttpHeaders(environment.headers)
-  };
-
   constructor(
     private http: HttpClient,    
     private errorHandlerService: ErrorHandlerService
   ) { }
 
-  create(params: Company): Observable<Company> {
-    return this.http.post<Company>(`${environment.apiUrl}/company`, params, this.httpOptions).pipe(
-        // Send error to ErrorHandler service
-      catchError(this.errorHandlerService.handleError<any>('create', null))
+  getCompanies(): Observable<Company[]> {
+    return this.http.get<Company[]>(`${environment.apiUrl}/company`).pipe(
+      catchError(this.errorHandlerService.handleError<any>('getCompanies', []))
+    );
+  }
+
+  createCompany(params: Company): Observable<Company> {
+    return this.http.post<Company>(`${environment.apiUrl}/company`, params).pipe(
+      catchError(this.errorHandlerService.handleError<any>('createCompany', null))
     );
   }
 }

@@ -38,7 +38,7 @@ server.listen(port, () => {
 const io = socket(server);
 
 // bind and listen for socket connections
-io.on('connection' , (socket) => {
+io.on('connection', (socket) => {
   console.log(`--> new socket connection: ${socket.id}`);
 
   // on 'event name' function callback that create a web socket and emits the data throught it
