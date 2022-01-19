@@ -23,8 +23,8 @@ export class CompanyService {
     );
   }
 
-  createCompany(params: Company): Observable<Company> {
-    return this.http.post<Company>(`${environment.apiUrl}/company`, params).pipe(
+  createCompany(company: Company, userId: number): Observable<Company> {
+    return this.http.post<Company>(`${environment.apiUrl}/company`, { company, userId }).pipe(
       catchError(this.errorHandlerService.handleError<any>('createCompany', null))
     );
   }

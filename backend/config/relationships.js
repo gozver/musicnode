@@ -1,36 +1,48 @@
 const models = require('../models');
 
-// USER / ROLE => MANY TO MANY: duplicated entries allowed
-models.user.belongsToMany(models.role, { 
-  through: { model: models.userRole, unique: false }
+/**
+ * USER/ROLE: ONE TO MANY
+ */
+models.user.hasMany(models.role, {
+  foreignKey: 'userId', onDelete: 'cascade', onUpdate: 'cascade'
 });
 
-models.role.belongsToMany(models.user, { 
-  through: { model: models.userRole, unique: false }
+models.role.belongsTo(models.user);
+
+/**
+ * USER/BAND: MANY TO MANY (DUPLICATED ENTRIES ALLOWED)
+ */
+models.user.belongsToMany(models.band, { 
+  through: 'user_band', unique: false, onDelete: 'cascade', onUpdate: 'cascade'
 });
 
-// USER-ROLE / BAND => ONE TO ONE
-models.userRole.belongsTo(models.band, { 
-  foreignKey: 'bandId', onDelete: 'cascade', onUpdate: 'cascade' 
+models.band.belongsToMany(models.user, {
+  through: 'user_band', unique: false, onDelete: 'cascade', onUpdate: 'cascade'
 });
 
-models.band.hasOne(models.userRole);
-
-// USER-ROLE / COMPANY => ONE TO ONE
-models.userRole.belongsTo(models.company, { 
-  foreignKey: 'companyId', onDelete: 'cascade', onUpdate: 'cascade' 
+/**
+ * USER/COMPANY: MANY TO MANY (DUPLICATED ENTRIES ALLOWED)
+ */
+models.user.belongsToMany(models.company, {
+  through: 'user_comp', unique: false, onDelete: 'cascade', onUpdate: 'cascade'
 });
 
-models.company.hasOne(models.userRole);
+models.company.belongsToMany(models.user, {
+  through: 'user_comp', unique: false, onDelete: 'cascade', onUpdate: 'cascade'
+});
 
-// USER / AD => ONE TO MANY 
+/**
+ * USER/AD: ONE TO MANY
+ */
 models.user.hasMany(models.ad, {
   foreignKey: 'userId', onDelete: 'cascade', onUpdate: 'cascade'
 });
 
 models.ad.belongsTo(models.user);
 
-// USER / MESSAGE => ONE TO MANY 
+/**
+ * USER/MESSAGE: ONE TO MANY
+ */
 models.user.hasMany(models.message, {
   foreignKey: 'userId', foreignKey: 'recipient', onDelete: 'cascade', onUpdate: 'cascade'
 });

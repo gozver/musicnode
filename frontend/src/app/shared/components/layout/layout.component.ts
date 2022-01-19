@@ -5,6 +5,7 @@ import { BreakpointObserver } from '@angular/cdk/layout'
 import { MatSidenav } from '@angular/material/sidenav';
 
 import { AuthService } from '@shared/services/auth.service';
+import { UserService } from './../../services/user.service';
 import { User } from '@app/shared/interfaces/user.interface';
 
 @Component({
@@ -19,12 +20,14 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   isLogged: boolean = false;
   currentUser: User;
+  role: string;
 
   constructor(
     private cdRef: ChangeDetectorRef,
     private readonly router: Router,
     private readonly bpObserver: BreakpointObserver,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -42,7 +45,28 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   getComponentData(): void {
     this.authService.isLogged$.subscribe(isLogged => this.isLogged = isLogged);    
-    this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
+    this.authService.currentUser$.subscribe(async currentUser => {
+      this.currentUser = currentUser;
+
+      // if (this.currentUser) {
+      //   setTimeout(() => {
+      //     this.userService.getUser(this.currentUser.id).subscribe(user => {
+      //       const roleId = user[0].roles[0].code;
+
+      //       console.log('--> user:');
+      //       console.log(user);
+
+      //       if (roleId !== 2 || roleId !== 3) {
+      //         this.role = user[0].roles[0].name;
+      //       } else {
+      //         this.role = user[0].roles[0].name;
+      //       }
+
+      //       console.log(`--> role: ${this.role}`);
+      //     })
+      //   }, 0);
+      // }
+    });
   }
 
   hasRole(): boolean {

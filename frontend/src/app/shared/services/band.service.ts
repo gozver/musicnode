@@ -23,8 +23,8 @@ export class BandService {
     );
   }
 
-  createBand(params: Band): Observable<Band> {
-    return this.http.post<Band>(`${environment.apiUrl}/band`, params).pipe(
+  createBand(band: Band, userId: number): Observable<Band> {
+    return this.http.post<Band>(`${environment.apiUrl}/band`, { band, userId }).pipe(
       catchError(this.errorHandlerService.handleError<any>('createBand', null))
     );
   }

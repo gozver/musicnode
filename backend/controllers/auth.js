@@ -87,8 +87,7 @@ exports.signup = async (req, res, next) => {
   const roleId = req.body.roleId;
   const code = req.body.code;
 
-  let userId;
-  let hasRole;
+  let userId, hasRole;
   
   // check admin code if user select admin role
   if (parseInt(roleId) === 5 && parseInt(code) !== 123) {
@@ -106,7 +105,7 @@ exports.signup = async (req, res, next) => {
       ? hasRole = true
       : hasRole = false;
     
-    // save the user in the db
+    // save the user into the db
     await models.user.create({ name, surname, email, phone, password: hashedPwd, hasRole })
       .then((user) => {
         // save the userId to operate with later
@@ -125,11 +124,22 @@ exports.signup = async (req, res, next) => {
       });
 
     if (hasRole) {
-      // save the USER ROLE relationship in the db
-      await models.userRole.create({ 
-        userId: userId,
-        roleId: roleId
-      });
+      let role;
+
+      switch(true) {
+        case roleId === '1':
+          role = 'musician';
+          break;
+        case roleId === '4':
+          role = 'contractor';
+          break;
+        case roleId === '5':
+          role = 'admin';
+          break;
+      }
+
+      // save the new role in the db
+      await models.role.create({ userId, roleId: roleId, role });
     }
   }
 };

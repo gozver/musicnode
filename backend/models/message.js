@@ -6,9 +6,10 @@ class Message extends Model {}
 
 Message.init({
   id:        { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true },
+
   body:      { type: DataTypes.TEXT,    allowNull: false, validate: { notEmpty: false } },
-  userId:    { type: DataTypes.INTEGER, allowNull: false  },
-  recipient: { type: DataTypes.INTEGER, allowNull: false  },
+  userId:    { type: DataTypes.INTEGER, allowNull: false, validate: { notEmpty: false } },
+  recipient: { type: DataTypes.INTEGER, allowNull: false, validate: { notEmpty: false } },
 }, { 
   sequelize,
   modelName: 'message'

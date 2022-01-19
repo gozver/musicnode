@@ -41,8 +41,7 @@ export class ExploreComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly userService: UserService,
     private readonly bandService: BandService,
-    private readonly companyService: CompanyService,
-    private readonly userRoleService: UserRoleService,
+    private readonly companyService: CompanyService
   ) { }
 
   ngOnInit(): void {
@@ -55,16 +54,10 @@ export class ExploreComponent implements OnInit {
       this.userService.getUsers(),
       this.bandService.getBands(),
       this.companyService.getCompanies(),
-      this.userRoleService.findByRoleId(1),
-      this.userRoleService.findByRoleId(4),
-      this.userRoleService.findByRoleId(5),
-    ]).subscribe(([ usersList, bandsList, companiesList, musiciansURList, contractorsURList, admisURList ]) => {
+    ]).subscribe(([ usersList, bandsList, companiesList ]) => {
       this.usersList = usersList;
       this.bandsList = bandsList;
       this.companiesList = companiesList;
-      this.musiciansURList = musiciansURList;
-      this.contractorsURList = contractorsURList;
-      this.admisURList = admisURList;
 
       console.log('--> this.usersList:');
       console.log(this.usersList);
@@ -72,12 +65,6 @@ export class ExploreComponent implements OnInit {
       console.log(this.bandsList);
       console.log('--> this.companiesList:');
       console.log(this.companiesList);
-      console.log('--> this.musiciansURList:');
-      console.log(this.musiciansURList);
-      console.log('--> this.contractorsURList:');
-      console.log(this.contractorsURList);
-      console.log('--> this.admisURList:');
-      console.log(this.admisURList);
     });
   }
 

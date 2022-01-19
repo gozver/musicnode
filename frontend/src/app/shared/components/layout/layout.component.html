@@ -29,7 +29,7 @@
       <h4 class="user" *ngIf="!isLogged">Guest</h4>
       <h4 class="user" *ngIf="isLogged">{{ currentUser?.name }} {{ currentUser?.surname }}</h4>
       
-      <p class="role" *ngIf="isLogged && hasRole()">Role</p>
+      <p class="role" *ngIf="isLogged && hasRole()"> {{ role | titlecase }}</p>
       <p class="role" *ngIf="isLogged && !hasRole()">No Role</p>
       <mat-divider></mat-divider>
     </span>

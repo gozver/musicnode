@@ -1,17 +1,30 @@
 const models = require('../models');
 
-exports.create = async (req, res, next) => {
-  const company = { 
-    name: req.body.name,
-    desc: req.body.desc,
-    phone: req.body.phone,
-    email: req.body.email,
-    address: req.body.address,
-    avatar: req.body.avatar
-  };
+/**
+ * many to many relationships:
+ * https://sequelize.org/master/manual/assocs.html#many-to-many-relationships
+ * 
+ * special methods/mixins added to instances:
+ * https://sequelize.org/master/manual/assocs.html#special-methods-mixins-added-to-instances
+ */
 
-  models.company.create(company)
-    .then(data => res.json(data))
+ exports.create = async (req, res, next) => {
+  const companyIn = req.body.company;
+  const userId = req.body.userId;
+   
+  // find the user who is going to create the band
+  const user = await models.user.findOne({ where: { id: userId } })
+  .catch(err => {
+    if (!err.statusCode) err.statusCode = 500;
+
+    // print error and send it to error controller
+    console.log('--> error:');
+    console.log(err);
+    next(err);
+  });
+
+  // save the band into the db
+  const company = await models.company.create(companyIn)
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;
 
@@ -20,10 +33,23 @@ exports.create = async (req, res, next) => {
       console.log(err);
       next(err);
     });
+    
+  // add the data to the user-band junction table
+  await company.addUser(user);
+
+  // save the new role into the db
+  await models.role.create({ userId, roleId: 3, role: 'company' });
+
+  // return response to the client
+  res.json(company);
 }
 
 exports.findAll = async (req, res, next) => {
-  models.company.findAll()
+  models.company.findAll({
+    include: {
+      model: models.user
+    }
+  })
     .then(data => res.json(data))
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;
@@ -34,21 +60,3 @@ exports.findAll = async (req, res, next) => {
       next(err);
     });
 }
-
-// exports.findAll = async (req, res, next) => {
-//   models.company.findAll({
-//     attributes: ['id', 'name', 'description', 'phone', 'email', 'avatar', 'address'],
-//     include: {
-//       model: models.role,
-//       attributes: ['id', 'type']
-//     }
-//   }).then(data => res.json(data))
-//     .catch(err => {
-//       if (!err.statusCode) err.statusCode = 500;
-
-//       // print error and send it to error controller
-//       console.log('--> error:');
-//       console.log(err);
-//       next(err);
-//     });
-// }

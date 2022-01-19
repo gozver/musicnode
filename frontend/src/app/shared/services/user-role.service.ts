@@ -23,12 +23,6 @@ export class UserRoleService {
     );
   }
 
-  findByRoleId(roleId: number): Observable<UserRole[]> {
-    return this.http.get<UserRole[]>(`${environment.apiUrl}/user-role/role/${roleId}`).pipe(
-      catchError(this.errorHandlerService.handleError<any>('getUserRolesByRoleId', []))
-    );
-  }
-
   findByUserId(userId: number): Observable<UserRole[]> {
     return this.http.get<UserRole[]>(`${environment.apiUrl}/user-role/${userId}`).pipe(
       catchError(this.errorHandlerService.handleError<any>('findByUserId', []))

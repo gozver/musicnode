@@ -7,6 +7,5 @@ module.exports = {
   'error': require('./error'),
   'message': require('./message'),
   'role': require('./role'),
-  'user': require('./user'),
-  'userRole': require('./userRole')
+  'user': require('./user')
 }

@@ -4,6 +4,5 @@ module.exports = {
   'company': require('./company'),
   'message': require('./message'),
   'role': require('./role'),
-  'user': require('./user'),
-  'userRole': require('./userRole')
+  'user': require('./user')
 };

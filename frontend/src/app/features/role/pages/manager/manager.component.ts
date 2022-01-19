@@ -61,12 +61,12 @@ export class ManagerComponent implements OnInit {
       { id: 2, value: 'Company' },
     ];
 
-    this.userRoleService.findByUserId(this.currentUser.id).subscribe(userRolesList => {
-      this.userRolesList = userRolesList
+    // this.userRoleService.findByUserId(this.currentUser.id).subscribe(userRolesList => {
+    //   this.userRolesList = userRolesList
 
-      console.log('--> this.userRolesList:');
-      console.log(this.userRolesList);
-    })
+    //   console.log('--> this.userRolesList:');
+    //   console.log(this.userRolesList);
+    // })
   }
 
   initRoleForm(): void {
@@ -88,8 +88,7 @@ export class ManagerComponent implements OnInit {
       price:  [ null, [ Validators.required, Validators.pattern(this.priceRegex) ]],
       type:   [ '',   [ Validators.required, Validators.minLength(3) ]],
       scope:  [ '',   [ Validators.required, Validators.minLength(3) ]],
-      video:  [ '',   [ Validators.required, Validators.minLength(3) ]],
-      userId: [ null ]
+      video:  [ '',   [ Validators.required, Validators.minLength(3) ]]
     });
   }
 
@@ -104,34 +103,16 @@ export class ManagerComponent implements OnInit {
   }
 
   createBand(): void {
-    this.bandService.createBand(this.bandForm.value).subscribe(res => {
-      this.userRoleForm = this.fb.group({
-        userId: this.currentUser.id,
-        roleId: 2,
-        bandId: res.id,
-        companyId: null
-      });
-
-      this.userRoleService.createUserRole(this.userRoleForm.value).subscribe(() => {
-        this.currentUser.hasRole = true;
-        this.authService.setCurrentUser(this.currentUser);
-      });
+    this.bandService.createBand(this.bandForm.value, this.currentUser.id).subscribe(() => {
+      this.currentUser.hasRole = true;
+      this.authService.setCurrentUser(this.currentUser);
     });
   }
 
   createCompany(): void {
-    this.companyService.createCompany(this.companyForm.value).subscribe(res => {
-      this.userRoleForm = this.fb.group({
-        userId: this.currentUser.id,
-        roleId: 3,
-        bandId: null,
-        companyId: res.id
-      });
-
-      this.userRoleService.createUserRole(this.userRoleForm.value).subscribe(() => {
-        this.currentUser.hasRole = true;
-        this.authService.setCurrentUser(this.currentUser);
-      });
+    this.companyService.createCompany(this.companyForm.value, this.currentUser.id).subscribe(() => {
+      this.currentUser.hasRole = true;
+      this.authService.setCurrentUser(this.currentUser);
     });
   }
 
