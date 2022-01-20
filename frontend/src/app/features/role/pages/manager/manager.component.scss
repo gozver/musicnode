@@ -35,7 +35,13 @@ article {
     margin-top: 30px;
   }
 
-  .no-role-ctnr,
+  .has-role-ctnr {
+    h2 {
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
+  .has-no-role-ctnr,
   .add-role-ctnr {
     .card {
       display: flex;

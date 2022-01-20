@@ -16,7 +16,7 @@
   </section>
 
   <!-- USER HAS NO ROLE -->
-  <section class="no-role-ctnr" *ngIf="!hasRole()">
+  <section class="has-no-role-ctnr" *ngIf="!hasRole()">
     <div class="card">
       <form [formGroup]="roleForm" novalidate>
         <mat-form-field appearance="outline" class="input-headline role">
@@ -51,9 +51,16 @@
   </section>
 
   <!-- USER HAS ROLE -->
-  <section class="roles-ctnr" *ngIf="hasRole()">
+  <section class="has-role-ctnr" *ngIf="hasRole()">
     <h1>Roles List</h1>
     
+    <div [ngSwitch]="activeRole">
+      <h2 class="user" *ngSwitchCase="'1'">This user is a musician (active role)</h2>
+      <h2 class="user" *ngSwitchCase="'2'">This user belongs to a band (active role)</h2>
+      <h2 class="user" *ngSwitchCase="'3'">This user belongs to a company (active role)</h2>
+      <h2 class="user" *ngSwitchCase="'4'">This user is an independent contractor (active role)</h2>
+      <h2 class="user" *ngSwitchCase="'5'">This user is an administrator (active role)</h2>
+    </div>
     <!-- TO DO: SHOW USER ROLES -->
   </section>
 
@@ -65,7 +72,7 @@
         <form [formGroup]="roleForm" novalidate>
           <mat-form-field appearance="outline" class="input-headline role">
             <mat-label>Role</mat-label>
-            <mat-select formControlName="roleId" (changeEventChange)="printValue()">
+            <mat-select formControlName="roleId">
               <mat-option *ngFor="let item of selectAddRole" value="{{ item.id }}">{{ item.value }}</mat-option>
             </mat-select>
             <button mat-icon-button matSuffix [attr.aria-label]="'Role'" disabled>

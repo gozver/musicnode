@@ -22,9 +22,9 @@ export class ExploreComponent implements OnInit {
   usersList: User[] = [];
   bandsList: Band[] = [];
   companiesList: Company[] = [];
-  // musiciansURList: UserRole[] = [];
-  // contractorsURList: UserRole[] = [];
-  // admisURList: UserRole[] = [];
+  musiciansList: User[] = [];
+  contractorsList: User[] = [];
+  adminsList: User[] = [];
   
   roleSelect:  { id: number, value: string }[] = [
     { id: 1, value: 'All Users' },
@@ -57,12 +57,23 @@ export class ExploreComponent implements OnInit {
       this.bandsList = bandsList;
       this.companiesList = companiesList;
 
+      this.musiciansList = this.usersList.filter(item => item.activeRole === 1);
+      this.contractorsList = this.usersList.filter(item => item.activeRole === 4);
+      this.adminsList = this.usersList.filter(item => item.activeRole === 5);
+
       console.log('--> this.usersList:');
       console.log(this.usersList);
       console.log('--> this.bandsList:');
       console.log(this.bandsList);
       console.log('--> this.companiesList:');
       console.log(this.companiesList);
+
+      console.log('--> this.musiciansList:');
+      console.log(this.musiciansList);
+      console.log('--> this.contractorsList:');
+      console.log(this.contractorsList);
+      console.log('--> this.adminsList:');
+      console.log(this.adminsList);
     });
   }
 

@@ -5,9 +5,9 @@ const avatar = `${config.serverUrl}/avatars/user.png`;
 const password = '$2a$12$D/vDRpecICTWCv9rQIsH4.BVoMf8MlIHPQf0FZdAtKWestrGdmVGm';
 
 const contractorUsers = [
-  { name: 'Josiah', surname: 'Hill', email: 'josiah@gmail.com', phone: '123-456-789', password: password, avatar: avatar, hasRole: true },
-  { name: 'Elias', surname: 'Flores', email: 'elias@gmail.com', phone: '123-456-789', password: password, avatar: avatar, hasRole: true },
-  { name: 'Jaxon', surname: 'Green', email: 'jaxon@gmail.com', phone: '123-456-789', password: password, avatar: avatar, hasRole: true },
+  { name: 'Josiah', surname: 'Hill', email: 'josiah@gmail.com', phone: '123-456-789', password: password, avatar: avatar, hasRole: true, activeRole: 4 },
+  { name: 'Elias', surname: 'Flores', email: 'elias@gmail.com', phone: '123-456-789', password: password, avatar: avatar, hasRole: true, activeRole: 4 },
+  { name: 'Jaxon', surname: 'Green', email: 'jaxon@gmail.com', phone: '123-456-789', password: password, avatar: avatar, hasRole: true, activeRole: 4 }
 ];
 
 module.exports = contractorUsers;

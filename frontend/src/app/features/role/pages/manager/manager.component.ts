@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@shared/services/auth.service';
 import { BandService } from '@shared/services/band.service';
 import { CompanyService } from '@shared/services/company.service';
-import { RoleService } from '@shared/services/role.service';
 import { User } from '@shared/interfaces/user.interface';
 
 @Component({
@@ -15,6 +14,7 @@ import { User } from '@shared/interfaces/user.interface';
 export class ManagerComponent implements OnInit {
   // User related properties
   currentUser: User;
+  activeRole: number;
 
   // Form related properties
   roleForm: FormGroup;
@@ -27,11 +27,11 @@ export class ManagerComponent implements OnInit {
   ];
 
   addRoleDdl: { id: number, value: string }[] = [
-    { id: 1, value: 'Musician ' },
-    { id: 2, value: 'Band ' },
-    { id: 3, value: 'Company ' },
-    { id: 4, value: 'Contractor ' },
-    { id: 5, value: 'Admin ' },
+    { id: 1, value: 'Musician' },
+    { id: 2, value: 'Band' },
+    { id: 3, value: 'Company' },
+    { id: 4, value: 'Contractor' },
+    { id: 5, value: 'Admin' },
   ];
 
   // Regex related properties
@@ -43,8 +43,7 @@ export class ManagerComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
     private readonly bandService: BandService,
-    private readonly companyService: CompanyService,
-    private readonly roleService: RoleService,
+    private readonly companyService: CompanyService
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +56,7 @@ export class ManagerComponent implements OnInit {
 
   initComponentData(): void {
     this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
+    this.authService.activeRole$.subscribe(activeRole => this.activeRole = activeRole);
 
     this.noRoleDdl = [
       { id: 1, value: 'Band ' },

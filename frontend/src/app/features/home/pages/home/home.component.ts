@@ -7,13 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  imagesList: string[] = [
-    'https://images-na.ssl-images-amazon.com/images/I/51DR2KzeGBL._AC_.jpg',
-    'https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_960_720.jpg',
-    'https://torange.biz/photofx/93/8/light-vivid-colors-fragment-love-background-rain-fall-cover-93412.jpg',
-    'https://cdn.pixabay.com/photo/2017/07/18/18/24/dove-2516641_960_720.jpg',
-    'https://c0.wallpaperflare.com/preview/956/761/225/5be97da101a3f.jpg',
-    'https://upload.wikimedia.org/wikipedia/commons/9/9a/Swepac_FB_465%2C_RV70%2C_with_passing_lorry.jpg'
+  bandsList: any[] = [
+    { name: 'Aerosmith', img: 'assets/img/aerosmith.jpg', avatar: 'assets/img/aerosmith-logo.svg' },
+    { name: 'The Doors', img: 'assets/img/the-doors.jpg', avatar: 'assets/img/the-doors-logo.png' },
+    { name: 'Guns N Roses', img: 'assets/img/guns-n-roses.jpg', avatar: 'assets/img/guns-n-roses-logo.jpg' },
+    { name: 'Metallica', img: 'assets/img/metallica.jpg', avatar: 'assets/img/metallica-logo.jpg' },
+    { name: 'Pearl Jam', img: 'assets/img/pearl-jam.jpg', avatar: 'assets/img/pearl-jam-logo.gif' },
+    { name: 'ZZ Top', img: 'assets/img/zz-top.jpg', avatar: 'assets/img/zz-top-logo.jfif' }
   ];
 
   constructor() {
