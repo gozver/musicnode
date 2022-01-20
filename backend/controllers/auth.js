@@ -31,11 +31,11 @@ exports.login = async (req, res, next) => {
         userId: user.id 
       };
 
+      // create a jwt
       const expiresIn = { 
         expiresIn: '24h'
       };
 
-      // create a jwt
       const token = jwt.sign(params, config.secretKey, expiresIn);
 
       // return response to the client
@@ -47,7 +47,8 @@ exports.login = async (req, res, next) => {
         email: user.email,
         phone: user.phone,
         avatar: user.avatar,
-        hasRole: user.hasRole
+        hasRole: user.hasRole,
+        activeRole: user.activeRole
       });
     })
     // user not found
@@ -84,9 +85,9 @@ exports.signup = async (req, res, next) => {
   const surname = req.body.surname;  
   const phone = req.body.phone;
   const password = req.body.password;
-  const roleId = req.body.roleId;
   const code = req.body.code;
-
+  
+  let roleId = req.body.roleId;
   let userId, hasRole;
   
   // check admin code if user select admin role
@@ -99,14 +100,16 @@ exports.signup = async (req, res, next) => {
     // hash the password 12 times
     const hashedPwd = await bcrypt.hash(password, 12)
     
-    // if the user is a musician, a contractor or an admin, create user-role
-    // if the user belogns to a band or a company, we'll create user-role later
-    parseInt(roleId) === 1 || parseInt(roleId) === 4 || parseInt(roleId) === 5
-      ? hasRole = true
-      : hasRole = false;
+    // set has role value and check if the user has an active role
+    if (parseInt(roleId) === 1 || parseInt(roleId) === 4 || parseInt(roleId) === 5) {
+      hasRole = true;
+    } else {
+      hasRole = false;
+      roleId = 0;
+    }
     
     // save the user into the db
-    await models.user.create({ name, surname, email, phone, password: hashedPwd, hasRole })
+    await models.user.create({ name, surname, email, phone, password: hashedPwd, hasRole, activeRole: roleId })
       .then((user) => {
         // save the userId to operate with later
         userId = user.id;
@@ -123,6 +126,8 @@ exports.signup = async (req, res, next) => {
         next(err);
       });
 
+    // if the user is a musician, a contractor or an admin, create user-role
+    // if the user belogns to a band or a company, we'll create user-role later
     if (hasRole) {
       let role;
 

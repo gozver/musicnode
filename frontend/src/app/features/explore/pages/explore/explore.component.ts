@@ -6,12 +6,10 @@ import { forkJoin } from 'rxjs';
 import { UserService } from '@shared/services/user.service';
 import { BandService } from '@shared/services/band.service';
 import { CompanyService } from '@shared/services/company.service';
-import { UserRoleService } from '@shared/services/user-role.service';
 
 import { User } from '@shared/interfaces/user.interface';
 import { Band } from '@shared/interfaces/band.interface';
 import { Company } from '@shared/interfaces/company.interface';
-import { UserRole } from '@shared/interfaces/user-role.interface';
 
 @Component({
   selector: 'app-explore',
@@ -24,9 +22,9 @@ export class ExploreComponent implements OnInit {
   usersList: User[] = [];
   bandsList: Band[] = [];
   companiesList: Company[] = [];
-  musiciansURList: UserRole[] = [];
-  contractorsURList: UserRole[] = [];
-  admisURList: UserRole[] = [];
+  // musiciansURList: UserRole[] = [];
+  // contractorsURList: UserRole[] = [];
+  // admisURList: UserRole[] = [];
   
   roleSelect:  { id: number, value: string }[] = [
     { id: 1, value: 'All Users' },

@@ -19,8 +19,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
   isLogged: boolean = false;
+  activeRole: number;
   currentUser: User;
-  role: string;
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -45,28 +45,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   getComponentData(): void {
     this.authService.isLogged$.subscribe(isLogged => this.isLogged = isLogged);    
-    this.authService.currentUser$.subscribe(async currentUser => {
-      this.currentUser = currentUser;
-
-      // if (this.currentUser) {
-      //   setTimeout(() => {
-      //     this.userService.getUser(this.currentUser.id).subscribe(user => {
-      //       const roleId = user[0].roles[0].code;
-
-      //       console.log('--> user:');
-      //       console.log(user);
-
-      //       if (roleId !== 2 || roleId !== 3) {
-      //         this.role = user[0].roles[0].name;
-      //       } else {
-      //         this.role = user[0].roles[0].name;
-      //       }
-
-      //       console.log(`--> role: ${this.role}`);
-      //     })
-      //   }, 0);
-      // }
-    });
+    this.authService.activeRole$.subscribe(activeRole => this.activeRole = activeRole);    
+    this.authService.currentUser$.subscribe(async currentUser => this.currentUser = currentUser);
   }
 
   hasRole(): boolean {

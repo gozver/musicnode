@@ -26,7 +26,24 @@ exports.findOne = async (req, res, next) => {
       model: models.role 
     },
   })
-    .then(data => res.json(data))
+    .then(user => {
+      console.log('--> user:');
+      console.log(user);
+
+      if (user.length > 0) {
+        res.json(user)
+      } else {
+        // create error
+        const err = new Error();
+        err.statusCode = 401;
+        err.message = 'User not found';
+
+        // print error and send it to error controller
+        console.log('--> error:');
+        console.log(err);
+        next(err);  
+      }
+    })
     .catch(() => {
       // create error
       const err = new Error();
@@ -39,6 +56,37 @@ exports.findOne = async (req, res, next) => {
       next(err);
     });
 }
+
+// exports.findOne = async (req, res, next) => {
+//   const id = req.params.id;
+//   const whereString = {
+//     where: { id }
+//   };
+
+//   await models.user.findOne(whereString)
+//     .then(async (user) => {
+//       res.status(200).json({ 
+//         id: user.id,
+//         name: user.name,
+//         surname: user.surname,
+//         email: user.email,
+//         phone: user.phone,
+//         avatar: user.avatar,
+//         hasRole: user.hasRole
+//       });
+//     })
+//     .catch(() => {
+//       // create error
+//       const err = new Error();
+//       err.statusCode = 401;
+//       err.message = 'User not found';
+
+//       // print error and send it to error controller
+//       console.log('--> error:');
+//       console.log(err);
+//       next(err);
+//     });
+// }
 
 exports.updateAvatar = async (req, res, next) => {
   console.log('--> req.body.id:');

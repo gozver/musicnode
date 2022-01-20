@@ -22,7 +22,7 @@
         <mat-form-field appearance="outline" class="input-headline role">
           <mat-label>Role</mat-label>
           <mat-select formControlName="roleId" (changeEventChange)="printValue()">
-            <mat-option *ngFor="let item of selectNoRole" value="{{ item.id }}">{{ item.value }}</mat-option>
+            <mat-option *ngFor="let item of noRoleDdl" value="{{ item.id }}">{{ item.value }}</mat-option>
           </mat-select>
           <button mat-icon-button matSuffix [attr.aria-label]="'Role'" disabled>
             <mat-icon>category</mat-icon>
@@ -51,22 +51,10 @@
   </section>
 
   <!-- USER HAS ROLE -->
-  <section class="roles-ctnr" *ngIf="userRolesList.length > 0">
+  <section class="roles-ctnr" *ngIf="hasRole()">
     <h1>Roles List</h1>
     
-    <div *ngFor="let userRole of userRolesList">
-      <div *ngIf="userRole.roleId === 1">
-        <p>This person has a musician role.</p>
-      </div>
-
-      <div *ngIf="userRole.roleId === 4">
-        <p>This person has an independent contractor role.</p>
-      </div>
-
-      <div *ngIf="userRole.roleId === 5">
-        <p>This person has an administrator role.</p>
-      </div>
-    </div>    
+    <!-- TO DO: SHOW USER ROLES -->
   </section>
 
   <section class="add-role-ctnr" *ngIf="hasRole()">

@@ -7,7 +7,7 @@
       </button>
       
       <div class="title">
-        <!-- <img class="logo" src="assets/images/logo.png" /> -->
+        <!-- <img class="logo" src="assets/img/logo.png" /> -->
         <div>Musicnode</div>
       </div>
     </div>
@@ -26,11 +26,19 @@
       <img class="avatar mat-elevation-z8" src="assets/img/user.png" *ngIf="!isLogged"/>
       <img class="avatar mat-elevation-z8" src="{{ currentUser?.avatar }}" *ngIf="isLogged" />
       
-      <h4 class="user" *ngIf="!isLogged">Guest</h4>
-      <h4 class="user" *ngIf="isLogged">{{ currentUser?.name }} {{ currentUser?.surname }}</h4>
+      <div [ngSwitch]="isLogged">
+        <h4 class="user" *ngSwitchCase="false">Guest</h4>
+        <h4 class="user" *ngSwitchCase="true">{{ currentUser?.name }} {{ currentUser?.surname }}</h4>
+      </div>
       
-      <p class="role" *ngIf="isLogged && hasRole()"> {{ role | titlecase }}</p>
-      <p class="role" *ngIf="isLogged && !hasRole()">No Role</p>
+      <div [ngSwitch]="activeRole">
+        <p class="role" *ngSwitchCase="'1'">Musician</p>
+        <p class="role" *ngSwitchCase="'2'">Band</p>
+        <p class="role" *ngSwitchCase="'3'">Company</p>
+        <p class="role" *ngSwitchCase="'4'">Contractor</p>
+        <p class="role" *ngSwitchCase="'5'">Admin</p>
+      </div>
+
       <mat-divider></mat-divider>
     </span>
 
