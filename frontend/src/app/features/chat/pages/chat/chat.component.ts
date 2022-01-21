@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 import { forkJoin } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -16,17 +17,20 @@ import { Message } from '@shared/interfaces/message.interface';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-  // Users
+  isMobileView: boolean = false;
+  hideUsersCtnr: boolean = false;
+  hideChatCtnr: boolean = false;
+
   currentUser: User = null;
   selectedUser: User = null;
   usersList: User[] = [];
   
-  // Messages
   message: string = '';
   feedback: string = '';
   messagesList: Message[] = [];
 
   constructor(
+    private readonly bpObserver: BreakpointObserver,
     private readonly authService: AuthService,
     private readonly userService: UserService,
     private readonly chatService: ChatService
@@ -37,6 +41,11 @@ export class ChatComponent implements OnInit {
     this.getSocketData();
   }
 
+  ngAfterViewInit() {
+    this.setBreakPointObserver();
+  }
+
+  // General functions
   getComponentData(): void {
     forkJoin([
       this.authService.currentUser$.pipe(take(1)),
@@ -55,8 +64,27 @@ export class ChatComponent implements OnInit {
       .subscribe((data) => this.updateMessage(data));  
   }
 
+  setBreakPointObserver(): void {
+    this.bpObserver.observe(['(max-width: 800px)']).subscribe((res) => {
+      Promise.resolve().then(() => {
+        if (res.matches) {
+          this.isMobileView = true;
+        } else {
+          this.isMobileView = false;
+          this.hideUsersCtnr = false;
+          this.hideChatCtnr = false;
+        }
+      });
+    });
+  }
+
   selectUser(id: number): void {
     this.message = this.feedback = '';
+
+    if (this.isMobileView) {
+      this.hideUsersCtnr = true;
+      this.hideChatCtnr = false;
+    }
 
     this.selectedUser = this.usersList.find(user => user.id === id);
 
@@ -64,7 +92,14 @@ export class ChatComponent implements OnInit {
       .subscribe(messagesList => this.messagesList = messagesList);
   }
 
-  // type functions
+  showUsersCtnr(): void {
+    if (this.isMobileView && this.hideUsersCtnr) {
+      this.hideUsersCtnr = false;
+      this.hideChatCtnr = true;
+    }
+  }
+
+  // Type functions
   sendFeedback(): void {
     this.chatService.emit('type', {
       userId: this.currentUser.id,
@@ -75,11 +110,12 @@ export class ChatComponent implements OnInit {
   updateFeedback(data: any): void {
     if (data.userId !== this.currentUser.id) {
       this.feedback = `${data.userName} is writing a message`;
-    }
 
-    setTimeout(() => { 
-      this.feedback = ''
-    }, 6000);
+      const clearFeedback = setInterval(() => { 
+        this.feedback = '';
+        clearInterval(clearFeedback);
+      }, 6000);
+    } 
   }
 
   // Chat functions

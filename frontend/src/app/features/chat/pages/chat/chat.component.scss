@@ -48,6 +48,9 @@ article {
    
     .users-ctnr {
       width: 250px;
+      height: calc(100vh - 20rem);
+      overflow: hide;
+      overflow-y: scroll;
 
       @media (min-width: 800px) {
         min-width: 220px;
@@ -55,7 +58,7 @@ article {
 
       @media (max-width: 800px) {
         min-width: 100%;
-        margin-bottom: 10px;
+        height: calc(100vh - 25rem);
       }
 
       .user-card {
@@ -85,28 +88,44 @@ article {
         display: flex;
         flex-direction: row;
         align-items: center;
-
+        justify-content: space-between;
         color: #fff;
         background: #06548b;
         padding: 10px 20px;
         margin-bottom: 10px;
         border-radius: 5px;
+
+        .left {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+
+        .right {
+          .material-icons {
+            font-size: 28px;
+            cursor: pointer;
+          }
+        }
       }
   
       .chat-body {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-
         border: 1px solid #dddfe2;
         border-radius: 5px;
         box-shadow: 0 0.1px 1px #dddfe2;
         background: #fff;
         
-        height: 50vh;
+        height: calc(100vh - 29.8rem);
+        overflow: hide;
+        overflow-y: scroll;
+
         margin: 10px 0;
         padding: 10px;
         margin-bottom: 10px;
+        
+        @media (max-width: 800px) {
+          height: calc(38vh);
+        }
 
         .message-ctnr {
           padding: 12px 15px;
@@ -135,21 +154,7 @@ article {
             font-size: 14px;
             font-style: italic;
             margin: 5px 10px;
-
-            // animation-name: feedback;
-            // animation-duration: 2s;
-            // animation-iteration-count: 4;
           }
-
-          // @keyframes feedback {
-          //   from { 
-          //     color: #333;
-          //   }
-
-          //   to   {
-          //     color: #777; 
-          //   }
-          // }
 
           img {
             width: 14px;

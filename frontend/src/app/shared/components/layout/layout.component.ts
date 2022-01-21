@@ -1,11 +1,10 @@
 import { Component, ViewChild, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { BreakpointObserver } from '@angular/cdk/layout'
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 import { MatSidenav } from '@angular/material/sidenav';
 
 import { AuthService } from '@shared/services/auth.service';
-import { UserService } from './../../services/user.service';
 import { User } from '@app/shared/interfaces/user.interface';
 
 @Component({
@@ -26,8 +25,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     private cdRef: ChangeDetectorRef,
     private readonly router: Router,
     private readonly bpObserver: BreakpointObserver,
-    private readonly authService: AuthService,
-    private readonly userService: UserService
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {

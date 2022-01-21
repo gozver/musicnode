@@ -10,18 +10,24 @@
   </section>
 
   <section class="bottom-ctnr">
-    <div class="users-ctnr">
+    <div class="users-ctnr" *ngIf="!hideUsersCtnr">
       <div class="user-card" *ngFor="let user of usersList" (click)="selectUser(user.id)">
         <img class="avatar" [src]="user.avatar" [alt]="user.name" />
         <p class="username">{{ user?.name }} {{ user?.surname }}</p>
       </div>
     </div>
   
-    <div class="chat-ctnr">
+    <div class="chat-ctnr" *ngIf="!hideChatCtnr">
       <ng-container *ngIf="selectedUser">
         <div class="chat-header">
-          <img class="avatar" [src]="selectedUser.avatar" [alt]="selectedUser.name" />
-          <p class="username">{{ selectedUser?.name }} {{ selectedUser?.surname }}</p>
+          <div class="left">
+            <img class="avatar" [src]="selectedUser.avatar" [alt]="selectedUser.name" />
+            <p class="username">{{ selectedUser?.name }} {{ selectedUser?.surname }}</p>
+          </div>
+
+          <div class="right" *ngIf="isMobileView" (click)="showUsersCtnr()">
+            <i class="material-icons">keyboard_backspace</i>
+          </div>
         </div>
   
         <div class="chat-body">
