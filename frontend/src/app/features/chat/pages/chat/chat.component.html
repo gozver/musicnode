@@ -5,7 +5,7 @@
     <div class="subtitle">Let's chat</div>
 
     <div class="text">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima quasi odit repellendus. Quis eos sequi distinctio officiis veritatis quo repudiandae. Rerum ea maxime dignissimos a sed, minus nostrum. Eligendi, facere.
+      In this section you can get in touch with all the platform users. Click on the user you want to contact and start chatting. The user will receive the message in real time (websockets).
     </div>
   </section>
 
@@ -30,7 +30,7 @@
           </div>
         </div>
   
-        <div class="chat-body">
+        <div class="chat-body" #scrollMe>
           <ng-container *ngIf="messagesList.length > 0">
             <div *ngFor="let message of messagesList" [ngClass]="currentUser.id === message.userId ? 'left' : 'rigth'">
               <p class="message-ctnr" [ngClass]="currentUser.id === message.userId ? 'left' : 'rigth'" *ngIf="sanitizeMessage(message.userId)">{{ message?.body }}</p>

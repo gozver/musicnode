@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
 import { forkJoin } from 'rxjs';
@@ -16,7 +16,9 @@ import { Message } from '@shared/interfaces/message.interface';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewInit, AfterViewChecked {
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+
   isMobileView: boolean = false;
   hideUsersCtnr: boolean = false;
   hideChatCtnr: boolean = false;
@@ -45,6 +47,10 @@ export class ChatComponent implements OnInit {
     this.setBreakPointObserver();
   }
 
+  ngAfterViewChecked() {        
+    this.scrollToBottom();        
+  }
+
   // General functions
   getComponentData(): void {
     forkJoin([
@@ -61,9 +67,17 @@ export class ChatComponent implements OnInit {
       .subscribe((data) => this.updateFeedback(data));
     
     this.chatService.listen('chat')
-      .subscribe((data) => this.updateMessage(data));  
+      .subscribe((data) => this.updateMessage(data));
   }
 
+  // scroll chat to bottom each time a message is sent
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch(err) { }                 
+  }
+
+  // get if if the app is mobile view or not
   setBreakPointObserver(): void {
     this.bpObserver.observe(['(max-width: 800px)']).subscribe((res) => {
       Promise.resolve().then(() => {
@@ -144,8 +158,12 @@ export class ChatComponent implements OnInit {
     // Add the new message to the messageList array
     this.messagesList.push(data);
 
-    console.log('--> this.messagesList:');
-    console.log(this.messagesList);
+    // // TO DO: notifications
+    // console.log('--> data:');
+    // console.log(data);
+    // console.log(`--> currentUser: ${this.currentUser.id}`);
+    // console.log('--> this.messagesList:');
+    // console.log(this.messagesList);
     
     // avoid creating a duplicated message in the broadcasted client
     if (this.message) {

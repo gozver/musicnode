@@ -78,7 +78,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.closeIfIsMobileView();
   }
 
-  // Redirect functions (so the app redirects when clicking a button and not when when clicking an <a> tag)
+  // Redirect functions (so redirection occurs when clicking a button instead of clicking an <a> tag)
   navigateTo(component: string): void {
     this.router.navigate([`${component}`]);
     this.closeIfIsMobileView();
