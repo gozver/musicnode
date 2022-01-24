@@ -36,15 +36,16 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.setBreakPointObserver();
   }
 
-  // So this component can detects changes in other components
   ngAfterViewChecked() {
+    // This component will auto update when a behavior subject changes in other components
     this.cdRef.detectChanges();
   }
 
+  // General functions
   getComponentData(): void {
     this.authService.isLogged$.subscribe(isLogged => this.isLogged = isLogged);    
     this.authService.activeRole$.subscribe(activeRole => this.activeRole = activeRole);    
-    this.authService.currentUser$.subscribe(async currentUser => this.currentUser = currentUser);
+    this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
   }
 
   hasRole(): boolean {

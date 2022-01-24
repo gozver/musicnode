@@ -1,4 +1,5 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
 import { forkJoin } from 'rxjs';
@@ -16,12 +17,15 @@ import { Message } from '@shared/interfaces/message.interface';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, AfterViewInit, AfterViewChecked {
+export class ChatComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   isMobileView: boolean = false;
   hideUsersCtnr: boolean = false;
   hideChatCtnr: boolean = false;
+
+  subscription: any;
+  paramId: number;
 
   currentUser: User = null;
   selectedUser: User = null;
@@ -32,6 +36,7 @@ export class ChatComponent implements OnInit, AfterViewInit, AfterViewChecked {
   messagesList: Message[] = [];
 
   constructor(
+    private readonly route: ActivatedRoute,
     private readonly bpObserver: BreakpointObserver,
     private readonly authService: AuthService,
     private readonly userService: UserService,
@@ -51,6 +56,10 @@ export class ChatComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.scrollToBottom();        
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+  
   // General functions
   getComponentData(): void {
     forkJoin([
@@ -59,6 +68,15 @@ export class ChatComponent implements OnInit, AfterViewInit, AfterViewChecked {
     ]).subscribe(([ currentUser, usersList ]) => { 
       this.currentUser = currentUser;
       this.usersList = usersList.filter(user => user.id !== this.currentUser.id);
+
+      this.subscription = this.route.queryParams.subscribe(params => {
+        // Default to null if no query param provided
+        this.paramId = +params['id'] || null;
+  
+        if (this.paramId) {
+          this.selectedUser = this.usersList.find(user => user.id === this.paramId);
+        }
+      });
     });
   }
 

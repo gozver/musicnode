@@ -22,12 +22,12 @@ export class ProfileComponent implements OnInit {
   avatarSelected: boolean = false;
 
   constructor(
+    private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly activatedRoute: ActivatedRoute,
     private readonly authService: AuthService,
     private readonly userService: UserService
     ) {
-    this.profileId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.profileId = parseInt(this.route.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
@@ -51,12 +51,12 @@ export class ProfileComponent implements OnInit {
   initUserForm(profileUser: User): void {
     this.userForm = new FormGroup({
       name:   new FormControl(profileUser.name),
-      avatar: new FormControl(profileUser.avatar),
+      avatar: new FormControl(profileUser.avatar)
     });
   }
 
   isMyProfile(): boolean {
-    return this.currentUser.id === this.profileId
+    return this.currentUser.id === this.profileId;
   }
 
   onFileSelected(event: Event): void {

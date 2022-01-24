@@ -25,9 +25,10 @@
     </div>
   </section>
 
+  <!-- USERS -->
   <section class="users-list" *ngIf="usersList.length > 0 && +roleForm.value.roleId === 1">
     <div class="user-cntr" *ngFor="let user of usersList">
-      <div class="user">
+      <div class="user" (click)="goToUserProfile(user.id)">
         <img class="avatar" [src]="user?.avatar" alt="{{ user?.name }}">
 
         <div class="user-info">
@@ -37,16 +38,17 @@
       </div>
       
       <div class="btn-ctnr">
-        <button mat-flat-button color="warn" class="warn">
+        <button mat-flat-button color="warn" class="warn" [disabled]="currentUser.id === user.id" (click)="sendMessage(user.id)">
           Contact
         </button>
       </div>
     </div>
   </section>
 
+  <!-- MUSICIANS -->
   <section class="users-list" *ngIf="musiciansList.length > 0 && +roleForm.value.roleId === 2">
     <div class="user-cntr" *ngFor="let musician of musiciansList">
-      <div class="user">
+      <div class="user" (click)="goToUserProfile(musician.id)">
         <img class="avatar" [src]="musician?.avatar" alt="{{ musician?.name }}">
 
         <div class="user-info">
@@ -56,13 +58,14 @@
       </div>
       
       <div class="btn-ctnr">
-        <button mat-flat-button color="warn" class="warn">
+        <button mat-flat-button color="warn" class="warn" [disabled]="currentUser.id === musician.id" (click)="sendMessage(musician.id)">
           Contact
         </button>
       </div>
     </div>
   </section>
 
+  <!-- BANDS -->
   <section class="users-list" *ngIf="bandsList.length > 0 && +roleForm.value.roleId === 3">
     <div class="user-cntr" *ngFor="let band of bandsList">
       <div class="user">
@@ -82,6 +85,7 @@
     </div>
   </section>
 
+  <!-- COMPANIES -->
   <section class="users-list" *ngIf="companiesList.length > 0 && +roleForm.value.roleId === 4">
     <div class="user-cntr" *ngFor="let company of companiesList">
       <div class="user">
@@ -101,9 +105,10 @@
     </div>
   </section>
 
+  <!-- CONTRACTORS -->
   <section class="users-list" *ngIf="contractorsList.length > 0 && +roleForm.value.roleId === 5">
     <div class="user-cntr" *ngFor="let contractor of contractorsList">
-      <div class="user">
+      <div class="user" (click)="goToUserProfile(contractor.id)">
         <img class="avatar" [src]="contractor?.avatar" alt="{{ contractor?.name }}">
 
         <div class="user-info">
@@ -113,16 +118,17 @@
       </div>
       
       <div class="btn-ctnr">
-        <button mat-flat-button color="warn" class="warn">
+        <button mat-flat-button color="warn" class="warn" [disabled]="currentUser.id === contractor.id" (click)="sendMessage(contractor.id)">
           Contact
         </button>
       </div>
     </div>
   </section>
 
+  <!-- ADMINS -->
   <section class="users-list" *ngIf="adminsList.length > 0 && +roleForm.value.roleId === 6">
     <div class="user-cntr" *ngFor="let admin of adminsList">
-      <div class="user">
+      <div class="user" (click)="goToUserProfile(admin.id)">
         <img class="avatar" [src]="admin?.avatar" alt="{{ admin?.name }}">
 
         <div class="user-info">
@@ -132,7 +138,7 @@
       </div>
       
       <div class="btn-ctnr">
-        <button mat-flat-button color="warn" class="warn">
+        <button mat-flat-button color="warn" class="warn" [disabled]="currentUser.id === admin.id" (click)="sendMessage(admin.id)">
           Contact
         </button>
       </div>

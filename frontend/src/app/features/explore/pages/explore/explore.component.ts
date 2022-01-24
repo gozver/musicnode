@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { forkJoin } from 'rxjs';
 
+import { AuthService } from '@shared/services/auth.service';
 import { UserService } from '@shared/services/user.service';
 import { BandService } from '@shared/services/band.service';
 import { CompanyService } from '@shared/services/company.service';
@@ -19,6 +21,7 @@ import { Company } from '@shared/interfaces/company.interface';
 export class ExploreComponent implements OnInit {
   roleForm: FormGroup;
 
+  currentUser: User = null;
   usersList: User[] = [];
   bandsList: Band[] = [];
   companiesList: Company[] = [];
@@ -31,12 +34,14 @@ export class ExploreComponent implements OnInit {
     { id: 2, value: 'Musicians' },
     { id: 3, value: 'Bands'     },
     { id: 4, value: 'Companies' },
-    { id: 5, value: 'Independent Contractors' },
+    { id: 5, value: 'Contractors' },
     { id: 6, value: 'Administrators' }
   ];
 
   constructor(
     private readonly fb: FormBuilder,
+    private readonly router: Router,
+    private readonly authService: AuthService,
     private readonly userService: UserService,
     private readonly bandService: BandService,
     private readonly companyService: CompanyService
@@ -48,6 +53,8 @@ export class ExploreComponent implements OnInit {
   }
 
   initComponentData(): void {
+    this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
+
     forkJoin([
       this.userService.getUsers(),
       this.bandService.getBands(),
@@ -60,26 +67,18 @@ export class ExploreComponent implements OnInit {
       this.musiciansList = this.usersList.filter(item => item.activeRole === 1);
       this.contractorsList = this.usersList.filter(item => item.activeRole === 4);
       this.adminsList = this.usersList.filter(item => item.activeRole === 5);
-
-      console.log('--> this.usersList:');
-      console.log(this.usersList);
-      console.log('--> this.bandsList:');
-      console.log(this.bandsList);
-      console.log('--> this.companiesList:');
-      console.log(this.companiesList);
-
-      console.log('--> this.musiciansList:');
-      console.log(this.musiciansList);
-      console.log('--> this.contractorsList:');
-      console.log(this.contractorsList);
-      console.log('--> this.adminsList:');
-      console.log(this.adminsList);
     });
   }
 
   initRoleForm(): void {
-    this.roleForm = this.fb.group({
-      roleId: null
-    });
+    this.roleForm = this.fb.group({ roleId: null });
+  }
+
+  goToUserProfile(id: number): void {
+    this.router.navigate([`/profile/${id}`]);
+  }
+
+  sendMessage(id: number): void {
+    this.router.navigate(['/chat'], { queryParams: { id: id } });
   }
 }

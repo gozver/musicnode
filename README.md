@@ -31,8 +31,7 @@ Add animated gifs to show the final proyect
 - [Node Engine](https://nodejs.org/en/) version 14.15.0.
 
 ## Backend development server:
-- Run `npm run mocked-roles` before using the platform to insert roles into the database.
-- Run `npm run mocked-data` to insert demo data into the database.
+- Run `npm run mock` to insert demo data into the database.
 - Run `npm run dev` to run the server with nodemon. The app will automatically reload if you change any of the source files. <br/>
 
 NOTE: Roles are indispensable in order to use the platfrom, so make sure you run `npm run mocked-roles` once before running the serve.
