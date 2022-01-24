@@ -7,11 +7,11 @@ import { UserService } from '@shared/services/user.service';
 import { User } from '@app/shared/interfaces/user.interface';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  selector: 'app-user-profile',
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit {
   profileId: number;
   profileUser: User;
   
@@ -85,5 +85,9 @@ export class ProfileComponent implements OnInit {
       
       this.authService.setCurrentUser(this.currentUser);
     });
+  }
+
+  sendMessage(id: number): void {
+    this.router.navigate(['/chat'], { queryParams: { id } });
   }
 }

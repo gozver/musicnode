@@ -8,13 +8,13 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponentsModule } from '../components/profile-components.module';
 import { ComponentsModule } from '@shared/components/components.module';
 
-import { ProfileComponent } from './profile/profile.component'
+import { UserProfileComponent } from './user-profile/user-profile.component'
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 
 
 @NgModule({
   declarations: [
-    ProfileComponent,
+    UserProfileComponent,
     UpdateProfileComponent
   ],
   imports: [

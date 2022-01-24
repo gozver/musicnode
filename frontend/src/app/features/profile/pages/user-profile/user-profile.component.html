@@ -24,7 +24,8 @@
         <div class="email">{{ profileUser?.email }}</div>
         <div class="phone">{{ profileUser?.phone }}</div>
 
-        <button mat-flat-button color="warn" class="warn" *ngIf="!isMyProfile()">
+        <!-- button type="button" to avoid form submission -->
+        <button type="button" mat-flat-button color="warn" class="warn" *ngIf="!isMyProfile()" (click)="sendMessage(profileUser?.id)">
           Message
         </button>
       </div>
