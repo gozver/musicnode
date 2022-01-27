@@ -27,6 +27,15 @@ export class ContactComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.initComponentData();
+    this.initContactForm();
+  }
+
+  ngOnDestroy(): void {
+    this.contactForm.reset();
+  }
+
+  initComponentData(): void {
     this.authService.isLogged$.subscribe(isLogged => {
       this.isLogged = isLogged;
       
@@ -36,14 +45,8 @@ export class ContactComponent implements OnInit, OnDestroy {
         });
       }
     });
-
-    this.initContactForm();
   }
-
-  ngOnDestroy(): void {
-    this.contactForm.reset();
-  }
-
+  
   initContactForm(): void {
     let name  = this.isLogged ? `${this.currentUser.name} ${this.currentUser.surname}` : '';
     let email = this.isLogged ? this.currentUser.email : '';

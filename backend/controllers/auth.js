@@ -36,7 +36,7 @@ exports.login = async (req, res, next) => {
         expiresIn: '24h'
       };
 
-      const token = jwt.sign(params, config.secretKey, expiresIn);
+      const token = jwt.sign(params, config.token.secretKey, expiresIn);
 
       // return response to the client
       res.status(200).json({ 

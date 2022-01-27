@@ -1,7 +1,7 @@
 const config = require('../../config/config.json');
 
 // avatar and password for all the users (Abcd1234)
-const avatar = `${config.serverUrl}/avatars/user.png`;
+const avatar = `${config.server.url}/avatars/user.png`;
 const password = '$2a$12$D/vDRpecICTWCv9rQIsH4.BVoMf8MlIHPQf0FZdAtKWestrGdmVGm';
 
 const musicianUsers = [
