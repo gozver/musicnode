@@ -1,14 +1,9 @@
-// Angular
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-// RxJS
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
-// Services, interfaces and environment variables
 import { Email } from '@shared/interfaces/email.interface';
-import { ErrorHandlerService } from './error-handler.service';
 import { environment } from '@environments/environment';
 
 @Injectable({
@@ -20,13 +15,10 @@ export class EmailService {
   };
 
   constructor(
-    private http: HttpClient,
-    private errorHandlerService: ErrorHandlerService
+    private http: HttpClient
   ) { }
 
   sendEmail(params: Email): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/email`, params, this.httpOptions).pipe(
-      catchError(this.errorHandlerService.handleError<any>('create', null))
-    );
+    return this.http.post<any>(`${environment.apiUrl}/email`, params, this.httpOptions);
   }
 }

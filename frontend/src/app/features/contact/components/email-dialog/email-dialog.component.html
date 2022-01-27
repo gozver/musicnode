@@ -1,0 +1,27 @@
+<div class="dialog">
+  <div class="header">
+    {{ data.title }}
+  </div>
+  
+  <div class="content">
+    <p *ngIf="data.code">
+      <span class="param">Code: </span>
+      <span class="value">{{ data.code }}</span>
+    </p>
+    <p *ngIf="data.code">
+      <span class="param">Message: </span>
+      <span class="value">{{ data.message }}</span>
+    </p>
+    <p *ngIf="!data.code">
+      <span class="value">{{ data.message }}</span>
+    </p>
+  </div>
+
+  <!-- The dialog automatically focuses the first focusable element -->
+  <!-- We can avoid focusing the button by setting it's tabindex to -1 -->
+  <div class="footer">
+    <button mat-flat-button mat-dialog-close tabindex=-1 color="warn" [ngClass]="!data.code ? 'warn' : 'no-class'">
+      Close
+    </button>
+  </div>
+</div>

@@ -1,28 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@app/shared/modules/material.module';
-
-import { ContactRoutingModule } from './contact-routing.module';
-import { ContactComponentsModule } from '../components/contact-components.module';
 import { ComponentsModule } from '@shared/components/components.module';
 
-import { ContactComponent } from './contact/contact.component';
+import { EmailDialogComponent } from './email-dialog/email-dialog.component';
 
 @NgModule({
   declarations: [
-    ContactComponent
+    EmailDialogComponent
   ],
   imports: [
     CommonModule,
+    RouterModule,
     ReactiveFormsModule,
-    
-    MaterialModule,
 
-    ContactRoutingModule,
-    ContactComponentsModule,
-    ComponentsModule
+    MaterialModule,
+    ComponentsModule,
+  ], 
+  exports: [
+    EmailDialogComponent
   ]
 })
-export class ContactModule { }
+export class ContactComponentsModule { }

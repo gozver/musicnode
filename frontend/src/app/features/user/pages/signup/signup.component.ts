@@ -55,7 +55,6 @@ export class SignupComponent implements OnInit {
           ErrorDialogComponent, { 
           data: { 
             title: 'Signup Error',
-            operation: 'Signup',
             code: err.error.err.code,
             message: err.error.err.message 
           }

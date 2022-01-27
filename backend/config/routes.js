@@ -7,10 +7,9 @@ const controllers = require('../controllers');
 const storage = require('../config/storage');
 
 /**
- * get endpoint data from the browser: 'http://localhost:3000/api/model_name'
- * 
- * no auth middleware in find all to allow users to fetch the endpoints data from the browser
- * no auth middleware in methods that are used before login
+ * @info get endpoint data from the browser: 'http://localhost:3000/api/model_name'
+ * @info no auth middleware in find all to allow users to fetch the endpoints data from the browser
+ * @info no auth middleware in methods that are used before login
  */
 
 router
@@ -39,6 +38,6 @@ router
   .get    ('/message/:from:to', middlewares.auth, controllers.message.findAllByUsersIds)
   .post   ('/message',          middlewares.auth, controllers.message.create)
 
-  .post   ('/email',  controllers.email.sendEmail);
+  .post   ('/email',  controllers.email.sendContactEmail);
 
 module.exports = router;
