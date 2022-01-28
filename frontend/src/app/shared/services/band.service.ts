@@ -17,8 +17,9 @@ export class BandService {
     private errorHandlerService: ErrorHandlerService
   ) { }
 
-  getBands(): Observable<Band[]> {
-    return this.http.get<Band[]>(`${environment.apiUrl}/band`).pipe(
+  // any: in this controller model band includes model user and model image
+  getBands(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/band`).pipe(
       catchError(this.errorHandlerService.handleError<any>('getBands', []))
     );
   }

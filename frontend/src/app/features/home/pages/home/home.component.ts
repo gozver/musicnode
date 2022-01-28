@@ -1,5 +1,7 @@
-// Angular
 import { Component, OnInit } from '@angular/core';
+
+import { BandService } from '@shared/services/band.service';
+import { Band } from '@shared/interfaces/band.interface';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  bandsList: any[] = [
+  bandsList: Band[] = [];
+
+  topBandsList: any[] = [
     { name: 'Aerosmith', img: 'assets/img/aerosmith.jpg', avatar: 'assets/img/aerosmith-logo.svg' },
     { name: 'The Doors', img: 'assets/img/the-doors.jpg', avatar: 'assets/img/the-doors-logo.png' },
     { name: 'Guns N Roses', img: 'assets/img/guns-n-roses.jpg', avatar: 'assets/img/guns-n-roses-logo.jpg' },
@@ -16,12 +20,22 @@ export class HomeComponent implements OnInit {
     { name: 'ZZ Top', img: 'assets/img/zz-top.jpg', avatar: 'assets/img/zz-top-logo.jfif' }
   ];
 
-  constructor() {
-  }
+  constructor(
+    private readonly bandService: BandService
+  ) { }
 
   ngOnInit(): void {
+    this.initComponentData()
   }
 
-  postMessage(): void {
+  initComponentData(): void {
+    this.bandService.getBands().subscribe(bandsList => {
+      this.bandsList = bandsList;
+
+      console.log('--> bandsList:');
+      console.log(bandsList);
+
+      bandsList.forEach(band => console.log(band.images[0].image))
+    })
   }
 }

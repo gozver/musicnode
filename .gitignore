@@ -6,10 +6,8 @@
 /backend/.vscode/
 
 # folders
-/_apps/
-/_db/
 /_docs/
-/_tuto/
+/_info/
 
 # compressed files
 *.rar

@@ -5,82 +5,13 @@
   flex-direction: column;
   position: relative;
 
-  .toolbar-ctnr {
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    border: 1px solid $lightgray2;
-    margin-bottom: 20px;
-    
-    .left-ctnr {
-      flex: 0.5;
-
-      display: flex;
-      margin-left: 10px;
-      align-items: center;
-      gap: 10px;
-      
-      height: 100%;
-
-      .search-ctnr {
-        border-radius: 50px;
-        background: #eee;
-
-        width: 40px;
-        height: 40px;
-        cursor: pointer;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-  
-        input {
-          outline: none;
-          border: 1px solid lightgray;
-          padding: 10px 40px;
-          border-radius: 20px;
-        }
-      }
-    }
-
-    .right-ctnr {
-      flex: .5;
-
-      display: flex;
-      margin-right: 10px;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 10px;
-      
-      height: 100%;
-      padding: 15px;
-
-      // wildcard selector
-      > * {
-        // border: 1px solid $lightgray2;
-        border-radius: 50px;
-        background: #eee;
-
-        width: 40px;
-        height: 40px;
-        cursor: pointer;
-        margin-right: 10px;
-        padding: 5px;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-    }
-  }
-
   .cards-ctnr {
     display: flex;
     flex-direction: column;
 
     .cards {
-      flex: .5;
-
+      flex: 1;
+      
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -138,12 +69,92 @@
 
   .bands-ctnr {
     display: flex;
-    justify-content: center;
-    margin-top: 100px;
+    flex-direction: column;
+    
+    .bands {
+      flex: 1;
 
-    h1 {
-      font-size: 40px;
-      font-weight: 500;
+      .card {
+        margin: 20px 0;
+
+        img {
+          width: 100%;
+          flex: 1;
+        }
+      }
     }
+
+    
   }
 }
+
+
+
+// .toolbar-ctnr {
+//   z-index: 1000;
+//   display: flex;
+//   align-items: center;
+//   border: 1px solid $lightgray2;
+//   margin-bottom: 20px;
+  
+//   .left-ctnr {
+//     flex: 0.5;
+
+//     display: flex;
+//     margin-left: 10px;
+//     align-items: center;
+//     gap: 10px;
+    
+//     height: 100%;
+
+//     .search-ctnr {
+//       border-radius: 50px;
+//       background: #eee;
+
+//       width: 40px;
+//       height: 40px;
+//       cursor: pointer;
+
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+
+//       input {
+//         outline: none;
+//         border: 1px solid lightgray;
+//         padding: 10px 40px;
+//         border-radius: 20px;
+//       }
+//     }
+//   }
+
+//   .right-ctnr {
+//     flex: .5;
+
+//     display: flex;
+//     margin-right: 10px;
+//     align-items: center;
+//     justify-content: flex-end;
+//     gap: 10px;
+    
+//     height: 100%;
+//     padding: 15px;
+
+//     // wildcard selector
+//     > * {
+//       // border: 1px solid $lightgray2;
+//       border-radius: 50px;
+//       background: #eee;
+
+//       width: 40px;
+//       height: 40px;
+//       cursor: pointer;
+//       margin-right: 10px;
+//       padding: 5px;
+
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//     }
+//   }
+// }

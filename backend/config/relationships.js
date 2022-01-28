@@ -10,6 +10,15 @@ models.user.hasMany(models.role, {
 models.role.belongsTo(models.user);
 
 /**
+ * USER/MUSICIAN: ONE TO MANY
+ */
+ models.user.hasMany(models.musician, {
+  foreignKey: 'userId', onDelete: 'cascade', onUpdate: 'cascade'
+});
+
+models.musician.belongsTo(models.user);
+
+/**
  * USER/BAND: MANY TO MANY (DUPLICATED ENTRIES ALLOWED)
  */
 models.user.belongsToMany(models.band, { 
@@ -48,6 +57,43 @@ models.user.hasMany(models.message, {
 });
 
 models.message.belongsTo(models.user);
+
+/**
+ * BAND/IMAGE: ONE TO MANY
+ */
+ models.band.hasMany(models.image, {
+  foreignKey: 'bandId', onDelete: 'cascade', onUpdate: 'cascade'
+});
+
+models.image.belongsTo(models.band);
+
+/**
+ * COMPANY/IMAGE: ONE TO MANY
+ */
+ models.company.hasMany(models.image, {
+  foreignKey: 'companyId', onDelete: 'cascade', onUpdate: 'cascade'
+});
+
+models.image.belongsTo(models.company);
+
+/**
+ * MUSICIAN/IMAGE: ONE TO MANY
+ */
+ models.musician.hasMany(models.image, {
+  foreignKey: 'musicianId', onDelete: 'cascade', onUpdate: 'cascade'
+});
+
+models.image.belongsTo(models.musician);
+
+/**
+ * AD/IMAGE: ONE TO MANY
+ */
+ models.ad.hasMany(models.image, {
+  foreignKey: 'adId', onDelete: 'cascade', onUpdate: 'cascade'
+});
+
+models.image.belongsTo(models.ad);
+
 
 /**
  * RELATIONSHIP EXAMPLES

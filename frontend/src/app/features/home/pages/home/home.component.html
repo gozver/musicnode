@@ -1,9 +1,9 @@
 <div class="main-ctnr">
-  <div class="toolbar-ctnr">
+  
+  <!-- <div class="toolbar-ctnr">
     <div class="left-ctnr">
       <div class="search-ctnr">
         <mat-icon class="search-icon">search_outline</mat-icon>
-        <!-- <input placeholder="Search ..."> -->
       </div>
     </div>
     
@@ -25,23 +25,21 @@
       </div>
   
       <div>
-        <!-- <mat-icon [matMenuTriggerFor]="expand_more">menu</mat-icon> -->
         <mat-icon [matMenuTriggerFor]="menu">menu</mat-icon>
   
         <mat-menu #menu="matMenu">
           <button mat-menu-item>
-          <!-- <button mat-menu-item (click)="logout()"> -->
             <mat-icon>exit_to_app</mat-icon> 
             <span>Logout &nbsp;&nbsp;&nbsp;</span>
           </button>
         </mat-menu>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="cards-ctnr">
-    <div class="cards">    
-      <mat-card class="card-img" *ngFor="let band of bandsList">
+    <div class="cards">
+      <mat-card class="card-img" *ngFor="let band of topBandsList">
         <img class="bg" alt="bg" src="{{ band.img }}">
 
         <mat-card-content>
@@ -53,7 +51,11 @@
   </div>
 
   <div class="bands-ctnr">
-    <h1>TO DO</h1>
+    <div class="bands">
+      <mat-card class="card" *ngFor="let band of bandsList">
+        <img class="band-portrait" alt="band" src="{{ band.images[0].image }}" width="500px">
+      </mat-card>
+    </div>
   </div>
 </div>
     

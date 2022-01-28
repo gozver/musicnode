@@ -12,7 +12,7 @@ Ad.init({
   location:    { type: DataTypes.STRING,  allowNull: false, validate: { notEmpty: true } },
   description: { type: DataTypes.TEXT,    allowNull: false, validate: { notEmpty: true } },
   
-  userId:      { type: DataTypes.INTEGER, allowNull: false  },
+  userId:      { type: DataTypes.INTEGER, allowNull: false, validate: { notEmpty: false } },
 }, { 
   sequelize,
   modelName: 'ad'

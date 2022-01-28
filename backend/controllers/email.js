@@ -71,7 +71,6 @@ exports.sendContactEmail = async (req, res, next) => {
       } else {
         res.status(200).send(info);
       }
-        
     });
   } catch(err) {
     if (!err.statusCode) err.statusCode = 500;

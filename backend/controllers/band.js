@@ -46,9 +46,11 @@ exports.create = async (req, res, next) => {
 
 exports.findAll = async (req, res, next) => {
   models.band.findAll({
-    include: {
+    include: [{
       model: models.user
-    }
+    }, {
+      model: models.image
+    }]
   })
     .then(data => res.json(data))
     .catch(err => {

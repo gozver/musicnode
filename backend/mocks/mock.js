@@ -377,7 +377,15 @@ db.sync({ force: true })
     await models.role.create({ userId: 51, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 52, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 53, roleId: 2, role: 'band' },);
-  });
+  })
+  // band images
+  .then(async () => {
+    // insert band images into the db
+    for (let bandImage of seed.bandImage) {
+      await models.image.create(bandImage);
+    }
+  })
+  .catch(err => console.log('--> error:', err));
 
 // const ads = [
 //   { title: 'Title 1',  description: 'Description 1',  userId: 1 },

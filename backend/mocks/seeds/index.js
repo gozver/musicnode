@@ -4,5 +4,7 @@ module.exports = {
   'musicianUser': require('./musicianUser'),
   'musicianRole': require('./musicianRole'),
   'contractorUser': require('./contractorUser'),
-  'contractorRole': require('./contractorRole')
+  'contractorRole': require('./contractorRole'),
+  
+  'bandImage': require('./bandImage'),
 }
