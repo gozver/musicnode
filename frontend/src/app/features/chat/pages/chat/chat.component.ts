@@ -73,9 +73,7 @@ export class ChatComponent implements OnInit, AfterViewInit, AfterViewChecked, O
         // Default to null if no query param provided
         this.paramId = +params['id'] || null;
   
-        if (this.paramId) {
-          this.selectedUser = this.usersList.find(user => user.id === this.paramId);
-        }
+        if (this.paramId) this.selectUser(this.paramId);
       });
     });
   }
@@ -141,7 +139,7 @@ export class ChatComponent implements OnInit, AfterViewInit, AfterViewChecked, O
 
   updateFeedback(data: any): void {
     if (data.userId !== this.currentUser.id) {
-      this.feedback = `${data.userName} is writing a message`;
+      this.feedback = 'is writing';
 
       const clearFeedback = setInterval(() => { 
         this.feedback = '';

@@ -29,13 +29,6 @@ export class HomeComponent implements OnInit {
   }
 
   initComponentData(): void {
-    this.bandService.getBands().subscribe(bandsList => {
-      this.bandsList = bandsList;
-
-      console.log('--> bandsList:');
-      console.log(bandsList);
-
-      bandsList.forEach(band => console.log(band.images[0].image))
-    })
+    this.bandService.getBands().subscribe(bandsList => this.bandsList = bandsList);
   }
 }

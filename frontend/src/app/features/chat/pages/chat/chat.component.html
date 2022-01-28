@@ -23,6 +23,11 @@
           <div class="left">
             <img class="avatar" [src]="selectedUser.avatar" [alt]="selectedUser.name" />
             <p class="username">{{ selectedUser?.name }} {{ selectedUser?.surname }}</p>
+
+            <div class="feedback-ctnr" *ngIf="feedback.length>0">
+              <p class="feedback">{{ feedback }}</p>
+              <img src="assets/gif/loading-dots-2.gif" alt="">
+            </div>
           </div>
 
           <div class="right" *ngIf="isMobileView" (click)="showUsersCtnr()">
@@ -35,16 +40,11 @@
             <div *ngFor="let message of messagesList" [ngClass]="currentUser.id === message.userId ? 'left' : 'rigth'">
               <p class="message-ctnr" [ngClass]="currentUser.id === message.userId ? 'left' : 'rigth'" *ngIf="sanitizeMessage(message.userId)">{{ message?.body }}</p>
             </div>
-
-            <div class="feedback-ctnr" *ngIf="feedback.length>0">
-              <p class="feedback">{{ feedback }}</p>
-              <img src="assets/gif/loading-dots.gif" alt="">
-            </div>
           </ng-container>
         </div>
   
         <div class="chat-footer">
-          <input placeholder="Type a message" [(ngModel)]="message" autocomplete="off" (keypress)="sendFeedback()" />
+          <input placeholder="Type a message" [(ngModel)]="message" autocomplete="off" (keypress)="sendFeedback()" (keyup.enter)="sendMessage()" />
           
           <button mat-flat-button color="warn" class="warn" (click)="sendMessage()">
             Send

@@ -99,6 +99,22 @@ article {
           display: flex;
           flex-direction: row;
           align-items: center;
+
+          .feedback-ctnr {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+  
+            .feedback {
+              margin-left: 3px;
+            }
+  
+            img {
+              width: 24px;
+              transform: translate(3px, 4px);
+              color: #fff;
+            }
+          }
         }
 
         .right {
@@ -143,23 +159,6 @@ article {
         .rigth {
           display: flex;
           justify-content: flex-end;
-        }
-
-        .feedback-ctnr {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-
-          .feedback {
-            font-size: 14px;
-            font-style: italic;
-            margin: 5px 10px;
-          }
-
-          img {
-            width: 14px;
-            transform: translate(-5px, 4px);
-          }
         }
       }
   
