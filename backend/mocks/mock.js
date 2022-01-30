@@ -77,8 +77,8 @@ db.sync({ force: true })
 
     // companies
     const compIn1 = { name: 'Vnue', desc: compIn1Desc, phone: '123-456-789', email: 'vnue@gmail.com', avatar: avatar, address: 'False Street 123' };
-    const compIn2 = { name: 'Producer Presets', desc: compIn2Desc, phone: '123-456-789', email: 'producerpresets@gmail.com', avatar: avatar, address: 'False street 456' };
-    const compIn3 = { name: 'Hapinez Productions', desc: compIn3Desc, phone: '123-456-789', email: 'hapinezproductions@gmail.com', avatar: avatar, address: 'False street 456' };
+    const compIn2 = { name: 'Producer Presets', desc: compIn2Desc, phone: '123-456-789', email: 'producer@gmail.com', avatar: avatar, address: 'False street 456' };
+    const compIn3 = { name: 'Hapinez Productions', desc: compIn3Desc, phone: '123-456-789', email: 'hapinez@gmail.com', avatar: avatar, address: 'False street 456' };
 
     // create companies
     const comp1 = await models.company.create(compIn1);
@@ -173,7 +173,7 @@ db.sync({ force: true })
       name: 'ZZ Top', desc: bandIn11Desc, phone: '123-456-789', email: 'zztop@gmail.com', roleId: 4, type: 'Heavy', price: 1100, scope: 'Madrid', avatar: `${config.server.url}/avatars/zz_top.jpg`, video: null 
     };
     const bandIn12 = {
-      name: 'Sly & the Family Stone', desc: bandIn12Desc, phone: '123-456-789', email: 'slyandthefamilystone@gmail.com', roleId: 4, type: 'Heavy', price: 1200, scope: 'Barcelona', avatar: `${config.server.url}/avatars/sly.jpg`, video: null 
+      name: 'Sly & the Family Stone', desc: bandIn12Desc, phone: '123-456-789', email: 'familystone@gmail.com', roleId: 4, type: 'Heavy', price: 1200, scope: 'Barcelona', avatar: `${config.server.url}/avatars/sly.jpg`, video: null 
     };
     
     // create companies

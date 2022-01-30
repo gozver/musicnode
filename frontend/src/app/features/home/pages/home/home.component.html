@@ -11,7 +11,7 @@
 
   <section class="top-bands">
     <div class="top-bands-ctnr">
-      <mat-card *ngFor="let band of topBandsList">
+      <mat-card *ngFor="let band of topBandsList; let i = index" [ngClass]="isMobileView && i > 2 ? 'hidden' : 'none'">
         <img class="background" alt="bg" src="{{ band?.img }}">
 
         <mat-card-content>
@@ -53,52 +53,4 @@
       </mat-card>
     </div>
   </div>
-</article>
-
-<!-- <div class="main-ctnr"> -->
-  <!-- <div class="toolbar-ctnr">
-    <div class="left-ctnr">
-      <div class="search-ctnr">
-        <mat-icon class="search-icon">search_outline</mat-icon>
-      </div>
-    </div>
-    
-    <div class="right-ctnr">
-      <div>
-        <mat-icon>add</mat-icon>
-      </div>
-  
-      <div>
-        <mat-icon matBadge="4" matBadgeColor="primary" matBadgeOverlap="false" matBadgePosition="above after">
-          forum
-        </mat-icon>
-      </div>
-  
-      <div>
-        <mat-icon matBadge="3" matBadgeColor="warn" matBadgeOverlap="false">
-          notifications
-        </mat-icon>
-      </div>
-  
-      <div>
-        <mat-icon [matMenuTriggerFor]="menu">menu</mat-icon>
-  
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <mat-icon>exit_to_app</mat-icon> 
-            <span>Logout &nbsp;&nbsp;&nbsp;</span>
-          </button>
-        </mat-menu>
-      </div>
-    </div>
-  </div> -->
-
-  <!-- <div class="bands-ctnr">
-    <div class="bands">
-      <div class="card" *ngFor="let band of bandsList">
-        <img class="band-portrait" alt="band" src="{{ band.images[0].image }}" width="500px">
-      </div>
-    </div>
-  </div> -->
-<!-- </div> -->
-    
+</article>    

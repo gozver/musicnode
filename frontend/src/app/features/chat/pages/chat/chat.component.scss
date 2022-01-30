@@ -93,7 +93,7 @@ article {
         background: #06548b;
         padding: 10px 20px;
         margin-bottom: 10px;
-        border-radius: 5px;
+        border-radius: 4px;
 
         .left {
           display: flex;
@@ -127,8 +127,7 @@ article {
   
       .chat-body {
         border: 1px solid #dddfe2;
-        border-radius: 5px;
-        box-shadow: 0 0.1px 1px #dddfe2;
+        border-radius: 4px;
         background: #fff;
         
         height: calc(100vh - 29.8rem);
@@ -146,7 +145,7 @@ article {
         .message-ctnr {
           padding: 12px 15px;
           margin: 10px 5px;
-          border-radius: 5px;
+          border-radius: 4px;
           background: #f0f2f583;
           max-width: 90%;
         }
@@ -174,8 +173,7 @@ article {
           padding: 22px;
           background: #fff;
           border: 1px solid #dddfe2;
-          border-radius: 5px;
-          box-shadow: 0 0.1px 1px #dddfe2;
+          border-radius: 4px;
           outline: none;
 
           &::placeholder {
@@ -186,7 +184,6 @@ article {
         
         button {
           width: 20%;
-          border-radius: 5px;
         }
       }
     }
