@@ -3,5 +3,19 @@
 
 # But not these files...
 !.gitignore
+
 !user.png
 !user.jpg
+
+!aerosmith.jpg
+!guns_n_roses.jpg
+!iggy_pop.jpeg
+!kiss.png
+!metallica.jpg
+!pearl_jam.gif
+!sly.jpg
+!the_beach_boys.jpg
+!the_doors.png
+!the_eagles.jpg
+!van_halen.jpg
+!zz_top.jpg

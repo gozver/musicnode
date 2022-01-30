@@ -18,10 +18,7 @@ oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
 // controller to send contact emails
 exports.sendContactEmail = async (req, res, next) => {
-  fullName = req.body.name;
-  email = req.body.email;
-  phone = req.body.phone;
-  message = req.body.message;
+  const { name, email, phone, message } = req.body;
 
   try {
     // create access token
@@ -40,17 +37,17 @@ exports.sendContactEmail = async (req, res, next) => {
       }
     });    
 
-    // set the email options (we don't use the sender email because doesn't exists)
+    // set the email options (we don't use the sender email because it isn'n a real email account)
     const mailOptions = {
       // from: email,
       from: 'gozver@gmail.com',
       to: 'gozver@gmail.com',
-      subject: `Musicnode contact inquire from ${fullName}`,
+      subject: `Musicnode contact inquire from ${name}`,
       text: message,
       html: `
       <h3>User information</h3>
       <ul>
-        <li>User: ${fullName}</li>
+        <li>User: ${name}</li>
         <li>Email: ${email}</li>
         <li>Phone: ${phone}</li>
       </ul>

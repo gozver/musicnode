@@ -1,5 +1,29 @@
-<div class="main-ctnr">
-  
+<article>
+  <section class="top-ctnr">
+    <div class=title>HOME</div>
+    
+    <div class="subtitle">Request a budget</div>
+
+    <div class="text">
+      In this section you will get a list of all the bands subscribed to Musicnode. If you want to know more details, click on one of the bands to go to its profile, and if you need a personalized budget for your event, contact with the band specifying all the details.
+    </div>
+  </section>
+
+  <div class="highlighted-bands-ctnr">
+    <div class="highlighted-bands">
+      <mat-card class="card-img" *ngFor="let band of topBandsList">
+        <img class="bg" alt="bg" src="{{ band?.img }}">
+
+        <mat-card-content>
+          <img class="avatar" alt="avatar" src="{{ band?.avatar }}" width="50px">
+          <span class="card-name">{{ band?.name }}</span>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</article>
+
+<!-- <div class="main-ctnr"> -->
   <!-- <div class="toolbar-ctnr">
     <div class="left-ctnr">
       <div class="search-ctnr">
@@ -37,25 +61,12 @@
     </div>
   </div> -->
 
-  <div class="cards-ctnr">
-    <div class="cards">
-      <mat-card class="card-img" *ngFor="let band of topBandsList">
-        <img class="bg" alt="bg" src="{{ band.img }}">
-
-        <mat-card-content>
-          <img class="avatar" alt="avatar" src="{{ band.avatar }}" width="50px">
-          <span class="card-name">{{ band.name }}</span>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
-
-  <div class="bands-ctnr">
+  <!-- <div class="bands-ctnr">
     <div class="bands">
-      <mat-card class="card" *ngFor="let band of bandsList">
+      <div class="card" *ngFor="let band of bandsList">
         <img class="band-portrait" alt="band" src="{{ band.images[0].image }}" width="500px">
-      </mat-card>
+      </div>
     </div>
-  </div>
-</div>
+  </div> -->
+<!-- </div> -->
     

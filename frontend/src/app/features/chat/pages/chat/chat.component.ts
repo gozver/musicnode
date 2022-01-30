@@ -1,9 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
-
-import { forkJoin } from 'rxjs';
-import { take } from 'rxjs/operators';
 
 import { AuthService } from '@shared/services/auth.service';
 import { UserService } from '@shared/services/user.service';
@@ -18,7 +15,7 @@ import { Message } from '@shared/interfaces/message.interface';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
-  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+  @ViewChild('scroll') private scrollCtnr: ElementRef;
 
   isMobileView: boolean = false;
   hideUsersCtnr: boolean = false;
@@ -62,11 +59,9 @@ export class ChatComponent implements OnInit, AfterViewInit, AfterViewChecked, O
   
   // General functions
   getComponentData(): void {
-    forkJoin([
-      this.authService.currentUser$.pipe(take(1)),
-      this.userService.getUsers()
-    ]).subscribe(([ currentUser, usersList ]) => { 
-      this.currentUser = currentUser;
+    this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
+    
+    this.userService.getUsers().subscribe(usersList => {
       this.usersList = usersList.filter(user => user.id !== this.currentUser.id);
 
       this.subscription = this.route.queryParams.subscribe(params => {
@@ -89,11 +84,11 @@ export class ChatComponent implements OnInit, AfterViewInit, AfterViewChecked, O
   // scroll chat to bottom each time a message is sent
   scrollToBottom(): void {
     try {
-      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+      this.scrollCtnr.nativeElement.scrollTop = this.scrollCtnr.nativeElement.scrollHeight;
     } catch(err) { }                 
   }
 
-  // get if if the app is mobile view or not
+  // get app view (mobile or desktop)
   setBreakPointObserver(): void {
     this.bpObserver.observe(['(max-width: 800px)']).subscribe((res) => {
       Promise.resolve().then(() => {

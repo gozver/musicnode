@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { BandService } from '@shared/services/band.service';
-import { Band } from '@shared/interfaces/band.interface';
 
 @Component({
   selector: 'app-home',
@@ -9,26 +8,43 @@ import { Band } from '@shared/interfaces/band.interface';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  bandsList: Band[] = [];
-
-  topBandsList: any[] = [
-    { name: 'Aerosmith', img: 'assets/img/aerosmith.jpg', avatar: 'assets/img/aerosmith-logo.svg' },
-    { name: 'The Doors', img: 'assets/img/the-doors.jpg', avatar: 'assets/img/the-doors-logo.png' },
-    { name: 'Guns N Roses', img: 'assets/img/guns-n-roses.jpg', avatar: 'assets/img/guns-n-roses-logo.jpg' },
-    { name: 'Metallica', img: 'assets/img/metallica.jpg', avatar: 'assets/img/metallica-logo.jpg' },
-    { name: 'Pearl Jam', img: 'assets/img/pearl-jam.jpg', avatar: 'assets/img/pearl-jam-logo.gif' },
-    { name: 'ZZ Top', img: 'assets/img/zz-top.jpg', avatar: 'assets/img/zz-top-logo.jfif' }
-  ];
+  bandsList: any[] = [];
+  topBandsList: any[] = [];
 
   constructor(
     private readonly bandService: BandService
   ) { }
 
   ngOnInit(): void {
-    this.initComponentData()
+    this.initComponentData();
   }
 
   initComponentData(): void {
-    this.bandService.getBands().subscribe(bandsList => this.bandsList = bandsList);
+    this.bandService.getBands().subscribe(async (bandsList) =>  {
+      this.bandsList = bandsList;
+
+      const indexesList = await this.getIndexes();
+      
+      for (let i = 0; i < 6; i++) {
+        const band = {
+          name: this.bandsList[indexesList[i]].name,
+          img: this.bandsList[indexesList[i]].images[0].image,
+          avatar: this.bandsList[indexesList[i]].avatar 
+        };
+        
+        this.topBandsList = [...this.topBandsList, band];
+      }
+    });
+  }
+
+  getIndexes() {
+    let indexesList: number[] = [];
+
+    while(indexesList.length < 6) {
+      const index: number = Math.floor(Math.random() * this.bandsList.length);
+      if(indexesList.indexOf(index) === -1) indexesList.push(index);
+    }
+
+    return indexesList;
   }
 }

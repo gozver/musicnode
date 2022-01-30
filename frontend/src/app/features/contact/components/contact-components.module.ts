@@ -6,11 +6,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '@app/shared/modules/material.module';
 import { ComponentsModule } from '@shared/components/components.module';
 
-import { EmailDialogComponent } from './email-dialog/email-dialog.component';
+import { ContactDialogComponent } from './contact-dialog/contact-dialog.component';
 
 @NgModule({
   declarations: [
-    EmailDialogComponent
+    ContactDialogComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +21,7 @@ import { EmailDialogComponent } from './email-dialog/email-dialog.component';
     ComponentsModule,
   ], 
   exports: [
-    EmailDialogComponent
+    ContactDialogComponent
   ]
 })
 export class ContactComponentsModule { }

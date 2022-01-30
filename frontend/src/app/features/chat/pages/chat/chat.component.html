@@ -35,7 +35,7 @@
           </div>
         </div>
   
-        <div class="chat-body" #scrollMe>
+        <div class="chat-body" #scroll>
           <ng-container *ngIf="messagesList.length > 0">
             <div *ngFor="let message of messagesList" [ngClass]="currentUser.id === message.userId ? 'left' : 'rigth'">
               <p class="message-ctnr" [ngClass]="currentUser.id === message.userId ? 'left' : 'rigth'" *ngIf="sanitizeMessage(message.userId)">{{ message?.body }}</p>

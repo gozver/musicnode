@@ -5,8 +5,7 @@ const config = require('../config/config.json');
 const models = require('../models');
 
 exports.login = async (req, res, next) => {
-  const email = req.body.email;
-  const password = req.body.password;
+  const { email, password } = req.body;
   const whereString = {
     where: { email }
   };
@@ -81,11 +80,7 @@ exports.signup = async (req, res, next) => {
     });
 
   // if the email does not exist, continue
-  const name = req.body.name;
-  const surname = req.body.surname;  
-  const phone = req.body.phone;
-  const password = req.body.password;
-  const code = req.body.code;
+  const { name, surname, phone, password, code } = req.body;
   
   let roleId = req.body.roleId;
   let userId, hasRole;
@@ -144,7 +139,7 @@ exports.signup = async (req, res, next) => {
       }
 
       // save the new role in the db
-      await models.role.create({ userId, roleId: roleId, role });
+      await models.role.create({ userId, roleId, role });
     }
   }
 };

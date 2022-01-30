@@ -1,92 +1,190 @@
 @import 'src/styles';
 
-.main-ctnr {
-  display: flex;
-  flex-direction: column;
-  position: relative;
+article {
+  padding: 30px 30px 0 30px;
+  color: #333;
 
-  .cards-ctnr {
+  @media (max-width: 800px) {
+    padding: 30px 10px 10px 10px;
+  }
+
+  .top-ctnr {
+    .title {
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+
+    .subtitle {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #eeaa24;
+
+      margin-top: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  .highlighted-bands-ctnr {
     display: flex;
     flex-direction: column;
-
-    .cards {
+    
+    margin-top: 1.875rem;
+    
+    .highlighted-bands {
       flex: 1;
       
       display: flex;
+      flex-direction: row;
       justify-content: space-around;
       align-items: center;
       gap: 10px;
 
-      .card-img {
-        width: 150px;
-        height: 200px;
-        border-radius: 20px;
-        position: relative;
-        z-index: 0;
+      mat-card {
+        box-shadow: none;
 
-        &:hover {
+        &.card-img {
+          width: 150px;
+          height: 200px;
+          position: relative;
+          border-radius: 20px;
+          
+          &:hover {
+            img.bg {
+              transform: scale(1.06);
+            }
+          }
+        
+          span {
+            position: absolute;
+            bottom: 10px;
+            left: 5px;
+            padding: 5px;
+            
+            font-size: 1rem;
+            font-weight: 500;
+            color: white;
+          }
+  
           img.bg {
-            transform: scale(1.06);
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            max-width: 100%;
+            object-fit: cover;
+            height: 100%;
+
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+          }
+  
+          img.avatar {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
           }
         }
-      
-        span {
-          font-size: 15px;
-          line-height: 1.2;
-          position: absolute;
-          bottom: 10px;
-          left: 5px;
-          color: white;
-          font-weight: 600;
-          padding: 5px;
-        }
-
-        img.bg {
-          max-width: 100%;
-          object-fit: cover;
-          height: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          border-radius: 20px;
-          transition: all 0.3s ease;
-          cursor: pointer;
-        }
-
-        img.avatar {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          color: white;
-          z-index: 99;
-          position: absolute;
-          top: 10px;
-          left: 10px;
-        }
       }
     }
-  }
-
-  .bands-ctnr {
-    display: flex;
-    flex-direction: column;
-    
-    .bands {
-      flex: 1;
-
-      .card {
-        margin: 20px 0;
-
-        img {
-          width: 100%;
-          flex: 1;
-        }
-      }
-    }
-
-    
   }
 }
+
+// .main-ctnr {
+//   display: flex;
+//   flex-direction: column;
+//   position: relative;
+
+//   .cards-ctnr {
+//     display: flex;
+//     flex-direction: column;
+
+//     .cards {
+//       flex: 1;
+      
+//       display: flex;
+//       justify-content: space-around;
+//       align-items: center;
+//       gap: 10px;
+
+//       .card-img {
+//         width: 150px;
+//         height: 200px;
+//         border-radius: 20px;
+//         position: relative;
+//         z-index: 0;
+
+//         &:hover {
+//           img.bg {
+//             transform: scale(1.06);
+//           }
+//         }
+      
+//         span {
+//           font-size: 15px;
+//           line-height: 1.2;
+//           position: absolute;
+//           bottom: 10px;
+//           left: 5px;
+//           color: white;
+//           font-weight: 600;
+//           padding: 5px;
+//         }
+
+//         img.bg {
+//           max-width: 100%;
+//           object-fit: cover;
+//           height: 100%;
+//           position: absolute;
+//           top: 0;
+//           left: 0;
+//           border-radius: 20px;
+//           transition: all 0.3s ease;
+//           cursor: pointer;
+//         }
+
+//         img.avatar {
+//           width: 40px;
+//           height: 40px;
+//           border-radius: 50%;
+//           color: white;
+//           z-index: 99;
+//           position: absolute;
+//           top: 10px;
+//           left: 10px;
+//         }
+//       }
+//     }
+//   }
+
+//   .bands-ctnr {
+//     display: flex;
+//     flex-direction: column;
+    
+//     .bands {
+//       flex: 1;
+
+//       .card {
+//         // margin: 20px 0;
+
+//         border: 1px solid #dddfe2;
+//         border-radius: 8px;
+//         padding: 1rem;
+//         margin-bottom: 1.5rem;
+//         background: #fff;
+    
+//         img {
+//           width: 100%;
+//           flex: 1;
+//         }
+//       }
+//     }
+//   }
+// }
 
 
 

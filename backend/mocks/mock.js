@@ -125,7 +125,7 @@ db.sync({ force: true })
   // bands
   .then(async () => {
     // bands descriptions
-    const bandIn1Desc = "We begin our gallery of Top 20 American Bands in Boston, Mass., a key site in the Revolutionary War – and home to all-American bad boys Aerosmith. Steven Tyler and Joe Perry certainly had their '70s-era struggles, both personal and professional, but they simply refused to stay down. And, in this land of second chances, no one has played the role of bootstrap underdog better than Aerosmith as they ultimately scored one of rock history's most dramatic comebacks late in the next decade.";
+    const bandIn1Desc = "We begin our gallery of Top 20 American Bands in Boston, a key site in the Revolutionary War – and home to all-American bad boys Aerosmith. Steven Tyler and Joe Perry certainly had their '70s-era struggles, both personal and professional, but they simply refused to stay down. And, in this land of second chances, no one has played the role of bootstrap underdog better than Aerosmith as they ultimately scored one of rock history's most dramatic comebacks late in the next decade.";
     const bandIn2Desc = "Brothers Carl, Dennis and Brian Wilson joined cousin Mike Love and friend Al Jardine to define the West Coast youth culture, as the Beach Boys combined gorgeous vocal harmonies with songs focusing on cars, girls and surfing. In some ways, they created the modern concept of California. Then, for a brief moment, they challenged the Beatles for wider pop-rock supremacy before Brian's creative fires began to flicker.";
     const bandIn3Desc = "Forever associated with Los Angeles after forming there as film students at UCLA, the Doors originally hailed from places like Chicago and Florida. That led to a unique brand of Americanism that wasn't about flag-waving so much as upholding a rugged sense of individualism. Intent on bucking trends, as heard on the jazz-rock hit 'Light My Fire' and on protest songs like 'Five to One,' they emerged as musical revolutionaries";
     const bandIn4Desc = "Initially featuring veteran performers from Poco, the Flying Burrito Brothers and Linda Ronstadt's band, the Eagles helped redirect rock back to its country roots – and then surprised everyone by mounting a series of unlikely late-period reunions with former members like Don Felder and then Bernie Leadon. They briefly called it quits upon co-founder Glenn Frey's too-early passing, before hitting the road again with Frey's son Deacon in his stead.";
@@ -140,40 +140,40 @@ db.sync({ force: true })
 
     // bands
     const bandIn01 = { 
-      name: 'Aerosmith', desc: bandIn1Desc, phone: '123-456-789', email: 'aerosmith@gmail.com', roleId: 4, type: 'heavy Rock', price: 1000, scope: 'Andalucia', avatar: avatar, video: null 
+      name: 'Aerosmith', desc: bandIn1Desc, phone: '123-456-789', email: 'aerosmith@gmail.com', roleId: 4, type: 'heavy Rock', price: 1000, scope: 'Andalucia', avatar: `${config.server.url}/avatars/aerosmith.jpg`, video: null 
     };
     const bandIn02 = {
-      name: 'The Beach Boys', desc: bandIn2Desc, phone: '123-456-789', email: 'thebeachboys@gmail.com', roleId: 4, type: 'Pop', price: 1100, scope: 'Madrid', avatar: avatar, video: null 
+      name: 'The Beach Boys', desc: bandIn2Desc, phone: '123-456-789', email: 'thebeachboys@gmail.com', roleId: 4, type: 'Pop', price: 1100, scope: 'Madrid', avatar: `${config.server.url}/avatars/the_beach_boys.jpg`, video: null 
     };
     const bandIn03 = {
-      name: 'The Doors', desc: bandIn3Desc, phone: '123-456-789', email: 'thedoors@gmail.com', roleId: 4, type: 'Rock', price: 1200, scope: 'Barcelona', avatar: avatar, video: null 
+      name: 'The Doors', desc: bandIn3Desc, phone: '123-456-789', email: 'thedoors@gmail.com', roleId: 4, type: 'Rock', price: 1200, scope: 'Barcelona', avatar: `${config.server.url}/avatars/the_doors.png`, video: null 
     };
     const bandIn04 = {
-      name: 'The Eagles', desc: bandIn4Desc, phone: '123-456-789', email: 'theeagles@gmail.com', roleId: 4, type: 'Pop', price: 1200, scope: 'Andalucia', avatar: avatar, video: null 
+      name: 'The Eagles', desc: bandIn4Desc, phone: '123-456-789', email: 'theeagles@gmail.com', roleId: 4, type: 'Pop', price: 1000, scope: 'Andalucia', avatar: `${config.server.url}/avatars/the_eagles.jpg`, video: null 
     };
     const bandIn05 = {
-      name: 'Guns N Roses', desc: bandIn5Desc, phone: '123-456-789', email: 'gunsnroses@gmail.com', roleId: 4, type: 'Rock', price: 1200, scope: 'Madrid', avatar: avatar, video: null 
+      name: 'Guns N Roses', desc: bandIn5Desc, phone: '123-456-789', email: 'gunsnroses@gmail.com', roleId: 4, type: 'Rock', price: 1100, scope: 'Madrid', avatar: `${config.server.url}/avatars/guns_n_roses.jpg`, video: null 
     };
     const bandIn06 = {
-      name: 'Iggy Pop', desc: bandIn6Desc, phone: '123-456-789', email: 'iggypop@gmail.com', roleId: 4, type: 'Rock', price: 1200, scope: 'Barcelona', avatar: avatar, video: null 
+      name: 'Iggy Pop', desc: bandIn6Desc, phone: '123-456-789', email: 'iggypop@gmail.com', roleId: 4, type: 'Rock', price: 1200, scope: 'Barcelona', avatar: `${config.server.url}/avatars/iggy_pop.jpeg`, video: null 
     };
     const bandIn07 = {
-      name: 'Kiss', desc: bandIn7Desc, phone: '123-456-789', email: 'kiss@gmail.com', roleId: 4, type: 'Heavy', price: 1200, scope: 'Andalucia', avatar: avatar, video: null 
+      name: 'Kiss', desc: bandIn7Desc, phone: '123-456-789', email: 'kiss@gmail.com', roleId: 4, type: 'Heavy', price: 1000, scope: 'Andalucia', avatar: `${config.server.url}/avatars/kiss.png`, video: null 
     };
     const bandIn08 = {
-      name: 'Metallica', desc: bandIn8Desc, phone: '123-456-789', email: 'metallica@gmail.com', roleId: 4, type: 'Metal', price: 1200, scope: 'Madrid', avatar: avatar, video: null 
+      name: 'Metallica', desc: bandIn8Desc, phone: '123-456-789', email: 'metallica@gmail.com', roleId: 4, type: 'Metal', price: 1100, scope: 'Madrid', avatar: `${config.server.url}/avatars/metallica.jpg`, video: null 
     };
     const bandIn09 = {
-      name: 'Pearl Jam', desc: bandIn9Desc, phone: '123-456-789', email: 'pearljam@gmail.com', roleId: 4, type: 'Punk', price: 1200, scope: 'Barcelona', avatar: avatar, video: null 
+      name: 'Pearl Jam', desc: bandIn9Desc, phone: '123-456-789', email: 'pearljam@gmail.com', roleId: 4, type: 'Punk', price: 1200, scope: 'Barcelona', avatar: `${config.server.url}/avatars/pearl_jam.gif`, video: null 
     };
     const bandIn10 = {
-      name: 'Van Halen', desc: bandIn10Desc, phone: '123-456-789', email: 'vanHalen@gmail.com', roleId: 4, type: 'Heavy', price: 1200, scope: 'Andalucia', avatar: avatar, video: null 
+      name: 'Van Halen', desc: bandIn10Desc, phone: '123-456-789', email: 'vanHalen@gmail.com', roleId: 4, type: 'Heavy', price: 1000, scope: 'Andalucia', avatar: `${config.server.url}/avatars/van_halen.jpg`, video: null 
     };
     const bandIn11 = {
-      name: 'ZZ Top', desc: bandIn11Desc, phone: '123-456-789', email: 'zztop@gmail.com', roleId: 4, type: 'Heavy', price: 1200, scope: 'Madrid', avatar: avatar, video: null 
+      name: 'ZZ Top', desc: bandIn11Desc, phone: '123-456-789', email: 'zztop@gmail.com', roleId: 4, type: 'Heavy', price: 1100, scope: 'Madrid', avatar: `${config.server.url}/avatars/zz_top.jpg`, video: null 
     };
     const bandIn12 = {
-      name: 'Sly & the Family Stone', desc: bandIn12Desc, phone: '123-456-789', email: 'slyandthefamilystone@gmail.com', roleId: 4, type: 'Heavy', price: 1200, scope: 'Barcelona', avatar: avatar, video: null 
+      name: 'Sly & the Family Stone', desc: bandIn12Desc, phone: '123-456-789', email: 'slyandthefamilystone@gmail.com', roleId: 4, type: 'Heavy', price: 1200, scope: 'Barcelona', avatar: `${config.server.url}/avatars/sly.jpg`, video: null 
     };
     
     // create companies
