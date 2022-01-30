@@ -1,5 +1,5 @@
 <article>
-  <section class="top-ctnr">
+  <header>
     <div class=title>HOME</div>
     
     <div class="subtitle">Request a budget</div>
@@ -7,17 +7,49 @@
     <div class="text">
       In this section you will get a list of all the bands subscribed to Musicnode. If you want to know more details, click on one of the bands to go to its profile, and if you need a personalized budget for your event, contact with the band specifying all the details.
     </div>
-  </section>
+  </header>
 
-  <div class="highlighted-bands-ctnr">
-    <div class="highlighted-bands">
-      <mat-card class="card-img" *ngFor="let band of topBandsList">
-        <img class="bg" alt="bg" src="{{ band?.img }}">
+  <section class="top-bands">
+    <div class="top-bands-ctnr">
+      <mat-card *ngFor="let band of topBandsList">
+        <img class="background" alt="bg" src="{{ band?.img }}">
 
         <mat-card-content>
           <img class="avatar" alt="avatar" src="{{ band?.avatar }}" width="50px">
-          <span class="card-name">{{ band?.name }}</span>
+          <span class="name">{{ band?.name }}</span>
         </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
+  <div class="bands">
+    <div class="bands-ctnr">
+      <mat-card *ngFor="let band of bandsList">
+        <div class="img-ctnr">
+          <img alt="{{ band?.name }}" src="{{ band?.images[0]?.image }}" width="500px">
+        </div>
+
+        <div class="band-info">
+          <h1 class="name">{{ band?.name }}</h1>
+          
+          <div class="rating">
+            <i class="material-icons">star</i>
+            <span class="rate">5.0</span>
+            <span class="scope">(50) · {{ band?.scope }}</span>
+          </div>
+
+          <div class="description">
+            {{ band?.desc }}
+          </div>
+
+          <div class="budget">
+            From {{ band?.price }}€
+          </div>
+
+          <button mat-flat-button color="warn" class="warn request-budget">
+            Request Budget
+          </button>
+        </div>
       </mat-card>
     </div>
   </div>

@@ -8,7 +8,7 @@ article {
     padding: 30px 10px 10px 10px;
   }
 
-  .top-ctnr {
+  header {
     .title {
       font-size: 1.25rem;
       font-weight: 500;
@@ -24,13 +24,13 @@ article {
     }
   }
 
-  .highlighted-bands-ctnr {
+  .top-bands {
     display: flex;
     flex-direction: column;
     
     margin-top: 1.875rem;
     
-    .highlighted-bands {
+    .top-bands-ctnr {
       flex: 1;
       
       display: flex;
@@ -42,56 +42,150 @@ article {
       mat-card {
         box-shadow: none;
 
-        &.card-img {
-          width: 150px;
-          height: 200px;
-          position: relative;
-          border-radius: 20px;
+        width: 150px;
+        height: 200px;
+        position: relative;
+        border-radius: 8px;
+        
+        &:hover {
+          img.bg {
+            transform: scale(1.06);
+          }
+        }
+
+        .background {
+          position: absolute;
+          top: 0;
+          left: 0;
+
+          max-width: 100%;
+          object-fit: cover;
+          height: 100%;
+
+          border-radius: 8px;
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+
+        .avatar {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+      
+        .name {
+          position: absolute;
+          bottom: 10px;
+          left: 5px;
+          padding: 5px;
           
-          &:hover {
-            img.bg {
-              transform: scale(1.06);
+          font-size: 1rem;
+          font-weight: 500;
+          color: white;
+        }
+      }
+    }
+  }
+
+  .bands {
+    display: flex;
+    flex-direction: column;
+    
+    .bands-ctnr {
+      flex: 1;
+      margin: 15px 0;
+      
+      mat-card {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+
+        box-shadow: none;
+        margin: 20px 0;
+        border: 1px solid #dddfe2;
+        
+        // border-radius: 8px;
+        // padding: 1rem;
+        // margin-bottom: 1.5rem;
+        // background: #fff;
+    
+        .img-ctnr {
+          width: 50%;
+
+          img {
+            flex: 1;
+
+            border-radius: 8px;
+            width: 100%;
+          }
+        }
+        
+        .band-info {
+          width: 50%;
+
+          .name {
+            margin-top: 0;
+            font-size: 1.5rem;
+            font-weight: 500;
+          }
+
+          .rating {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .rate {
+              font-size: 1rem;
+              font-weight: 500;
+              margin-right: 5px;
+            }
+
+            .scope {
+              font-size: 1rem;
+              font-weight: 100;
+            }
+
+            i {
+              color: #eeaa24;
             }
           }
-        
-          span {
-            position: absolute;
-            bottom: 10px;
-            left: 5px;
-            padding: 5px;
+
+          .description {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            margin-top: 15px;
+            font-size: .875rem;
+            line-height: 1.5rem;
+          }
+
+          .budget {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
             
-            font-size: 1rem;
-            font-weight: 500;
-            color: white;
+            margin-top: 15px;
+            font-size: .875rem;
+            line-height: 1.5rem;
           }
-  
-          img.bg {
-            position: absolute;
-            top: 0;
-            left: 0;
 
-            max-width: 100%;
-            object-fit: cover;
-            height: 100%;
-
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-          }
-  
-          img.avatar {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+          .request-budget {
+            margin-top: 15px;
           }
         }
       }
     }
   }
+
 }
 
 // .main-ctnr {
@@ -160,31 +254,6 @@ article {
 //       }
 //     }
 //   }
-
-//   .bands-ctnr {
-//     display: flex;
-//     flex-direction: column;
-    
-//     .bands {
-//       flex: 1;
-
-//       .card {
-//         // margin: 20px 0;
-
-//         border: 1px solid #dddfe2;
-//         border-radius: 8px;
-//         padding: 1rem;
-//         margin-bottom: 1.5rem;
-//         background: #fff;
-    
-//         img {
-//           width: 100%;
-//           flex: 1;
-//         }
-//       }
-//     }
-//   }
-// }
 
 
 
