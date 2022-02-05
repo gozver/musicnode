@@ -4,13 +4,9 @@ Web Application Development Final Proyect (IES Trassierra).
 ### Description:
 Professional business drive network for musicians and music events management companies or free market contractors.  
 
-### To do:
-Add animated gifs to show the final proyect
-
 ### Technologies:
-- Front: Angular (Angular Material, RxJS), HTML, Sass, JavaScript and TypeScript
-- Backend: Node.js/Express, Sequelize ORM and Socket.IO
-- Database: SQL
+- Front: Angular (Angular Material, RxJS), HTML, Sass, JavaScript and TypeScript.
+- Backend: Node.js/Express, Sequelize ORM and Socket.IO.
 
 ## Frontend technologies:
 - [TypeScript](https://www.typescriptlang.org/) version 4.3.5.
@@ -32,7 +28,5 @@ Add animated gifs to show the final proyect
 
 ## Backend development server:
 - Run `npm run mock` to insert demo data into the database.
-- Run `npm run dev` to run the server with nodemon. The app will automatically reload if you change any of the source files. <br/>
-
-NOTE: Roles are indispensable in order to use the platfrom, so make sure you run `npm run mocked-roles` once before running the serve.
+- Run `npm run dev` to run the server with nodemon. The app will automatically reload if you change any of the source files.
 
