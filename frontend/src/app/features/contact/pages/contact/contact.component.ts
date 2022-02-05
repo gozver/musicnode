@@ -7,7 +7,7 @@ import { AuthService } from '@shared/services/auth.service';
 import { EmailService } from '@shared/services/email.service';
 import { User } from '@shared/interfaces/user.interface';
 
-import { ContactDialogComponent } from '@features/contact/components/contact-dialog/contact-dialog.component';
+import { EmailDialogComponent } from '@shared/components/email-dialog/email-dialog.component';
 
 @Component({
   selector: 'app-contact',
@@ -67,7 +67,7 @@ export class ContactComponent implements OnInit, OnDestroy {
     this.emailService.sendEmail(this.contactForm.value).subscribe(
       res => {
         this.dialog.open(
-          ContactDialogComponent, { 
+          EmailDialogComponent, { 
           data: { 
             title: 'Email Success',
             code: null,
@@ -80,7 +80,7 @@ export class ContactComponent implements OnInit, OnDestroy {
       },
       err => {
         this.dialog.open(
-          ContactDialogComponent, { 
+          EmailDialogComponent, { 
           data: { 
             title: 'Email Error',
             code: err.error.err.code,

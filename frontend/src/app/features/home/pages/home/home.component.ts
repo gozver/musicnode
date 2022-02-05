@@ -87,7 +87,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   openBudgetDialog(band: any): void{
-    console.log(band);
     this.dialog.open(HomeDialogComponent, { data: band });
   }
 }

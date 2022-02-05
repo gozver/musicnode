@@ -5,7 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '@app/shared/modules/material.module';
 
 import { ContactRoutingModule } from './contact-routing.module';
-import { ContactComponentsModule } from '../components/contact-components.module';
 import { ComponentsModule } from '@shared/components/components.module';
 
 import { ContactComponent } from './contact/contact.component';
@@ -21,7 +20,6 @@ import { ContactComponent } from './contact/contact.component';
     MaterialModule,
 
     ContactRoutingModule,
-    ContactComponentsModule,
     ComponentsModule
   ]
 })

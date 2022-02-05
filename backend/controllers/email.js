@@ -18,7 +18,10 @@ oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
 // controller to send contact emails
 exports.sendContactEmail = async (req, res, next) => {
-  const { name, email, phone, message } = req.body;
+  console.log('--> req.body:');
+  console.log(req.body);
+
+  const { name, email, phone, message, band } = req.body;
 
   try {
     // create access token
@@ -37,22 +40,27 @@ exports.sendContactEmail = async (req, res, next) => {
       }
     });    
 
-    // set the email options (we don't use the sender email because it isn'n a real email account)
+    // set email params depending on whether the contact request is made from 'contact' or 'home'
+    const from = 'gozver@gmail.com';
+    const to = 'gozver@gmail.com';
+    // const to = band ? band.email : email;
+    const subject = band ? `${band.name} has a budget request from ${name}` : `Musicnode contact inquire from ${name}`;
+
+    // set email options ('from' and 'to' fields are set to 'gozver@gmail.com beause emails from musicnode app aren't real)
     const mailOptions = {
-      // from: email,
-      from: 'gozver@gmail.com',
-      to: 'gozver@gmail.com',
-      subject: `Musicnode contact inquire from ${name}`,
+      from: from,
+      to: to,
+      subject: subject,
       text: message,
       html: `
-      <h3>User information</h3>
-      <ul>
-        <li>User: ${name}</li>
-        <li>Email: ${email}</li>
-        <li>Phone: ${phone}</li>
-      </ul>
-      <h3>Message</h3>
-      <p>${message}</p>
+        <h3>User information</h3>
+        <ul>
+          <li>User: ${name}</li>
+          <li>Email: ${email}</li>
+          <li>Phone: ${phone}</li>
+        </ul>
+        <h3>Message</h3>
+        <p>${message}</p>
       `
     };
   
