@@ -10,6 +10,7 @@ import { BandService } from '@app/shared/services/band.service';
 })
 export class BandProfileComponent implements OnInit {
   profileId: number;
+  profileBand: any;
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -25,8 +26,10 @@ export class BandProfileComponent implements OnInit {
 
     this.bandService.getBand(this.profileId).subscribe(
       band => {
+        this.profileBand = band[0];
+
         console.log('--> band:');
-        console.log(band);
+        console.log(this.profileBand);
       },
       error => {
         console.error("--> the band doesn't exist");
