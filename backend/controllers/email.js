@@ -18,9 +18,6 @@ oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
 // controller to send contact emails
 exports.sendContactEmail = async (req, res, next) => {
-  console.log('--> req.body:');
-  console.log(req.body);
-
   const { name, email, phone, message, band } = req.body;
 
   try {

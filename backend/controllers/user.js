@@ -27,9 +27,6 @@ exports.findOne = async (req, res, next) => {
     },
   })
     .then(user => {
-      console.log('--> user:');
-      console.log(user);
-
       if (user.length > 0) {
         res.json(user)
       } else {

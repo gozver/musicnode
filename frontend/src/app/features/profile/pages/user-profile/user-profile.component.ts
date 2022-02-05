@@ -34,8 +34,8 @@ export class UserProfileComponent implements OnInit {
     this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
 
     this.userService.getUser(this.profileId).subscribe(
-      profileUser => {
-        this.profileUser = profileUser[0];
+      user => {
+        this.profileUser = user[0];
         this.imageData = this.profileUser.avatar;
         this.initUserForm(this.profileUser);
       }, 

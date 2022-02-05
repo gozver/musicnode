@@ -17,11 +17,16 @@ export class BandService {
     private errorHandlerService: ErrorHandlerService
   ) { }
 
-  // any: in this controller model band includes model user and model image
+  // any: in this controller band model includes user and image models
   getBands(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/band`).pipe(
       catchError(this.errorHandlerService.handleError<any>('getBands', []))
     );
+  }
+
+  // any: in this controller band model includes user and image models
+  getBand(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/band/${id}`);
   }
 
   createBand(band: Band, userId: number): Observable<Band> {

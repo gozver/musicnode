@@ -5,17 +5,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '@shared/modules/material.module';
 
 import { ProfileRoutingModule } from './profile-routing.module';
-import { ProfileComponentsModule } from '../components/profile-components.module';
 import { ComponentsModule } from '@shared/components/components.module';
 
 import { UserProfileComponent } from './user-profile/user-profile.component'
-import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { EditUserProfileComponent } from './edit-user-profile/edit-user-profile.component';
+import { BandProfileComponent } from './band-profile/band-profile.component';
+import { EditBandProfileComponent } from './edit-band-profile/edit-band-profile.component';
 
 
 @NgModule({
   declarations: [
     UserProfileComponent,
-    UpdateProfileComponent
+    EditUserProfileComponent,
+    BandProfileComponent,
+    EditBandProfileComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +27,6 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
     MaterialModule,
 
     ProfileRoutingModule,
-    ProfileComponentsModule,
     ComponentsModule
   ]
 })

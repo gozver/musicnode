@@ -22,8 +22,9 @@ router
 
   .get    ('/role', controllers.role.findAll)
 
-  .get    ('/band',                   controllers.band.findAll)
-  .post   ('/band', middlewares.auth, controllers.band.create)
+  .get    ('/band',                       controllers.band.findAll)
+  .get    ('/band/:id', middlewares.auth, controllers.band.findOne)
+  .post   ('/band',     middlewares.auth, controllers.band.create)
 
   .get    ('/company',                   controllers.company.findAll)
   .post   ('/company', middlewares.auth, controllers.company.create)

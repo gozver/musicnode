@@ -62,3 +62,45 @@ exports.findAll = async (req, res, next) => {
       next(err);
     });
 }
+
+exports.findOne = async (req, res, next) => {
+  await models.band.findAll({
+    where: {
+      id: req.params.id,
+    },
+    include: [{
+      model: models.user
+    }, {
+      model: models.image
+    }]
+  })
+    .then(band => {
+      console.log('--> band:');
+      console.log(band);
+
+      if (band.length > 0) {
+        res.json(band)
+      } else {
+        // create error
+        const err = new Error();
+        err.statusCode = 401;
+        err.message = 'Band not found';
+
+        // print error and send it to error controller
+        console.log('--> error:');
+        console.log(err);
+        next(err);  
+      }
+    })
+    .catch(() => {
+      // create error
+      const err = new Error();
+      err.statusCode = 401;
+      err.message = 'Band not found';
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
+    });
+}
