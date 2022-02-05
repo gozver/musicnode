@@ -1,25 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@app/shared/modules/material.module';
-
-import { AdRoutingModule } from './ad-routing.module';
-import { AdComponentsModule } from '../components/ad-components.module';
 import { ComponentsModule } from '@shared/components/components.module';
 
-import { AdComponent } from './ad/ad.component';
+import { HomeDialogComponent } from './home-dialog/home-dialog.component';
 
 @NgModule({
   declarations: [
-    AdComponent
+    HomeDialogComponent
   ],
   imports: [
     CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+
     MaterialModule,
-    
-    AdRoutingModule,
-    AdComponentsModule,
     ComponentsModule
+  ],
+  exports: [
+    HomeDialogComponent
   ]
 })
-export class AdModule { }
+export class HomeComponentsModule { }

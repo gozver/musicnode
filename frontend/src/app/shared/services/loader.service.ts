@@ -1,7 +1,4 @@
-// Angular
 import { Injectable } from '@angular/core';
-
-// RxJS
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({

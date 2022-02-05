@@ -1,11 +1,8 @@
-// Angular
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-// Angular Material
 import { MatDialog } from '@angular/material/dialog';
 
-// Services and Components
 import { AuthService } from '@shared/services/auth.service';
 import { ErrorDialogComponent } from '@shared/components/error-dialog/error-dialog.component'
 
@@ -33,7 +30,7 @@ export class LoginComponent implements OnInit {
 
     this.loginForm = this.fb.group({
       email:    [ '', [ Validators.required, Validators.pattern(eRegex) ]],
-      password: [ '', [ Validators.required, /* Validators.pattern(pRegex) */, Validators.minLength(6) ]],
+      password: [ '', [ Validators.required, Validators.pattern(pRegex) ]],
     });
   } 
 

@@ -1,0 +1,45 @@
+<div class="dialog">
+  <div class="header">
+    <h1>Ask for more info</h1>
+    <p>Fill out this form and <strong>{{ data.name }}</strong> will contact you shortly. All the data you send will be treated confidentially.</p>
+  </div>
+  
+  <div class="content">
+    <form [formGroup]="userForm" class="user-form">
+      <mat-form-field appearance="outline" class="input-headline">
+        <mat-label>Full Name</mat-label>
+        <input matInput tabindex=-1 placeholder="Full Name" formControlName="name" />
+        <mat-icon matSuffix><i class="material-icons">person_outline</i></mat-icon>
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline" class="input-headline">
+        <mat-label>Email</mat-label>
+        <input matInput tabindex=-1 placeholder="Email" formControlName="email" type="email" />
+        <mat-icon matSuffix>email</mat-icon>
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline" class="input-headline">
+        <mat-label>Phone</mat-label>
+        <input matInput tabindex=-1 placeholder="Phone" formControlName="phone" />
+        <mat-icon matSuffix>phone</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Message</mat-label>
+        <textarea matInput tabindex=-1 placeholder="Message" formControlName="message" rows="3"></textarea>
+        <mat-icon matSuffix class="message">message</mat-icon>
+      </mat-form-field>          
+    </form>
+  </div>
+
+  <div class="footer">
+    <!-- (click)="sendMessage()" -->
+    <button mat-flat-button tabindex=-1 color="primary" class="primary" [disabled]="userForm.invalid">
+      Contact
+    </button>
+    
+    <button mat-flat-button tabindex=-1 mat-dialog-close color="warn" class="warn">
+      Close
+    </button>
+  </div>
+</div>

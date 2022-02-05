@@ -1,8 +1,6 @@
-// Angular
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-// Custom Components
 import { AdComponent } from './ad/ad.component';
 
 const routes: Routes = [{

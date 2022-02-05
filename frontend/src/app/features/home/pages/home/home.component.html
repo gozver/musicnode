@@ -46,7 +46,7 @@
             From {{ band?.price }}€
           </div>
 
-          <button mat-flat-button color="warn" class="warn request-budget">
+          <button mat-flat-button color="warn" class="warn request-budget" (click)="openBudgetDialog(band)">
             Request Budget
           </button>
         </div>

@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@shared/modules/material.module';
 
 import { HomeRoutingModule } from './home-routing.module';
+import { HomeComponentsModule } from '../components/home-components.module';
+import { ComponentsModule } from '@shared/components/components.module';
+
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
@@ -13,9 +16,13 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
+    
     MaterialModule,
-    HomeRoutingModule
+
+    HomeRoutingModule,
+    HomeComponentsModule,
+    ComponentsModule
   ]
 })
 export class HomeModule { }

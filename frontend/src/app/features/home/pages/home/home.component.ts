@@ -1,7 +1,10 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
+import { MatDialog } from '@angular/material/dialog';
 import { BandService } from '@shared/services/band.service';
+
+import { HomeDialogComponent } from '@features/home/components/home-dialog/home-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +17,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   topBandsList: any[] = [];
 
   constructor(
+    private readonly dialog: MatDialog,
     private readonly bpObserver: BreakpointObserver,
     private readonly bandService: BandService
   ) { }
@@ -29,9 +33,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   initComponentData(): void {
     this.bandService.getBands().subscribe(bandsList =>  {
       this.bandsList = bandsList;
-
       this.bandsList = this.shuffle(this.bandsList);
-
       const indexesList = this.getIndexes();
       
       for (let i = 0; i < 6; i++) {
@@ -49,11 +51,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   setBreakPointObserver(): void {
     this.bpObserver.observe(['(max-width: 800px)']).subscribe((res) => {
       Promise.resolve().then(() => {
-        if (res.matches) {
-          this.isMobileView = true;
-        } else {
-          this.isMobileView = false;
-        }
+        res.matches
+          ? this.isMobileView = true
+          : this.isMobileView = false;
       });
     });
   }
@@ -63,32 +63,31 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     while(indexesList.length < 6) {
       const index: number = Math.floor(Math.random() * this.bandsList.length);
-      if(indexesList.indexOf(index) === -1) indexesList.push(index);
+      if (indexesList.indexOf(index) === -1) indexesList.push(index);
     }
 
     return indexesList;
   }
 
-  /**
-   * https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-   * https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
-   */
   shuffle(array: any[]): any[] {
     let currentIndex: number = array.length;
     let randomIndex: number;
   
     // While there remain elements to shuffle...
     while (currentIndex != 0) {
-  
       // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
   
       // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
+      [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
     }
   
     return array;
+  }
+
+  openBudgetDialog(band: any): void{
+    console.log(band);
+    this.dialog.open(HomeDialogComponent, { data: band });
   }
 }

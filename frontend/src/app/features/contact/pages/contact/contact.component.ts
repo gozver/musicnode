@@ -7,7 +7,7 @@ import { AuthService } from '@shared/services/auth.service';
 import { EmailService } from '@shared/services/email.service';
 import { User } from '@shared/interfaces/user.interface';
 
-import { ContactDialogComponent } from '../../components/contact-dialog/contact-dialog.component';
+import { ContactDialogComponent } from '@features/contact/components/contact-dialog/contact-dialog.component';
 
 @Component({
   selector: 'app-contact',
