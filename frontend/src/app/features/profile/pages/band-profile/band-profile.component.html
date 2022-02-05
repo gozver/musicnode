@@ -1,1 +1,27 @@
-<p>band-profile works!</p>
+<article>
+  <section class="header">
+    <div class=title>BAND PROFILE</div>
+    
+    <div class="subtitle">{{ profileBand?.name }}</div>
+
+    <div class="text">{{ profileBand?.desc }}</div>
+  </section>
+
+  <section class="band-images">
+    <div class="band-images-ctnr">
+      <owl-carousel-o class="owl-carousel-o" [options]="customOptions">
+        <ng-template carouselSlide class="slide owl-carousel owl-theme owl-centered" *ngFor="let images of profileBand?.images">
+          <img src="{{ images?.image }}" alt="{{ profileBand?.name }}" />
+        </ng-template>  
+      </owl-carousel-o>
+    </div>
+  </section>
+
+  <section class="musicians">
+    <p>{{ profileBand?.name }} musicians:
+    
+    <ul *ngFor="let musician of profileBand?.users">
+      <li>{{ musician?.name }} {{ musician?.surname }}</li>
+    </ul>
+  </section>
+</article>

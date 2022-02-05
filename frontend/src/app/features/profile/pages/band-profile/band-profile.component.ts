@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { OwlOptions } from 'ngx-owl-carousel-o';
+
 import { BandService } from '@app/shared/services/band.service';
 
 @Component({
@@ -12,6 +14,25 @@ export class BandProfileComponent implements OnInit {
   profileId: number;
   profileBand: any;
 
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    navSpeed: 700,
+    navText: [
+      '<i class="material-icons">navigate_before</i>',
+      '<i class="material-icons">navigate_next</i>'
+    ],
+    responsive: {
+      0:    { items: 1 },
+      400:  { items: 1 },
+      740:  { items: 1 }
+    },
+    nav: true
+  }
+  
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
@@ -21,9 +42,6 @@ export class BandProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('--> this.profileId');
-    console.log(this.profileId);
-
     this.bandService.getBand(this.profileId).subscribe(
       band => {
         this.profileBand = band[0];
@@ -39,5 +57,4 @@ export class BandProfileComponent implements OnInit {
       }
     );
   }
-
 }

@@ -23,8 +23,8 @@ import { LoaderInterceptorService } from '@shared/interceptors/loader-intercepto
     AppRoutingModule,
     HttpClientModule,
 
-    ComponentsModule,
-    MaterialModule
+    MaterialModule,
+    ComponentsModule
   ],
   providers: [
     { 

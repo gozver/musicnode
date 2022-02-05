@@ -1,5 +1,3 @@
-// @import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
-
 // global variables
 $primary: #014fa7;
 $primary-shadow: #e7f3ff;
@@ -56,5 +54,47 @@ button {
     &:hover { 
       background: #eeab24ee; 
     }
+  }
+}
+
+.band-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 30px;
+  background: #000;
+
+  .band-images-ctnr {
+    width: 550px;
+    height: 320px;
+    overflow-y: hidden;
+
+    @media (max-width: 625px) {
+      width: 100%;
+      height: 215px;
+    }
+    
+    // img {
+    //   object-fit: cover;
+    // }
+  }
+
+  .owl-prev,
+  .owl-next {
+    background: #000 !important;
+    position: absolute;
+    top: 140px;
+
+    @media (max-width: 625px) {
+      top: 90px;
+    }
+  }
+  .owl-prev {
+    left: 0%;
+  }
+
+  .owl-next {
+    right: 0%;
   }
 }

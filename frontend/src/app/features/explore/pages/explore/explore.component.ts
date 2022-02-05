@@ -64,9 +64,6 @@ export class ExploreComponent implements OnInit {
       this.bandsList = bandsList;
       this.companiesList = companiesList;
 
-      console.log('--> this.bandsList:');
-      console.log(this.bandsList);
-
       this.musiciansList = this.usersList.filter(item => item.activeRole === 1);
       this.contractorsList = this.usersList.filter(item => item.activeRole === 4);
       this.adminsList = this.usersList.filter(item => item.activeRole === 5);
