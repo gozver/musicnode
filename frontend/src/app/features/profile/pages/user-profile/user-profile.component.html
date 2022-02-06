@@ -10,6 +10,7 @@
   </section>
 
   <section class="middle-ctnr">
+    <!-- if the form is initialized, generate the template -->
     <form [formGroup]="userForm" class="userForm" *ngIf="userForm">
       <div class="avatar">
         <input type="file" id="file" name="file" (change)="onFileSelected($event)" *ngIf="isMyProfile()" />

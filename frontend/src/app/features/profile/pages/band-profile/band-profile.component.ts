@@ -69,11 +69,6 @@ export class BandProfileComponent implements OnInit {
         console.log('--> band:');
         console.log(this.profileBand);
 
-        console.log('--> users:');
-        this.profileBand.users.forEach(user => {
-          console.log(user.id);
-        });
-
         // !! => parse to boolean
         this.isMyBand = !!this.profileBand.users.find(user => user.id === this.currentUser.id);
 
@@ -99,7 +94,7 @@ export class BandProfileComponent implements OnInit {
   onFileSelected(event: Event): void {
     const file = (event.target as HTMLInputElement).files[0];
     const allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-    
+
     this.avatarSelected = true;
     this.bandForm.patchValue({ avatar: file });
 
@@ -115,13 +110,11 @@ export class BandProfileComponent implements OnInit {
   }
 
   updateImage(): void {
-  //   this.bandService.updateAvatar(this.currentUser.id, this.bandForm.value.avatar).subscribe(avatar => {
-  //     this.imageData = avatar;
-  //     this.currentUser.avatar = avatar;
-  //     this.avatarSelected = false;
-      
-  //     this.authService.setCurrentUser(this.currentUser);
-  //   });
+    this.bandService.updateAvatar(this.profileBand.id, this.bandForm.value.avatar).subscribe(avatar => {
+      this.imageData = avatar;
+      this.profileBand.avatar = avatar;
+      this.avatarSelected = false;
+    });
   }
 
   sendMessage(id: number): void {

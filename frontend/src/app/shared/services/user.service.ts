@@ -33,7 +33,7 @@ export class UserService {
     formData.append('id', id.toString());
     formData.append('file', avatar, avatar.name);
 
-    return this.http.post<any>(`${environment.apiUrl}/user`, formData).pipe(
+    return this.http.patch<any>(`${environment.apiUrl}/user`, formData).pipe(
       catchError(this.errorHandlerService.handleError<any>('updateAvatar', null))
     );
   }

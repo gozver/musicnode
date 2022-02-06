@@ -34,4 +34,15 @@ export class BandService {
       catchError(this.errorHandlerService.handleError<any>('createBand', null))
     );
   }
+
+  updateAvatar(id: number, avatar: File): Observable<string> {
+    const formData = new FormData();
+
+    formData.append('id', id.toString());
+    formData.append('file', avatar, avatar.name);
+
+    return this.http.patch<any>(`${environment.apiUrl}/band`, formData).pipe(
+      catchError(this.errorHandlerService.handleError<any>('updateAvatar', null))
+    );
+  }
 }

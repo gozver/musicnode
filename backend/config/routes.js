@@ -3,8 +3,7 @@ const router = express.Router();
 
 const middlewares = require('../middlewares');
 const controllers = require('../controllers');
-
-const storage = require('../config/storage');
+const storage = require('../storage');
 
 /**
  * @info get endpoint data from the browser: 'http://localhost:3000/api/model_name'
@@ -18,13 +17,14 @@ router
 
   .get    ('/user',                       controllers.user.findAll)
   .get    ('/user/:id', middlewares.auth, controllers.user.findOne)
-  .post   ('/user',     storage,          controllers.user.updateAvatar)
+  .patch  ('/user',     storage.avatar,   controllers.user.updateAvatar)
 
   .get    ('/role', controllers.role.findAll)
 
   .get    ('/band',                       controllers.band.findAll)
   .get    ('/band/:id', middlewares.auth, controllers.band.findOne)
   .post   ('/band',     middlewares.auth, controllers.band.create)
+  .patch  ('/band',     storage.avatar,   controllers.band.updateAvatar)
 
   .get    ('/company',                   controllers.company.findAll)
   .post   ('/company', middlewares.auth, controllers.company.create)

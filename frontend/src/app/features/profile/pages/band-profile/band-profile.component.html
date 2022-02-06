@@ -5,7 +5,7 @@
   </section>
 
   <section class="band-info">
-    <!-- Check if the form is initialized, then only start generating the template. -->
+    <!-- if the form is initialized, generate the template -->
     <form [formGroup]="bandForm" class="bandForm" *ngIf="bandForm">
       <div class="avatar">
         <input type="file" id="file" name="file" (change)="onFileSelected($event)" *ngIf="isMyBand" />
@@ -16,7 +16,6 @@
       </div>
 
       <div class="band-data">
-        <!-- <div class="name">{{ profileBand?.name }}</div> -->
         <div class="text-bold">Contact Info:</div>
         <div class="text">{{ profileBand?.email }}</div>
         <div class="text">{{ profileBand?.users[0]?.email }}</div>
