@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
+import { AuthService } from '@shared/services/auth.service';
 import { BandService } from '@app/shared/services/band.service';
+import { User } from '@app/shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-band-profile',
@@ -13,6 +16,13 @@ import { BandService } from '@app/shared/services/band.service';
 export class BandProfileComponent implements OnInit {
   profileId: number;
   profileBand: any;
+
+  bandForm: FormGroup;
+  currentUser: User;
+  imageData: string;
+
+  avatarSelected: boolean = false;
+  isMyBand: boolean = false;
 
   customOptions: OwlOptions = {
     loop: true,
@@ -36,18 +46,39 @@ export class BandProfileComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
+    private readonly authService: AuthService,
     private readonly bandService: BandService
   ) { 
     this.profileId = parseInt(this.route.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
+    this.authService.currentUser$.subscribe(currentUser => {
+      this.currentUser = currentUser;
+
+      console.log('--> currentUser:');
+      console.log(currentUser.id);
+    });
+
     this.bandService.getBand(this.profileId).subscribe(
       band => {
         this.profileBand = band[0];
+        this.imageData = this.profileBand.avatar;
+        this.initUserForm(this.profileBand);
 
         console.log('--> band:');
         console.log(this.profileBand);
+
+        console.log('--> users:');
+        this.profileBand.users.forEach(user => {
+          console.log(user.id);
+        });
+
+        // !! => parse to boolean
+        this.isMyBand = !!this.profileBand.users.find(user => user.id === this.currentUser.id);
+
+        console.log('--> this.isMyBand:');
+        console.log(this.isMyBand);
       },
       error => {
         console.error("--> the band doesn't exist");
@@ -56,5 +87,44 @@ export class BandProfileComponent implements OnInit {
         this.router.navigate(['/home']);
       }
     );
+  }
+
+  initUserForm(profileBand: any): void {
+    this.bandForm = new FormGroup({
+      name:   new FormControl(profileBand.name),
+      avatar: new FormControl(profileBand.avatar)
+    });
+  }
+
+  onFileSelected(event: Event): void {
+    const file = (event.target as HTMLInputElement).files[0];
+    const allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+    
+    this.avatarSelected = true;
+    this.bandForm.patchValue({ avatar: file });
+
+    if (file && allowedMimeTypes.includes(file.type)) {
+      const reader = new FileReader();
+      
+      reader.onload = () => {
+        this.imageData = reader.result as string;
+      }
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+  updateImage(): void {
+  //   this.bandService.updateAvatar(this.currentUser.id, this.bandForm.value.avatar).subscribe(avatar => {
+  //     this.imageData = avatar;
+  //     this.currentUser.avatar = avatar;
+  //     this.avatarSelected = false;
+      
+  //     this.authService.setCurrentUser(this.currentUser);
+  //   });
+  }
+
+  sendMessage(id: number): void {
+    this.router.navigate(['/chat'], { queryParams: { id } });
   }
 }

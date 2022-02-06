@@ -158,40 +158,40 @@ db.sync({ force: true })
 
     // bands
     const bandIn01 = { 
-      name: 'Aerosmith', desc: bandIn1Desc, phone: '123-456-789', email: 'aerosmith@gmail.com', roleId: 4, type: 'heavy Rock', price: 1000, scope: 'Andalucia', avatar: `${config.server.url}/avatars/aerosmith.jpg`, video: null 
+      name: 'Aerosmith', desc: bandIn1Desc, phone: '123-456-789', email: 'aerosmith@gmail.com', roleId: 4, type: 'heavy Rock', price: 1000, scope: 'Andalucia', avatar: `${config.server.url}/avatars/aerosmith.jpg`, video: 'https://www.youtube.com/watch?v=JkK8g6FMEXE'
     };
     const bandIn02 = {
-      name: 'The Beach Boys', desc: bandIn2Desc, phone: '123-456-789', email: 'thebeachboys@gmail.com', roleId: 4, type: 'Pop', price: 1100, scope: 'Madrid', avatar: `${config.server.url}/avatars/the_beach_boys.jpg`, video: null 
+      name: 'The Beach Boys', desc: bandIn2Desc, phone: '123-456-789', email: 'thebeachboys@gmail.com', roleId: 4, type: 'Pop', price: 1100, scope: 'Madrid', avatar: `${config.server.url}/avatars/the_beach_boys.jpg`, video: 'https://www.youtube.com/watch?v=ruKCw797JM4' 
     };
     const bandIn03 = {
-      name: 'The Doors', desc: bandIn3Desc, phone: '123-456-789', email: 'thedoors@gmail.com', roleId: 4, type: 'Rock', price: 1200, scope: 'Barcelona', avatar: `${config.server.url}/avatars/the_doors.png`, video: null 
+      name: 'The Doors', desc: bandIn3Desc, phone: '123-456-789', email: 'thedoors@gmail.com', roleId: 4, type: 'Rock', price: 1200, scope: 'Barcelona', avatar: `${config.server.url}/avatars/the_doors.png`, video: 'https://www.youtube.com/watch?v=TMiAQPABgHA' 
     };
     const bandIn04 = {
-      name: 'The Eagles', desc: bandIn4Desc, phone: '123-456-789', email: 'theeagles@gmail.com', roleId: 4, type: 'Pop', price: 1000, scope: 'Andalucia', avatar: `${config.server.url}/avatars/the_eagles.jpg`, video: null 
+      name: 'The Eagles', desc: bandIn4Desc, phone: '123-456-789', email: 'theeagles@gmail.com', roleId: 4, type: 'Pop', price: 1000, scope: 'Andalucia', avatar: `${config.server.url}/avatars/the_eagles.jpg`, video: 'https://www.youtube.com/watch?v=KZ1RP84QLdY' 
     };
     const bandIn05 = {
-      name: 'Guns N Roses', desc: bandIn5Desc, phone: '123-456-789', email: 'gunsnroses@gmail.com', roleId: 4, type: 'Rock', price: 1100, scope: 'Madrid', avatar: `${config.server.url}/avatars/guns_n_roses.jpg`, video: null 
+      name: 'Guns N Roses', desc: bandIn5Desc, phone: '123-456-789', email: 'gunsnroses@gmail.com', roleId: 4, type: 'Rock', price: 1100, scope: 'Madrid', avatar: `${config.server.url}/avatars/guns_n_roses.jpg`, video: 'https://www.youtube.com/watch?v=1w7OgIMMRc4' 
     };
     const bandIn06 = {
-      name: 'Iggy Pop', desc: bandIn6Desc, phone: '123-456-789', email: 'iggypop@gmail.com', roleId: 4, type: 'Rock', price: 1200, scope: 'Barcelona', avatar: `${config.server.url}/avatars/iggy_pop.jpeg`, video: null 
+      name: 'Iggy Pop', desc: bandIn6Desc, phone: '123-456-789', email: 'iggypop@gmail.com', roleId: 4, type: 'Rock', price: 1200, scope: 'Barcelona', avatar: `${config.server.url}/avatars/iggy_pop.jpeg`, video: 'https://www.youtube.com/watch?v=-fWw7FE9tTo' 
     };
     const bandIn07 = {
-      name: 'Kiss', desc: bandIn7Desc, phone: '123-456-789', email: 'kiss@gmail.com', roleId: 4, type: 'Heavy', price: 1000, scope: 'Andalucia', avatar: `${config.server.url}/avatars/kiss.png`, video: null 
+      name: 'Kiss', desc: bandIn7Desc, phone: '123-456-789', email: 'kiss@gmail.com', roleId: 4, type: 'Heavy', price: 1000, scope: 'Andalucia', avatar: `${config.server.url}/avatars/kiss.png`, video: 'https://www.youtube.com/watch?v=jhorQPIiAEk' 
     };
     const bandIn08 = {
       name: 'Metallica', desc: bandIn8Desc, phone: '123-456-789', email: 'metallica@gmail.com', roleId: 4, type: 'Metal', price: 1100, scope: 'Madrid', avatar: `${config.server.url}/avatars/metallica.jpg`, video: null 
     };
     const bandIn09 = {
-      name: 'Pearl Jam', desc: bandIn9Desc, phone: '123-456-789', email: 'pearljam@gmail.com', roleId: 4, type: 'Punk', price: 1200, scope: 'Barcelona', avatar: `${config.server.url}/avatars/pearl_jam.gif`, video: null 
+      name: 'Pearl Jam', desc: bandIn9Desc, phone: '123-456-789', email: 'pearljam@gmail.com', roleId: 4, type: 'Punk', price: 1200, scope: 'Barcelona', avatar: `${config.server.url}/avatars/pearl_jam.gif`, video: 'https://www.youtube.com/watch?v=Lli99OmkPwM' 
     };
     const bandIn10 = {
-      name: 'Van Halen', desc: bandIn10Desc, phone: '123-456-789', email: 'vanHalen@gmail.com', roleId: 4, type: 'Heavy', price: 1000, scope: 'Andalucia', avatar: `${config.server.url}/avatars/van_halen.jpg`, video: null 
+      name: 'Van Halen', desc: bandIn10Desc, phone: '123-456-789', email: 'vanHalen@gmail.com', roleId: 4, type: 'Heavy', price: 1000, scope: 'Andalucia', avatar: `${config.server.url}/avatars/van_halen.jpg`, video: 'https://www.youtube.com/watch?v=BS6TSBdruig' 
     };
     const bandIn11 = {
       name: 'ZZ Top', desc: bandIn11Desc, phone: '123-456-789', email: 'zztop@gmail.com', roleId: 4, type: 'Heavy', price: 1100, scope: 'Madrid', avatar: `${config.server.url}/avatars/zz_top.jpg`, video: null 
     };
     const bandIn12 = {
-      name: 'Sly & the Family Stone', desc: bandIn12Desc, phone: '123-456-789', email: 'familystone@gmail.com', roleId: 4, type: 'Heavy', price: 1200, scope: 'Barcelona', avatar: `${config.server.url}/avatars/sly.jpg`, video: null 
+      name: 'Sly & the Family Stone', desc: bandIn12Desc, phone: '123-456-789', email: 'familystone@gmail.com', roleId: 4, type: 'Heavy', price: 1200, scope: 'Barcelona', avatar: `${config.server.url}/avatars/sly.jpg`, video: 'https://www.youtube.com/watch?v=wj5VODa-eTY' 
     };
     
     // create companies

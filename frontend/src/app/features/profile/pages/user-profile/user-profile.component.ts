@@ -15,7 +15,7 @@ export class UserProfileComponent implements OnInit {
   profileId: number;
   profileUser: User;
   
-  userForm: FormGroup
+  userForm: FormGroup;
   currentUser: User;
   imageData: string;
 
