@@ -47,7 +47,16 @@
     </div>
   </section>
 
-  <section class="musicians">
+  <section class="band-video">
+    <h1>Promotional video:</h1>
+    <!-- https://www.youtube.com/watch?v=JkK8g6FMEXE"> -->
+    <!-- https://www.youtube.com/embed/JkK8g6FMEXE -->
+    <div class="iframe-ctnr">
+      <iframe width="560" height="315" [src]="profileBand?.video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen *ngIf="videoIsEmbeded"></iframe>
+    </div>
+  </section>
+
+  <section class="band-musicians">
     <h1>{{ profileBand?.name }} musicians:</h1>
     
     <ul *ngFor="let musician of profileBand?.users">

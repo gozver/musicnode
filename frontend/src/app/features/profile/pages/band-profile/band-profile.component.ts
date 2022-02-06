@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
+import { DomSanitizer} from '@angular/platform-browser';
 
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
@@ -23,6 +24,7 @@ export class BandProfileComponent implements OnInit {
 
   avatarSelected: boolean = false;
   isMyBand: boolean = false;
+  videoIsEmbeded: boolean = false;
 
   customOptions: OwlOptions = {
     loop: true,
@@ -46,6 +48,7 @@ export class BandProfileComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
+    private readonly sanitizer: DomSanitizer,
     private readonly authService: AuthService,
     private readonly bandService: BandService
   ) { 
@@ -69,11 +72,23 @@ export class BandProfileComponent implements OnInit {
         console.log('--> band:');
         console.log(this.profileBand);
 
-        // !! => parse to boolean
+        // !! => Parse to boolean
         this.isMyBand = !!this.profileBand.users.find(user => user.id === this.currentUser.id);
 
         console.log('--> this.isMyBand:');
         console.log(this.isMyBand);
+
+        /**
+         * 1. Modify video URL to embed in the HTML: replace('watch?v=', 'embed/')
+         * 2. Angular DomSanitizer:
+         * https://stackoverflow.com/questions/47193997/im-trying-to-dynamically-change-the-url-of-an-iframe-but-im-getting-an-error-un/47194242
+         */ 
+        this.profileBand.video = this.profileBand.video.replace('watch?v=', 'embed/');
+        this.profileBand.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.profileBand.video);
+        this.videoIsEmbeded = true;
+        
+        console.log('--> sanitized profileBand video:');
+        console.log(this.profileBand.video.changingThisBreaksApplicationSecurity);
       },
       error => {
         console.error("--> the band doesn't exist");
