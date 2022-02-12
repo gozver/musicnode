@@ -7,4 +7,5 @@ module.exports = {
   'contractorRole': require('./contractorRole'),
   
   'bandImage': require('./bandImage'),
+  'review': require('./review'),
 }

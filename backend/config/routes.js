@@ -39,6 +39,8 @@ router
   .get    ('/message/:from:to', middlewares.auth, controllers.message.findAllByUsersIds)
   .post   ('/message',          middlewares.auth, controllers.message.create)
 
+  .get    ('/review/:bandId', controllers.review.findAll)
+
   .post   ('/email',  controllers.email.sendContactEmail);
 
 module.exports = router;

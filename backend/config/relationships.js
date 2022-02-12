@@ -59,6 +59,15 @@ models.user.hasMany(models.message, {
 models.message.belongsTo(models.user);
 
 /**
+ * USER/REVIEW: ONE TO MANY
+ */
+ models.user.hasMany(models.review, {
+  foreignKey: 'userId', onDelete: 'cascade', onUpdate: 'cascade',
+});
+
+models.review.belongsTo(models.user);
+
+/**
  * BAND/IMAGE: ONE TO MANY
  */
  models.band.hasMany(models.image, {

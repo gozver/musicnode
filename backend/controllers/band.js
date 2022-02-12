@@ -76,8 +76,8 @@ exports.findOne = async (req, res, next) => {
     }]
   })
     .then(band => {
-      console.log('--> band:');
-      console.log(band);
+      // console.log('--> band:');
+      // console.log(band);
 
       if (band.length > 0) {
         res.json(band)
@@ -107,11 +107,11 @@ exports.findOne = async (req, res, next) => {
 }
 
 exports.updateAvatar = async (req, res, next) => {
-  console.log('--> req.body.id:');
-  console.log(req.body.id);
+  // console.log('--> req.body.id:');
+  // console.log(req.body.id);
 
-  console.log('--> req.file:');
-  console.log(req.file);
+  // console.log('--> req.file:');
+  // console.log(req.file);
 
   const id = req.body.id;
   const avatar = config.server.url + '/avatars/' + req.file.filename;

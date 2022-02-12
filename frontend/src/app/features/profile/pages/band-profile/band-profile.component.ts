@@ -6,7 +6,8 @@ import { DomSanitizer} from '@angular/platform-browser';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 import { AuthService } from '@shared/services/auth.service';
-import { BandService } from '@app/shared/services/band.service';
+import { BandService } from '@shared/services/band.service';
+import { ReviewService } from '@shared/services/review.service';
 import { User } from '@app/shared/interfaces/user.interface';
 
 @Component({
@@ -25,6 +26,8 @@ export class BandProfileComponent implements OnInit {
   avatarSelected: boolean = false;
   isMyBand: boolean = false;
   videoIsEmbeded: boolean = false;
+
+  reviewsList: any[] = []
 
   customOptions: OwlOptions = {
     loop: true,
@@ -50,7 +53,8 @@ export class BandProfileComponent implements OnInit {
     private readonly router: Router,
     private readonly sanitizer: DomSanitizer,
     private readonly authService: AuthService,
-    private readonly bandService: BandService
+    private readonly bandService: BandService,
+    private readonly reviewService: ReviewService,
   ) { 
     this.profileId = parseInt(this.route.snapshot.paramMap.get('id'));
   }
@@ -79,8 +83,8 @@ export class BandProfileComponent implements OnInit {
         console.log(this.isMyBand);
 
         /**
-         * 1. Modify video URL to embed in the HTML: replace('watch?v=', 'embed/')
-         * 2. Angular DomSanitizer:
+         * 1) Modify video URL to embed in the HTML: replace('watch?v=', 'embed/')
+         * 2) Angular DomSanitizer:
          * https://stackoverflow.com/questions/47193997/im-trying-to-dynamically-change-the-url-of-an-iframe-but-im-getting-an-error-un/47194242
          */ 
         this.profileBand.video = this.profileBand.video.replace('watch?v=', 'embed/');
@@ -89,14 +93,21 @@ export class BandProfileComponent implements OnInit {
         
         console.log('--> sanitized profileBand video:');
         console.log(this.profileBand.video.changingThisBreaksApplicationSecurity);
+        
+        this.reviewService.getReviews(this.profileBand.id).subscribe(reviewsList => {
+          this.reviewsList = reviewsList;
+
+          console.log('--> reviewsList:');
+          console.log(this.reviewsList);
+        })
       },
       error => {
-        console.error("--> the band doesn't exist");
         console.error('--> error:', error);
 
         this.router.navigate(['/home']);
       }
     );
+
   }
 
   initUserForm(profileBand: any): void {

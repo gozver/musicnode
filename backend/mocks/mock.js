@@ -161,7 +161,7 @@ db.sync({ force: true })
       name: 'Aerosmith', desc: bandIn1Desc, phone: '123-456-789', email: 'aerosmith@gmail.com', roleId: 4, type: 'heavy Rock', price: 1000, scope: 'Andalucia', avatar: `${config.server.url}/avatars/aerosmith.jpg`, video: 'https://www.youtube.com/watch?v=JkK8g6FMEXE'
     };
     const bandIn02 = {
-      name: 'The Beach Boys', desc: bandIn2Desc, phone: '123-456-789', email: 'thebeachboys@gmail.com', roleId: 4, type: 'Pop', price: 1100, scope: 'Madrid', avatar: `${config.server.url}/avatars/the_beach_boys.jpg`, video: 'https://www.youtube.com/watch?v=ruKCw797JM4' 
+      name: 'The Beach Boys', desc: bandIn2Desc, phone: '123-456-789', email: 'beachboys@gmail.com', roleId: 4, type: 'Pop', price: 1100, scope: 'Madrid', avatar: `${config.server.url}/avatars/the_beach_boys.jpg`, video: 'https://www.youtube.com/watch?v=ruKCw797JM4' 
     };
     const bandIn03 = {
       name: 'The Doors', desc: bandIn3Desc, phone: '123-456-789', email: 'thedoors@gmail.com', roleId: 4, type: 'Rock', price: 1200, scope: 'Barcelona', avatar: `${config.server.url}/avatars/the_doors.png`, video: 'https://www.youtube.com/watch?v=TMiAQPABgHA' 
@@ -179,7 +179,7 @@ db.sync({ force: true })
       name: 'Kiss', desc: bandIn7Desc, phone: '123-456-789', email: 'kiss@gmail.com', roleId: 4, type: 'Heavy', price: 1000, scope: 'Andalucia', avatar: `${config.server.url}/avatars/kiss.png`, video: 'https://www.youtube.com/watch?v=jhorQPIiAEk' 
     };
     const bandIn08 = {
-      name: 'Metallica', desc: bandIn8Desc, phone: '123-456-789', email: 'metallica@gmail.com', roleId: 4, type: 'Metal', price: 1100, scope: 'Madrid', avatar: `${config.server.url}/avatars/metallica.jpg`, video: null 
+      name: 'Metallica', desc: bandIn8Desc, phone: '123-456-789', email: 'metallica@gmail.com', roleId: 4, type: 'Metal', price: 1100, scope: 'Madrid', avatar: `${config.server.url}/avatars/metallica.jpg`, video: 'https://www.youtube.com/watch?v=Lli99OmkPwM'
     };
     const bandIn09 = {
       name: 'Pearl Jam', desc: bandIn9Desc, phone: '123-456-789', email: 'pearljam@gmail.com', roleId: 4, type: 'Punk', price: 1200, scope: 'Barcelona', avatar: `${config.server.url}/avatars/pearl_jam.gif`, video: 'https://www.youtube.com/watch?v=Lli99OmkPwM' 
@@ -473,6 +473,15 @@ db.sync({ force: true })
     // insert band images into the db
     for (let bandImage of seed.bandImage) {
       await models.image.create(bandImage);
+    }
+  })
+  .catch(err => console.log('--> error:', err))
+  
+  // reviews
+  .then(async () => {
+    // insert users reviews into the db
+    for (let review of seed.review) {
+      await models.review.create(review);
     }
   })
   .catch(err => console.log('--> error:', err));
