@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
 import { BandService } from '@shared/services/band.service';
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   topBandsList: any[] = [];
 
   constructor(
+    private readonly router: Router,
     private readonly dialog: MatDialog,
     private readonly bpObserver: BreakpointObserver,
     private readonly bandService: BandService
@@ -34,10 +36,27 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.bandService.getBands().subscribe(bandsList =>  {
       this.bandsList = bandsList;
       this.bandsList = this.shuffle(this.bandsList);
+
+      console.log('--> this.bandsList');
+      console.log(this.bandsList);
+
+      // Calculate average rating
+      this.bandsList.forEach(band => {
+        let averageRating = 0;
+
+        band.reviews.forEach(review => {
+          averageRating += review.rating
+        });
+
+        band.rating = averageRating / band.reviews.length;
+      });
+
+      // Top Band List
       const indexesList = this.getIndexes();
       
       for (let i = 0; i < 6; i++) {
         const band = {
+          id: this.bandsList[indexesList[i]].id,
           name: this.bandsList[indexesList[i]].name,
           img: this.bandsList[indexesList[i]].images[0].image,
           avatar: this.bandsList[indexesList[i]].avatar 
@@ -88,5 +107,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   openBudgetDialog(band: any): void{
     this.dialog.open(HomeDialogComponent, { data: band });
+  }
+
+  goToBandProfile(bandId: number): void {
+    this.router.navigate([`/profile/band/${bandId}`]);
   }
 }

@@ -12,7 +12,7 @@
   <section class="top-bands">
     <div class="top-bands-ctnr">
       <mat-card *ngFor="let band of topBandsList; let i = index" [ngClass]="isMobileView && i > 2 ? 'hidden' : 'none'">
-        <img class="background" alt="bg" src="{{ band?.img }}">
+        <img class="background" alt="bg" src="{{ band?.img }}" (click)="goToBandProfile(band.id)">
 
         <mat-card-content>
           <img class="avatar" alt="avatar" src="{{ band?.avatar }}" width="50px">
@@ -25,7 +25,7 @@
   <div class="bands">
     <div class="bands-ctnr">
       <mat-card *ngFor="let band of bandsList">
-        <div class="img-ctnr">
+        <div class="img-ctnr" (click)="goToBandProfile(band.id)">
           <img alt="{{ band?.name }}" src="{{ band?.images[0]?.image }}" width="500px">
         </div>
 
@@ -34,8 +34,9 @@
           
           <div class="rating">
             <i class="material-icons">star</i>
-            <span class="rate">5.0</span>
-            <span class="scope">(50) · {{ band?.scope }}</span>
+            <!-- number:'1.0-3' =>  min integers number | min digits number | max digits number -->
+            <span class="rate">{{ band?.rating | number:'1.1-1' }}</span>
+            <span class="scope">({{ band?.reviews.length }}) · {{ band?.scope }}</span>
           </div>
 
           <div class="description">

@@ -77,6 +77,15 @@ models.review.belongsTo(models.user);
 models.image.belongsTo(models.band);
 
 /**
+ * BAND/REVIEW: ONE TO MANY
+ */
+ models.band.hasMany(models.review, {
+  foreignKey: 'bandId', onDelete: 'cascade', onUpdate: 'cascade',
+});
+
+models.review.belongsTo(models.band);
+
+/**
  * COMPANY/IMAGE: ONE TO MANY
  */
  models.company.hasMany(models.image, {

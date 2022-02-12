@@ -51,6 +51,8 @@ exports.findAll = async (req, res, next) => {
       model: models.user
     }, {
       model: models.image
+    }, {
+      model: models.review
     }]
   })
     .then(data => res.json(data))
