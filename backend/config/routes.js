@@ -39,7 +39,8 @@ router
   .get    ('/message/:from:to', middlewares.auth, controllers.message.findAllByUsersIds)
   .post   ('/message',          middlewares.auth, controllers.message.create)
 
-  .get    ('/review/:bandId', controllers.review.findAll)
+  .get    ('/review/:bandId', middlewares.auth, controllers.review.findAll)
+  .post   ('/review',         middlewares.auth, controllers.review.create)
 
   .post   ('/email',  controllers.email.sendContactEmail);
 

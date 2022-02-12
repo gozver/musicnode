@@ -49,8 +49,7 @@
 
   <section class="band-video">
     <h1>Promotional video:</h1>
-    <!-- https://www.youtube.com/watch?v=JkK8g6FMEXE"> -->
-    <!-- https://www.youtube.com/embed/JkK8g6FMEXE -->
+    
     <div class="iframe-ctnr">
       <iframe width="560" height="315" [src]="profileBand?.video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen *ngIf="videoIsEmbeded"></iframe>
     </div>
@@ -75,6 +74,7 @@
         
         <div class="user-info">
           <p class="full-name">{{ review?.user?.name }} {{ review?.user?.surname }}</p>
+
           <div class="rating" [ngSwitch]="review?.rating">
             <span *ngSwitchCase="'1'">
               <i class="material-icons">star</i>
@@ -106,6 +106,8 @@
               <i class="material-icons">star</i>
             </span>
           </div>
+
+          <div class="date">{{ review.createdAt | date: 'short' }}</div>
         </div>
       </div>
 
@@ -119,9 +121,34 @@
     <h1>Write a Review:</h1>
 
     <div class="review-ctnr">
-      <div class="avatar">
+      <!-- <div class="avatar">
         <img src="{{ currentUser?.avatar }}" alt="{{ currentUser?.name }}" />
-      </div>
+      </div> -->
+
+      <!-- if the form is initialized, generate the template -->
+      <form [formGroup]="reviewForm" *ngIf="reviewForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Rating</mat-label>
+          <mat-select formControlName="rating">
+            <mat-option *ngFor="let item of ratingsList" value="{{ item.value }}">{{ item.value }}</mat-option>
+          </mat-select>
+          <button mat-icon-button matSuffix [attr.aria-label]="'Rating'" disabled>
+            <mat-icon>category</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="input-headline">
+          <mat-label>Review</mat-label>
+          <textarea matInput placeholder="Write a Review" formControlName="body" rows="3"></textarea>
+          <button mat-icon-button matSuffix [attr.aria-label]="'Review'" disabled>
+            <mat-icon matSuffix>text_snippet</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+
+      <button mat-flat-button color="warn" class="warn" [disabled]="reviewForm.invalid" (click)="createReview()">
+        Create Review
+      </button>
     </div>
     
   </section>

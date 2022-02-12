@@ -76,9 +76,6 @@ exports.findOne = async (req, res, next) => {
     }]
   })
     .then(band => {
-      // console.log('--> band:');
-      // console.log(band);
-
       if (band.length > 0) {
         res.json(band)
       } else {

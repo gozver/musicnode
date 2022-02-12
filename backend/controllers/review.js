@@ -1,21 +1,20 @@
 const models = require('../models');
 
-// exports.create = async (req, res, next) => {
-//   const ad = { 
-//     title: req.body.title,
-//     price: req.body.price,
-//     location: req.body.location,
-//     description: req.body.description,
-//     userId: req.body.userId
-//   };
+exports.create = async (req, res, next) => {
+  const review = { 
+    body: req.body.body,
+    rating: req.body.rating,
+    userId: req.body.userId,
+    bandId: req.body.bandId,
+  };
 
-//   models.ad.create(ad)
-//     .then(data => res.json(data))
-//     .catch(err => {
-//       if (!err.statusCode) err.statusCode = 500;
-//       next(err); // go to error controller
-//     });
-// }
+  models.review.create(review)
+    .then(data => res.json(data))
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
+      next(err); // go to error controller
+    });
+}
 
 exports.findAll = async (req, res, next) => {
   console.log('--> req.params:');

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer} from '@angular/platform-browser';
 
 import { OwlOptions } from 'ngx-owl-carousel-o';
@@ -18,16 +18,25 @@ import { User } from '@app/shared/interfaces/user.interface';
 export class BandProfileComponent implements OnInit {
   profileId: number;
   profileBand: any;
-
-  bandForm: FormGroup;
   currentUser: User;
   imageData: string;
 
+  bandForm: FormGroup;
+  reviewForm: FormGroup;
+  
   avatarSelected: boolean = false;
   isMyBand: boolean = false;
   videoIsEmbeded: boolean = false;
 
-  reviewsList: any[] = []
+  reviewsList: any[] = [];
+
+  ratingsList: { value: number }[] = [
+    { value: 1 },
+    { value: 2 },
+    { value: 3 },
+    { value: 4 },
+    { value: 5 },
+  ];
 
   customOptions: OwlOptions = {
     loop: true,
@@ -49,6 +58,7 @@ export class BandProfileComponent implements OnInit {
   }
   
   constructor(
+    private readonly fb: FormBuilder,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly sanitizer: DomSanitizer,
@@ -108,12 +118,22 @@ export class BandProfileComponent implements OnInit {
       }
     );
 
+    this.initReviewForm();
   }
 
   initUserForm(profileBand: any): void {
     this.bandForm = new FormGroup({
       name:   new FormControl(profileBand.name),
       avatar: new FormControl(profileBand.avatar)
+    });
+  }
+
+  initReviewForm(): void {
+    this.reviewForm = this.fb.group({
+      rating: [ null, [ Validators.required ]],
+      body:   [ '',   [ Validators.required, Validators.minLength(3) ]],
+      userId: null,
+      bandId: null
     });
   }
 
@@ -145,5 +165,37 @@ export class BandProfileComponent implements OnInit {
 
   sendMessage(id: number): void {
     this.router.navigate(['/chat'], { queryParams: { id } });
+  }
+
+  createReview(): void {
+    const newReview = {
+      id: 10,
+      body: this.reviewForm.value.body,
+      rating: this.reviewForm.value.rating,
+      userId: this.currentUser.id,
+      bandId: this.profileBand.id,
+      user: {
+        id: this.currentUser.id,
+        name: this.currentUser.name,
+        surname: this.currentUser.surname,
+        email: this.currentUser.email,
+        phone: this.currentUser.phone,
+        avatar: this.currentUser.avatar
+      },
+      createdAt: Date.now(),
+      updatedAt: Date.now()
+    }
+
+    // Ad the new review to the reviewsList array
+    this.reviewsList = [newReview, ...this.reviewsList ];
+
+    this.reviewForm.value.userId = this.currentUser.id;
+    this.reviewForm.value.bandId = this.profileBand.id;
+
+    // Ad the new review to db
+    this.reviewService.createReview(this.reviewForm.value).subscribe();
+
+    // Reset the form
+    this.reviewForm.reset();
   }
 }
