@@ -21,11 +21,12 @@ router
 
   .get    ('/role', controllers.role.findAll)
 
-  .get    ('/band',                       controllers.band.findAll)
-  .get    ('/band/:id', middlewares.auth, controllers.band.findOne)
-  .post   ('/band',     middlewares.auth, controllers.band.create)
-  .patch  ('/band',     storage.avatar,   controllers.band.updateAvatar)
-  .delete ('/band/:id', middlewares.auth, controllers.band.deleteImages)
+  .get    ('/band',                         controllers.band.findAll)
+  .get    ('/band/:id',   middlewares.auth, controllers.band.findOne)
+  .post   ('/band',       middlewares.auth, controllers.band.create)
+  .patch  ('/band',       storage.avatar,   controllers.band.updateAvatar)
+  .patch  ('/band/multi', storage.multi,    controllers.band.updateImages)
+  .delete ('/band/:id',   middlewares.auth, controllers.band.deleteImages)
 
   .get    ('/company',                   controllers.company.findAll)
   .post   ('/company', middlewares.auth, controllers.company.create)

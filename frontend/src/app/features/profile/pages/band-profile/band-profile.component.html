@@ -4,11 +4,12 @@
     <div class="subtitle">{{ profileBand?.name }}</div>
   </section>
 
+  <!-- AVATAR -->
   <section class="band-info">
     <!-- if the form is initialized, generate the template -->
-    <form [formGroup]="bandForm" class="bandForm" *ngIf="bandForm">
-      <div class="avatar">
-        <input type="file" id="file" name="file" (change)="onFileSelected($event)" *ngIf="isMyBand" />
+    <form [formGroup]="avatarForm" class="band-form" *ngIf="avatarForm">
+      <div class="avatar-ctnr">
+        <input type="file" id="file" name="file" (change)="selectAvatar($event)" *ngIf="isMyBand" />
 
         <label for="file">
           <img [src]="imageData" [alt]="profileBand?.name" [ngClass]="isMyBand ? 'pointer' : 'normal'">
@@ -29,7 +30,7 @@
     </form>
 
     <div class="btn-ctnr">
-      <button mat-flat-button color="warn" class="warn mb-20" (click)="updateImage()" *ngIf="isMyBand && this.avatarSelected">
+      <button mat-flat-button color="warn" class="warn mb-20" (click)="updateAvatar()" *ngIf="isMyBand && this.avatarSelected">
         Update Avatar
       </button>
     </div>
@@ -37,15 +38,16 @@
     <div class="description">{{ profileBand?.desc }}</div>
   </section>
 
-  <section class="band-images">
+  <!-- CAROUSEL -->
+  <section class="band-carousel">
     <div class="band-images-ctnr">
-      <owl-carousel-o class="owl-carousel-o" [options]="customOptions" *ngIf="profileBand?.images[0]">
+      <owl-carousel-o [options]="customOptions" *ngIf="profileBand?.images[0]">
         <ng-template carouselSlide class="slide owl-carousel owl-theme owl-centered" *ngFor="let images of profileBand?.images">
           <img src="{{ images?.image }}" alt="{{ profileBand?.name }}" />
         </ng-template>  
       </owl-carousel-o>
 
-      <owl-carousel-o class="owl-carousel-o" [options]="customOptions" *ngIf="!profileBand?.images[0]">
+      <owl-carousel-o [options]="customOptions" *ngIf="!profileBand?.images[0]">
         <ng-template carouselSlide class="slide owl-carousel owl-theme owl-centered">
           <img src="assets/img/no-image-2.png" alt="No Image" />
         </ng-template>  
@@ -53,7 +55,9 @@
     </div>
   </section>
 
-  <section class="band-images-btns">  
+  <section class="band-carousel-btn-ctnr">
+    <input type="file" id="file" name="file" (change)="uploadImages($event)" *ngIf="isMyBand" />
+
     <button mat-fab color="warn" class="warn">
       <mat-icon>upload</mat-icon>
     </button>
@@ -63,6 +67,7 @@
     </button>
   </section>
 
+  <!-- YOUTUBE VIDEO -->
   <section class="band-video">
     <h1>Promotional video:</h1>
     
@@ -79,6 +84,7 @@
     </ul>
   </section>
 
+  <!-- LIST REVIEWS -->
   <section class="band-reviews">
     <h1>Reviews:</h1>
 
@@ -133,6 +139,7 @@
     </div>
   </section>
 
+  <!-- CREATE REVIEW -->
   <section class="new-review">
     <h1>Write a Review:</h1>
 

@@ -21,7 +21,8 @@ export class BandProfileComponent implements OnInit {
   currentUser: User;
   imageData: string;
 
-  bandForm: FormGroup;
+  avatarForm: FormGroup;
+  imagesForm: FormGroup;
   reviewForm: FormGroup;
   
   avatarSelected: boolean = false;
@@ -75,10 +76,17 @@ export class BandProfileComponent implements OnInit {
     this.initReviewForm();
   }
   
-  initBandForm(profileBand: any): void {
-    this.bandForm = new FormGroup({
+  initAvatarForm(profileBand: any): void {
+    this.avatarForm = new FormGroup({
       name:   new FormControl(profileBand.name),
       avatar: new FormControl(profileBand.avatar)
+    });
+  }
+
+  initImagesForm(profileBand: any): void {
+    this.imagesForm = new FormGroup({
+      name:  new FormControl(profileBand.name),
+      image: new FormControl(null)
     });
   }
 
@@ -86,8 +94,8 @@ export class BandProfileComponent implements OnInit {
     this.reviewForm = this.fb.group({
       rating: [ null, [ Validators.required ]],
       body:   [ '',   [ Validators.required, Validators.minLength(3) ]],
-      userId: null,
-      bandId: null
+      userId: [ null ],
+      bandId: [ null ]
     });
   }
 
@@ -99,7 +107,8 @@ export class BandProfileComponent implements OnInit {
         this.profileBand = band[0];
         this.imageData = this.profileBand.avatar;
 
-        this.initBandForm(this.profileBand);
+        this.initAvatarForm(this.profileBand);
+        this.initImagesForm(this.profileBand);
 
         // !! => Parse to boolean
         this.isMyBand = !!this.profileBand.users.find((user: { id: number; }) => user.id === this.currentUser.id);
@@ -131,12 +140,12 @@ export class BandProfileComponent implements OnInit {
     );
   }
 
-  onFileSelected(event: Event): void {
+  selectAvatar(event: Event): void {
     const file = (event.target as HTMLInputElement).files[0];
     const allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
 
     this.avatarSelected = true;
-    this.bandForm.patchValue({ avatar: file });
+    this.avatarForm.patchValue({ avatar: file });
 
     if (file && allowedMimeTypes.includes(file.type)) {
       const reader = new FileReader();
@@ -149,11 +158,30 @@ export class BandProfileComponent implements OnInit {
     }
   }
 
-  updateImage(): void {
-    this.bandService.updateAvatar(this.profileBand.id, this.bandForm.value.avatar).subscribe(avatar => {
+  updateAvatar(): void {
+    this.bandService.updateAvatar(this.profileBand.id, this.avatarForm.value.avatar).subscribe(avatar => {
       this.imageData = avatar;
       this.profileBand.avatar = avatar;
       this.avatarSelected = false;
+    });
+  }
+
+  uploadImages(event: Event): void {
+    const file = (event.target as HTMLInputElement).files[0];
+    const allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+    
+    console.log('--> selected images:');
+    console.log(file);
+
+    this.imagesForm.patchValue({ image: file });
+
+    this.bandService.updateImages(this.profileBand.id, this.imagesForm.value.image).subscribe(res => {
+      console.log('--> res:');
+      console.log(res);
+
+      this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+      this.router.navigate([`/profile/band/${this.profileBand.id}`]);
+    });
     });
   }
 

@@ -33,7 +33,7 @@ article {
     flex-direction: column;
     justify-content: center;
 
-    .bandForm {
+    .band-form {
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -41,7 +41,7 @@ article {
       width: 400px;
       margin-top: 3px;
 
-      .avatar {
+      .avatar-ctnr {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -55,6 +55,7 @@ article {
           width: 168px;
           border-radius: 50%;
           margin-right: 30px;
+          object-fit: cover;
         }
   
         .pointer {
@@ -102,9 +103,9 @@ article {
     }
   }
 
-  // band-images styles are in styles.scss due to owl carousel behavior
+  // NOTE: band-carousel styles are in styles.scss due to owl carousel behavior
 
-  .band-images-btns {
+  .band-carousel-btn-ctnr {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;

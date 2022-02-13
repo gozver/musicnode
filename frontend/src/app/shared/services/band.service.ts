@@ -46,6 +46,17 @@ export class BandService {
     );
   }
 
+  updateImages(id: number, image: File): Observable<string> {
+    const formData = new FormData();
+
+    formData.append('id', id.toString());
+    formData.append('file', image, image.name);
+
+    return this.http.patch<any>(`${environment.apiUrl}/band/multi`, formData).pipe(
+      catchError(this.errorHandlerService.handleError<any>('updateImages', null))
+    );
+  }
+
   deleteImages(id: number): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}/band/${id}`).pipe(
       catchError(this.errorHandlerService.handleError<any>('deleteImages', null))

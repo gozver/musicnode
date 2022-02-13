@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         // default image if the band has no images
         const img = this.bandsList[indexesList[i]].images[0]
           ? this.bandsList[indexesList[i]].images[0].image
-          : 'assets/img/no-image-2.jpg';
+          : 'assets/img/no-photo.jpg';
 
         const band = {
           id: this.bandsList[indexesList[i]].id,
