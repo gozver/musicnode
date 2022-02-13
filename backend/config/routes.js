@@ -25,6 +25,7 @@ router
   .get    ('/band/:id', middlewares.auth, controllers.band.findOne)
   .post   ('/band',     middlewares.auth, controllers.band.create)
   .patch  ('/band',     storage.avatar,   controllers.band.updateAvatar)
+  .delete ('/band/:id', middlewares.auth, controllers.band.deleteImages)
 
   .get    ('/company',                   controllers.company.findAll)
   .post   ('/company', middlewares.auth, controllers.company.create)

@@ -129,3 +129,26 @@ exports.updateAvatar = async (req, res, next) => {
       next(err);
     });
 }
+
+exports.updateImages = async (req, res, next) => {
+
+}
+
+exports.deleteImages = async (req, res, next) => {
+  console.log('--> req.params.id:');
+  console.log(req.params.id);
+
+  models.image.destroy({
+    where: {
+      bandId: req.params.id
+    }
+  }).then(data => res.json(data))
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
+    });
+}

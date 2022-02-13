@@ -44,9 +44,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.bandsList.forEach(band => {
         let averageRating = 0;
 
-        band.reviews.forEach(review => {
-          averageRating += review.rating
-        });
+        band.reviews.forEach((review: { rating: number; }) => averageRating += review.rating);
 
         band.rating = averageRating / band.reviews.length;
       });
@@ -55,10 +53,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
       const indexesList = this.getIndexes();
       
       for (let i = 0; i < 6; i++) {
+        // default image if the band has no images
+        const img = this.bandsList[indexesList[i]].images[0]
+          ? this.bandsList[indexesList[i]].images[0].image
+          : 'assets/img/no-image-2.jpg';
+
         const band = {
           id: this.bandsList[indexesList[i]].id,
           name: this.bandsList[indexesList[i]].name,
-          img: this.bandsList[indexesList[i]].images[0].image,
+          img: img,
           avatar: this.bandsList[indexesList[i]].avatar 
         };
         

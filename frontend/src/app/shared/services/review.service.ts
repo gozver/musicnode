@@ -25,7 +25,6 @@ export class ReviewService {
   }
 
   createReview(params: Review): Observable<Review> {
-    console.log(params);
     return this.http.post<Review>(`${environment.apiUrl}/review`, params).pipe(
       catchError(this.errorHandlerService.handleError<any>('createReview', null))
     );

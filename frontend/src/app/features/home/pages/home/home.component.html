@@ -26,7 +26,8 @@
     <div class="bands-ctnr">
       <mat-card *ngFor="let band of bandsList">
         <div class="img-ctnr" (click)="goToBandProfile(band.id)">
-          <img alt="{{ band?.name }}" src="{{ band?.images[0]?.image }}" width="500px">
+          <img alt="{{ band?.name }}" src="{{ band?.images[0]?.image }}" width="500px" *ngIf="band?.images[0]">
+          <img alt="{{ band?.name }}" src="assets/img/no-image.png" width="500px" *ngIf="!band?.images[0]">
         </div>
 
         <div class="band-info">

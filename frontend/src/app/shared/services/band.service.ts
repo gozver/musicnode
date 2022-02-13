@@ -45,4 +45,10 @@ export class BandService {
       catchError(this.errorHandlerService.handleError<any>('updateAvatar', null))
     );
   }
+
+  deleteImages(id: number): Observable<any> {
+    return this.http.delete<any>(`${environment.apiUrl}/band/${id}`).pipe(
+      catchError(this.errorHandlerService.handleError<any>('deleteImages', null))
+    );
+  }
 }

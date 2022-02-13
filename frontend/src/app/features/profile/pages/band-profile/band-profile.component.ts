@@ -67,28 +67,45 @@ export class BandProfileComponent implements OnInit {
     private readonly reviewService: ReviewService,
   ) { 
     this.profileId = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
-    this.authService.currentUser$.subscribe(currentUser => {
-      this.currentUser = currentUser;
-
-      console.log('--> currentUser:');
-      console.log(currentUser.id);
+    this.initComponentData();
+    this.initReviewForm();
+  }
+  
+  initBandForm(profileBand: any): void {
+    this.bandForm = new FormGroup({
+      name:   new FormControl(profileBand.name),
+      avatar: new FormControl(profileBand.avatar)
     });
+  }
+
+  initReviewForm(): void {
+    this.reviewForm = this.fb.group({
+      rating: [ null, [ Validators.required ]],
+      body:   [ '',   [ Validators.required, Validators.minLength(3) ]],
+      userId: null,
+      bandId: null
+    });
+  }
+
+  initComponentData(): void {
+    this.currentUser = this.authService.currentUser$.value;
 
     this.bandService.getBand(this.profileId).subscribe(
       band => {
         this.profileBand = band[0];
         this.imageData = this.profileBand.avatar;
-        this.initUserForm(this.profileBand);
 
-        console.log('--> band:');
-        console.log(this.profileBand);
+        this.initBandForm(this.profileBand);
 
         // !! => Parse to boolean
-        this.isMyBand = !!this.profileBand.users.find(user => user.id === this.currentUser.id);
+        this.isMyBand = !!this.profileBand.users.find((user: { id: number; }) => user.id === this.currentUser.id);
 
+        console.log('--> profile band:');
+        console.log(this.profileBand);
         console.log('--> this.isMyBand:');
         console.log(this.isMyBand);
 
@@ -104,12 +121,7 @@ export class BandProfileComponent implements OnInit {
         console.log('--> sanitized profileBand video:');
         console.log(this.profileBand.video.changingThisBreaksApplicationSecurity);
         
-        this.reviewService.getReviews(this.profileBand.id).subscribe(reviewsList => {
-          this.reviewsList = reviewsList;
-
-          console.log('--> reviewsList:');
-          console.log(this.reviewsList);
-        })
+        this.reviewService.getReviews(this.profileBand.id).subscribe(reviewsList => this.reviewsList = reviewsList);
       },
       error => {
         console.error('--> error:', error);
@@ -117,24 +129,6 @@ export class BandProfileComponent implements OnInit {
         this.router.navigate(['/home']);
       }
     );
-
-    this.initReviewForm();
-  }
-
-  initUserForm(profileBand: any): void {
-    this.bandForm = new FormGroup({
-      name:   new FormControl(profileBand.name),
-      avatar: new FormControl(profileBand.avatar)
-    });
-  }
-
-  initReviewForm(): void {
-    this.reviewForm = this.fb.group({
-      rating: [ null, [ Validators.required ]],
-      body:   [ '',   [ Validators.required, Validators.minLength(3) ]],
-      userId: null,
-      bandId: null
-    });
   }
 
   onFileSelected(event: Event): void {
@@ -163,27 +157,33 @@ export class BandProfileComponent implements OnInit {
     });
   }
 
+  deleteImages(): void {
+    this.bandService.deleteImages(this.profileBand.id).subscribe(res => {
+      console.log('--> res:');
+      console.log(res);
+    });
+
+    this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+      this.router.navigate([`/profile/band/${this.profileBand.id}`]);
+    });
+  }
+
   sendMessage(id: number): void {
     this.router.navigate(['/chat'], { queryParams: { id } });
   }
 
   createReview(): void {
     const newReview = {
-      id: 10,
       body: this.reviewForm.value.body,
       rating: this.reviewForm.value.rating,
       userId: this.currentUser.id,
       bandId: this.profileBand.id,
       user: {
-        id: this.currentUser.id,
         name: this.currentUser.name,
         surname: this.currentUser.surname,
-        email: this.currentUser.email,
-        phone: this.currentUser.phone,
         avatar: this.currentUser.avatar
       },
-      createdAt: Date.now(),
-      updatedAt: Date.now()
+      createdAt: Date.now()
     }
 
     // Ad the new review to the reviewsList array

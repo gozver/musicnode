@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, AfterViewChecked, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
@@ -12,7 +12,7 @@ import { User } from '@app/shared/interfaces/user.interface';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit, AfterViewInit {
+export class LayoutComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
   // ! => tells typescript a variable will be initialized later (only in strinct mode)
   // viewchild => we use viewchild to reference the MatSidenav element in the template
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
@@ -32,19 +32,25 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.getComponentData();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.setBreakPointObserver();
   }
 
-  ngAfterViewChecked() {
-    // This component will auto update when a behavior subject changes in other components
+  // This component will auto update when a behavior subject changes in other components
+  ngAfterViewChecked(): void {
     this.cdRef.detectChanges();
+  }
+
+  ngOnDestroy(): void {
+    this.authService.isLogged$.complete();
+    this.authService.activeRole$.complete();
+    this.authService.currentUser$.complete();
   }
 
   // General functions
   getComponentData(): void {
-    this.authService.isLogged$.subscribe(isLogged => this.isLogged = isLogged);    
-    this.authService.activeRole$.subscribe(activeRole => this.activeRole = activeRole);    
+    this.authService.isLogged$.subscribe(isLogged => this.isLogged = isLogged);
+    this.authService.activeRole$.subscribe(activeRole => this.activeRole = activeRole);
     this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
   }
 
@@ -52,10 +58,10 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     return this.currentUser.hasRole;
   }
 
+  // BreakpointObserver on small screens => max-width: 800px
+  // Angular lifecicle hook: https://www.youtube.com/watch?v=O47uUnJjbJc&t=9s
   setBreakPointObserver(): void {
-    // BreakpointObserver on small screens => max-width: 800px
     this.bpObserver.observe(['(max-width: 800px)']).subscribe((res) => {
-      // Angular lifecicle hook: https://www.youtube.com/watch?v=O47uUnJjbJc&t=9s
       Promise.resolve().then(() => {
         if (res.matches) {
           this.sidenav.mode = 'over';

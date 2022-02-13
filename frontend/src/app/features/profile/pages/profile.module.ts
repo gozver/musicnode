@@ -13,7 +13,6 @@ import { EditUserProfileComponent } from './edit-user-profile/edit-user-profile.
 import { BandProfileComponent } from './band-profile/band-profile.component';
 import { EditBandProfileComponent } from './edit-band-profile/edit-band-profile.component';
 
-
 @NgModule({
   declarations: [
     UserProfileComponent,

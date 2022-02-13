@@ -39,12 +39,28 @@
 
   <section class="band-images">
     <div class="band-images-ctnr">
-      <owl-carousel-o class="owl-carousel-o" [options]="customOptions">
+      <owl-carousel-o class="owl-carousel-o" [options]="customOptions" *ngIf="profileBand?.images[0]">
         <ng-template carouselSlide class="slide owl-carousel owl-theme owl-centered" *ngFor="let images of profileBand?.images">
           <img src="{{ images?.image }}" alt="{{ profileBand?.name }}" />
         </ng-template>  
       </owl-carousel-o>
+
+      <owl-carousel-o class="owl-carousel-o" [options]="customOptions" *ngIf="!profileBand?.images[0]">
+        <ng-template carouselSlide class="slide owl-carousel owl-theme owl-centered">
+          <img src="assets/img/no-image-2.png" alt="No Image" />
+        </ng-template>  
+      </owl-carousel-o>
     </div>
+  </section>
+
+  <section class="band-images-btns">  
+    <button mat-fab color="warn" class="warn">
+      <mat-icon>upload</mat-icon>
+    </button>
+
+    <button mat-fab color="warn" (click)="deleteImages()">
+      <mat-icon>delete</mat-icon>
+    </button>
   </section>
 
   <section class="band-video">
@@ -121,10 +137,6 @@
     <h1>Write a Review:</h1>
 
     <div class="review-ctnr">
-      <!-- <div class="avatar">
-        <img src="{{ currentUser?.avatar }}" alt="{{ currentUser?.name }}" />
-      </div> -->
-
       <!-- if the form is initialized, generate the template -->
       <form [formGroup]="reviewForm" *ngIf="reviewForm">
         <mat-form-field appearance="outline">
