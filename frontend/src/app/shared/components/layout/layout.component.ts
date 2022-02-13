@@ -22,7 +22,7 @@ export class LayoutComponent implements OnInit, AfterViewInit, AfterViewChecked,
   currentUser: User;
 
   constructor(
-    private cdRef: ChangeDetectorRef,
+    private readonly cdRef: ChangeDetectorRef,
     private readonly router: Router,
     private readonly bpObserver: BreakpointObserver,
     private readonly authService: AuthService

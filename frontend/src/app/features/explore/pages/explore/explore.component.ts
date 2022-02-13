@@ -53,7 +53,7 @@ export class ExploreComponent implements OnInit {
   }
 
   initComponentData(): void {
-    this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
+    this.currentUser = this.authService.currentUser$.value;
 
     forkJoin([
       this.userService.getUsers(),

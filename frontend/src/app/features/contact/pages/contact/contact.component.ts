@@ -40,9 +40,7 @@ export class ContactComponent implements OnInit, OnDestroy {
       this.isLogged = isLogged;
       
       if (this.isLogged) {
-        this.authService.currentUser$.subscribe(currentUser => {
-          this.currentUser = currentUser;
-        });
+        this.currentUser = this.authService.currentUser$.value;
       }
     });
   }

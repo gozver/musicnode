@@ -55,8 +55,8 @@ export class ManagerComponent implements OnInit {
   }
 
   initComponentData(): void {
-    this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
-    this.authService.activeRole$.subscribe(activeRole => this.activeRole = activeRole);
+    this.currentUser = this.authService.currentUser$.value;
+    this.activeRole = this.authService.activeRole$.value;
 
     this.noRoleDdl = [
       { id: 1, value: 'Band ' },

@@ -59,7 +59,7 @@ export class ChatComponent implements OnInit, AfterViewInit, AfterViewChecked, O
   
   // General functions
   getComponentData(): void {
-    this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
+    this.currentUser = this.authService.currentUser$.value;
     
     this.userService.getUsers().subscribe(usersList => {
       this.usersList = usersList.filter(user => user.id !== this.currentUser.id);
