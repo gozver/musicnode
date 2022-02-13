@@ -27,7 +27,7 @@ const fileFilter = (req, file, callback) => {
 
 // NOTE: the <NAME> you use in multer's storage.single(<NAME>) function 
 // must be the same as the one you use in <input type="file" name="<NAME>" ...>
-const storage = multer({ storage: diskStorage, fileFilter: fileFilter }).single('file');
+const storage = multer({ storage: diskStorage, fileFilter: fileFilter }).array('files');
 
 module.exports = storage;
 

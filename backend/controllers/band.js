@@ -131,44 +131,41 @@ exports.updateAvatar = async (req, res, next) => {
 }
 
 exports.updateImages = async (req, res, next) => {
-  console.log('--> req.body.id:');
-  console.log(req.body.id);
+  // console.log('--> req.body.id:');
+  // console.log(req.body.id);
 
-  console.log('--> req.file:');
-  console.log(req.file);
+  // console.log('--> req.files:');
+  // console.log(req.files);
 
   const id = req.body.id;
-  const bandImage = config.server.url + '/bands/' + req.file.filename;
+  const filesList = req.files;
 
-  console.log('--> id:', id);
-  console.log('--> avatar:', bandImage);
+  filesList.forEach(file => {
+    const bandImage = config.server.url + '/bands/' + file.filename;
 
-  const image = {
-    adId: null,
-    musicianId: null,
-    bandId: id,
-    companyId: null,
-    image: bandImage,
-  };
+    const image = {
+      adId: null,
+      musicianId: null,
+      bandId: id,
+      companyId: null,
+      image: bandImage,
+    };  
 
-  console.log(image);
+    models.image.create(image)
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
 
-  models.image.create(image)
-  .then(data => res.json(data))
-  .catch(err => {
-    if (!err.statusCode) err.statusCode = 500;
-
-    // print error and send it to error controller
-    console.log('--> error:');
-    console.log(err);
-    next(err);
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
+    });
   });
+
+  res.json(filesList);
 }
 
 exports.deleteImages = async (req, res, next) => {
-  console.log('--> req.params.id:');
-  console.log(req.params.id);
-
   models.image.destroy({
     where: {
       bandId: req.params.id

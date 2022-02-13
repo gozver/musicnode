@@ -46,11 +46,14 @@ export class BandService {
     );
   }
 
-  updateImages(id: number, image: File): Observable<string> {
+  updateImages(id: number, imagesList: any): Observable<string> {
     const formData = new FormData();
-
+    
     formData.append('id', id.toString());
-    formData.append('file', image, image.name);
+
+    for (let i = 0; i < imagesList.length; i++) {
+      formData.append('files', imagesList[i], imagesList[i].name);
+    }
 
     return this.http.patch<any>(`${environment.apiUrl}/band/multi`, formData).pipe(
       catchError(this.errorHandlerService.handleError<any>('updateImages', null))

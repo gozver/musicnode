@@ -86,7 +86,7 @@ export class BandProfileComponent implements OnInit {
   initImagesForm(profileBand: any): void {
     this.imagesForm = new FormGroup({
       name:  new FormControl(profileBand.name),
-      image: new FormControl(null)
+      images: new FormControl(null)
     });
   }
 
@@ -166,22 +166,18 @@ export class BandProfileComponent implements OnInit {
     });
   }
 
-  uploadImages(event: Event): void {
-    const file = (event.target as HTMLInputElement).files[0];
-    const allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+  uploadImages(event: any): void {
+    const files: FileList = event.target.files;
     
-    console.log('--> selected images:');
-    console.log(file);
+    this.imagesForm.patchValue({ images: files });
 
-    this.imagesForm.patchValue({ image: file });
-
-    this.bandService.updateImages(this.profileBand.id, this.imagesForm.value.image).subscribe(res => {
-      console.log('--> res:');
-      console.log(res);
+    this.bandService.updateImages(this.profileBand.id, this.imagesForm.value.images).subscribe(imagesList => {
+      console.log('--> uploaded files:');
+      console.log(imagesList);
 
       this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-      this.router.navigate([`/profile/band/${this.profileBand.id}`]);
-    });
+        this.router.navigate([`/profile/band/${this.profileBand.id}`]);
+      });
     });
   }
 

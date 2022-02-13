@@ -56,11 +56,13 @@
   </section>
 
   <section class="band-carousel-btn-ctnr">
-    <input type="file" id="file" name="file" (change)="uploadImages($event)" *ngIf="isMyBand" />
+    <input type="file" id="files" name="files" multiple (change)="uploadImages($event)" *ngIf="isMyBand" />
 
-    <button mat-fab color="warn" class="warn">
-      <mat-icon>upload</mat-icon>
-    </button>
+    <label for="files">
+      <span class="upload-button">
+        <mat-icon>upload</mat-icon>
+      </span>
+    </label>
 
     <button mat-fab color="warn" (click)="deleteImages()">
       <mat-icon>delete</mat-icon>
