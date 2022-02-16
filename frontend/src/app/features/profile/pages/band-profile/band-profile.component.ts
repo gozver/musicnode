@@ -3,12 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer} from '@angular/platform-browser';
 
-import { OwlOptions } from 'ngx-owl-carousel-o';
+import { BehaviorSubject } from 'rxjs';
 
 import { AuthService } from '@shared/services/auth.service';
 import { BandService } from '@shared/services/band.service';
 import { ReviewService } from '@shared/services/review.service';
-import { User } from '@app/shared/interfaces/user.interface';
+import { User } from '@shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-band-profile',
@@ -16,6 +16,8 @@ import { User } from '@app/shared/interfaces/user.interface';
   styleUrls: ['./band-profile.component.scss']
 })
 export class BandProfileComponent implements OnInit {
+  imagesList$ = new BehaviorSubject([]);
+
   profileId: number;
   profileBand: any;
   currentUser: User;
@@ -39,25 +41,6 @@ export class BandProfileComponent implements OnInit {
     { value: 5 },
   ];
 
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 700,
-    navText: [
-      '<i class="material-icons">navigate_before</i>',
-      '<i class="material-icons">navigate_next</i>'
-    ],
-    responsive: {
-      0:    { items: 1 },
-      400:  { items: 1 },
-      740:  { items: 1 }
-    },
-    nav: true
-  }
-  
   constructor(
     private readonly fb: FormBuilder,
     private readonly route: ActivatedRoute,
@@ -68,7 +51,6 @@ export class BandProfileComponent implements OnInit {
     private readonly reviewService: ReviewService,
   ) { 
     this.profileId = parseInt(this.route.snapshot.paramMap.get('id'));
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
@@ -76,6 +58,7 @@ export class BandProfileComponent implements OnInit {
     this.initReviewForm();
   }
   
+  // This form is used to upload the band avatar
   initAvatarForm(profileBand: any): void {
     this.avatarForm = new FormGroup({
       name:   new FormControl(profileBand.name),
@@ -83,6 +66,7 @@ export class BandProfileComponent implements OnInit {
     });
   }
 
+  // This form is used to upload band images
   initImagesForm(profileBand: any): void {
     this.imagesForm = new FormGroup({
       name:  new FormControl(profileBand.name),
@@ -106,6 +90,8 @@ export class BandProfileComponent implements OnInit {
       band => {
         this.profileBand = band[0];
         this.imageData = this.profileBand.avatar;
+
+        this.imagesList$.next(this.profileBand.images);
 
         this.initAvatarForm(this.profileBand);
         this.initImagesForm(this.profileBand);
@@ -169,27 +155,37 @@ export class BandProfileComponent implements OnInit {
   uploadImages(event: any): void {
     const files: FileList = event.target.files;
     
-    this.imagesForm.patchValue({ images: files });
+    console.log('---> files:');
+    console.log(files);
 
-    this.bandService.updateImages(this.profileBand.id, this.imagesForm.value.images).subscribe(imagesList => {
-      console.log('--> uploaded files:');
-      console.log(imagesList);
+    // this.imagesForm.patchValue({ images: files });
 
-      this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-        this.router.navigate([`/profile/band/${this.profileBand.id}`]);
-      });
-    });
+    // this.bandService.updateImages(this.profileBand.id, this.imagesForm.value.images).subscribe(imagesList => {
+    //   console.log('--> uploaded files:');
+    //   console.log(imagesList);
+
+    //   this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+    //     this.router.navigate([`/profile/band/${this.profileBand.id}`]);
+    //   });
+    // });
   }
 
   deleteImages(): void {
     this.bandService.deleteImages(this.profileBand.id).subscribe(res => {
       console.log('--> res:');
       console.log(res);
+
+      const noImage = [{
+        bandId: this.profileId,
+        image: "assets/img/no-image-2.png",
+      }]
+
+      this.imagesList$.next(noImage);
     });
 
-    this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-      this.router.navigate([`/profile/band/${this.profileBand.id}`]);
-    });
+    // this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+    //   this.router.navigate([`/profile/band/${this.profileBand.id}`]);
+    // });
   }
 
   sendMessage(id: number): void {

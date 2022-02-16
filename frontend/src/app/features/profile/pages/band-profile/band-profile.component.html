@@ -39,7 +39,11 @@
   </section>
 
   <!-- CAROUSEL -->
-  <section class="band-carousel">
+  <app-carousel
+    [data]=imagesList$>
+  </app-carousel>
+
+  <!-- <section class="band-carousel">
     <div class="band-images-ctnr">
       <owl-carousel-o [options]="customOptions" *ngIf="profileBand?.images[0]">
         <ng-template carouselSlide class="slide owl-carousel owl-theme owl-centered" *ngFor="let images of profileBand?.images">
@@ -53,7 +57,7 @@
         </ng-template>  
       </owl-carousel-o>
     </div>
-  </section>
+  </section> -->
 
   <section class="band-carousel-btn-ctnr">
     <input type="file" id="files" name="files" multiple (change)="uploadImages($event)" *ngIf="isMyBand" />
