@@ -5,6 +5,7 @@ import { DomSanitizer} from '@angular/platform-browser';
 
 import { BehaviorSubject } from 'rxjs';
 
+import { environment } from '@environments/environment';
 import { AuthService } from '@shared/services/auth.service';
 import { BandService } from '@shared/services/band.service';
 import { ReviewService } from '@shared/services/review.service';
@@ -155,37 +156,38 @@ export class BandProfileComponent implements OnInit {
   uploadImages(event: any): void {
     const files: FileList = event.target.files;
     
-    console.log('---> files:');
-    console.log(files);
+    // Update images (backend)
+    this.imagesForm.patchValue({ images: files });
 
-    // this.imagesForm.patchValue({ images: files });
+    this.bandService.updateImages(this.profileBand.id, this.imagesForm.value.images).subscribe(imagesList => {
+      console.log('--> uploaded files:');
+      console.log(imagesList);
 
-    // this.bandService.updateImages(this.profileBand.id, this.imagesForm.value.images).subscribe(imagesList => {
-    //   console.log('--> uploaded files:');
-    //   console.log(imagesList);
+      // Update images (frontend)
+      let newImagesList: any = imagesList;
 
-    //   this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-    //     this.router.navigate([`/profile/band/${this.profileBand.id}`]);
-    //   });
-    // });
+      for (let i = 0; i < newImagesList.length; i++) {
+        const path = newImagesList[i].path.replace('public', environment.serverUrl);
+        newImagesList[i].image = path;
+      }
+
+      this.imagesList$.next(newImagesList);
+    });
   }
 
   deleteImages(): void {
+    // Delete images (backend)
     this.bandService.deleteImages(this.profileBand.id).subscribe(res => {
       console.log('--> res:');
       console.log(res);
 
+      // Delete images (frontend)
       const noImage = [{
-        bandId: this.profileId,
         image: "assets/img/no-image-2.png",
       }]
 
       this.imagesList$.next(noImage);
     });
-
-    // this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-    //   this.router.navigate([`/profile/band/${this.profileBand.id}`]);
-    // });
   }
 
   sendMessage(id: number): void {
