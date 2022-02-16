@@ -17,7 +17,7 @@ db.sync({ force: true })
   })
   .catch(err => console.log('--> error:', err))
 
-  // admins
+  // ADMINS
   .then(async () => {
     // insert admin users into the db
     for (let adminUser of seed.adminUser) {
@@ -26,32 +26,15 @@ db.sync({ force: true })
   })
   .catch(err => console.log('--> error:', err))
   
+  // insert admin roles into the db
   .then(async () => {
-    // insert admin roles into the db
     for (let adminRole of seed.adminRole) {
       await models.role.create(adminRole);
     }
   })
   .catch(err => console.log('--> error:', err))
 
-  // musicians
-  .then(async () => {
-    // insert musician users into the db
-    for (let musicianUser of seed.musicianUser) {
-      await models.user.create(musicianUser);
-    }
-  })
-  .catch(err => console.log('--> error:', err))
-  
-  .then(async () => {
-    // insert musician roles into the db
-    for (let musicianRole of seed.musicianRole) {
-      await models.role.create(musicianRole);
-    }
-  })
-  .catch(err => console.log('--> error:', err))
-
-  // independent contractors
+  // CONTRCTORS
   .then(async () => {
     // insert contractor users into the db
     for (let contractorUser of seed.contractorUser) {
@@ -68,9 +51,9 @@ db.sync({ force: true })
   })
   .catch(err => console.log('--> error:', err))
 
-  // companies
+  // COMPANIES
   .then(async () => {
-    // band descriptions
+    // company descriptions
     const compIn1Desc = "Vnue is a Music company and has headquarters in New York, New York, United States. Vnue has 1-10 employees. Vnue has raised $8.7M.";
     const compIn2Desc = "Producer Presets is a Music company and has headquarters in Beverly, Ma. Producer Presets has 1-10 employees.";
     const compIn3Desc = "Hapinez Productions is a Music company and has headquarters in Barrington, Nh. Team Hapinez Productions has 1-10 employees.";
@@ -93,26 +76,26 @@ db.sync({ force: true })
 
     // users who belong to vnue
     const userIn1 = {
-      name: 'Eli', surname: 'Hall', email: 'eli@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user-comp01.jpg`, hasRole: true, activeRole: 3
+      name: 'Eli', surname: 'Hall', email: 'eli@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user-comp01.jpg`, hasRole: true, activeRole: 2
     };
     const userIn2 = {
-      name: 'John', surname: 'Rivera', email: 'john@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user-comp02.jpg`, hasRole: true, activeRole: 3
+      name: 'John', surname: 'Rivera', email: 'john@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user-comp02.jpg`, hasRole: true, activeRole: 2
     };
     
     // users who belong to producer presets
     const userIn3 = {
-      name: 'Joseph', surname: 'Campbell', email: 'joseph@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user-comp03.png`, hasRole: true, activeRole: 3
+      name: 'Joseph', surname: 'Campbell', email: 'joseph@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user-comp03.png`, hasRole: true, activeRole: 2
     };
     const userIn4 = {
-      name: 'Matthew', surname: 'Mitchell', email: 'matthew@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user-comp04.jpg`, hasRole: true, activeRole: 3
+      name: 'Matthew', surname: 'Mitchell', email: 'matthew@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user-comp04.jpg`, hasRole: true, activeRole: 2
     };
     
     // users who belong to hapinez productions
     const userIn5 = {
-      name: 'William', surname: 'Carter', email: 'william@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user-comp05.jpg`, hasRole: true, activeRole: 3
+      name: 'William', surname: 'Carter', email: 'william@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user-comp05.jpg`, hasRole: true, activeRole: 2
     };
     const userIn6 = {
-      name: 'Christopher', surname: 'Roberts', email: 'christopher@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user-comp06.jpg`, hasRole: true, activeRole: 3
+      name: 'Christopher', surname: 'Roberts', email: 'christopher@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user-comp06.jpg`, hasRole: true, activeRole: 2
     };
 
     // create users who belong to companies
@@ -132,15 +115,15 @@ db.sync({ force: true })
     await comp3.addUser(user6);
 
     // create roles of users who belong to a company
+    await models.role.create({ userId:  9, roleId: 3, role: 'company' },);
+    await models.role.create({ userId: 10, roleId: 3, role: 'company' },);
+    await models.role.create({ userId: 11, roleId: 3, role: 'company' },);
     await models.role.create({ userId: 12, roleId: 3, role: 'company' },);
     await models.role.create({ userId: 13, roleId: 3, role: 'company' },);
     await models.role.create({ userId: 14, roleId: 3, role: 'company' },);
-    await models.role.create({ userId: 15, roleId: 3, role: 'company' },);
-    await models.role.create({ userId: 16, roleId: 3, role: 'company' },);
-    await models.role.create({ userId: 17, roleId: 3, role: 'company' },);
   })
 
-  // bands
+  // BANDS
   .then(async () => {
     // bands descriptions
     const bandIn1Desc = "We begin our gallery of Top 20 American Bands in Boston, a key site in the Revolutionary War and home to all-American bad boys Aerosmith. Steven Tyler and Joe Perry certainly had their '70s-era struggles, both personal and professional, but they simply refused to stay down. And, in this land of second chances, no one has played the role of bootstrap underdog better than Aerosmith as they ultimately scored one of rock history's most dramatic comebacks late in the next decade.";
@@ -194,7 +177,7 @@ db.sync({ force: true })
       name: 'Sly & the Family Stone', desc: bandIn12Desc, phone: '123-456-789', email: 'familystone@gmail.com', roleId: 4, type: 'Heavy', price: 1200, scope: 'Barcelona', avatar: `${config.server.url}/avatars/sly.jpg`, video: 'https://www.youtube.com/watch?v=wj5VODa-eTY' 
     };
     
-    // create companies
+    // create bands
     const band01 = await models.band.create(bandIn01);
     const band02 = await models.band.create(bandIn02);
     const band03 = await models.band.create(bandIn03);
@@ -210,134 +193,134 @@ db.sync({ force: true })
 
     // users who belong to 'aerosmith'
     const userIn01 = { 
-      name: 'Liam', surname: 'Smith', email: 'liam@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user01.jpg`, hasRole: true, activeRole: 2 
+      name: 'Liam', surname: 'Smith', email: 'liam@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user01.jpg`, hasRole: true, activeRole: 1 
     };
     const userIn02 = { 
-      name: 'Noah', surname: 'Johnson', email: 'noah@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user02.jpg`, hasRole: true, activeRole: 2 
+      name: 'Noah', surname: 'Johnson', email: 'noah@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user02.jpg`, hasRole: true, activeRole: 1 
     };
     const userIn03 = { 
-      name: 'Oliver', surname: 'Williams', email: 'oliver@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user03.jpg`, hasRole: true, activeRole: 2
+      name: 'Oliver', surname: 'Williams', email: 'oliver@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user03.jpg`, hasRole: true, activeRole: 1
     };
 
     // users who belong to 'the beach boys'
     const userIn04 = { 
-      name: 'Elijah', surname: 'Brown', email: 'elijah@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user04.jpg`, hasRole: true, activeRole: 2
+      name: 'Elijah', surname: 'Brown', email: 'elijah@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user04.jpg`, hasRole: true, activeRole: 1
     };
     const userIn05 = {
-      name: 'Lucas', surname: 'Jones', email: 'lucas@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user05.jpg`, hasRole: true, activeRole: 2
+      name: 'Lucas', surname: 'Jones', email: 'lucas@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user05.jpg`, hasRole: true, activeRole: 1
     };
     const userIn06 = {
-      name: 'Levi', surname: 'Garcia', email: 'levi@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user06.jpg`, hasRole: true, activeRole: 2
+      name: 'Levi', surname: 'Garcia', email: 'levi@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user06.jpg`, hasRole: true, activeRole: 1
     };
     
     // users who belong to 'the doors'
     const userIn07 = { 
-      name: 'Mason', surname: 'Miller', email: 'mason@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user07.png`, hasRole: true, activeRole: 2
+      name: 'Mason', surname: 'Miller', email: 'mason@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user07.png`, hasRole: true, activeRole: 1
     };
     const userIn08 = {
-      name: 'James', surname: 'Davis', email: 'james@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user08.jpg`, hasRole: true, activeRole: 2
+      name: 'James', surname: 'Davis', email: 'james@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user08.jpg`, hasRole: true, activeRole: 1
     };
     const userIn09 = {
-      name: 'Ethan', surname: 'Rodriguez', email: 'ethan@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user09.jpg`, hasRole: true, activeRole: 2
+      name: 'Ethan', surname: 'Rodriguez', email: 'ethan@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user09.jpg`, hasRole: true, activeRole: 1
     };
     
     // users who belong to 'the eagles'
     const userIn10 = {
-      name: 'Mateo', surname: 'Martinez', email: 'mateo@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user10.jpg`, hasRole: true, activeRole: 2
+      name: 'Mateo', surname: 'Martinez', email: 'mateo@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user10.jpg`, hasRole: true, activeRole: 1
     };
     const userIn11 = {
-      name: 'Leo', surname: 'Hernandez', email: 'leo@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user11.jpg`, hasRole: true, activeRole: 2
+      name: 'Wesley', surname: 'Hernandez', email: 'wesley@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user11.jpg`, hasRole: true, activeRole: 1
     };
     const userIn12 = {
-      name: 'Jack', surname: 'Lopez', email: 'jack@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user12.jpg`, hasRole: true, activeRole: 2
+      name: 'Jack', surname: 'Lopez', email: 'jack@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user12.jpg`, hasRole: true, activeRole: 1
     };
     
     // users who belong to 'guns n roses'
     const userIn13 = {
-      name: 'Benjamin', surname: 'Wilson', email: 'benjamin@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user13.jpg`, hasRole: true, activeRole: 2
+      name: 'Benjamin', surname: 'Wilson', email: 'benjamin@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user13.jpg`, hasRole: true, activeRole: 1
     };
     const userIn14 = {
-      name: 'Aiden', surname: 'Anderson', email: 'aiden@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user14.jpg`, hasRole: true, activeRole: 2
+      name: 'Aiden', surname: 'Anderson', email: 'aiden@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user14.jpg`, hasRole: true, activeRole: 1
     };
     const userIn15 = {
-      name: 'Logan', surname: 'Thomas', email: 'logan@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user15.jpg`, hasRole: true, activeRole: 2
+      name: 'Logan', surname: 'Thomas', email: 'logan@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user15.jpg`, hasRole: true, activeRole: 1
     };
     
     // users who belong to 'iggy pop'
     const userIn16 = {
-      name: 'Grayson', surname: 'Taylor', email: 'grayson@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user16.jpg`, hasRole: true, activeRole: 2
+      name: 'Grayson', surname: 'Taylor', email: 'grayson@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user16.jpg`, hasRole: true, activeRole: 1
     };
     const userIn17 = {
-      name: 'Jackson', surname: 'Moore', email: 'jackson@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user17.jpg`, hasRole: true, activeRole: 2
+      name: 'Jackson', surname: 'Moore', email: 'jackson@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user17.jpg`, hasRole: true, activeRole: 1
     };
     const userIn18 = {
-      name: 'Henry', surname: 'Jackson', email: 'henry@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user18.jpg`, hasRole: true, activeRole: 2
+      name: 'Henry', surname: 'Jackson', email: 'henry@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user18.jpg`, hasRole: true, activeRole: 1
     };
     
     // users who belong to 'kiss'
     const userIn19 = {
-      name: 'Wyatt', surname: 'Martin', email: 'wyatt@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user19.jpg`, hasRole: true, activeRole: 2
+      name: 'Wyatt', surname: 'Martin', email: 'wyatt@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user19.jpg`, hasRole: true, activeRole: 1
     };
     const userIn20 = {
-      name: 'Sebastian', surname: 'Lee', email: 'sebastian@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user20.jpg`, hasRole: true, activeRole: 2
+      name: 'Sebastian', surname: 'Lee', email: 'sebastian@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user20.jpg`, hasRole: true, activeRole: 1
     };
     const userIn21 = {
-      name: 'Carter', surname: 'Perez', email: 'carter@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user21.jpg`, hasRole: true, activeRole: 2
+      name: 'Carter', surname: 'Perez', email: 'carter@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user21.jpg`, hasRole: true, activeRole: 1
     };
     
     // users who belong to 'metallica'
     const userIn22 = {
-      name: 'Daniel', surname: 'Thompson', email: 'daniel@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user22.jpg`, hasRole: true, activeRole: 2
+      name: 'Daniel', surname: 'Thompson', email: 'daniel@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user22.jpg`, hasRole: true, activeRole: 1
     };
     const userIn23 = {
-      name: 'Alex', surname: 'White', email: 'alex@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user23.jpg`, hasRole: true, activeRole: 2
+      name: 'Alex', surname: 'White', email: 'alex@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user23.jpg`, hasRole: true, activeRole: 1
     };
     const userIn24 = {
-      name: 'Ezra', surname: 'Harris', email: 'ezra@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user24.jpg`, hasRole: true, activeRole: 2
+      name: 'Ezra', surname: 'Harris', email: 'ezra@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user24.jpg`, hasRole: true, activeRole: 1
     };
     
     // users who belong to 'pearl jam'
     const userIn25 = {
-      name: 'Owen', surname: 'Clark', email: 'owen@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user25.png`, hasRole: true, activeRole: 2
+      name: 'Owen', surname: 'Clark', email: 'owen@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user25.png`, hasRole: true, activeRole: 1
     };
     const userIn26 = {
-      name: 'Michael', surname: 'Ramirez', email: 'michael@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user26.jpg`, hasRole: true, activeRole: 2
+      name: 'Michael', surname: 'Ramirez', email: 'michael@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user26.jpg`, hasRole: true, activeRole: 1
     };
     const userIn27 = {
-      name: 'Muhammad', surname: 'Lewis', email: 'muhammad@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user27.jpg`, hasRole: true, activeRole: 2
+      name: 'Muhammad', surname: 'Lewis', email: 'muhammad@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user27.jpg`, hasRole: true, activeRole: 1
     };
     
     // users who belong to 'van halen'
     const userIn28 = {
-      name: 'Julian', surname: 'Robinson', email: 'julian@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user28.jpg`, hasRole: true, activeRole: 2
+      name: 'Julian', surname: 'Robinson', email: 'julian@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user28.jpg`, hasRole: true, activeRole: 1
     };
     const userIn29 = {
-      name: 'Hudson', surname: 'Walker', email: 'hudson@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user29.jpg`, hasRole: true, activeRole: 2
+      name: 'Hudson', surname: 'Walker', email: 'hudson@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user29.jpg`, hasRole: true, activeRole: 1
     };
     const userIn30 = {
-      name: 'Luke', surname: 'Young', email: 'luke@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user30.jpg`, hasRole: true, activeRole: 2
+      name: 'Luke', surname: 'Young', email: 'luke@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user30.jpg`, hasRole: true, activeRole: 1
     };
     
     // users who belong to 'zz top'
     const userIn31 = {
-      name: 'Jacob', surname: 'Allen', email: 'jacob@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user31.jpg`, hasRole: true, activeRole: 2
+      name: 'Jacob', surname: 'Allen', email: 'jacob@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user31.jpg`, hasRole: true, activeRole: 1
     };
     const userIn32 = {
-      name: 'Lincoln', surname: 'King', email: 'lincoln@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user32.jpg`, hasRole: true, activeRole: 2
+      name: 'Lincoln', surname: 'King', email: 'lincoln@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user32.jpg`, hasRole: true, activeRole: 1
     };
     const userIn33 = {
-      name: 'Gabriel', surname: 'Wright', email: 'gabriel@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user33.jpg`, hasRole: true, activeRole: 2
+      name: 'Gabriel', surname: 'Wright', email: 'gabriel@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user33.jpg`, hasRole: true, activeRole: 1
     };
     
     // users who belong to 'sly & the family stone'
     const userIn34 = {
-      name: 'Jayden', surname: 'Scott', email: 'jayden@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user34.jpg`, hasRole: true, activeRole: 2
+      name: 'Jayden', surname: 'Scott', email: 'jayden@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user34.jpg`, hasRole: true, activeRole: 1
     };
     const userIn35 = {
-      name: 'Luca', surname: 'Torres', email: 'luca@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user35.jpg`, hasRole: true, activeRole: 2
+      name: 'Luca', surname: 'Torres', email: 'luca@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user35.jpg`, hasRole: true, activeRole: 1
     };
     const userIn36 = {
-      name: 'Maverick', surname: 'Nguyen', email: 'maverick@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user36.jpg`, hasRole: true, activeRole: 2
+      name: 'Maverick', surname: 'Nguyen', email: 'maverick@gmail.com', phone: '123-456-789', password: password, avatar: `${config.server.url}/avatars/user36.jpg`, hasRole: true, activeRole: 1
     };
 
     // create users who belong to a band
@@ -428,6 +411,9 @@ db.sync({ force: true })
     await band12.addUser(user36);
 
     // create roles of users who belong to a band
+    await models.role.create({ userId: 15, roleId: 2, role: 'band' },);
+    await models.role.create({ userId: 16, roleId: 2, role: 'band' },);
+    await models.role.create({ userId: 17, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 18, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 19, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 20, roleId: 2, role: 'band' },);
@@ -435,10 +421,10 @@ db.sync({ force: true })
     await models.role.create({ userId: 22, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 23, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 24, roleId: 2, role: 'band' },);
+
     await models.role.create({ userId: 25, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 26, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 27, roleId: 2, role: 'band' },);
-
     await models.role.create({ userId: 28, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 29, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 30, roleId: 2, role: 'band' },);
@@ -446,10 +432,10 @@ db.sync({ force: true })
     await models.role.create({ userId: 32, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 33, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 34, roleId: 2, role: 'band' },);
+
     await models.role.create({ userId: 35, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 36, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 37, roleId: 2, role: 'band' },);
-
     await models.role.create({ userId: 38, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 39, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 40, roleId: 2, role: 'band' },);
@@ -457,16 +443,13 @@ db.sync({ force: true })
     await models.role.create({ userId: 42, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 43, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 44, roleId: 2, role: 'band' },);
+
     await models.role.create({ userId: 45, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 46, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 47, roleId: 2, role: 'band' },);
-
     await models.role.create({ userId: 48, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 49, roleId: 2, role: 'band' },);
     await models.role.create({ userId: 50, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 51, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 52, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 53, roleId: 2, role: 'band' },);
   })
   // band images
   .then(async () => {

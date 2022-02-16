@@ -60,7 +60,10 @@ export class AuthService {
 
   logout(): void {
     this.isLogged$.next(false);
-    
+    this.hasRole$.next(false);
+    this.activeRole$.next(null);
+    this.currentUser$.next(null);
+
     localStorage.removeItem('isLogged');
     localStorage.removeItem('userId');
     localStorage.removeItem('hasRole');

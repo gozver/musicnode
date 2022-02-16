@@ -86,7 +86,7 @@ exports.signup = async (req, res, next) => {
   let userId, hasRole;
   
   // check admin code if user select admin role
-  if (parseInt(roleId) === 5 && parseInt(code) !== 123) {
+  if (parseInt(roleId) === 4 && parseInt(code) !== 123) {
     const err = new Error();
     err.statusCode = 401;
     err.message = 'The administrator code is not correct';
@@ -96,11 +96,14 @@ exports.signup = async (req, res, next) => {
     const hashedPwd = await bcrypt.hash(password, 12)
     
     // set has role value and check if the user has an active role
-    if (parseInt(roleId) === 1 || parseInt(roleId) === 4 || parseInt(roleId) === 5) {
-      hasRole = true;
-    } else {
+    if (parseInt(roleId) === 1) {
+      roleId = -1;
       hasRole = false;
-      roleId = 0;
+    } else if (parseInt(roleId) === 2) {
+      roleId = -2;
+      hasRole = false;
+    } else if (parseInt(roleId) === 3 || parseInt(roleId) === 4) {
+      hasRole = true;
     }
     
     // save the user into the db
@@ -121,19 +124,16 @@ exports.signup = async (req, res, next) => {
         next(err);
       });
 
-    // if the user is a musician, a contractor or an admin, create user-role
+    // if the user is a contractor or an admin, create user-role
     // if the user belogns to a band or a company, we'll create user-role later
     if (hasRole) {
       let role;
 
       switch(true) {
-        case roleId === '1':
-          role = 'musician';
-          break;
-        case roleId === '4':
+        case roleId === '3':
           role = 'contractor';
           break;
-        case roleId === '5':
+        case roleId === '4':
           role = 'admin';
           break;
       }

@@ -108,7 +108,6 @@ exports.findOne = async (req, res, next) => {
 exports.updateAvatar = async (req, res, next) => {
   // console.log('--> req.body.id:');
   // console.log(req.body.id);
-
   // console.log('--> req.file:');
   // console.log(req.file);
 
@@ -133,7 +132,6 @@ exports.updateAvatar = async (req, res, next) => {
 exports.updateImages = async (req, res, next) => {
   // console.log('--> req.body.id:');
   // console.log(req.body.id);
-
   // console.log('--> req.files:');
   // console.log(req.files);
 
