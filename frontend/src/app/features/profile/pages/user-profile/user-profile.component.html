@@ -1,22 +1,22 @@
 <article>
-  <section class="top-ctnr">
+  <section class="header">
     <div class=title>USER PROFILE</div>
     
     <div class="subtitle">Let's get info</div>
 
     <div class="text">
-      In this section you can obtain information about platform users and get in touch with them.
+      In this section you can manage your personal information and your roles. You can also search in others users profiles to obtain information and get in touch with them.
     </div>
   </section>
 
-  <section class="middle-ctnr">
+  <section class="user-ctnr">
     <!-- if the form is initialized, generate the template -->
     <form [formGroup]="userForm" class="userForm" *ngIf="userForm">
       <div class="avatar">
-        <input type="file" id="file" name="file" (change)="onFileSelected($event)" *ngIf="isMyProfile()" />
+        <input type="file" id="file" name="file" (change)="onFileSelected($event)" *ngIf="isMyProfile() || isAdmin()" />
 
         <label for="file">
-          <img [src]="imageData" [alt]="profileUser?.name" [ngClass]="isMyProfile() ? 'pointer' : 'normal'">
+          <img [src]="imageData" [alt]="profileUser?.name" [ngClass]="isMyProfile() || isAdmin() ? 'pointer' : 'normal'">
         </label>
       </div>
 
@@ -25,10 +25,24 @@
         <div class="email">{{ profileUser?.email }}</div>
         <div class="phone">{{ profileUser?.phone }}</div>
 
-        <!-- button type="button" to avoid form submission -->
-        <button type="button" mat-flat-button color="warn" class="warn" *ngIf="!isMyProfile()" (click)="sendMessage(profileUser?.id)">
-          Message
-        </button>
+        <div class="btn-ctnr">
+          <!-- button type="button" to avoid form submission -->
+          <button type="button" mat-flat-button color="warn" class="warn" *ngIf="!isMyProfile()" (click)="sendMessage(profileUser?.id)">
+            Message
+          </button>
+
+          <!-- button type="button" to avoid form submission -->
+          <button type="button" mat-flat-button color="warn" class="warn" *ngIf="isMyProfile()" (click)="goToEditProfile()">
+            Edit
+          </button>
+
+          <div class="separator" *ngIf="!isMyProfile() && isAdmin()"></div>
+
+          <!-- button type="button" to avoid form submission -->
+          <button type="button" mat-flat-button color="primary" *ngIf="!isMyProfile() && isAdmin()" (click)="goToEditProfile()">
+            Edit
+          </button>
+        </div>
       </div>
     </form>
 

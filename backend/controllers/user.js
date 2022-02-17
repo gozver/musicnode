@@ -1,8 +1,10 @@
+const bcrypt = require('bcryptjs');
+const sequelize = require('sequelize');
+const op = sequelize.Op;
+
 const models = require('../models');
 const config = require('../config/config.json');
 
-const sequelize = require('sequelize');
-const op = sequelize.Op;
 
 exports.findAll = async (req, res, next) => {
   models.user.findAll({
@@ -79,6 +81,33 @@ exports.findOne = async (req, res, next) => {
       const err = new Error();
       err.statusCode = 401;
       err.message = 'User not found';
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
+    });
+}
+
+exports.updateInfo = async (req, res, next) => {
+  const { id, name, surname, phone, password } = req.body;
+  
+  console.log('--> id:', id);
+  console.log('--> name:', name);
+  console.log('--> surname:', surname);
+  console.log('--> phone:', phone);
+  console.log('--> password:', password);
+  
+  const hashedPwd = await bcrypt.hash(password, 12);
+
+  await models.user.update({ 
+    id, name, surname, phone, password: hashedPwd
+  }, {
+    where: { id }
+  })
+    .then(user => res.json(user))
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
 
       // print error and send it to error controller
       console.log('--> error:');

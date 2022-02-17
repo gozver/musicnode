@@ -1,8 +1,8 @@
-const models = require('../models');
-const config = require('../config/config.json');
-
 const sequelize = require('sequelize');
 const op = sequelize.Op;
+
+const models = require('../models');
+const config = require('../config/config.json');
 
 /**
  * many to many relationships:

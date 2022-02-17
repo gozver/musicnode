@@ -93,7 +93,7 @@ exports.signup = async (req, res, next) => {
     next(err);
   } else {
     // hash the password 12 times
-    const hashedPwd = await bcrypt.hash(password, 12)
+    const hashedPwd = await bcrypt.hash(password, 12);
     
     // set has role value and check if the user has an active role
     if (parseInt(roleId) === 1) {

@@ -18,6 +18,7 @@ router
   .get    ('/user',                           controllers.user.findAll)
   .get    ('/userByParams', middlewares.auth, controllers.user.findAllByParams)
   .get    ('/user/:id',     middlewares.auth, controllers.user.findOne)
+  .patch  ('/user/info',    middlewares.auth, controllers.user.updateInfo)
   .patch  ('/user',         storage.avatar,   controllers.user.updateAvatar)
 
   .get    ('/role', controllers.role.findAll)

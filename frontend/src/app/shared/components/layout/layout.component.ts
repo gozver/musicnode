@@ -92,11 +92,10 @@ export class LayoutComponent implements OnInit, AfterViewInit, AfterViewChecked,
   }
 
   navigateByUrl(component: string): void {
-    // this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-    //   this.router.navigate([`/${component}/${this.currentUser.id}`]);
-    // });
+    this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+      this.router.navigate([`${component}/user/${this.currentUser.id}`]);
+    });
 
-    this.router.navigate([`${component}/user/${this.currentUser.id}`]);
     this.closeIfIsMobileView();
   }
 }

@@ -90,4 +90,12 @@ export class UserProfileComponent implements OnInit {
   sendMessage(id: number): void {
     this.router.navigate(['/chat'], { queryParams: { id } });
   }
+
+  isAdmin(): boolean {
+    return this.currentUser.activeRole === 4;
+  }
+
+  goToEditProfile() {
+    this.router.navigate([`/profile/user/${this.profileId}/edit`]);
+  }
 }

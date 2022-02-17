@@ -45,6 +45,13 @@ export class UserService {
     return this.http.get<User>(`${environment.apiUrl}/user/${id}`);
   }
 
+  updateInfo(params: User): Observable<User> {
+    console.log('--> params:');
+    console.log(params);
+
+    return this.http.patch<User>(`${environment.apiUrl}/user/info`, params);
+  }
+
   updateAvatar(id: number, avatar: File): Observable<string> {
     const formData = new FormData();
 
