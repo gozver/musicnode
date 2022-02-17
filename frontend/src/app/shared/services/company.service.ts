@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -20,6 +20,24 @@ export class CompanyService {
   getCompanies(): Observable<Company[]> {
     return this.http.get<Company[]>(`${environment.apiUrl}/company`).pipe(
       catchError(this.errorHandlerService.handleError<any>('getCompanies', []))
+    );
+  }
+
+  getCompaniesByParams(searchParams: any): Observable<Company[]> {
+    let httpParams = new HttpParams();
+
+    if (searchParams) {
+      for (const key in searchParams) {
+        if (searchParams.hasOwnProperty(key)) {
+          httpParams = httpParams.set(key, searchParams[key]);
+        }
+      }
+    }
+
+    const options = { params: httpParams };
+
+    return this.http.get<Company[]>(`${environment.apiUrl}/companyByParams`, options).pipe(
+      catchError(this.errorHandlerService.handleError<any>('getCompaniesByParams', []))
     );
   }
 

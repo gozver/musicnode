@@ -19,9 +19,11 @@ import { Company } from '@shared/interfaces/company.interface';
   styleUrls: ['./explore.component.scss']
 })
 export class ExploreComponent implements OnInit {
-  roleForm: FormGroup;
+  searchForm: FormGroup;
 
   currentUser: User = null;
+  searchResults: any[] = [];
+
   usersList: User[] = [];
   bandsList: Band[] = [];
   companiesList: Company[] = [];
@@ -30,12 +32,11 @@ export class ExploreComponent implements OnInit {
   adminsList: User[] = [];
   
   roleSelect:  { id: number, value: string }[] = [
-    { id: 1, value: 'All Users' },
-    { id: 2, value: 'Musicians' },
-    { id: 3, value: 'Bands'     },
-    { id: 4, value: 'Companies' },
-    { id: 5, value: 'Contractors' },
-    { id: 6, value: 'Administrators' }
+    { id: -1,  value: 'All Users' },
+    { id: 1,  value: 'Bands' },
+    { id: 2,  value: 'Companies' },
+    { id: 3,  value: 'Contractors' },
+    { id: 4,  value: 'Administrators' }
   ];
 
   constructor(
@@ -49,29 +50,51 @@ export class ExploreComponent implements OnInit {
 
   ngOnInit(): void {
     this.initComponentData();
-    this.initRoleForm();
+    this.initSearchForm();
+    this.resetSearchResults();
   }
 
   initComponentData(): void {
     this.currentUser = this.authService.currentUser$.value;
 
-    forkJoin([
-      this.userService.getUsers(),
-      this.bandService.getBands(),
-      this.companyService.getCompanies(),
-    ]).subscribe(([ usersList, bandsList, companiesList ]) => {
-      this.usersList = usersList;
-      this.bandsList = bandsList;
-      this.companiesList = companiesList;
+    // forkJoin([
+    //   this.userService.getUsers(),
+    //   this.bandService.getBands(),
+    //   this.companyService.getCompanies(),
+    // ]).subscribe(([ usersList, bandsList, companiesList ]) => {
+    //   this.usersList = usersList;
+    //   this.bandsList = bandsList;
+    //   this.companiesList = companiesList;
+    // });
+  }
 
-      this.musiciansList = this.usersList.filter(item => item.activeRole === 1);
-      this.contractorsList = this.usersList.filter(item => item.activeRole === 4);
-      this.adminsList = this.usersList.filter(item => item.activeRole === 5);
+  initSearchForm(): void {
+    this.searchForm = this.fb.group({
+      name:   [ '' ],
+      email:  [ '' ],
+      roleId: [ null ],
     });
   }
 
-  initRoleForm(): void {
-    this.roleForm = this.fb.group({ roleId: null });
+  resetSearchResults(): void {
+    this.searchForm.get('roleId').valueChanges.subscribe(() => this.searchResults = []);
+  }
+
+  search(): void {
+    switch (parseInt(this.searchForm.value.roleId)) {
+      case 1:
+        this.bandService.getBandsByParams(this.searchForm.value).subscribe(bands => this.searchResults = bands);
+        break;
+
+      case 2:
+        this.companyService.getCompaniesByParams(this.searchForm.value).subscribe(companies => this.searchResults = companies);
+        break;
+        
+      case 3:
+      case 4:
+      default:
+        this.userService.getUsersByParams(this.searchForm.value).subscribe(users => this.searchResults = users);
+    }
   }
 
   goToProfile(role: string, id: number): void {

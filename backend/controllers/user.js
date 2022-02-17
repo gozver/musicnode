@@ -1,12 +1,45 @@
 const models = require('../models');
 const config = require('../config/config.json');
 
+const sequelize = require('sequelize');
+const op = sequelize.Op;
+
 exports.findAll = async (req, res, next) => {
   models.user.findAll({
     include: {
       model: models.role
     }
   }).then(data => res.json(data))
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
+    });
+}
+
+exports.findAllByParams = async (req, res, next) => {
+  const { name, email, roleId } = req.query
+  let whereString = [];
+
+  if (name !== '') {
+    whereString.push({ name: { [op.like]: '%' + name + '%' } });
+  }
+  
+  if (email !== '') {
+    whereString.push({ email: { [op.like]: '%' + email + '%' } });
+  }
+
+  if (parseInt(roleId) === 3 || parseInt(roleId) === 4) {  
+    whereString.push({ active_role: { [op.like]: '%' + roleId + '%' } });
+  }
+
+  await models.user.findAll({
+    where: whereString
+  })
+    .then(data => res.json(data))
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;
 

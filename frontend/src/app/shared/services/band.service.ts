@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -21,6 +21,24 @@ export class BandService {
   getBands(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/band`).pipe(
       catchError(this.errorHandlerService.handleError<any>('getBands', []))
+    );
+  }
+
+  getBandsByParams(searchParams: any): Observable<Band[]> {
+    let httpParams = new HttpParams();
+
+    if (searchParams) {
+      for (const key in searchParams) {
+        if (searchParams.hasOwnProperty(key)) {
+          httpParams = httpParams.set(key, searchParams[key]);
+        }
+      }
+    }
+
+    const options = { params: httpParams };
+
+    return this.http.get<Band[]>(`${environment.apiUrl}/bandByParams`, options).pipe(
+      catchError(this.errorHandlerService.handleError<any>('getBandsByParams', []))
     );
   }
 

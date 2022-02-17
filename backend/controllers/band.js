@@ -1,6 +1,9 @@
 const models = require('../models');
 const config = require('../config/config.json');
 
+const sequelize = require('sequelize');
+const op = sequelize.Op;
+
 /**
  * many to many relationships:
  * https://sequelize.org/master/manual/assocs.html#many-to-many-relationships
@@ -54,6 +57,33 @@ exports.findAll = async (req, res, next) => {
     }, {
       model: models.review
     }]
+  })
+    .then(data => res.json(data))
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
+    });
+}
+
+exports.findAllByParams = async (req, res, next) => {
+  const { name, email } = req.query
+  let whereString = [];
+
+  if (name !== '') {
+    whereString.push({ name: { [op.like]: '%' + name + '%' } });
+  }
+  
+  if (email !== '') {
+    whereString.push({ email: { [op.like]: '%' + email + '%' } });
+  }
+
+  await models.band.findAll({
+    where: whereString,
+    include: { model: models.user }
   })
     .then(data => res.json(data))
     .catch(err => {

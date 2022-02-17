@@ -10,25 +10,47 @@
   </section>
 
   <!-- SEARCH -->
-  <section class="filter" *ngIf="usersList.length > 0">
+  <section class="search">
     <div class="card">
-      <form [formGroup]="roleForm" novalidate>
-        <mat-form-field appearance="outline" class="input-headline role">
+      <form [formGroup]="searchForm" novalidate>
+        <mat-form-field appearance="outline" class="input-headline name">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Name" formControlName="name" />
+          <button mat-icon-button matSuffix [attr.aria-label]="'Name'" disabled>
+            <mat-icon matSuffix>person</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="input-headline email">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" formControlName="email" />
+          <button mat-icon-button matSuffix [attr.aria-label]="'Email'" disabled>
+            <mat-icon matSuffix>alternate_email</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="input-headline">
           <mat-label>Role</mat-label>
+
           <mat-select formControlName="roleId">
             <mat-option *ngFor="let item of roleSelect" value="{{ item.id }}">{{ item.value }}</mat-option>
           </mat-select>
+          
           <button mat-icon-button matSuffix [attr.aria-label]="'Role'" disabled>
             <mat-icon>category</mat-icon>
           </button>
         </mat-form-field>
       </form>
+
+      <button mat-flat-button class="primary" (click)="search()">
+        Search
+      </button>
     </div>
   </section>
 
-  <!-- USERS -->
-  <section class="users-list" *ngIf="usersList.length > 0 && +roleForm.value.roleId === 1">
-    <div class="user-cntr" *ngFor="let user of usersList">
+  <!-- SEARCH RESULT: USERS (ALL, CONTRACTORS AND ADMINS) -->
+  <section class="results" *ngIf="searchResults.length > 0 && (+searchForm.value.roleId !== 1 && +searchForm.value.roleId !== 2)">
+    <div class="user-cntr" *ngFor="let user of searchResults">
       <div class="user" (click)="goToProfile('user', user.id)">
         <img class="avatar" [src]="user?.avatar" alt="{{ user?.name }}">
 
@@ -46,29 +68,9 @@
     </div>
   </section>
 
-  <!-- MUSICIANS -->
-  <section class="users-list" *ngIf="musiciansList.length > 0 && +roleForm.value.roleId === 2">
-    <div class="user-cntr" *ngFor="let musician of musiciansList">
-      <div class="user" (click)="goToUserProfile(musician.id)">
-        <img class="avatar" [src]="musician?.avatar" alt="{{ musician?.name }}">
-
-        <div class="user-info">
-          <span class="name">{{ musician?.name }} {{ musician?.surname }}</span>
-          <span class="email">{{ musician?.email }}</span>
-        </div>
-      </div>
-      
-      <div class="btn-ctnr">
-        <button mat-flat-button color="warn" class="warn" [disabled]="currentUser.id === musician.id" (click)="sendMessage(musician.id)">
-          Contact
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- BANDS -->
-  <section class="users-list" *ngIf="bandsList.length > 0 && +roleForm.value.roleId === 3">
-    <div class="user-cntr" *ngFor="let band of bandsList">
+  <!-- SEARCH RESULT: BANDS -->
+  <section class="results" *ngIf="searchResults.length > 0 && +searchForm.value.roleId === 1">
+    <div class="user-cntr" *ngFor="let band of searchResults">
       <div class="user" (click)="goToProfile('band', band.id)">
         <img class="avatar" [src]="band?.avatar" alt="{{ band?.name }}">
 
@@ -86,10 +88,10 @@
     </div>
   </section>
 
-  <!-- COMPANIES -->
-  <section class="users-list" *ngIf="companiesList.length > 0 && +roleForm.value.roleId === 4">
-    <div class="user-cntr" *ngFor="let company of companiesList">
-      <div class="user">
+  <!-- SEARCH RESULT: COMPANIES -->
+  <section class="results" *ngIf="searchResults.length > 0 && +searchForm.value.roleId === 2">
+    <div class="user-cntr" *ngFor="let company of searchResults">
+      <div class="user" (click)="goToProfile('company', company.id)">
         <img class="avatar" [src]="company?.avatar" alt="{{ company?.name }}">
 
         <div class="user-info">
@@ -99,52 +101,10 @@
       </div>
       
       <div class="btn-ctnr">
-        <button mat-flat-button color="warn" class="warn">
-          Contact
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTRACTORS -->
-  <section class="users-list" *ngIf="contractorsList.length > 0 && +roleForm.value.roleId === 5">
-    <div class="user-cntr" *ngFor="let contractor of contractorsList">
-      <div class="user" (click)="goToUserProfile(contractor.id)">
-        <img class="avatar" [src]="contractor?.avatar" alt="{{ contractor?.name }}">
-
-        <div class="user-info">
-          <span class="name">{{ contractor?.name }} {{ contractor?.surname }}</span>
-          <span class="email">{{ contractor?.email }}</span>
-        </div>
-      </div>
-      
-      <div class="btn-ctnr">
-        <button mat-flat-button color="warn" class="warn" [disabled]="currentUser.id === contractor.id" (click)="sendMessage(contractor.id)">
-          Contact
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ADMINS -->
-  <section class="users-list" *ngIf="adminsList.length > 0 && +roleForm.value.roleId === 6">
-    <div class="user-cntr" *ngFor="let admin of adminsList">
-      <div class="user" (click)="goToUserProfile(admin.id)">
-        <img class="avatar" [src]="admin?.avatar" alt="{{ admin?.name }}">
-
-        <div class="user-info">
-          <span class="name">{{ admin?.name }} {{ admin?.surname }}</span>
-          <span class="email">{{ admin?.email }}</span>
-        </div>
-      </div>
-      
-      <div class="btn-ctnr">
-        <button mat-flat-button color="warn" class="warn" [disabled]="currentUser.id === admin.id" (click)="sendMessage(admin.id)">
+        <button mat-flat-button color="warn" class="warn" (click)="sendMessage(company.users[0].id)">
           Contact
         </button>
       </div>
     </div>
   </section>
 </article>
-
-
