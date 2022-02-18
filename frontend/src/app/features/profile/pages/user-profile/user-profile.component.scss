@@ -109,4 +109,25 @@ article {
       }
     }
   }
+
+  .role-ctnr {
+    h1 {
+      font-size: 20px;
+      color: #eeaa24;
+      margin-top: 15px;
+      margin-bottom: 0px;
+    }
+
+    .active-role {
+      .band {
+        .item {
+          margin: 0 0 10px 0;
+        }
+      }
+    }
+
+    .bold {
+      font-weight: 500;
+    }
+  }
 }

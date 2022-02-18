@@ -52,4 +52,21 @@
       </button>
     </div>
   </section>
+
+  <section class="role-ctnr">
+    <h1>Roles List:</h1>
+    
+    <div [ngSwitch]="profileUser?.activeRole" class="active-role">
+      <p class="band" *ngSwitchCase="'1'">
+        <span *ngFor="let band of bandsList">
+          <p class="item">- This user belongs to <span class="bold">{{ band?.band?.name }}</span></p>
+        </span>
+      </p>
+
+      <p class="user" *ngSwitchCase="'2'">This user belongs to a company</p>
+      <p class="user" *ngSwitchCase="'3'">This user is an independent contractor</p>
+      <p class="user" *ngSwitchCase="'4'">This user is an administrator</p>
+    </div>
+    <!-- TO DO: SHOW USER ROLES -->
+  </section>
 </article>

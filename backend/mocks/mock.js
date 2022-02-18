@@ -366,10 +366,12 @@ db.sync({ force: true })
     await band01.addUser(user02);
     await band01.addUser(user03);
 
+    await band02.addUser(user01);
     await band02.addUser(user04);
     await band02.addUser(user05);
     await band02.addUser(user06);
 
+    await band03.addUser(user01);
     await band03.addUser(user07);
     await band03.addUser(user08);
     await band03.addUser(user09);
@@ -411,45 +413,55 @@ db.sync({ force: true })
     await band12.addUser(user36);
 
     // create roles of users who belong to a band
-    await models.role.create({ userId: 15, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 16, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 17, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 18, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 19, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 20, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 21, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 22, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 23, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 24, roleId: 2, role: 'band' },);
+    await models.role.create({ roleId: 2, role: 'band', userId: 15, bandId: 1 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 16, bandId: 1 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 17, bandId: 1 });
+    
+    await models.role.create({ roleId: 2, role: 'band', userId: 15, bandId: 2 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 18, bandId: 2 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 19, bandId: 2 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 20, bandId: 2 });
+    
+    await models.role.create({ roleId: 2, role: 'band', userId: 15, bandId: 3 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 21, bandId: 3 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 22, bandId: 3 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 23, bandId: 3 });
 
-    await models.role.create({ userId: 25, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 26, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 27, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 28, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 29, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 30, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 31, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 32, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 33, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 34, roleId: 2, role: 'band' },);
+    await models.role.create({ roleId: 2, role: 'band', userId: 24, bandId: 4 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 25, bandId: 4 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 26, bandId: 5 });
 
-    await models.role.create({ userId: 35, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 36, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 37, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 38, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 39, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 40, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 41, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 42, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 43, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 44, roleId: 2, role: 'band' },);
+    await models.role.create({ roleId: 2, role: 'band', userId: 27, bandId: 5 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 28, bandId: 5 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 29, bandId: 5 });
 
-    await models.role.create({ userId: 45, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 46, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 47, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 48, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 49, roleId: 2, role: 'band' },);
-    await models.role.create({ userId: 50, roleId: 2, role: 'band' },);
+    await models.role.create({ roleId: 2, role: 'band', userId: 30, bandId: 6 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 31, bandId: 6 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 32, bandId: 6 });
+
+    await models.role.create({ roleId: 2, role: 'band', userId: 33, bandId: 7 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 34, bandId: 7 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 35, bandId: 7 });
+
+    await models.role.create({ roleId: 2, role: 'band', userId: 36, bandId: 8 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 37, bandId: 8 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 38, bandId: 8 });
+
+    await models.role.create({ roleId: 2, role: 'band', userId: 39, bandId: 9 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 40, bandId: 9 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 41, bandId: 9 });
+
+    await models.role.create({ roleId: 2, role: 'band', userId: 42, bandId: 10 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 43, bandId: 10 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 44, bandId: 10 });
+
+    await models.role.create({ roleId: 2, role: 'band', userId: 45, bandId: 11 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 46, bandId: 11 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 47, bandId: 11 });
+
+    await models.role.create({ roleId: 2, role: 'band', userId: 48, bandId: 12 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 49, bandId: 12 });
+    await models.role.create({ roleId: 2, role: 'band', userId: 50, bandId: 12 });
   })
   // band images
   .then(async () => {

@@ -23,15 +23,18 @@ exports.findAll = async (req, res, next) => {
 }
 
 exports.findAllByParams = async (req, res, next) => {
-  const { name, email, roleId } = req.query
+  const { name, surname, roleId } = req.query
   let whereString = [];
+
+  console.log('--> req.query');
+  console.log(req.query);
 
   if (name !== '') {
     whereString.push({ name: { [op.like]: '%' + name + '%' } });
   }
   
-  if (email !== '') {
-    whereString.push({ email: { [op.like]: '%' + email + '%' } });
+  if (surname !== '') {
+    whereString.push({ surname: { [op.like]: '%' + surname + '%' } });
   }
 
   if (parseInt(roleId) === 3 || parseInt(roleId) === 4) {  
@@ -91,13 +94,7 @@ exports.findOne = async (req, res, next) => {
 
 exports.updateInfo = async (req, res, next) => {
   const { id, name, surname, phone, password } = req.body;
-  
-  console.log('--> id:', id);
-  console.log('--> name:', name);
-  console.log('--> surname:', surname);
-  console.log('--> phone:', phone);
-  console.log('--> password:', password);
-  
+    
   const hashedPwd = await bcrypt.hash(password, 12);
 
   await models.user.update({ 

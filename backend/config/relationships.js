@@ -8,15 +8,8 @@ models.user.hasMany(models.role, {
 });
 
 models.role.belongsTo(models.user);
-
-/**
- * USER/MUSICIAN: ONE TO MANY
- */
- models.user.hasMany(models.musician, {
-  foreignKey: 'userId', onDelete: 'cascade', onUpdate: 'cascade'
-});
-
-models.musician.belongsTo(models.user);
+models.role.belongsTo(models.band);
+models.role.belongsTo(models.company);
 
 /**
  * USER/BAND: MANY TO MANY (DUPLICATED ENTRIES ALLOWED)
@@ -93,15 +86,6 @@ models.review.belongsTo(models.band);
 });
 
 models.image.belongsTo(models.company);
-
-/**
- * MUSICIAN/IMAGE: ONE TO MANY
- */
- models.musician.hasMany(models.image, {
-  foreignKey: 'musicianId', onDelete: 'cascade', onUpdate: 'cascade'
-});
-
-models.image.belongsTo(models.musician);
 
 /**
  * AD/IMAGE: ONE TO MANY

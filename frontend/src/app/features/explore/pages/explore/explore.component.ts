@@ -70,9 +70,10 @@ export class ExploreComponent implements OnInit {
 
   initSearchForm(): void {
     this.searchForm = this.fb.group({
-      name:   [ '' ],
-      email:  [ '' ],
-      roleId: [ null ],
+      name:    [ '' ],
+      surname: [ '' ],
+      email:   [ '' ],
+      roleId:  [ null ],
     });
   }
 

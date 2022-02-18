@@ -4,7 +4,6 @@ module.exports = {
   'company': require('./company'),
   'image': require('./image'),
   'message': require('./message'),
-  'musician': require('./musician'),
   'review': require('./review'),
   'role': require('./role'),
   'user': require('./user')

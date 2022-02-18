@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthService } from '@shared/services/auth.service';
 import { UserService } from '@shared/services/user.service';
+import { BandService } from '@shared/services/band.service';
 import { User } from '@app/shared/interfaces/user.interface';
 
 @Component({
@@ -20,18 +21,29 @@ export class UserProfileComponent implements OnInit {
   imageData: string;
 
   avatarSelected: boolean = false;
+  bandsList: string[] = [];
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly authService: AuthService,
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    private readonly bandService: BandService,
     ) {
     this.profileId = parseInt(this.route.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUser$.value;
+
+    if (this.currentUser.activeRole === 1) {
+      this.bandService.getBandsByUserId(this.profileId).subscribe(bands => {
+        console.log('--> bands:');
+        console.log(bands);
+
+        this.bandsList = bands;
+      });
+    }
 
     this.userService.getUser(this.profileId).subscribe(
       user => {

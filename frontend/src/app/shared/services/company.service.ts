@@ -36,7 +36,7 @@ export class CompanyService {
 
     const options = { params: httpParams };
 
-    return this.http.get<Company[]>(`${environment.apiUrl}/companyByParams`, options).pipe(
+    return this.http.get<Company[]>(`${environment.apiUrl}/company/params`, options).pipe(
       catchError(this.errorHandlerService.handleError<any>('getCompaniesByParams', []))
     );
   }

@@ -21,7 +21,15 @@
           </button>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="input-headline email">
+        <mat-form-field appearance="outline" class="input-headline surname" *ngIf="+searchForm.value.roleId !== 1 && +searchForm.value.roleId !== 2">
+          <mat-label>Surname</mat-label>
+          <input matInput placeholder="Surname" formControlName="surname" />
+          <button mat-icon-button matSuffix [attr.aria-label]="'Surname'" disabled>
+            <mat-icon matSuffix>person</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="input-headline email" *ngIf="+searchForm.value.roleId === 1 || +searchForm.value.roleId === 2">
           <mat-label>Email</mat-label>
           <input matInput placeholder="Email" formControlName="email" />
           <button mat-icon-button matSuffix [attr.aria-label]="'Email'" disabled>

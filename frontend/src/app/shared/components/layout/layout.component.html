@@ -6,8 +6,12 @@
         <mat-icon *ngIf="sidenav.opened">close</mat-icon>
       </button>
       
+      <button mat-icon-button *ngIf="sidenav.mode==='side'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">close</mat-icon>
+        <mat-icon *ngIf="sidenav.opened">menu</mat-icon>
+      </button>
+
       <div class="title">
-        <!-- <img class="logo" src="assets/img/logo.png" /> -->
         <div>Musicnode</div>
       </div>
     </div>

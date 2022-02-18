@@ -49,7 +49,7 @@ article {
             }
           }
 
-          &.name, &.email {
+          &.name, &.email, &.surname {
             max-width: 49.5%;
 
             @media (max-width: 625px) {

@@ -5,7 +5,7 @@ mat-toolbar {
 
   .toolbar-ctnr {
     display: flex;
-    width: 1200px;
+    width: 100%;
     margin: auto;
     padding: 0 1px;
     
@@ -18,14 +18,11 @@ mat-toolbar {
       .title {
         display: flex;
         align-items: center;
-
-        @media (min-width: 900px) {
-          margin-left: 10px;
-        }
+        font-size: 20px;
         
-        .logo {
-          width: 30px;
-          padding-right: 10px;
+        @media (min-width: 800px) {
+          font-size: 22px;
+          margin-left: 10px;
         }
       }
   
@@ -39,7 +36,13 @@ mat-toolbar {
       align-items: center;
       justify-content: flex-end;
       width: 50%;
-      font-size: 16px;    
+
+      font-size: 16px;
+      
+      @media (min-width: 800px) {
+        font-size: 17px;
+        
+      }
   
       .link {
         margin: 0 10px;
@@ -51,9 +54,7 @@ mat-toolbar {
 }
 
 mat-sidenav-container {
-  background: #f5f7fa;
-  max-width: 1200px;
-  margin: auto;
+  background: #f9fafc;
   
   mat-sidenav {
     background: #002b5c;
@@ -114,12 +115,19 @@ mat-sidenav-container {
   }
 
   mat-sidenav-content {
+    height: calc(100vh - 64px);
+    position: relative;
+    
     .sidenav-ctnr {
       display: flex;
       flex-direction: column;
-
-      height: calc(100vh - 64px);
+      
+      background: #f5f7fa;
+      max-width: 1100px;
+      min-height: 100vh;
+      margin: auto;
       padding: 20px;
+      border-left: 1px solid #dddfe2;
       border-right: 1px solid #dddfe2;
     }
   }

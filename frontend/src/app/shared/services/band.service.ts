@@ -17,7 +17,7 @@ export class BandService {
     private errorHandlerService: ErrorHandlerService
   ) { }
 
-  // any: in this controller band model includes user and image models
+  // Observable<any> => controller return band model which includes other models
   getBands(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/band`).pipe(
       catchError(this.errorHandlerService.handleError<any>('getBands', []))
@@ -37,12 +37,17 @@ export class BandService {
 
     const options = { params: httpParams };
 
-    return this.http.get<Band[]>(`${environment.apiUrl}/bandByParams`, options).pipe(
+    return this.http.get<Band[]>(`${environment.apiUrl}/band/params`, options).pipe(
       catchError(this.errorHandlerService.handleError<any>('getBandsByParams', []))
     );
   }
 
-  // any: in this controller band model includes user and image models
+  // Observable<any> => controller return band model which includes other models
+  getBandsByUserId(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/band/user/${id}`);
+  }
+
+  // Observable<any> => controller return band model which includes other models
   getBand(id: number): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/band/${id}`);
   }
@@ -78,6 +83,7 @@ export class BandService {
     );
   }
 
+  // Observable<any> => controller return deleted items
   deleteImages(id: number): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}/band/${id}`).pipe(
       catchError(this.errorHandlerService.handleError<any>('deleteImages', null))

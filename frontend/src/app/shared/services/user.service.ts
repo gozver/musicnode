@@ -36,7 +36,7 @@ export class UserService {
 
     const options = { params: httpParams };
 
-    return this.http.get<User[]>(`${environment.apiUrl}/userByParams`, options).pipe(
+    return this.http.get<User[]>(`${environment.apiUrl}/user/params`, options).pipe(
       catchError(this.errorHandlerService.handleError<any>('getUsersByParams', []))
     );
   }
