@@ -1,5 +1,5 @@
 <section class="band-carousel">
-  <div class="band-images-ctnr" *ngIf="imagesList.length">
+  <div class="band-images-ctnr">
     <owl-carousel-o [options]="customOptions" *ngIf="imagesList[0] || imagesList[0]?.image !== 'assets/img/no-image-2.png'">
       <ng-template carouselSlide class="slide owl-carousel owl-theme owl-centered" *ngFor="let images of imagesList">
         <img src="{{ images?.image }}" alt="No Image" />

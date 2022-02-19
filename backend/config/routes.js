@@ -22,21 +22,21 @@ router
   .patch  ('/user/info',   middlewares.auth, controllers.user.updateInfo)
   .patch  ('/user/role',   middlewares.auth, controllers.user.updateActiveRole)
 
-  .get    ('/role', controllers.role.findAll)
+  .get    ('/role',                       controllers.role.findAll)
+  .get    ('/role/:id', middlewares.auth, controllers.role.findAllByUserId)
 
   .get    ('/band',                           controllers.band.findAll)
   .get    ('/band/params',   middlewares.auth, controllers.band.findAllByParams)
-  .get    ('/band/user/:id', middlewares.auth, controllers.band.findAllByUserId)
   .get    ('/band/:id',      middlewares.auth, controllers.band.findOne)
   .post   ('/band',          middlewares.auth, controllers.band.create)
   .patch  ('/band',          storage.avatar,   controllers.band.updateAvatar)
   .patch  ('/band/multi',    storage.multi,    controllers.band.updateImages)
   .patch  ('/band/info',     middlewares.auth, controllers.band.updateInfo)
   .delete ('/band/:id',      middlewares.auth, controllers.band.deleteImages)
-
-  .get    ('/company',                          controllers.company.findAll)
-  .get    ('/company/params', middlewares.auth, controllers.company.findAllByParams)
-  .post   ('/company',        middlewares.auth, controllers.company.create)
+  
+  .get    ('/company',                            controllers.company.findAll)
+  .get    ('/company/params',   middlewares.auth, controllers.company.findAllByParams)
+  .post   ('/company',          middlewares.auth, controllers.company.create)
 
   .get    ('/ad',                       controllers.ad.findAll)
   .post   ('/ad',     middlewares.auth, controllers.ad.create)

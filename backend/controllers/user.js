@@ -141,10 +141,6 @@ exports.updateInfo = async (req, res, next) => {
 exports.updateActiveRole = async (req, res, next) => {
   const { id, activeRole } = req.body;
 
-  console.log('----------------------------------------------');
-  console.log(req.body);
-  console.log('----------------------------------------------');
-    
   await models.user.update({ 
     activeRole
   }, {

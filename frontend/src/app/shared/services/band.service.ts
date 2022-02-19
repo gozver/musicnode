@@ -47,10 +47,6 @@ export class BandService {
     );
   }
 
-  getBandsByUserId(id: number): Observable<any> { // controller return band model with includes
-    return this.http.get<any>(`${environment.apiUrl}/band/user/${id}`);
-  }
-
   getBand(id: number): Observable<any> { // controller return band model with includes
     return this.http.get<any>(`${environment.apiUrl}/band/${id}`);
   }

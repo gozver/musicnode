@@ -10,35 +10,45 @@
       The role manager is where an user can manage his roles. He can create a new one if he doesn't have any, can delete or modify the ones he has and most important can select the one he desire to have active while enjoying the platform features.
     </div>
 
-    <div class="text" *ngIf="!hasRole() && +activeRole === -1">
+    <div class="text" *ngIf="!hasRole() && +currentUser?.activeRole === -1">
       You are in the <span class="bold">last step to sign in</span> as <span class="bold">you don't have any role yet</span>. Please <span class="bold">create a band</span> to unlock all platform features.
     </div>
   </section>
 
   <!-- USER HAS NO ROLE -->
-  <section class="has-no-role-ctnr" *ngIf="!hasRole()">
+  <section class="no-role-ctnr" *ngIf="!hasRole()">
     <div class="card">
       <app-band-form
-        [bandForm]=bandForm
-        *ngIf="+activeRole === -1"
+      [bandForm]=bandForm
+      *ngIf="+currentUser?.activeRole === -1"
       ></app-band-form>
-
+      
       <app-company-form
-        [companyForm]=companyForm
-        *ngIf="+activeRole === -2"
+      [companyForm]=companyForm
+      *ngIf="+currentUser?.activeRole === -2"
       ></app-company-form>
-
-      <button mat-flat-button class="primary" *ngIf="+activeRole === -1" (click)="createBand()" [disabled]="bandForm.invalid">
+      
+      <button mat-flat-button class="primary" *ngIf="+currentUser?.activeRole === -1" (click)="createBand()" [disabled]="bandForm.invalid">
         Create Role
       </button>
-
-      <button mat-flat-button class="primary" *ngIf="+activeRole === -2" (click)="createCompany()" [disabled]="companyForm.invalid">
+      
+      <button mat-flat-button class="primary" *ngIf="+currentUser?.activeRole === -2" (click)="createCompany()" [disabled]="companyForm.invalid">
         Create Role
       </button>
     </div>
   </section>
-
-  <section class="add-role-ctnr" *ngIf="hasRole()">
-    <h1>Add a Role</h1>
+  
+  <!-- USER HAS ROLE -->
+  <section class="roles-list-ctnr">
+    <h1>Roles List:</h1>
+    
+    <span *ngFor="let role of rolesList">
+      <span [ngSwitch]="+role?.roleId">
+        <p *ngSwitchCase="1" class="role">- This user belongs to <span class="bold">{{ role?.band?.name }}.</span></p>
+        <p *ngSwitchCase="2" class="role">- This user belongs to <span class="bold">{{ role?.company?.name }}.</span></p>
+        <p *ngSwitchCase="3" class="role">- This user has an <span class="bold">contractor</span> role.</p>
+        <p *ngSwitchCase="4" class="role">- This user has an <span class="bold">administrator</span> role.</p>
+      </span>
+    </span>
   </section>
 <article>

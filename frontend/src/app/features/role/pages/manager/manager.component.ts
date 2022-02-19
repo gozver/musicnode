@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '@shared/services/auth.service';
 import { UserService } from '@shared/services/user.service';
+import { RoleService } from '@shared/services/role.service';
 import { BandService } from '@shared/services/band.service';
 import { CompanyService } from '@shared/services/company.service';
 import { User } from '@shared/interfaces/user.interface';
@@ -13,13 +14,12 @@ import { User } from '@shared/interfaces/user.interface';
   styleUrls: ['./manager.component.scss']
 })
 export class ManagerComponent implements OnInit {
-  // User related properties
-  currentUser: User;
-  activeRole: number;
+  currentUser: User;  
 
-  // Form related properties
   bandForm: FormGroup;
   companyForm: FormGroup;
+
+  rolesList: any[] = [];
 
   // addRoleDdl: { id: number, value: string }[] = [
   //   { id: 1, value: 'Musician' },
@@ -38,6 +38,7 @@ export class ManagerComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
     private readonly userService: UserService,
+    private readonly roleService: RoleService,
     private readonly bandService: BandService,
     private readonly companyService: CompanyService
   ) { }
@@ -51,13 +52,16 @@ export class ManagerComponent implements OnInit {
 
   initComponentData(): void {
     this.currentUser = this.authService.currentUser$.value;
-    this.activeRole = this.authService.activeRole$.value;
 
     console.log('--> this.currentUser');
     console.log(this.currentUser);
     
-    console.log('--> this.activeRole');
-    console.log(this.activeRole);
+    this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
+      this.rolesList = rolesList;
+
+      console.log('--> this.rolesList');
+      console.log(this.rolesList);
+    });
   }
 
   // Init Forms Functions
@@ -95,22 +99,27 @@ export class ManagerComponent implements OnInit {
       this.currentUser.activeRole = 1;
       
       this.userService.updateActiveRole(this.currentUser.id, 1).subscribe(user => {
-        console.log('--> update active role:')
+        console.log('--> updated active role:')
         console.log(user);
       });
 
       this.authService.setCurrentUser(this.currentUser);
       this.authService.setHasRole(this.currentUser.hasRole);
-      this.authService.setActiveRole(1);
     });
   }
 
   createCompany(): void {
     this.companyService.createCompany(this.companyForm.value, this.currentUser.id).subscribe(() => {
       this.currentUser.hasRole = true;
+      this.currentUser.activeRole = 2;
+
+      this.userService.updateActiveRole(this.currentUser.id, 2).subscribe(user => {
+        console.log('--> updated active role:')
+        console.log(user);
+      });
+
       this.authService.setCurrentUser(this.currentUser);
       this.authService.setHasRole(this.currentUser.hasRole);
-      this.authService.setActiveRole(2);
     });
   }
 }

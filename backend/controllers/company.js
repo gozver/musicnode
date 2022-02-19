@@ -16,7 +16,7 @@ const config = require('../config/config.json');
   const companyIn = req.body.company;
   const userId = req.body.userId;
    
-  // find the user who is going to create the band
+  // find the user who is going to create the company
   const user = await models.user.findOne({ where: { id: userId } })
   .catch(err => {
     if (!err.statusCode) err.statusCode = 500;
@@ -27,7 +27,7 @@ const config = require('../config/config.json');
     next(err);
   });
 
-  // save the band into the db
+  // save the company into the db
   const company = await models.company.create(companyIn)
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;
@@ -42,7 +42,7 @@ const config = require('../config/config.json');
   await company.addUser(user);
 
   // save the new role into the db
-  await models.role.create({ userId, roleId: 3, role: 'company' });
+  await models.role.create({ roleId: 2, role: 'company', userId, compId: company.id });
 
   // return response to the client
   res.json(company);

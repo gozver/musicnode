@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthService } from '@shared/services/auth.service';
 import { UserService } from '@shared/services/user.service';
-import { BandService } from '@shared/services/band.service';
+import { RoleService } from '@shared/services/role.service';
 import { User } from '@app/shared/interfaces/user.interface';
 
 @Component({
@@ -21,14 +21,15 @@ export class UserProfileComponent implements OnInit {
   imageData: string;
 
   avatarSelected: boolean = false;
-  bandsList: string[] = [];
+
+  rolesList: any[] = [];
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly userService: UserService,
-    private readonly bandService: BandService,
+    private readonly roleService: RoleService
     ) {
     this.profileId = parseInt(this.route.snapshot.paramMap.get('id'));
   }
@@ -43,21 +44,19 @@ export class UserProfileComponent implements OnInit {
     console.log('--> this.currentUser:');
     console.log(this.currentUser);
 
-    // if (this.currentUser.activeRole === 1) {
-      this.bandService.getBandsByUserId(this.profileId).subscribe(bands => {
-        console.log('--> bands:');
-        console.log(bands);
-
-        this.bandsList = bands;
-      });
-    // }
-
     this.userService.getUser(this.profileId).subscribe(
       user => {
         this.profileUser = user[0];
 
         console.log('--> this.profileUser:');
         console.log(this.profileUser);
+
+        this.roleService.getRolesByUserId(this.profileId).subscribe(rolesList => {
+          this.rolesList = rolesList;
+
+          console.log('--> this.rolesList');
+          console.log(this.rolesList);
+        });
 
         this.imageData = this.profileUser.avatar;
         this.initUserForm(this.profileUser);

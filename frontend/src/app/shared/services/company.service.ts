@@ -17,6 +17,12 @@ export class CompanyService {
     private errorHandlerService: ErrorHandlerService
   ) { }
 
+  createCompany(company: Company, userId: number): Observable<Company> {
+    return this.http.post<Company>(`${environment.apiUrl}/company`, { company, userId }).pipe(
+      catchError(this.errorHandlerService.handleError<any>('createCompany', null))
+    );
+  }
+
   getCompanies(): Observable<Company[]> {
     return this.http.get<Company[]>(`${environment.apiUrl}/company`).pipe(
       catchError(this.errorHandlerService.handleError<any>('getCompanies', []))
@@ -38,12 +44,6 @@ export class CompanyService {
 
     return this.http.get<Company[]>(`${environment.apiUrl}/company/params`, options).pipe(
       catchError(this.errorHandlerService.handleError<any>('getCompaniesByParams', []))
-    );
-  }
-
-  createCompany(company: Company, userId: number): Observable<Company> {
-    return this.http.post<Company>(`${environment.apiUrl}/company`, { company, userId }).pipe(
-      catchError(this.errorHandlerService.handleError<any>('createCompany', null))
     );
   }
 }
