@@ -9,11 +9,12 @@
     </div>
   </section>
 
+  <!-- AVATAR -->
   <section class="user-ctnr">
     <!-- if the form is initialized, generate the template -->
     <form [formGroup]="userForm" class="userForm" *ngIf="userForm">
       <div class="avatar">
-        <input type="file" id="file" name="file" (change)="onFileSelected($event)" *ngIf="isMyProfile() || isAdmin()" />
+        <input type="file" id="file" name="file" (change)="onAvatarSelected($event)" *ngIf="isMyProfile() || isAdmin()" />
 
         <label for="file">
           <img [src]="imageData" [alt]="profileUser?.name" [ngClass]="isMyProfile() || isAdmin() ? 'pointer' : 'normal'">
@@ -47,7 +48,7 @@
     </form>
 
     <div class="btn-ctnr">
-      <button mat-flat-button color="warn" class="warn" (click)="updateImage()" *ngIf="isMyProfile() && this.avatarSelected">
+      <button mat-flat-button color="warn" class="warn" (click)="updateAvatar()" *ngIf="isMyProfile() && this.avatarSelected">
         Update Avatar
       </button>
     </div>

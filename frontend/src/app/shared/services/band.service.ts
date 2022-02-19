@@ -17,8 +17,13 @@ export class BandService {
     private errorHandlerService: ErrorHandlerService
   ) { }
 
-  // Observable<any> => controller return band model which includes other models
-  getBands(): Observable<any> {
+  createBand(band: Band, userId: number): Observable<Band> {
+    return this.http.post<Band>(`${environment.apiUrl}/band`, { band, userId }).pipe(
+      catchError(this.errorHandlerService.handleError<any>('createBand', null))
+    );
+  }
+
+  getBands(): Observable<any> { // controller return band model with includes
     return this.http.get<any>(`${environment.apiUrl}/band`).pipe(
       catchError(this.errorHandlerService.handleError<any>('getBands', []))
     );
@@ -42,19 +47,17 @@ export class BandService {
     );
   }
 
-  // Observable<any> => controller return band model which includes other models
-  getBandsByUserId(id: number): Observable<any> {
+  getBandsByUserId(id: number): Observable<any> { // controller return band model with includes
     return this.http.get<any>(`${environment.apiUrl}/band/user/${id}`);
   }
 
-  // Observable<any> => controller return band model which includes other models
-  getBand(id: number): Observable<any> {
+  getBand(id: number): Observable<any> { // controller return band model with includes
     return this.http.get<any>(`${environment.apiUrl}/band/${id}`);
   }
 
-  createBand(band: Band, userId: number): Observable<Band> {
-    return this.http.post<Band>(`${environment.apiUrl}/band`, { band, userId }).pipe(
-      catchError(this.errorHandlerService.handleError<any>('createBand', null))
+  updateInfo(params: Band): Observable<Band> {
+    return this.http.patch<Band>(`${environment.apiUrl}/band/info`, params).pipe(
+      catchError(this.errorHandlerService.handleError<any>('updateAvatar', null))
     );
   }
 
@@ -83,8 +86,7 @@ export class BandService {
     );
   }
 
-  // Observable<any> => controller return deleted items
-  deleteImages(id: number): Observable<any> {
+  deleteImages(id: number): Observable<any> { // controller return deleted items
     return this.http.delete<any>(`${environment.apiUrl}/band/${id}`).pipe(
       catchError(this.errorHandlerService.handleError<any>('deleteImages', null))
     );

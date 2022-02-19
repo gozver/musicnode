@@ -18,7 +18,7 @@ Band.init({
   scope:  { type: DataTypes.STRING,  allowNull: false, validate: { notEmpty: false } },
   video:  { type: DataTypes.STRING,  allowNull: true },
   
-  avatar: { type: DataTypes.STRING,  allowNull: true,  defaultValue: 'assets/images/user.png' },
+  avatar: { type: DataTypes.STRING,  allowNull: true,  defaultValue: 'assets/img/user.png' },
 }, { 
   sequelize,
   modelName: 'band'

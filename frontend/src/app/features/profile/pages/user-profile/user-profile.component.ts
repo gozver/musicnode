@@ -34,20 +34,31 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initComponentData();
+  }
+
+  initComponentData(): void {
     this.currentUser = this.authService.currentUser$.value;
 
-    if (this.currentUser.activeRole === 1) {
+    console.log('--> this.currentUser:');
+    console.log(this.currentUser);
+
+    // if (this.currentUser.activeRole === 1) {
       this.bandService.getBandsByUserId(this.profileId).subscribe(bands => {
         console.log('--> bands:');
         console.log(bands);
 
         this.bandsList = bands;
       });
-    }
+    // }
 
     this.userService.getUser(this.profileId).subscribe(
       user => {
         this.profileUser = user[0];
+
+        console.log('--> this.profileUser:');
+        console.log(this.profileUser);
+
         this.imageData = this.profileUser.avatar;
         this.initUserForm(this.profileUser);
       }, 
@@ -71,7 +82,7 @@ export class UserProfileComponent implements OnInit {
     return this.currentUser.id === this.profileId;
   }
 
-  onFileSelected(event: Event): void {
+  onAvatarSelected(event: Event): void {
     const file = (event.target as HTMLInputElement).files[0];
     const allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
     
@@ -89,7 +100,7 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  updateImage(): void {
+  updateAvatar(): void {
     this.userService.updateAvatar(this.currentUser.id, this.userForm.value.avatar).subscribe(avatar => {
       this.imageData = avatar;
       this.currentUser.avatar = avatar;

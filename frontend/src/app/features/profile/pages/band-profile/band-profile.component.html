@@ -9,7 +9,7 @@
     <!-- if the form is initialized, generate the template -->
     <form [formGroup]="avatarForm" class="band-form" *ngIf="avatarForm">
       <div class="avatar-ctnr">
-        <input type="file" id="file" name="file" (change)="selectAvatar($event)" *ngIf="isMyBand" />
+        <input type="file" id="file" name="file" (change)="onAvatarSelected($event)" *ngIf="isMyBand" />
 
         <label for="file">
           <img [src]="imageData" [alt]="profileBand?.name" [ngClass]="isMyBand ? 'pointer' : 'normal'">
@@ -22,10 +22,24 @@
         <div class="text">{{ profileBand?.users[0]?.email }}</div>
         <div class="text-bold">{{ profileBand?.phone }}</div>
 
-        <!-- button type="button" to avoid form submission -->
-        <button type="button" mat-flat-button color="warn" class="warn" *ngIf="!isMyBand" (click)="sendMessage(profileBand?.users[0]?.id)">
-          Message
-        </button>
+        <div class="btn-ctnr">
+          <!-- button type="button" to avoid form submission -->
+          <button type="button" mat-flat-button color="warn" class="warn" *ngIf="!isMyBand" (click)="sendMessage(profileBand?.users[0]?.id)">
+            Message
+          </button>
+
+          <!-- button type="button" to avoid form submission -->
+          <button type="button" mat-flat-button color="warn" class="warn" *ngIf="isMyBand" (click)="goToEditProfile()">
+            Edit
+          </button>
+
+          <div class="separator" *ngIf="!isMyBand && isAdmin()"></div>
+
+          <!-- button type="button" to avoid form submission -->
+          <button type="button" mat-flat-button color="primary" *ngIf="!isMyBand && isAdmin()" (click)="goToEditProfile()">
+            Edit
+          </button>
+        </div>
       </div>
     </form>
 
@@ -43,8 +57,8 @@
     [data]=imagesList$>
   </app-carousel>
 
-  <section class="band-carousel-btn-ctnr" *ngIf="isMyBand">
-    <input type="file" id="files" name="files" multiple (change)="uploadImages($event)" *ngIf="isMyBand" />
+  <section class="band-carousel-btn-ctnr" *ngIf="isMyBand || isAdmin()">
+    <input type="file" id="files" name="files" multiple (change)="uploadImages($event)" />
 
     <label for="files">
       <span class="upload-button">

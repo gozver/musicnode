@@ -45,13 +45,6 @@ export class UserService {
     return this.http.get<User>(`${environment.apiUrl}/user/${id}`);
   }
 
-  updateInfo(params: User): Observable<User> {
-    console.log('--> params:');
-    console.log(params);
-
-    return this.http.patch<User>(`${environment.apiUrl}/user/info`, params);
-  }
-
   updateAvatar(id: number, avatar: File): Observable<string> {
     const formData = new FormData();
 
@@ -60,6 +53,18 @@ export class UserService {
 
     return this.http.patch<any>(`${environment.apiUrl}/user`, formData).pipe(
       catchError(this.errorHandlerService.handleError<any>('updateAvatar', null))
+    );
+  }
+
+  updateInfo(params: User): Observable<User> {
+    return this.http.patch<User>(`${environment.apiUrl}/user/info`, params).pipe(
+      catchError(this.errorHandlerService.handleError<any>('updateInfo', null))
+    );
+  }
+
+  updateActiveRole(id: number, activeRole: number): Observable<User> {
+    return this.http.patch<User>(`${environment.apiUrl}/user/role`, { id, activeRole }).pipe(
+      catchError(this.errorHandlerService.handleError<any>('updateActiveRole', null))
     );
   }
 }

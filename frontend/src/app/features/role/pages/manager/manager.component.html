@@ -10,103 +10,35 @@
       The role manager is where an user can manage his roles. He can create a new one if he doesn't have any, can delete or modify the ones he has and most important can select the one he desire to have active while enjoying the platform features.
     </div>
 
-    <div class="text" *ngIf="!hasRole()">
-      You don't have any role yet. Please add a role to unlock all platform features.
+    <div class="text" *ngIf="!hasRole() && +activeRole === -1">
+      You are in the <span class="bold">last step to sign in</span> as <span class="bold">you don't have any role yet</span>. Please <span class="bold">create a band</span> to unlock all platform features.
     </div>
   </section>
 
   <!-- USER HAS NO ROLE -->
   <section class="has-no-role-ctnr" *ngIf="!hasRole()">
     <div class="card">
-      <form [formGroup]="roleForm" novalidate>
-        <mat-form-field appearance="outline" class="input-headline role">
-          <mat-label>Role</mat-label>
-          <mat-select formControlName="roleId" (changeEventChange)="printValue()">
-            <mat-option *ngFor="let item of noRoleDdl" value="{{ item.id }}">{{ item.value }}</mat-option>
-          </mat-select>
-          <button mat-icon-button matSuffix [attr.aria-label]="'Role'" disabled>
-            <mat-icon>category</mat-icon>
-          </button>
-        </mat-form-field>
-      </form>
-
       <app-band-form
         [bandForm]=bandForm
-        *ngIf="+roleForm.value.roleId === 1"
+        *ngIf="+activeRole === -1"
       ></app-band-form>
 
       <app-company-form
         [companyForm]=companyForm
-        *ngIf="+roleForm.value.roleId === 2"
+        *ngIf="+activeRole === -2"
       ></app-company-form>
 
-      <button mat-flat-button class="primary" *ngIf="+roleForm.value.roleId !== 2" (click)="createBand()" [disabled]="bandForm.invalid">
+      <button mat-flat-button class="primary" *ngIf="+activeRole === -1" (click)="createBand()" [disabled]="bandForm.invalid">
         Create Role
       </button>
 
-      <button mat-flat-button class="primary" *ngIf="+roleForm.value.roleId === 2" (click)="createCompany()" [disabled]="companyForm.invalid">
+      <button mat-flat-button class="primary" *ngIf="+activeRole === -2" (click)="createCompany()" [disabled]="companyForm.invalid">
         Create Role
       </button>
     </div>
-  </section>
-
-  <!-- USER HAS ROLE -->
-  <section class="has-role-ctnr" *ngIf="hasRole()">
-    <h1>Roles List</h1>
-    
-    <div [ngSwitch]="activeRole">
-      <h2 class="user" *ngSwitchCase="'1'">This user is a musician (active role)</h2>
-      <h2 class="user" *ngSwitchCase="'2'">This user belongs to a band (active role)</h2>
-      <h2 class="user" *ngSwitchCase="'3'">This user belongs to a company (active role)</h2>
-      <h2 class="user" *ngSwitchCase="'4'">This user is an independent contractor (active role)</h2>
-      <h2 class="user" *ngSwitchCase="'5'">This user is an administrator (active role)</h2>
-    </div>
-    <!-- TO DO: SHOW USER ROLES -->
   </section>
 
   <section class="add-role-ctnr" *ngIf="hasRole()">
     <h1>Add a Role</h1>
-
-    <div class="card">
-      <div class="card-content">
-        <form [formGroup]="roleForm" novalidate>
-          <mat-form-field appearance="outline" class="input-headline role">
-            <mat-label>Role</mat-label>
-            <mat-select formControlName="roleId">
-              <mat-option *ngFor="let item of selectAddRole" value="{{ item.id }}">{{ item.value }}</mat-option>
-            </mat-select>
-            <button mat-icon-button matSuffix [attr.aria-label]="'Role'" disabled>
-              <mat-icon>category</mat-icon>
-            </button>
-          </mat-form-field>
-        </form>
-  
-        <!-- <app-band-form
-          [bandForm]=bandForm
-          *ngIf="+roleForm.value.roleId !== 2"
-        ></app-band-form>
-  
-        <app-company-form
-          [companyForm]=companyForm
-          *ngIf="+roleForm.value.roleId === 2"
-        ></app-company-form> -->
-  
-        <!-- <button mat-flat-button class="primary" *ngIf="+roleForm.value.roleId !== 2" (click)="createBand()" [disabled]="bandForm.invalid">
-          Create Role
-        </button>
-  
-        <button mat-flat-button class="primary" *ngIf="+roleForm.value.roleId === 2" (click)="createCompany()" [disabled]="companyForm.invalid">
-          Create Role
-        </button> -->
-
-        <button mat-flat-button class="primary" *ngIf="+roleForm.value.roleId === 4" [disabled]="roleForm.invalid" (click)="createContractorRole()">
-          Create Role
-        </button>
-
-        <button mat-flat-button class="primary" *ngIf="+roleForm.value.roleId === 5" [disabled]="roleForm.invalid" (click)="createAdminRole()">
-          Create Role
-        </button>
-      </div>
-    </div>
   </section>
 <article>

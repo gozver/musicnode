@@ -92,6 +92,31 @@ exports.findOne = async (req, res, next) => {
     });
 }
 
+exports.updateAvatar = async (req, res, next) => {
+  // console.log('--> req.body.id:');
+  // console.log(req.body.id);
+
+  // console.log('--> req.file:');
+  // console.log(req.file);
+
+  const id = req.body.id;
+  const avatar = config.server.url + '/avatars/' + req.file.filename;
+  
+  models.user.update({ 
+    avatar 
+  }, {
+    where: { id }
+  }).then(() => res.status(201).json(avatar))
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
+    });
+}
+
 exports.updateInfo = async (req, res, next) => {
   const { id, name, surname, phone, password } = req.body;
     
@@ -113,21 +138,19 @@ exports.updateInfo = async (req, res, next) => {
     });
 }
 
-exports.updateAvatar = async (req, res, next) => {
-  // console.log('--> req.body.id:');
-  // console.log(req.body.id);
+exports.updateActiveRole = async (req, res, next) => {
+  const { id, activeRole } = req.body;
 
-  // console.log('--> req.file:');
-  // console.log(req.file);
-
-  const id = req.body.id;
-  const avatar = config.server.url + '/avatars/' + req.file.filename;
-  
-  models.user.update({ 
-    avatar 
+  console.log('----------------------------------------------');
+  console.log(req.body);
+  console.log('----------------------------------------------');
+    
+  await models.user.update({ 
+    activeRole
   }, {
     where: { id }
-  }).then(() => res.status(201).json(avatar))
+  })
+    .then(user => res.json(user))
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;
 

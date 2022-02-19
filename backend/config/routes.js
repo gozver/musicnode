@@ -15,11 +15,12 @@ router
   .post   ('/auth/login',  controllers.auth.login)
   .post   ('/auth/signup', controllers.auth.signup)
 
-  .get    ('/user',                           controllers.user.findAll)
+  .get    ('/user',                          controllers.user.findAll)
   .get    ('/user/params', middlewares.auth, controllers.user.findAllByParams)
   .get    ('/user/:id',    middlewares.auth, controllers.user.findOne)
-  .patch  ('/user/info',   middlewares.auth, controllers.user.updateInfo)
   .patch  ('/user',        storage.avatar,   controllers.user.updateAvatar)
+  .patch  ('/user/info',   middlewares.auth, controllers.user.updateInfo)
+  .patch  ('/user/role',   middlewares.auth, controllers.user.updateActiveRole)
 
   .get    ('/role', controllers.role.findAll)
 
@@ -30,6 +31,7 @@ router
   .post   ('/band',          middlewares.auth, controllers.band.create)
   .patch  ('/band',          storage.avatar,   controllers.band.updateAvatar)
   .patch  ('/band/multi',    storage.multi,    controllers.band.updateImages)
+  .patch  ('/band/info',     middlewares.auth, controllers.band.updateInfo)
   .delete ('/band/:id',      middlewares.auth, controllers.band.deleteImages)
 
   .get    ('/company',                          controllers.company.findAll)

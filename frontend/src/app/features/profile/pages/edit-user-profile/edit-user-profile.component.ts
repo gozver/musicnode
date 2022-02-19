@@ -52,24 +52,29 @@ export class EditUserProfileComponent implements OnInit {
     const phoneRegex = '^[0-9\-]+$';
     const passwdRegex = /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
     
+    let id = this.profileUser.id
+    let name = this.profileUser.name
+    let surname = this.profileUser.surname
+    let phone = this.profileUser.phone    
+
     this.updateForm = this.fb.group({
-      id:       [ this.profileUser.id ],
-      name:     [ this.profileUser.name,    [ Validators.required, Validators.minLength(3) ]],
-      surname:  [ this.profileUser.surname, [ Validators.required, Validators.minLength(3) ]],
-      phone:    [ this.profileUser.phone,   [ Validators.required, Validators.pattern(phoneRegex) ]],
-      password: [ '' ,                      [ Validators.required, Validators.pattern(passwdRegex) ]],
-      newPwd:   [ '' ,                      [ Validators.required, Validators.pattern(passwdRegex) ]],
+      id:       [ id ],
+      name:     [ name,    [ Validators.required, Validators.minLength(3) ]],
+      surname:  [ surname, [ Validators.required, Validators.minLength(3) ]],
+      phone:    [ phone,   [ Validators.required, Validators.pattern(phoneRegex) ]],
+      password: [ '' ,     [ Validators.required, Validators.pattern(passwdRegex) ]],
+      newPwd:   [ '' ,     [ Validators.required, Validators.pattern(passwdRegex) ]],
     });
   }
 
   passwordsAreEqual(): boolean {
-    return this.updateForm.value.password === this.updateForm.value.newPwd;
+    return this.updateForm.value.password !== '' && this.updateForm.value.password === this.updateForm.value.newPwd; 
   }
 
   update(): void {
     this.userService.updateInfo(this.updateForm.value).subscribe(() => {
       this.router.navigate([`/profile/user/${this.profileId}`]);
-    })
+    });
   }
 
   goBack() {

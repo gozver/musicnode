@@ -42,7 +42,7 @@ exports.create = async (req, res, next) => {
   await band.addUser(user);
 
   // save the new role into the db
-  await models.role.create({ userId, roleId: 2, role: 'band' });
+  await models.role.create({ roleId: 1, role: 'band', userId, bandId: band.id });
 
   // return response to the client
   res.json(band);
@@ -149,6 +149,25 @@ exports.findOne = async (req, res, next) => {
       const err = new Error();
       err.statusCode = 401;
       err.message = 'Band not found';
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
+    });
+}
+
+exports.updateInfo = async (req, res, next) => {
+  const { id, name, desc, phone, price, type, scope, video } = req.body;
+    
+  await models.band.update({ 
+    id, name, desc, phone, price, type, scope, video
+  }, {
+    where: { id }
+  })
+    .then(band => res.json(band))
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
 
       // print error and send it to error controller
       console.log('--> error:');

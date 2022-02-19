@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '@shared/services/auth.service';
+import { UserService } from '@shared/services/user.service';
 import { BandService } from '@shared/services/band.service';
 import { CompanyService } from '@shared/services/company.service';
 import { User } from '@shared/interfaces/user.interface';
@@ -17,22 +18,16 @@ export class ManagerComponent implements OnInit {
   activeRole: number;
 
   // Form related properties
-  roleForm: FormGroup;
   bandForm: FormGroup;
   companyForm: FormGroup;
 
-  noRoleDdl:  { id: number, value: string }[] = [
-    { id: 1, value: 'Band'    },
-    { id: 2, value: 'Company' },
-  ];
-
-  addRoleDdl: { id: number, value: string }[] = [
-    { id: 1, value: 'Musician' },
-    { id: 2, value: 'Band' },
-    { id: 3, value: 'Company' },
-    { id: 4, value: 'Contractor' },
-    { id: 5, value: 'Admin' },
-  ];
+  // addRoleDdl: { id: number, value: string }[] = [
+  //   { id: 1, value: 'Musician' },
+  //   { id: 2, value: 'Band' },
+  //   { id: 3, value: 'Company' },
+  //   { id: 4, value: 'Contractor' },
+  //   { id: 5, value: 'Admin' },
+  // ];
 
   // Regex related properties
   priceRegex: string = '^[0-9]+$';
@@ -42,6 +37,7 @@ export class ManagerComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
+    private readonly userService: UserService,
     private readonly bandService: BandService,
     private readonly companyService: CompanyService
   ) { }
@@ -49,7 +45,6 @@ export class ManagerComponent implements OnInit {
   ngOnInit(): void {
     this.initComponentData();
 
-    this.initRoleForm();
     this.initBandForm();
     this.initCompanyForm();
   }
@@ -58,19 +53,14 @@ export class ManagerComponent implements OnInit {
     this.currentUser = this.authService.currentUser$.value;
     this.activeRole = this.authService.activeRole$.value;
 
-    this.noRoleDdl = [
-      { id: 1, value: 'Band ' },
-      { id: 2, value: 'Company' },
-    ];
+    console.log('--> this.currentUser');
+    console.log(this.currentUser);
+    
+    console.log('--> this.activeRole');
+    console.log(this.activeRole);
   }
 
   // Init Forms Functions
-  initRoleForm(): void {
-    this.roleForm = this.fb.group({
-      roleId: [ null , Validators.required ],
-    });
-  }
-
   initBandForm(): void {
     this.bandForm = this.fb.group({
       name:   [ '',   [ Validators.required, Validators.minLength(3) ]],
@@ -102,9 +92,16 @@ export class ManagerComponent implements OnInit {
   createBand(): void {
     this.bandService.createBand(this.bandForm.value, this.currentUser.id).subscribe(() => {
       this.currentUser.hasRole = true;
+      this.currentUser.activeRole = 1;
+      
+      this.userService.updateActiveRole(this.currentUser.id, 1).subscribe(user => {
+        console.log('--> update active role:')
+        console.log(user);
+      });
+
       this.authService.setCurrentUser(this.currentUser);
       this.authService.setHasRole(this.currentUser.hasRole);
-      this.authService.setActiveRole(2);
+      this.authService.setActiveRole(1);
     });
   }
 
@@ -113,15 +110,7 @@ export class ManagerComponent implements OnInit {
       this.currentUser.hasRole = true;
       this.authService.setCurrentUser(this.currentUser);
       this.authService.setHasRole(this.currentUser.hasRole);
-      this.authService.setActiveRole(3);
+      this.authService.setActiveRole(2);
     });
-  }
-
-  createContractorRole(): void {
-    
-  }
-
-  createAdminRole(): void {
-    
   }
 }

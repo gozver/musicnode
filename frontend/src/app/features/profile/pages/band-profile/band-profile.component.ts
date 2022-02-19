@@ -127,7 +127,7 @@ export class BandProfileComponent implements OnInit {
     );
   }
 
-  selectAvatar(event: Event): void {
+  onAvatarSelected(event: Event): void {
     const file = (event.target as HTMLInputElement).files[0];
     const allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
 
@@ -156,14 +156,14 @@ export class BandProfileComponent implements OnInit {
   uploadImages(event: any): void {
     const files: FileList = event.target.files;
     
-    // Update images (backend)
+    // Update images in backend
     this.imagesForm.patchValue({ images: files });
 
     this.bandService.updateImages(this.profileBand.id, this.imagesForm.value.images).subscribe(imagesList => {
       console.log('--> uploaded files:');
       console.log(imagesList);
 
-      // Update images (frontend)
+      // Update images in frontend
       let newImagesList: any = imagesList;
 
       for (let i = 0; i < newImagesList.length; i++) {
@@ -176,12 +176,12 @@ export class BandProfileComponent implements OnInit {
   }
 
   deleteImages(): void {
-    // Delete images (backend)
+    // Delete images in backend
     this.bandService.deleteImages(this.profileBand.id).subscribe(res => {
       console.log('--> res:');
       console.log(res);
 
-      // Delete images (frontend)
+      // Delete images in frontend
       const noImage = [{
         image: "assets/img/no-image-2.png",
       }]
@@ -192,6 +192,14 @@ export class BandProfileComponent implements OnInit {
 
   sendMessage(id: number): void {
     this.router.navigate(['/chat'], { queryParams: { id } });
+  }
+
+  isAdmin(): boolean {
+    return this.currentUser.activeRole === 4;
+  }
+
+  goToEditProfile() {
+    this.router.navigate([`/profile/band/${this.profileId}/edit`]);
   }
 
   createReview(): void {
