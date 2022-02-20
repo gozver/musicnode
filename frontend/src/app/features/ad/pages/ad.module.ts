@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@app/shared/modules/material.module';
 
@@ -15,6 +16,8 @@ import { AdComponent } from './ad/ad.component';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    
     MaterialModule,
     
     AdRoutingModule,

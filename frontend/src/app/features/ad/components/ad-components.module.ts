@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@app/shared/modules/material.module';
+import { MaterialModule } from '@shared/modules/material.module';
+import { ComponentsModule } from '@shared/components/components.module';
 
 import { AdCardComponent } from './ad-card/ad-card.component';
 import { AdDialogComponent } from './ad-dialog/ad-dialog.component';
@@ -17,7 +18,9 @@ import { AdDialogComponent } from './ad-dialog/ad-dialog.component';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    MaterialModule
+
+    MaterialModule,
+    ComponentsModule
   ], 
   exports: [
     AdCardComponent,

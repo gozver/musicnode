@@ -482,32 +482,36 @@ db.sync({ force: true })
 
   // COMPANIES IMAGES
   .then(async () => {
-    // insert band images into the db
+    // insert company images into the db
     for (let companyImage of seed.companyImage) {
       await models.image.create(companyImage);
     }
   })
   .catch(err => console.log('--> error:', err))
   
-  // reviews
+  // REVIEWS
   .then(async () => {
-    // insert users reviews into the db
+    // insert reviews into the db
     for (let review of seed.review) {
       await models.review.create(review);
     }
   })
-  .catch(err => console.log('--> error:', err));
-
-// const ads = [
-//   { title: 'Title 1',  description: 'Description 1',  userId: 1 },
-//   { title: 'Title 2',  description: 'Description 2',  userId: 1 },
-//   { title: 'Title 3',  description: 'Description 3',  userId: 1 },
-//   { title: 'Title 4',  description: 'Description 4',  userId: 1 },
-//   { title: 'Title 5',  description: 'Description 5',  userId: 2 },
-//   { title: 'Title 6',  description: 'Description 6',  userId: 2 },
-//   { title: 'Title 7',  description: 'Description 7',  userId: 2 },
-//   { title: 'Title 8',  description: 'Description 8',  userId: 2 },
-//   { title: 'Title 9',  description: 'Description 9',  userId: 3 },
-//   { title: 'Title 10', description: 'Description 10', userId: 3 }  
-// ];
-    
+  .catch(err => console.log('--> error:', err))
+  
+  // ADS
+  .then(async () => {
+    // insert ads into the db
+    for (let ad of seed.ad) {
+      await models.ad.create(ad);
+    }
+  })
+  .catch(err => console.log('--> error:', err))
+  
+  // AD IMAGES
+  .then(async () => {
+    // insert ad images into the db
+    for (let adImage of seed.adImage) {
+      await models.image.create(adImage);
+    }
+  })
+  .catch(err => console.log('--> error:', err));    

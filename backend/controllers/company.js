@@ -42,7 +42,7 @@ const config = require('../config/config.json');
   await company.addUser(user);
 
   // save the new role into the db
-  await models.role.create({ roleId: 2, role: 'company', userId, compId: company.id });
+  await models.role.create({ roleId: 2, role: 'company', userId, companyId: company.id });
 
   // return response to the client
   res.json(company);

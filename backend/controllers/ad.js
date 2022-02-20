@@ -19,11 +19,11 @@ exports.create = async (req, res, next) => {
 
 exports.findAll = async (req, res, next) => {
   models.ad.findAll({
-    attributes: ['id', 'title', 'price', 'location', 'description', 'createdAt', 'updatedAt'],
-    include: {
-      model: models.user,
-      attributes: ['id', 'name', 'surname', 'phone', 'email']
-    },
+    include: [{
+      model: models.user
+    }, {
+      model: models.image
+    }],
     order: [['created_at','DESC']]
   }).then(data => res.json(data))
     .catch(err => {
@@ -36,7 +36,12 @@ exports.findOne = async (req, res, next) => {
   models.ad.findOne({
     where: {
       id: req.params.id
-    }
+    },
+    include: [{
+      model: models.user
+    }, {
+      model: models.image
+    }],
   }).then(data => res.json(data))
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;

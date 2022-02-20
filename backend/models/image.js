@@ -5,14 +5,13 @@ const sequelize = require('../config/db');
 class Image extends Model {}
 
 Image.init({
-  id:         { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true },
+  id:        { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true },
 
-  adId:       { type: DataTypes.INTEGER, allowNull: true, validate: { notEmpty: false } },
-  musicianId: { type: DataTypes.INTEGER, allowNull: true, validate: { notEmpty: false } },
-  bandId:     { type: DataTypes.INTEGER, allowNull: true, validate: { notEmpty: false } },
-  companyId:  { type: DataTypes.INTEGER, allowNull: true, validate: { notEmpty: false } },
+  adId:      { type: DataTypes.INTEGER, allowNull: true },
+  bandId:    { type: DataTypes.INTEGER, allowNull: true },
+  companyId: { type: DataTypes.INTEGER, allowNull: true },
 
-  image:      { type: DataTypes.STRING,  allowNull: false },
+  image:      { type: DataTypes.STRING, allowNull: false, validate: { notEmpty: false } },
 }, { 
   sequelize,
   modelName: 'image'

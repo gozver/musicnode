@@ -1,23 +1,25 @@
 <div class="card">
   <div class="card-header">
     <div class="left">
-      <img alt="title" src="assets/img/me.jpg">
-      <!-- <img alt="{{ p?.title }}" mat-card-avatar [src]="p?.avatar"> -->
+      <img src="{{ ad.user.avatar }}" alt="{{ ad.user.name }}">
     </div>
     
     <div class="right">
-      <span class="name">Lolo Gonzalez</span>
+      <span class="name">{{ ad.user.name }} {{ ad.user.surname }}</span>
       <span class="date">{{ ad.createdAt | date:'dd/MM/yyyy' }}</span>
-      <!-- <span>{{ p?.time?.seconds * 1000 | date:'shortTime' }}</span> -->
     </div>
   </div>
 
   <div class="card-content">
     <span class=title>{{ ad.title }}</span>
     <span class=price-location>{{ ad.price }}€ · {{ ad.location | uppercase}}</span>
-    <span class=body>{{ ad.description }}</span>
+    <span class=body>{{ ad.desc }}</span>
   </div>
 
+  <app-carousel
+    [data]=imagesList$>
+  </app-carousel>
+  
   <div class="btn-cntr">
     <button mat-flat-button (click)="deleteAd(ad.id)" color="warn" title="Delete">
       Delete

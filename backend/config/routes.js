@@ -44,8 +44,8 @@ router
   .delete ('/company/:id',    middlewares.auth, controllers.company.deleteImages)
 
   .get    ('/ad',                       controllers.ad.findAll)
-  .post   ('/ad',     middlewares.auth, controllers.ad.create)
   .get    ('/ad/:id', middlewares.auth, controllers.ad.findOne)
+  .post   ('/ad',     middlewares.auth, controllers.ad.create)
   .patch  ('/ad/:id', middlewares.auth, controllers.ad.update)
   .delete ('/ad/:id', middlewares.auth, controllers.ad.delete)
   

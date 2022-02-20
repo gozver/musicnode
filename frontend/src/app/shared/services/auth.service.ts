@@ -13,7 +13,6 @@ import { environment } from '@environments/environment';
 })
 export class AuthService {
   isLogged$ = new BehaviorSubject<boolean>(this.getIsLogged());
-  userId$ = new BehaviorSubject<number>(this.getUserId());
   hasRole$ = new BehaviorSubject<boolean>(this.getHasRole());
   activeRole$ = new BehaviorSubject<number>(this.getActiveRole());
   currentUser$ = new BehaviorSubject<User>(this.getCurrentUser());
@@ -36,14 +35,12 @@ export class AuthService {
 
           // Send BehaviorSubjects values to the next operation
           this.isLogged$.next(true);
-          this.userId$.next(user.id);
           this.hasRole$.next(user.hasRole);
           this.activeRole$.next(user.activeRole);
           this.currentUser$.next(user);
           
           // Store user details and JWT in local storage to keep user logged in between page refreshes
           localStorage.setItem('isLogged', '1');
-          localStorage.setItem('userId', JSON.stringify(user.id));
           localStorage.setItem('hasRole', JSON.stringify(user.hasRole));
           localStorage.setItem('activeRole', JSON.stringify(user.activeRole));
           localStorage.setItem('user', JSON.stringify(user));
@@ -65,7 +62,6 @@ export class AuthService {
     this.currentUser$.next(null);
 
     localStorage.removeItem('isLogged');
-    localStorage.removeItem('userId');
     localStorage.removeItem('hasRole');
     localStorage.removeItem('activeRole');
     localStorage.removeItem('user');
@@ -78,11 +74,6 @@ export class AuthService {
   private getIsLogged(): boolean {
     const isLogged = localStorage.getItem('isLogged');
     return (isLogged === '1');
-  }
-
-  private getUserId(): number {
-    const userId = localStorage.getItem('userId')
-    return parseInt(userId);
   }
 
   private getHasRole(): boolean {

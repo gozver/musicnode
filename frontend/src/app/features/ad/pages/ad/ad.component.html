@@ -1,9 +1,9 @@
 <div class="main-ctnr">
-  <button mat-button (click)="openDialog()">
+  <button mat-button class="primary" (click)="openDialog()">
     Sell Something
   </button>
 
-  <div *ngFor="let ad of adsList">
+  <div *ngFor="let ad of adsList" class="ad-ctnr">
     <app-ad-card
       [ad]=ad
       (delete)="deleteAd($event)"

@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { AuthService } from '@shared/services/auth.service';
 import { AdService } from '@shared/services/ad.service';
+import { User } from '@shared/interfaces/user.interface';
 import { Ad } from '@shared/interfaces/ad.interface';
 
 import { AdDialogComponent } from '@features/ad/components/ad-dialog/ad-dialog.component';
@@ -15,36 +16,36 @@ import { AdDialogComponent } from '@features/ad/components/ad-dialog/ad-dialog.c
   styleUrls: ['./ad.component.scss']
 })
 export class AdComponent implements OnInit {
-  userId: number;
+  currentUser: User;
 
   adForm: FormGroup;
   adsList: Ad[] = [];
 
   constructor(
-    private readonly authService: AuthService,
-    private readonly adService: AdService,
+    public dialog: MatDialog,
     private readonly fb: FormBuilder,
-    public dialog: MatDialog
+    private readonly authService: AuthService,
+    private readonly adService: AdService
   ) { }
 
   ngOnInit(): void {
-    this.initAdForm();
     this.getComponentData();
+    this.initAdForm();
+  }
+
+  getComponentData(): void {
+    this.currentUser = this.authService.currentUser$.value;
+    this.adService.getAds().subscribe(adsList => this.adsList = adsList);
   }
 
   initAdForm(): void {
     this.adForm = this.fb.group({
-      title:       [ '',   [ Validators.required ]],
-      price:       [ null, [ Validators.required, Validators.pattern('^[0-9]*$') ]],
-      location:    [ '',   [ Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚ]*$') ]],
-      description: [ '',   [ Validators.required ]],
-      userId:      null
+      title:    [ '',   [ Validators.required ]],
+      price:    [ null, [ Validators.required, Validators.pattern('^[0-9]*$') ]],
+      location: [ '',   [ Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚ]*$') ]],
+      desc:     [ '',   [ Validators.required ]],
+      userId:   [ null ]
     });
-  }
-
-  getComponentData(): void {
-    this.userId = this.authService.userId$.value;
-    this.adService.getAds().subscribe(ads => this.adsList = ads);
   }
 
   openDialog() {
@@ -57,7 +58,7 @@ export class AdComponent implements OnInit {
     // user taps on popup cancel button: result = false
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.adForm.value.userId = this.userId;
+        this.adForm.value.userId = this.currentUser.id;
 
         // Insert the element in the database
         this.adService.createAd(this.adForm.value).subscribe(res => {

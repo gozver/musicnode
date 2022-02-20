@@ -20,7 +20,7 @@ import { SingupFormComponent } from './singup-form/singup-form.component';
     ReactiveFormsModule,
     
     MaterialModule,
-    ComponentsModule,
+    ComponentsModule
   ],
   exports: [
     LoginFormComponent,

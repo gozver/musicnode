@@ -1,34 +1,21 @@
 @import 'src/styles';
 
 .main-ctnr {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
+  // display: flex;
+  // flex-direction: column;
+  max-width: 800px;
+  margin: auto;
+  
   @media (max-width: 950px) {
     margin: auto;
     width: 98%;
   }
 
   button {
-    width: 100vw;
-    max-width: 700px;
-
+    width: 100%;
     font-size: 1rem;
     font-weight: 500;
     padding: .4rem;
-    margin-top: .5rem;
-    margin-bottom: 1.5rem;
-    
-    color: #fff;
-    background: #06548b;
-    
-    &:hover {
-      background: #06548bee;
-    }
-
-    @media (max-width: 950px) {
-      width: 100%;
-    }
+    margin: .5rem 0 1.5rem 0;
   }
 }

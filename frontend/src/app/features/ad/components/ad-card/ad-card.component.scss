@@ -5,14 +5,15 @@
   border: 1px solid #dddfe2;
   border-radius: 4px;
 
-  max-width: 43.75rem;
-  padding: 1rem .5rem 1rem 1rem;
+  max-width: 100%; // 700px
+  padding: 18px;
   margin-bottom: 1.5rem;
   background: #fff;
 
   .card-header{
     display: flex;
     flex-direction: row;
+    margin-bottom: 5px;
 
     .left {
       img {
@@ -59,7 +60,7 @@
     .price-location {
       font-size: .75rem;
       font-weight: 100;
-      padding-bottom: 5px;
+      padding-bottom: 10px;
     }
 
     .body {
@@ -69,7 +70,7 @@
   }
 
   .btn-cntr {
-    margin: 10px 2px 2px 2px;
+    margin-top: 15px;
 
     button {
       width: 100px;

@@ -10,8 +10,13 @@
       The role manager is where an user can manage his roles. He can create a new one if he doesn't have any, can delete or modify the ones he has and most important can select the one he desire to have active while enjoying the platform features.
     </div>
 
-    <div class="text" *ngIf="!hasRole() && +currentUser?.activeRole === -1">
-      You are in the <span class="bold">last step to sign in</span> as <span class="bold">you don't have any role yet</span>. Please <span class="bold">create a band</span> to unlock all platform features.
+    <div class="text" *ngIf="!hasRole()">
+      You are in the <span class="bold">last step to sign in</span> as <span class="bold">you don't have any role yet</span>. Please
+        <span class="bold">
+          create a
+          <span *ngIf="+currentUser?.activeRole === -1">band</span>
+          <span *ngIf="+currentUser?.activeRole === -2">company</span>
+        </span> to unlock all platform features.
     </div>
   </section>
 

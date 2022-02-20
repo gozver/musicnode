@@ -117,6 +117,9 @@ export class ManagerComponent implements OnInit {
         this.authService.setCurrentUser(this.currentUser);
         this.authService.setHasRole(this.currentUser.hasRole);
       
+        this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/role']);
+        });
       });
     });
   }
