@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 
 import { environment } from '@environments/environment';
 import { AuthService } from '@shared/services/auth.service';
+import { RoleService } from '@shared/services/role.service';
 import { BandService } from '@shared/services/band.service';
 import { ReviewService } from '@shared/services/review.service';
 import { User } from '@shared/interfaces/user.interface';
@@ -22,6 +23,7 @@ export class BandProfileComponent implements OnInit {
   profileId: number;
   profileBand: any;
   currentUser: User;
+  isAdmin: boolean = false;
   
   avatarForm: FormGroup;
   imagesForm: FormGroup;
@@ -48,6 +50,7 @@ export class BandProfileComponent implements OnInit {
     private readonly router: Router,
     private readonly sanitizer: DomSanitizer,
     private readonly authService: AuthService,
+    private readonly roleService: RoleService,
     private readonly bandService: BandService,
     private readonly reviewService: ReviewService,
   ) { 
@@ -86,6 +89,13 @@ export class BandProfileComponent implements OnInit {
 
   initComponentData(): void {
     this.currentUser = this.authService.currentUser$.value;
+
+    this.roleService.getRolesByUserId(this.profileId).subscribe(rolesList => {
+      this.isAdmin = rolesList.filter(item => item.roleId === 4).length > 0;
+      
+      console.log('--> is admin:');
+      console.log(this.isAdmin);
+    });
 
     this.bandService.getBand(this.profileId).subscribe(
       band => {
@@ -192,10 +202,6 @@ export class BandProfileComponent implements OnInit {
 
   sendMessage(id: number): void {
     this.router.navigate(['/chat'], { queryParams: { id } });
-  }
-
-  isAdmin(): boolean {
-    return this.currentUser.activeRole === 4;
   }
 
   goToEditProfile() {

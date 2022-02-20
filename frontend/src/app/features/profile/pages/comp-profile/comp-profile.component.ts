@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 
 import { environment } from '@environments/environment';
 import { AuthService } from '@shared/services/auth.service';
+import { RoleService } from '@shared/services/role.service';
 import { CompanyService } from '@shared/services/company.service';
 import { User } from '@shared/interfaces/user.interface';
 
@@ -20,6 +21,7 @@ export class CompProfileComponent implements OnInit {
   profileId: number;
   profileComp: any;
   currentUser: User;
+  isAdmin: boolean = false;
   
   avatarForm: FormGroup;
   imagesForm: FormGroup;
@@ -34,6 +36,7 @@ export class CompProfileComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly authService: AuthService,
+    private readonly roleService: RoleService,
     private readonly companyService: CompanyService
   ) { 
     this.profileId = parseInt(this.route.snapshot.paramMap.get('id'));
@@ -62,6 +65,13 @@ export class CompProfileComponent implements OnInit {
   initComponentData(): void {
     this.currentUser = this.authService.currentUser$.value;
 
+    this.roleService.getRolesByUserId(this.profileId).subscribe(rolesList => {
+      this.isAdmin = rolesList.filter(item => item.roleId === 4).length > 0;
+      
+      console.log('--> is admin:');
+      console.log(this.isAdmin);
+    });
+    
     this.companyService.getCompany(this.profileId).subscribe(
       company => {
         this.profileComp = company[0];
@@ -149,9 +159,5 @@ export class CompProfileComponent implements OnInit {
 
       this.imagesList$.next(noImage);
     });
-  }
-
-  isAdmin(): boolean {
-    return this.currentUser.activeRole === 4;
   }
 }

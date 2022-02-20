@@ -9,10 +9,10 @@
     <!-- if the form is initialized, generate the template -->
     <form [formGroup]="avatarForm" class="company-form" *ngIf="avatarForm">
       <div class="avatar-ctnr">
-        <input type="file" id="file" name="file" (change)="onAvatarSelected($event)" *ngIf="isMyCompany  || isAdmin()" />
+        <input type="file" id="file" name="file" (change)="onAvatarSelected($event)" *ngIf="isMyCompany  || isAdmin" />
 
         <label for="file">
-          <img [src]="imageData" [alt]="profileBand?.name" [ngClass]="isMyCompany || isAdmin() ? 'pointer' : 'normal'">
+          <img [src]="imageData" [alt]="profileBand?.name" [ngClass]="isMyCompany || isAdmin ? 'pointer' : 'normal'">
         </label>
       </div>
 
@@ -33,10 +33,10 @@
             Edit
           </button>
 
-          <div class="separator" *ngIf="!isMyBand && isAdmin()"></div>
+          <div class="separator" *ngIf="!isMyBand && isAdmin"></div>
 
           <!-- button type="button" to avoid form submission -->
-          <button type="button" mat-flat-button color="primary" class="admin" *ngIf="!isMyCompany && isAdmin()" (click)="goToEditProfile()">
+          <button type="button" mat-flat-button color="primary" class="admin" *ngIf="!isMyCompany && isAdmin" (click)="goToEditProfile()">
             Edit
           </button>
         </div>
@@ -44,7 +44,7 @@
     </form>
 
     <div class="btn-ctnr">
-      <button mat-flat-button color="warn" class="warn mb-20" (click)="updateAvatar()" *ngIf="(isMyCompany || isAdmin()) && this.avatarSelected">
+      <button mat-flat-button color="warn" class="warn mb-20" (click)="updateAvatar()" *ngIf="(isMyCompany || isAdmin) && this.avatarSelected">
         Update Avatar
       </button>
     </div>
@@ -57,7 +57,7 @@
     [data]=imagesList$>
   </app-carousel>
 
-  <section class="carousel-btn-ctnr" *ngIf="isMyCompany || isAdmin()">
+  <section class="carousel-btn-ctnr" *ngIf="isMyCompany || isAdmin">
     <input type="file" id="files" name="files" multiple (change)="uploadImages($event)" />
 
     <label for="files">
