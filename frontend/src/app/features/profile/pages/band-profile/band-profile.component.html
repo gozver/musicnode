@@ -57,7 +57,7 @@
     [data]=imagesList$>
   </app-carousel>
 
-  <section class="band-carousel-btn-ctnr" *ngIf="isMyBand || isAdmin">
+  <section class="carousel-btn-ctnr" *ngIf="isMyBand || isAdmin">
     <input type="file" id="files" name="files" multiple (change)="uploadImages($event)" />
 
     <label for="files">

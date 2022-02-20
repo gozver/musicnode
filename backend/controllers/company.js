@@ -131,6 +131,25 @@ exports.findOne = async (req, res, next) => {
     });
 }
 
+exports.updateInfo = async (req, res, next) => {
+  const { id, name, desc, phone, address } = req.body;
+    
+  await models.company.update({ 
+    name, desc, phone, address
+  }, {
+    where: { id }
+  })
+    .then(company => res.json(company))
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
+    });
+}
+
 exports.updateAvatar = async (req, res, next) => {
   // console.log('--> req.body.id:');
   // console.log(req.body.id);

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
 
 import { AuthService } from '@shared/services/auth.service';
+import { RoleService } from '@shared/services/role.service';
 import { BandService } from '@shared/services/band.service';
 import { User } from '@app/shared/interfaces/user.interface';
 
@@ -15,16 +15,19 @@ import { User } from '@app/shared/interfaces/user.interface';
 export class EditBandProfileComponent implements OnInit {
   profileId: number;
   profileBand: any;
+  currentUser: User;
 
   updateForm: FormGroup;
-  currentUser: User;
+
+  isAdmin: boolean = false;
+  isMyBand: boolean = false;
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly location: Location,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly authService: AuthService,
+    private readonly roleService: RoleService,
     private readonly bandService: BandService,
   ) {
     this.profileId = parseInt(this.route.snapshot.paramMap.get('id'));
@@ -37,20 +40,46 @@ export class EditBandProfileComponent implements OnInit {
   initComponentData(): void {
     this.currentUser = this.authService.currentUser$.value;
 
-    if (this.currentUser.activeRole !== 4 && this.profileId !== this.currentUser.id) {
-      // this.router.navigate(['/home']);
-      console.log('--> fail...')
-    }
+    this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
+      this.isAdmin = rolesList.filter(item => item.roleId === 4).length > 0;
 
-    this.bandService.getBand(this.profileId).subscribe(band => {
-      this.profileBand = band[0];
-      this.initBandForm();
+      console.log('--> roles list:');
+      console.log(rolesList);
+      console.log('--> is admin:');
+      console.log(this.isAdmin);
+
+      this.bandService.getBand(this.profileId).subscribe(
+        band => {
+          this.profileBand = band[0];
+          this.initBandForm();
+
+          // !! => Parse to boolean
+          this.isMyBand = !!this.profileBand.users.find((user: { id: number; }) => user.id === this.currentUser.id);
+
+          console.log('--> profile band:');
+          console.log(this.profileBand);
+          console.log('--> is my band:');
+          console.log(this.isMyBand);
+
+          if (!this.isAdmin && !this.isMyBand) {
+            console.error('--> unauthorized');
+            console.error('--> redirect to home');
+            // this.router.navigate(['/home']);
+          }
+        }, 
+        error => {
+          console.error('--> unauthorized');
+          console.error('--> redirect to home');
+          console.error('--> error:', error);
+          // this.router.navigate(['/home']);
+        }
+      );
     });
   }
 
   initBandForm(): void {
     const priceRegex = '^[0-9]+$';
-    const phoneRegex = '^[0-9\-]+$';    
+    const phoneRegex = '^[0-9\-]+$';
     
     this.updateForm = this.fb.group({
       id:    [ this.profileBand.id ],
@@ -71,6 +100,6 @@ export class EditBandProfileComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate([`/profile/band/${this.profileId}`]);
   }
 }

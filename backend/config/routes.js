@@ -40,6 +40,7 @@ router
   .post   ('/company',        middlewares.auth, controllers.company.create)
   .patch  ('/company',        storage.avatar,   controllers.company.updateAvatar)
   .patch  ('/company/multi',  storage.multi,    controllers.company.updateImages)
+  .patch  ('/company/info',   middlewares.auth, controllers.company.updateInfo)
   .delete ('/company/:id',    middlewares.auth, controllers.company.deleteImages)
 
   .get    ('/ad',                       controllers.ad.findAll)

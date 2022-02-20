@@ -52,7 +52,7 @@ button {
   }
 }
 
-.band-carousel {
+.carousel {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +60,7 @@ button {
   margin-top: 30px;
   background: #000;
 
-  .band-images-ctnr {
+  .images-ctnr {
     width: 550px;
     height: 320px;
     overflow-y: hidden;
@@ -70,9 +70,9 @@ button {
       height: 215px;
     }
     
-    // img {
-    //   object-fit: cover;
-    // }
+    img {
+      object-fit: cover;
+    }
   }
 
   .owl-prev,

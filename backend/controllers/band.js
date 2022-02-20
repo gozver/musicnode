@@ -141,7 +141,7 @@ exports.updateInfo = async (req, res, next) => {
   const { id, name, desc, phone, price, type, scope, video } = req.body;
     
   await models.band.update({ 
-    id, name, desc, phone, price, type, scope, video
+    name, desc, phone, price, type, scope, video
   }, {
     where: { id }
   })

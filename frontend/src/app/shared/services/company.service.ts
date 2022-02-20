@@ -47,8 +47,14 @@ export class CompanyService {
     );
   }
 
-  getCompany(id: number): Observable<Company> {
+  getCompany(id: number): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/company/${id}`);
+  }
+
+  updateInfo(params: Company): Observable<Company> {
+    return this.http.patch<Company>(`${environment.apiUrl}/company/info`, params).pipe(
+      catchError(this.errorHandlerService.handleError<any>('updateInfo', null))
+    );
   }
 
   updateAvatar(id: number, avatar: File): Observable<string> {
@@ -76,7 +82,7 @@ export class CompanyService {
     );
   }
 
-  deleteImages(id: number): Observable<any> { // controller return deleted items
+  deleteImages(id: number): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}/company/${id}`).pipe(
       catchError(this.errorHandlerService.handleError<any>('deleteImages', null))
     );

@@ -23,7 +23,7 @@ export class BandService {
     );
   }
 
-  getBands(): Observable<any> { // controller return band model with includes
+  getBands(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/band`).pipe(
       catchError(this.errorHandlerService.handleError<any>('getBands', []))
     );
@@ -47,13 +47,13 @@ export class BandService {
     );
   }
 
-  getBand(id: number): Observable<any> { // controller return band model with includes
+  getBand(id: number): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/band/${id}`);
   }
 
   updateInfo(params: Band): Observable<Band> {
     return this.http.patch<Band>(`${environment.apiUrl}/band/info`, params).pipe(
-      catchError(this.errorHandlerService.handleError<any>('updateAvatar', null))
+      catchError(this.errorHandlerService.handleError<any>('updateInfo', null))
     );
   }
 
@@ -82,7 +82,7 @@ export class BandService {
     );
   }
 
-  deleteImages(id: number): Observable<any> { // controller return deleted items
+  deleteImages(id: number): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}/band/${id}`).pipe(
       catchError(this.errorHandlerService.handleError<any>('deleteImages', null))
     );

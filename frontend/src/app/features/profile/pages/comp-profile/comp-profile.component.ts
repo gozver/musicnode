@@ -21,15 +21,16 @@ export class CompProfileComponent implements OnInit {
   profileId: number;
   profileComp: any;
   currentUser: User;
-  isAdmin: boolean = false;
   
   avatarForm: FormGroup;
   imagesForm: FormGroup;
   reviewForm: FormGroup;
+
+  isAdmin: boolean = false;
+  isMyCompany: boolean = false;
   
   imageData: string;
   avatarSelected: boolean = false;
-  isMyCompany: boolean = false;
 
   constructor(
     private readonly fb: FormBuilder,
@@ -65,13 +66,15 @@ export class CompProfileComponent implements OnInit {
   initComponentData(): void {
     this.currentUser = this.authService.currentUser$.value;
 
-    this.roleService.getRolesByUserId(this.profileId).subscribe(rolesList => {
+    this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
       this.isAdmin = rolesList.filter(item => item.roleId === 4).length > 0;
       
+      console.log('--> roles list:');
+      console.log(rolesList);
       console.log('--> is admin:');
       console.log(this.isAdmin);
     });
-    
+
     this.companyService.getCompany(this.profileId).subscribe(
       company => {
         this.profileComp = company[0];
@@ -92,7 +95,6 @@ export class CompProfileComponent implements OnInit {
       },
       error => {
         console.error('--> error:', error);
-
         this.router.navigate(['/home']);
       }
     );
@@ -159,5 +161,13 @@ export class CompProfileComponent implements OnInit {
 
       this.imagesList$.next(noImage);
     });
+  }
+
+  sendMessage(id: number): void {
+    this.router.navigate(['/chat'], { queryParams: { id } });
+  }
+
+  goToEditProfile() {
+    this.router.navigate([`/profile/company/${this.profileId}/edit`]);
   }
 }

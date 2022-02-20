@@ -90,9 +90,11 @@ export class BandProfileComponent implements OnInit {
   initComponentData(): void {
     this.currentUser = this.authService.currentUser$.value;
 
-    this.roleService.getRolesByUserId(this.profileId).subscribe(rolesList => {
+    this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
       this.isAdmin = rolesList.filter(item => item.roleId === 4).length > 0;
       
+      console.log('--> roles list:');
+      console.log(rolesList);
       console.log('--> is admin:');
       console.log(this.isAdmin);
     });
@@ -115,11 +117,9 @@ export class BandProfileComponent implements OnInit {
         console.log('--> is my band:');
         console.log(this.isMyBand);
 
-        /**
-         * 1) Modify video URL to embed in the HTML: replace('watch?v=', 'embed/')
-         * 2) Angular DomSanitizer:
-         * https://stackoverflow.com/questions/47193997/im-trying-to-dynamically-change-the-url-of-an-iframe-but-im-getting-an-error-un/47194242
-         */ 
+        // 1) Modify video URL to embed in the HTML: replace('watch?v=', 'embed/')
+        // 2) Angular DomSanitizer:
+        // https://stackoverflow.com/questions/47193997/im-trying-to-dynamically-change-the-url-of-an-iframe-but-im-getting-an-error-un/47194242
         this.profileBand.video = this.profileBand.video.replace('watch?v=', 'embed/');
         this.profileBand.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.profileBand.video);
         this.videoIsEmbeded = true;

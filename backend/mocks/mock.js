@@ -55,7 +55,7 @@ db.sync({ force: true })
   .then(async () => {
     // company descriptions
     // const compIn1Desc = "Vnue is a Music company and has headquarters in New York, New York, United States. Vnue has 1-10 employees. Vnue has raised $8.7M.";
-    const compIn1Desc = "Vnue is a Music company and has headquarters in New York, New York, United States and has 1-10 employees. Vnue has raised $8.7M. and operates as a live entertainment music technology company. It offers a suite of products and services that monetize and monitor music for artists, labels, performing rights organizations, publishers, writers, radio stations, venues, and bars, as well as other stakeholders in music.";
+    const compIn1Desc = "Vnue is a Music company and has headquarters in New York, United States and has 1-10 employees. Vnue has raised $8.7M. and operates as a live entertainment music technology company. It offers a suite of products and services that monetize and monitor music for artists, labels, performing rights organizations, publishers, writers, radio stations, venues, and bars, as well as other stakeholders in music.";
     
     const compIn2Desc = "Producer Presets is a Music company and has headquarters in Beverly, Ma. and has 1-10 employees. Producer Presets is coming in 2022! We're hard at work on the beta that will allow you to: share your presets with other producers-search for new presets based on the plugins you already own-Store your library of presets in a safe place-Vote for your favorite presets";
 
@@ -63,13 +63,13 @@ db.sync({ force: true })
 
     // companies
     const compIn1 = {
-      name: 'Vnue', desc: compIn1Desc, phone: '123-456-789', email: 'vnue@gmail.com', avatar: `${config.server.url}/avatars/company01.jpg`, address: 'False Street 123'
+      name: 'Vnue', desc: compIn1Desc, phone: '123-456-789', email: 'vnue@gmail.com', avatar: `${config.server.url}/avatars/company01.jpg`, address: '123 Street Ln Vnue Beach'
     };
     const compIn2 = {
-      name: 'Producer Presets', desc: compIn2Desc, phone: '123-456-789', email: 'producer@gmail.com', avatar: `${config.server.url}/avatars/company02.png`, address: 'False street 456'
+      name: 'Producer Presets', desc: compIn2Desc, phone: '123-456-789', email: 'producer@gmail.com', avatar: `${config.server.url}/avatars/company02.png`, address: '123 Street Ln Producer Beach'
     };
     const compIn3 = {
-      name: 'Hapinez Productions', desc: compIn3Desc, phone: '123-456-789', email: 'hapinez@gmail.com', avatar: `${config.server.url}/avatars/company03.jpg`, address: 'False street 456'
+      name: 'Hapinez Productions', desc: compIn3Desc, phone: '123-456-789', email: 'hapinez@gmail.com', avatar: `${config.server.url}/avatars/company03.jpg`, address: '123 Street Ln Hapinez Beach'
     };
 
     // create companies
