@@ -81,8 +81,11 @@ article {
           flex-direction: column;
 
           button {
-            // margin-top: 20px;
             width: 150px;
+
+            &.admin {
+              margin-bottom: 15px;
+            }
           }
 
           .separator {

@@ -1,1 +1,73 @@
-<p>comp-profile works!</p>
+<article>
+  <section class="header">
+    <div class=title>COMPANY PROFILE</div>
+    <div class="subtitle">{{ profileComp?.name }}</div>
+  </section>
+
+  <!-- AVATAR -->
+  <section class="company-info">
+    <!-- if the form is initialized, generate the template -->
+    <form [formGroup]="avatarForm" class="company-form" *ngIf="avatarForm">
+      <div class="avatar-ctnr">
+        <input type="file" id="file" name="file" (change)="onAvatarSelected($event)" *ngIf="isMyCompany  || isAdmin()" />
+
+        <label for="file">
+          <img [src]="imageData" [alt]="profileBand?.name" [ngClass]="isMyCompany || isAdmin() ? 'pointer' : 'normal'">
+        </label>
+      </div>
+
+      <div class="company-data">
+        <div class="text-bold">Contact Info:</div>
+        <div class="text">{{ profileComp?.email }}</div>
+        <div class="text">{{ profileComp?.users[0]?.email }}</div>
+        <div class="text-bold">{{ profileComp?.phone }}</div>
+
+        <div class="btn-ctnr">
+          <!-- button type="button" to avoid form submission -->
+          <button type="button" mat-flat-button color="warn" class="warn" *ngIf="!isMyCompany" (click)="sendMessage(profileComp?.users[0]?.id)">
+            Message
+          </button>
+
+          <!-- button type="button" to avoid form submission -->
+          <button type="button" mat-flat-button color="warn" class="warn" *ngIf="isMyCompany" (click)="goToEditProfile()">
+            Edit
+          </button>
+
+          <div class="separator" *ngIf="!isMyBand && isAdmin()"></div>
+
+          <!-- button type="button" to avoid form submission -->
+          <button type="button" mat-flat-button color="primary" class="admin" *ngIf="!isMyCompany && isAdmin()" (click)="goToEditProfile()">
+            Edit
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div class="btn-ctnr">
+      <button mat-flat-button color="warn" class="warn mb-20" (click)="updateAvatar()" *ngIf="(isMyCompany || isAdmin()) && this.avatarSelected">
+        Update Avatar
+      </button>
+    </div>
+
+    <div class="description">{{ profileComp?.desc }}</div>
+  </section>
+
+  <!-- COMPANY IMAGES CAROUSEL -->
+  <app-carousel
+    [data]=imagesList$>
+  </app-carousel>
+
+  <section class="carousel-btn-ctnr" *ngIf="isMyCompany || isAdmin()">
+    <input type="file" id="files" name="files" multiple (change)="uploadImages($event)" />
+
+    <label for="files">
+      <span class="upload-button">
+        <mat-icon>upload</mat-icon>
+      </span>
+    </label>
+
+    <button mat-fab color="warn" (click)="deleteImages()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </section>
+</article>

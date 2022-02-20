@@ -91,3 +91,116 @@ exports.findAllByParams = async (req, res, next) => {
       next(err);
     });
 }
+
+exports.findOne = async (req, res, next) => {
+  await models.company.findAll({
+    where: {
+      id: req.params.id,
+    },
+    include: [{
+      model: models.user
+    }, {
+      model: models.image
+    }]
+  })
+    .then(company => {
+      if (company.length > 0) {
+        res.json(company)
+      } else {
+        // create error
+        const err = new Error();
+        err.statusCode = 401;
+        err.message = 'Company not found';
+
+        // print error and send it to error controller
+        console.log('--> error:');
+        console.log(err);
+        next(err);  
+      }
+    })
+    .catch(() => {
+      // create error
+      const err = new Error();
+      err.statusCode = 401;
+      err.message = 'Company not found';
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
+    });
+}
+
+exports.updateAvatar = async (req, res, next) => {
+  // console.log('--> req.body.id:');
+  // console.log(req.body.id);
+  // console.log('--> req.file:');
+  // console.log(req.file);
+
+  const id = req.body.id;
+  const avatar = config.server.url + '/avatars/' + req.file.filename;
+  
+  models.company.update({ 
+    avatar 
+  }, {
+    where: { id }
+  }).then(() => res.status(201).json(avatar))
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
+    });
+}
+
+exports.updateImages = async (req, res, next) => {
+  // console.log('--> req.body.id:');
+  // console.log(req.body.id);
+  // console.log('--> req.files:');
+  // console.log(req.files);
+
+  const id = req.body.id;
+  const filesList = req.files;
+
+  filesList.forEach(file => {
+    const companyImage = config.server.url + '/images/' + file.filename;
+
+    const image = {
+      adId: null,
+      musicianId: null,
+      bandId: null,
+      companyId: id,
+      image: companyImage,
+    };  
+
+    models.image.create(image)
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
+    });
+  });
+
+  res.json(filesList);
+}
+
+exports.deleteImages = async (req, res, next) => {
+  models.image.destroy({
+    where: {
+      companyId: req.params.id
+    }
+  }).then(data => res.json(data))
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
+    });
+}

@@ -1,0 +1,158 @@
+@import 'src/styles';
+
+article {
+  padding: 30px 30px 0 30px;
+  color: #333;
+
+  @media (max-width: 800px) {
+    padding: 30px 10px 10px 10px;
+  }
+
+  .header {
+    @media (max-width: 800px) {
+      margin-bottom: 15px;
+    }
+    
+    .title {
+      font-size: 1.25rem;
+      font-weight: 500;      
+    }
+
+    .subtitle {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #eeaa24;
+
+      margin-top: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  .company-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .company-form {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      width: 400px;
+      margin-top: 3px;
+
+      .avatar-ctnr {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        #file {
+          display: none;
+        }
+
+        img {
+          height: 168px;
+          width: 168px;
+          border-radius: 50%;
+          margin-right: 30px;
+          object-fit: cover;
+          box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 2px 4px rgb(0 0 0 / 10%);
+        }
+  
+        .pointer {
+          cursor: pointer;
+        }
+      }
+
+      .company-data {
+        .text {
+          font-size: 0.875rem;
+          font-weight: 100;
+          margin-top: 5px;
+        }
+
+        .text-bold {
+          font-size: 0.875rem;
+          margin-top: 5px;
+        }
+
+        .btn-ctnr {
+          display: flex;
+          flex-direction: column;
+
+          button {
+            width: 150px;
+
+            &.admin {
+              margin-bottom: 15px;
+            }
+          }
+
+          .separator {
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+
+    .btn-ctnr {
+      display: flex;
+      justify-content: baseline;
+      
+      width: 400px;
+      padding-top: 15px;
+
+      button {
+        width: 168px;
+
+        &.mb-20 {
+          margin-bottom: 20px;
+        }
+      }
+    }
+
+    .description {
+      margin-top: 5px;
+    }
+  }
+
+  // NOTE: band-carousel styles are in styles.scss due to owl carousel behavior
+
+  .carousel-btn-ctnr {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    
+    margin-bottom: -45px;
+
+    #files {
+      display: none;
+    }
+
+    .upload-button {
+      border-radius: 50%;
+      background: #eeaa24;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%), 
+                  0px 6px 10px 0px rgb(0 0 0 / 14%), 
+                  0px 1px 18px 0px rgb(0 0 0 / 12%);
+      
+      &:active {
+        background: #eeab24c2;
+      }
+    }
+
+    .upload-button,
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 40px;
+      height: 40px;
+      margin-top: 10px;
+      margin-left: 5px;
+    }
+  }
+}

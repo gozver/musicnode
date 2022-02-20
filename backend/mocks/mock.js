@@ -54,9 +54,12 @@ db.sync({ force: true })
   // COMPANIES
   .then(async () => {
     // company descriptions
-    const compIn1Desc = "Vnue is a Music company and has headquarters in New York, New York, United States. Vnue has 1-10 employees. Vnue has raised $8.7M.";
-    const compIn2Desc = "Producer Presets is a Music company and has headquarters in Beverly, Ma. Producer Presets has 1-10 employees.";
-    const compIn3Desc = "Hapinez Productions is a Music company and has headquarters in Barrington, Nh. Team Hapinez Productions has 1-10 employees.";
+    // const compIn1Desc = "Vnue is a Music company and has headquarters in New York, New York, United States. Vnue has 1-10 employees. Vnue has raised $8.7M.";
+    const compIn1Desc = "Vnue is a Music company and has headquarters in New York, New York, United States and has 1-10 employees. Vnue has raised $8.7M. and operates as a live entertainment music technology company. It offers a suite of products and services that monetize and monitor music for artists, labels, performing rights organizations, publishers, writers, radio stations, venues, and bars, as well as other stakeholders in music.";
+    
+    const compIn2Desc = "Producer Presets is a Music company and has headquarters in Beverly, Ma. and has 1-10 employees. Producer Presets is coming in 2022! We're hard at work on the beta that will allow you to: share your presets with other producers-search for new presets based on the plugins you already own-Store your library of presets in a safe place-Vote for your favorite presets";
+
+    const compIn3Desc = "Hapinez Productions is a Music company that has headquarters in Barrington, Nh. Team Hapinez Productions has 1-10 employees. They provided pre-event audio production & animation, on-location multi-camera switch video production, and virtual event live streaming services for Happinez is Camping's Virtual Fun-Raiser.";
 
     // companies
     const compIn1 = {
@@ -468,11 +471,20 @@ db.sync({ force: true })
     await models.role.create({ roleId: 1, role: 'band', userId: 49, bandId: 12 });
     await models.role.create({ roleId: 1, role: 'band', userId: 50, bandId: 12 });
   })
-  // band images
+  // BANDS IMAGES
   .then(async () => {
     // insert band images into the db
     for (let bandImage of seed.bandImage) {
       await models.image.create(bandImage);
+    }
+  })
+  .catch(err => console.log('--> error:', err))
+
+  // COMPANIES IMAGES
+  .then(async () => {
+    // insert band images into the db
+    for (let companyImage of seed.companyImage) {
+      await models.image.create(companyImage);
     }
   })
   .catch(err => console.log('--> error:', err))

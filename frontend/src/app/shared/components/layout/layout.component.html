@@ -7,7 +7,7 @@
       </button>
       
       <button mat-icon-button *ngIf="sidenav.mode==='side'" (click)="sidenav.toggle()">
-        <mat-icon *ngIf="!sidenav.opened">close</mat-icon>
+        <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
         <mat-icon *ngIf="sidenav.opened">menu</mat-icon>
       </button>
 
@@ -35,7 +35,7 @@
         <h4 class="user" *ngSwitchCase="true">{{ currentUser?.name }} {{ currentUser?.surname }}</h4>
       </div>
       
-      <div [ngSwitch]="activeRole">
+      <div [ngSwitch]="currentUser?.activeRole">
         <p class="role" *ngSwitchCase="'1'">Band</p>
         <p class="role" *ngSwitchCase="'2'">Company</p>
         <p class="role" *ngSwitchCase="'3'">Contractor</p>

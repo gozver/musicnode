@@ -22,12 +22,12 @@ export class BandProfileComponent implements OnInit {
   profileId: number;
   profileBand: any;
   currentUser: User;
-  imageData: string;
-
+  
   avatarForm: FormGroup;
   imagesForm: FormGroup;
   reviewForm: FormGroup;
   
+  imageData: string;
   avatarSelected: boolean = false;
   isMyBand: boolean = false;
   videoIsEmbeded: boolean = false;
@@ -102,7 +102,7 @@ export class BandProfileComponent implements OnInit {
 
         console.log('--> profile band:');
         console.log(this.profileBand);
-        console.log('--> this.isMyBand:');
+        console.log('--> is my band:');
         console.log(this.isMyBand);
 
         /**

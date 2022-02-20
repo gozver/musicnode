@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit, AfterViewInit, AfterViewChecked, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { Router } from '@angular/router';
 
 import { MatSidenav } from '@angular/material/sidenav';
 
@@ -18,7 +18,6 @@ export class LayoutComponent implements OnInit, AfterViewInit, AfterViewChecked,
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
   isLogged: boolean = false;
-  activeRole: number;
   currentUser: User;
 
   constructor(
@@ -43,14 +42,12 @@ export class LayoutComponent implements OnInit, AfterViewInit, AfterViewChecked,
 
   ngOnDestroy(): void {
     this.authService.isLogged$.complete();
-    this.authService.activeRole$.complete();
     this.authService.currentUser$.complete();
   }
 
   // General functions
   getComponentData(): void {
     this.authService.isLogged$.subscribe(isLogged => this.isLogged = isLogged);
-    this.authService.activeRole$.subscribe(activeRole => this.activeRole = activeRole);
     this.authService.currentUser$.subscribe(currentUser => this.currentUser = currentUser);
   }
 

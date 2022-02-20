@@ -9,10 +9,10 @@
     <!-- if the form is initialized, generate the template -->
     <form [formGroup]="avatarForm" class="band-form" *ngIf="avatarForm">
       <div class="avatar-ctnr">
-        <input type="file" id="file" name="file" (change)="onAvatarSelected($event)" *ngIf="isMyBand" />
+        <input type="file" id="file" name="file" (change)="onAvatarSelected($event)" *ngIf="isMyBand || isAdmin()" />
 
         <label for="file">
-          <img [src]="imageData" [alt]="profileBand?.name" [ngClass]="isMyBand ? 'pointer' : 'normal'">
+          <img [src]="imageData" [alt]="profileBand?.name" [ngClass]="isMyBand || isAdmin() ? 'pointer' : 'normal'">
         </label>
       </div>
 
@@ -44,7 +44,7 @@
     </form>
 
     <div class="btn-ctnr">
-      <button mat-flat-button color="warn" class="warn mb-20" (click)="updateAvatar()" *ngIf="isMyBand && this.avatarSelected">
+      <button mat-flat-button color="warn" class="warn mb-20" (click)="updateAvatar()" *ngIf="(isMyBand || isAdmin()) && this.avatarSelected">
         Update Avatar
       </button>
     </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AuthService } from '@shared/services/auth.service';
 import { UserService } from '@shared/services/user.service';
@@ -14,28 +15,20 @@ import { User } from '@shared/interfaces/user.interface';
   styleUrls: ['./manager.component.scss']
 })
 export class ManagerComponent implements OnInit {
-  currentUser: User;  
+  currentUser: User;
 
   bandForm: FormGroup;
   companyForm: FormGroup;
 
   rolesList: any[] = [];
 
-  // addRoleDdl: { id: number, value: string }[] = [
-  //   { id: 1, value: 'Musician' },
-  //   { id: 2, value: 'Band' },
-  //   { id: 3, value: 'Company' },
-  //   { id: 4, value: 'Contractor' },
-  //   { id: 5, value: 'Admin' },
-  // ];
-
-  // Regex related properties
   priceRegex: string = '^[0-9]+$';
   phoneRegex: string = '^[0-9\-]+$';
   emailRegex: string = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
 
   constructor(
     private readonly fb: FormBuilder,
+    private readonly router: Router,
     private readonly authService: AuthService,
     private readonly userService: UserService,
     private readonly roleService: RoleService,
@@ -95,31 +88,36 @@ export class ManagerComponent implements OnInit {
 
   createBand(): void {
     this.bandService.createBand(this.bandForm.value, this.currentUser.id).subscribe(() => {
-      this.currentUser.hasRole = true;
-      this.currentUser.activeRole = 1;
-      
       this.userService.updateActiveRole(this.currentUser.id, 1).subscribe(user => {
-        console.log('--> updated active role:')
+        console.log('--> update active role:')
         console.log(user);
       });
 
+      this.currentUser.hasRole = true;
+      this.currentUser.activeRole = 1;
+
       this.authService.setCurrentUser(this.currentUser);
       this.authService.setHasRole(this.currentUser.hasRole);
+      
+      this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/role']);
+      });
     });
   }
 
   createCompany(): void {
     this.companyService.createCompany(this.companyForm.value, this.currentUser.id).subscribe(() => {
-      this.currentUser.hasRole = true;
-      this.currentUser.activeRole = 2;
-
-      this.userService.updateActiveRole(this.currentUser.id, 2).subscribe(user => {
-        console.log('--> updated active role:')
+      this.userService.updateActiveRole(this.currentUser.id, 1).subscribe(user => {
+        console.log('--> update active role:')
         console.log(user);
-      });
 
-      this.authService.setCurrentUser(this.currentUser);
-      this.authService.setHasRole(this.currentUser.hasRole);
+        this.currentUser.hasRole = true;
+        this.currentUser.activeRole = 2;
+  
+        this.authService.setCurrentUser(this.currentUser);
+        this.authService.setHasRole(this.currentUser.hasRole);
+      
+      });
     });
   }
 }

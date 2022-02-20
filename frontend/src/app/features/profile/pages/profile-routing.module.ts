@@ -18,7 +18,7 @@ const routes: Routes = [{
     path: 'band/:id',
     component: BandProfileComponent
   }, {
-    path: 'comp/:id',
+    path: 'company/:id',
     component: CompProfileComponent
   }, { 
     path: 'user/:id/edit',
@@ -27,7 +27,7 @@ const routes: Routes = [{
     path: 'band/:id/edit',
     component: EditBandProfileComponent
   }, {
-    path: 'comp/:id/edit',
+    path: 'company/:id/edit',
     component: EditCompProfileComponent
   }, {
     path: '**', // Any other path

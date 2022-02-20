@@ -190,7 +190,7 @@ exports.updateImages = async (req, res, next) => {
   const filesList = req.files;
 
   filesList.forEach(file => {
-    const bandImage = config.server.url + '/bands/' + file.filename;
+    const bandImage = config.server.url + '/images/' + file.filename;
 
     const image = {
       adId: null,

@@ -5,5 +5,6 @@ module.exports = {
   'contractorRole': require('./contractorRole'),
   
   'bandImage': require('./bandImage'),
+  'companyImage': require('./companyImage'),
   'review': require('./review'),
 }
