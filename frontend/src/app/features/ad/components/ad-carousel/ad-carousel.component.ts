@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
-  selector: 'app-carousel',
-  templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.scss'],
+  selector: 'app-ad-carousel',
+  templateUrl: './ad-carousel.component.html',
+  styleUrls: ['./ad-carousel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CarouselComponent implements OnInit {
+export class AdCarouselComponent implements OnInit {
   @Input() data: Observable<any>;
 
   imagesList: any[] = [];
@@ -41,9 +41,6 @@ export class CarouselComponent implements OnInit {
     this.data.subscribe(imagesList => {
       this.imagesList = [...imagesList];
       this.cd.markForCheck();
-
-      console.log('--> this.imagesList:');
-      console.log(this.imagesList);
     });
   }
 }

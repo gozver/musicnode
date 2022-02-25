@@ -11,18 +11,27 @@
   </div>
 
   <div class="card-content">
-    <span class=title>{{ ad.title }}</span>
+    <h1 class=title>{{ ad.title }}</h1>
     <span class=price-location>{{ ad.price }}€ · {{ ad.location | uppercase}}</span>
     <span class=body>{{ ad.desc }}</span>
   </div>
 
-  <app-carousel
+  <app-ad-carousel
+    class="card-carousel"
     [data]=imagesList$>
-  </app-carousel>
+  </app-ad-carousel>
   
   <div class="btn-cntr">
-    <button mat-flat-button (click)="deleteAd(ad.id)" color="warn" title="Delete">
-      Delete
+    <button mat-fab color="warn" class="warn" (click)="sendMessage(ad.user.id)" title="Update">
+      <mat-icon>email</mat-icon>
+    </button>
+
+    <button mat-fab color="primary" (click)="editAd(ad.id)" title="Update">
+      <mat-icon>edit</mat-icon>
+    </button>
+
+    <button mat-fab color="warn" (click)="deleteAd(ad.id)" title="Delete">
+      <mat-icon>delete</mat-icon>
     </button>
   </div>
 </div>

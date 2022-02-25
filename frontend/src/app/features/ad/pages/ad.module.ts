@@ -8,11 +8,13 @@ import { AdRoutingModule } from './ad-routing.module';
 import { AdComponentsModule } from '../components/ad-components.module';
 import { ComponentsModule } from '@shared/components/components.module';
 
-import { AdComponent } from './ad/ad.component';
+import { ListAdComponent } from './list-ad/list-ad.component';
+import { EditAdComponent } from './edit-ad/edit-ad.component';
 
 @NgModule({
   declarations: [
-    AdComponent
+    ListAdComponent,
+    EditAdComponent
   ],
   imports: [
     CommonModule,

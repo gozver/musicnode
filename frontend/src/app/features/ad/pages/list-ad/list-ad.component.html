@@ -1,0 +1,25 @@
+<article>
+  <header>
+    <div class=title>MARKET PLACE</div>
+    
+    <div class="subtitle">Let's trade</div>
+
+    <div class="text">
+      In this section you can sell or buy music related items. If you are interested in buying something, you can contact with the user by clicking on message button. Not music related ads will be deleted by the administrator.
+    </div>
+  </header>
+
+  <section class="ads-list">
+    <button mat-button class="primary" (click)="openDialog()">
+      Sell Something
+    </button>
+  
+    <div *ngFor="let ad of adsList" class="ad-ctnr">
+      <app-ad-card
+        [ad]=ad
+        (edit)="editAd($event)"
+        (delete)="deleteAd($event)"
+      ></app-ad-card>
+    </div>
+  </section>
+</article>

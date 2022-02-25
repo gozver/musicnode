@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
 
@@ -12,10 +13,10 @@ import { AdDialogComponent } from '@features/ad/components/ad-dialog/ad-dialog.c
 
 @Component({
   selector: 'app-ad',
-  templateUrl: './ad.component.html',
-  styleUrls: ['./ad.component.scss']
+  templateUrl: './list-ad.component.html',
+  styleUrls: ['./list-ad.component.scss']
 })
-export class AdComponent implements OnInit {
+export class ListAdComponent implements OnInit {
   currentUser: User;
 
   adForm: FormGroup;
@@ -24,6 +25,7 @@ export class AdComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private readonly fb: FormBuilder,
+    private readonly router: Router,
     private readonly authService: AuthService,
     private readonly adService: AdService
   ) { }
@@ -73,6 +75,10 @@ export class AdComponent implements OnInit {
         });
       }
     });
+  }
+
+  editAd(id: number): void {
+    this.router.navigate(['/ad/edit'], { queryParams: { id: id } });
   }
 
   deleteAd(adId: number): void {
