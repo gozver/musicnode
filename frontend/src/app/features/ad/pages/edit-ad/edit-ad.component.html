@@ -1,1 +1,30 @@
-<p>edit-ad works!</p>
+<article>
+  <header>
+    <div class=title>EDIT YOUR AD</div>
+    
+    <div class="subtitle">Let's update</div>
+
+    <div class="text">
+      In this section you can update your ad information.
+    </div>
+  </header>
+
+  <app-ad-carousel
+    [data]=imagesList$>
+  </app-ad-carousel>
+
+  <!-- <section class="carousel-btn-ctnr" *ngIf="isMyBand || isAdmin"> -->
+  <section class="carousel-btn-ctnr" >
+    <input type="file" id="files" name="files" multiple (change)="uploadImages($event)" />
+    
+    <label for="files">
+      <span class="upload-button">
+        <mat-icon>upload</mat-icon>
+      </span>
+    </label>
+
+    <button mat-fab color="warn" (click)="deleteImages()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </section>
+</article>

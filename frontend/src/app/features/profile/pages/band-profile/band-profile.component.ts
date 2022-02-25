@@ -23,15 +23,16 @@ export class BandProfileComponent implements OnInit {
   profileId: number;
   profileBand: any;
   currentUser: User;
-  isAdmin: boolean = false;
   
   avatarForm: FormGroup;
   imagesForm: FormGroup;
   reviewForm: FormGroup;
   
+  isAdmin: boolean = false;
+  isMyBand: boolean = false;
+  
   imageData: string;
   avatarSelected: boolean = false;
-  isMyBand: boolean = false;
   videoIsEmbeded: boolean = false;
 
   reviewsList: any[] = [];

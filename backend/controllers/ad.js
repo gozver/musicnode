@@ -1,4 +1,5 @@
 const models = require('../models');
+const config = require('../config/config.json');
 
 exports.create = async (req, res, next) => {
   const ad = { 
@@ -78,5 +79,55 @@ exports.delete = async (req, res, next) => {
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;
       next(err); // go to error controller
+    });
+}
+
+exports.updateImages = async (req, res, next) => {
+  console.log('----------------------------------------------------------------');
+
+  const id = req.body.id;
+  const filesList = req.files;
+
+  filesList.forEach(file => {
+    const adImage = config.server.url + '/images/' + file.filename;
+
+    const image = {
+      adId: id,
+      musicianId: null,
+      bandId: null,
+      companyId: null,
+      image: adImage,
+    };  
+
+    models.image.create(image)
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
+    });
+  });
+
+  res.json(filesList);
+}
+
+exports.deleteImages = async (req, res, next) => {
+  console.log('--> req.params:');
+  console.log(req.params);
+
+  models.image.destroy({
+    where: {
+      adId: req.params.id
+    }
+  }).then(data => res.json(data))
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
     });
 }

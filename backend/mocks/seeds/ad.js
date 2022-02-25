@@ -15,8 +15,8 @@ const desc03 = `Very good condition, approximately 12 months old. With original 
 
 const ad = [
   { title: title01, price: price01, location: location01, desc: desc01, userId: 2 },
-  { title: title02, price: price02, location: location02, desc: desc02, userId: 1 },
-  { title: title03, price: price03, location: location03, desc: desc03, userId: 3 },
+  { title: title02, price: price02, location: location02, desc: desc02, userId: 15 },
+  { title: title03, price: price03, location: location03, desc: desc03, userId: 9 },
 ];
 
 module.exports = ad;

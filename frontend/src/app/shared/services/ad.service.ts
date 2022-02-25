@@ -42,10 +42,29 @@ export class AdService {
     );
   }
 
-  // When Sequelize => Observable<number> 
-  deleteAd(adId: number): Observable<unknown> {
+  deleteAd(adId: number): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}/ad/${adId}`, this.httpOptions).pipe(
       catchError(this.errorHandlerService.handleError<any>('deleteAd'))
+    );
+  }
+
+  updateImages(id: number, imagesList: any): Observable<string> {
+    const formData = new FormData();
+    
+    formData.append('id', id.toString());
+
+    for (let i = 0; i < imagesList.length; i++) {
+      formData.append('files', imagesList[i], imagesList[i].name);
+    }
+
+    return this.http.patch<any>(`${environment.apiUrl}/ad`, formData).pipe(
+      catchError(this.errorHandlerService.handleError<any>('updateImages', null))
+    );
+  }
+  
+  deleteImages(id: number): Observable<any> {
+    return this.http.delete<any>(`${environment.apiUrl}/ad/img/${id}`).pipe(
+      catchError(this.errorHandlerService.handleError<any>('deleteImages', null))
     );
   }
 }

@@ -26,11 +26,11 @@
       <mat-icon>email</mat-icon>
     </button>
 
-    <button mat-fab color="primary" (click)="editAd(ad.id)" title="Update">
+    <button mat-fab color="primary" (click)="editAd(ad.id)" title="Update" *ngIf="isMyAd || isAdmin ">
       <mat-icon>edit</mat-icon>
     </button>
 
-    <button mat-fab color="warn" (click)="deleteAd(ad.id)" title="Delete">
+    <button mat-fab color="warn" (click)="deleteAd(ad.id)" title="Delete" *ngIf="isMyAd || isAdmin ">
       <mat-icon>delete</mat-icon>
     </button>
   </div>

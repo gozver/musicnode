@@ -43,11 +43,13 @@ router
   .patch  ('/company/info',   middlewares.auth, controllers.company.updateInfo)
   .delete ('/company/:id',    middlewares.auth, controllers.company.deleteImages)
 
-  .get    ('/ad',                       controllers.ad.findAll)
-  .get    ('/ad/:id', middlewares.auth, controllers.ad.findOne)
-  .post   ('/ad',     middlewares.auth, controllers.ad.create)
-  .patch  ('/ad/:id', middlewares.auth, controllers.ad.update)
-  .delete ('/ad/:id', middlewares.auth, controllers.ad.delete)
+  .get    ('/ad',                           controllers.ad.findAll)
+  .get    ('/ad/:id',     middlewares.auth, controllers.ad.findOne)
+  .post   ('/ad',         middlewares.auth, controllers.ad.create)
+  .patch  ('/ad/:id',     middlewares.auth, controllers.ad.update)
+  .patch  ('/ad',         storage.multi,    controllers.ad.updateImages)
+  .delete ('/ad/:id',     middlewares.auth, controllers.ad.delete)
+  .delete ('/ad/img/:id', middlewares.auth, controllers.ad.deleteImages)
   
   .get    ('/message',                            controllers.message.findAll)
   .get    ('/message/:from:to', middlewares.auth, controllers.message.findAllByUsersIds)
