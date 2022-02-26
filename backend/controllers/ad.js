@@ -6,7 +6,7 @@ exports.create = async (req, res, next) => {
     title: req.body.title,
     price: req.body.price,
     location: req.body.location,
-    description: req.body.description,
+    desc: req.body.desc,
     userId: req.body.userId
   };
 
@@ -14,7 +14,11 @@ exports.create = async (req, res, next) => {
     .then(data => res.json(data))
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;
-      next(err); // go to error controller
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
     });
 }
 
@@ -29,7 +33,11 @@ exports.findAll = async (req, res, next) => {
   }).then(data => res.json(data))
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;
-      next(err); // go to error controller
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
     });
 }
 
@@ -46,20 +54,26 @@ exports.findOne = async (req, res, next) => {
   }).then(data => res.json(data))
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;
-      next(err); // go to error controller
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
     });
 }
 
-exports.update = async (req, res, next) => {
-  models.ad.update({
-    userId: req.body.userId,
-    title: req.body.title,
-    description: req.body.description,
+exports.updateInfo = async (req, res, next) => {
+  console.log('--> req.body:');
+  console.log(req.body);
+
+  const { id, title, desc, price, location } = req.body;
+    
+  await models.ad.update({ 
+    title, desc, price, location
   }, {
-    where: {
-      id: req.params.id
-    }
-  }).then(data => res.json(data))
+    where: { id }
+  })
+    .then(ad => res.json(ad))
     .catch(err => {
       if (!err.statusCode) err.statusCode = 500;
 
@@ -83,8 +97,6 @@ exports.delete = async (req, res, next) => {
 }
 
 exports.updateImages = async (req, res, next) => {
-  console.log('----------------------------------------------------------------');
-
   const id = req.body.id;
   const filesList = req.files;
 
@@ -114,9 +126,6 @@ exports.updateImages = async (req, res, next) => {
 }
 
 exports.deleteImages = async (req, res, next) => {
-  console.log('--> req.params:');
-  console.log(req.params);
-
   models.image.destroy({
     where: {
       adId: req.params.id

@@ -1,19 +1,19 @@
 <div class="card">
   <div class="card-header">
     <div class="left">
-      <img src="{{ ad.user.avatar }}" alt="{{ ad.user.name }}">
+      <img src="{{ ad?.user?.avatar }}" alt="{{ ad?.user?.name }}">
     </div>
     
     <div class="right">
-      <span class="name">{{ ad.user.name }} {{ ad.user.surname }}</span>
-      <span class="date">{{ ad.createdAt | date:'dd/MM/yyyy' }}</span>
+      <span class="name">{{ ad?.user?.name }} {{ ad?.user?.surname }}</span>
+      <span class="date">{{ ad?.createdAt | date:'dd/MM/yyyy' }}</span>
     </div>
   </div>
 
   <div class="card-content">
-    <h1 class=title>{{ ad.title }}</h1>
-    <span class=price-location>{{ ad.price }}€ · {{ ad.location | uppercase}}</span>
-    <span class=body>{{ ad.desc }}</span>
+    <h1 class=title>{{ ad?.title }}</h1>
+    <span class=price-location>{{ ad?.price }}€ · {{ ad?.location | uppercase}}</span>
+    <span class=body>{{ ad?.desc }}</span>
   </div>
 
   <app-ad-carousel

@@ -63,12 +63,18 @@ export class ListAdComponent implements OnInit {
         this.adForm.value.userId = this.currentUser.id;
 
         // Insert the element in the database
-        this.adService.createAd(this.adForm.value).subscribe(res => {
+        this.adService.createAd(this.adForm.value).subscribe(ad => {
           console.log('--> Create ad response:');
-          console.log(res);
+          console.log(ad);
           
+          // this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+          //   this.router.navigate(['/ad']);
+          // });
+
           // If the ad is inserted in the db, add it to the adList array
-          if (res) this.adsList = [res, ...this.adsList];
+          ad.user = this.currentUser;
+          ad.images = []
+          this.adsList = [ad, ...this.adsList];
 
           // Clear the form after adding the new ad
           this.adForm.reset();

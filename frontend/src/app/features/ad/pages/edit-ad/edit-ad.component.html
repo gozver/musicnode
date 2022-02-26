@@ -5,7 +5,7 @@
     <div class="subtitle">Let's update</div>
 
     <div class="text">
-      In this section you can update your ad information.
+      In this section you can edit your ad information and delete or update its images.
     </div>
   </header>
 
@@ -13,7 +13,7 @@
     [data]=imagesList$>
   </app-ad-carousel>
 
-  <!-- <section class="carousel-btn-ctnr" *ngIf="isMyBand || isAdmin"> -->
+  <!-- <section class="carousel-btn-ctnr" *ngIf="isMyAd || isAdmin"> -->
   <section class="carousel-btn-ctnr" >
     <input type="file" id="files" name="files" multiple (change)="uploadImages($event)" />
     
@@ -26,5 +26,48 @@
     <button mat-fab color="warn" (click)="deleteImages()">
       <mat-icon>delete</mat-icon>
     </button>
+  </section>
+
+  <section class="ad-form">
+    <div class="card">
+      <div class="card-content">
+        <form [formGroup]="adForm" *ngIf="adForm">
+          <mat-form-field appearance="outline" class="input-headline">
+            <mat-label>Title</mat-label>
+            <input matInput placeholder="Title" formControlName="title" />
+            <mat-icon matSuffix>title</mat-icon>
+          </mat-form-field>
+      
+          <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input matInput placeholder="Price" formControlName="price" />
+            <mat-icon matSuffix class="price">euro_symbol</mat-icon>
+          </mat-form-field>
+      
+          <mat-form-field appearance="outline">
+            <mat-label>Location</mat-label>
+            <input matInput placeholder="Location" formControlName="location" />
+            <mat-icon matSuffix>location_on</mat-icon>
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput placeholder="Description" formControlName="desc" rows="3"></textarea>
+            <mat-icon matSuffix class="description">description</mat-icon>
+          </mat-form-field>
+        </form>
+
+        <div class="btn-ctnr">
+          <!-- <button mat-flat-button class="primary left" (click)="update()" [disabled]="updateForm.invalid" *ngIf="updateForm"> -->
+          <button mat-flat-button class="primary left" (click)="updateAd()" [disabled]="adForm.invalid" *ngIf="adForm">
+            Update
+          </button>
+
+          <button mat-flat-button class="warn" color="warn" (click)="goBack()">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
   </section>
 </article>

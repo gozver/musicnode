@@ -46,7 +46,7 @@ router
   .get    ('/ad',                           controllers.ad.findAll)
   .get    ('/ad/:id',     middlewares.auth, controllers.ad.findOne)
   .post   ('/ad',         middlewares.auth, controllers.ad.create)
-  .patch  ('/ad/:id',     middlewares.auth, controllers.ad.update)
+  .patch  ('/ad/info',    middlewares.auth, controllers.ad.updateInfo)
   .patch  ('/ad',         storage.multi,    controllers.ad.updateImages)
   .delete ('/ad/:id',     middlewares.auth, controllers.ad.delete)
   .delete ('/ad/img/:id', middlewares.auth, controllers.ad.deleteImages)

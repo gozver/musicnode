@@ -1,12 +1,9 @@
-// Angular
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-// RxJS
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-// Services, interfaces and environment variables
 import { Ad } from '../interfaces/ad.interface'
 import { ErrorHandlerService } from './error-handler.service';
 import { environment } from '@environments/environment';
@@ -36,9 +33,15 @@ export class AdService {
     );
   }
 
-  createAd(params: Ad): Observable<Ad> {
+  createAd(params: any): Observable<any> {
     return this.http.post<Ad>(`${environment.apiUrl}/ad`, params, this.httpOptions).pipe(
       catchError(this.errorHandlerService.handleError<any>('createAd', null))
+    );
+  }
+
+  updateInfo(params: Ad): Observable<Ad> {
+    return this.http.patch<Ad>(`${environment.apiUrl}/ad/info`, params).pipe(
+      catchError(this.errorHandlerService.handleError<any>('updateInfo', null))
     );
   }
 
