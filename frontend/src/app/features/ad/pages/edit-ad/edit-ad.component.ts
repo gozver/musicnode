@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 import { environment } from '@environments/environment';
 import { AdService } from '@shared/services/ad.service';
 import { AuthService } from '@shared/services/auth.service';
+import { RoleService } from '@shared/services/role.service';
 import { User } from '@shared/interfaces/user.interface';
 
 @Component({
@@ -33,7 +34,8 @@ export class EditAdComponent implements OnInit, OnDestroy {
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly adService: AdService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly roleService: RoleService,
   ) { }
 
   ngOnInit(): void {
@@ -61,10 +63,23 @@ export class EditAdComponent implements OnInit, OnDestroy {
             this.ad = ad;
             this.isMyAd = this.currentUser.id === parseInt(this.ad.user.id);
             this.imagesList$.next(this.ad.images);
+
+            this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
+              this.isAdmin = rolesList.filter(item => item.roleId === 4).length > 0;
+              
+              console.log('-> this.isAdmin:', this.isAdmin);
+              console.log('-> this.isMyAd:', this.isMyAd);
+
+              if (!this.isMyAd && !this.isAdmin) {
+                this.router.navigate(['/ad']);
+              }
+            });
           } else {
             this.router.navigate(['/ad']);
           }
         });
+      } else {
+        this.router.navigate(['/ad']);
       }
     });
   }
@@ -89,9 +104,9 @@ export class EditAdComponent implements OnInit, OnDestroy {
   uploadImages(event: any): void {
     const files: FileList = event.target.files;
     
-    // Update images in backend
     this.imagesForm.patchValue({ images: files });
-
+    
+    // Update images in backend
     this.adService.updateImages(this.ad.id, this.imagesForm.value.images).subscribe(imagesList => {
       console.log('--> uploaded files:');
       console.log(imagesList);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -9,6 +9,7 @@ import { AdService } from '@shared/services/ad.service';
 import { User } from '@shared/interfaces/user.interface';
 import { Ad } from '@shared/interfaces/ad.interface';
 
+import { environment } from '@environments/environment';
 import { AdDialogComponent } from '@features/ad/components/ad-dialog/ad-dialog.component';
 
 @Component({
@@ -18,9 +19,10 @@ import { AdDialogComponent } from '@features/ad/components/ad-dialog/ad-dialog.c
 })
 export class ListAdComponent implements OnInit {
   currentUser: User;
+  adsList: Ad[] = [];
 
   adForm: FormGroup;
-  adsList: Ad[] = [];
+  imagesForm: FormGroup;
 
   constructor(
     public dialog: MatDialog,
@@ -31,22 +33,36 @@ export class ListAdComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getComponentData();
     this.initAdForm();
+    this.initImagesForm();
+    this.getComponentData();
   }
 
   getComponentData(): void {
     this.currentUser = this.authService.currentUser$.value;
-    this.adService.getAds().subscribe(adsList => this.adsList = adsList);
+    this.adService.getAds().subscribe(adsList => {
+      this.adsList = adsList;
+
+      console.log('--> this.adsList: ');
+      console.log(this.adsList);
+    });
   }
 
   initAdForm(): void {
     this.adForm = this.fb.group({
-      title:    [ '',   [ Validators.required ]],
-      price:    [ null, [ Validators.required, Validators.pattern('^[0-9]*$') ]],
-      location: [ '',   [ Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚ]*$') ]],
-      desc:     [ '',   [ Validators.required ]],
-      userId:   [ null ]
+      title:    [ '',   [ Validators.required, Validators.minLength(3) ]],
+      price:    [ null, [ Validators.required, Validators.pattern('^[0-9]+$') ]],
+      location: [ '',   [ Validators.required, Validators.minLength(3) ]],
+      desc:     [ '',   [ Validators.required, Validators.minLength(3) ]],
+      userId:   [ null ],
+      images:   [ null ]
+    });
+  }
+
+  initImagesForm(): void {
+    this.imagesForm = new FormGroup({
+      name:  new FormControl('ad'),
+      images: new FormControl(null)
     });
   }
 
@@ -62,22 +78,39 @@ export class ListAdComponent implements OnInit {
       if (result) {
         this.adForm.value.userId = this.currentUser.id;
 
-        // Insert the element in the database
+        // Insert the ad in the database
         this.adService.createAd(this.adForm.value).subscribe(ad => {
           console.log('--> Create ad response:');
           console.log(ad);
-          
-          // this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-          //   this.router.navigate(['/ad']);
-          // });
 
-          // If the ad is inserted in the db, add it to the adList array
-          ad.user = this.currentUser;
-          ad.images = []
-          this.adsList = [ad, ...this.adsList];
+          // Insert ad images in the database
+          const files: FileList = this.adForm.value.images;
+          this.imagesForm.patchValue({ images: files });
 
-          // Clear the form after adding the new ad
-          this.adForm.reset();
+          this.adService.updateImages(ad.id, this.imagesForm.value.images).subscribe(imagesList => {
+            console.log('--> uploaded files:');
+            console.log(imagesList);
+      
+            // Update adsList in the frontend
+            ad.user = this.currentUser;
+            ad.images = [];
+
+            imagesList.forEach((item: { originalname: any; }) => {
+              const image = {
+                adId: ad.id,
+                image: `${environment.serverUrl}/images/${item.originalname}`,
+                createdAt: Date.now(),
+                updatedAt: Date.now(),
+              }
+
+              ad.images = [...ad.images, image];
+            });
+
+            this.adsList = [ad, ...this.adsList];
+
+            // Clear the form after adding the new ad
+            this.adForm.reset();
+          });
         });
       }
     });

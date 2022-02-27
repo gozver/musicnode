@@ -27,13 +27,13 @@ export class AdService {
     );
   }
 
-  getAd(id: number): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/ad/${id}`).pipe(
+  getAd(id: number): Observable<Ad> {
+    return this.http.get<Ad>(`${environment.apiUrl}/ad/${id}`).pipe(
       catchError(this.errorHandlerService.handleError<any>('getAds', []))
     );
   }
 
-  createAd(params: any): Observable<any> {
+  createAd(params: Ad): Observable<any> {
     return this.http.post<Ad>(`${environment.apiUrl}/ad`, params, this.httpOptions).pipe(
       catchError(this.errorHandlerService.handleError<any>('createAd', null))
     );
@@ -46,12 +46,12 @@ export class AdService {
   }
 
   deleteAd(adId: number): Observable<any> {
-    return this.http.delete<any>(`${environment.apiUrl}/ad/${adId}`, this.httpOptions).pipe(
+    return this.http.delete<Ad>(`${environment.apiUrl}/ad/${adId}`, this.httpOptions).pipe(
       catchError(this.errorHandlerService.handleError<any>('deleteAd'))
     );
   }
 
-  updateImages(id: number, imagesList: any): Observable<string> {
+  updateImages(id: number, imagesList: any): Observable<any> {
     const formData = new FormData();
     
     formData.append('id', id.toString());

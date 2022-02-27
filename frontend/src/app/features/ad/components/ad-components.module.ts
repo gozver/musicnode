@@ -10,12 +10,14 @@ import { ComponentsModule } from '@shared/components/components.module';
 import { AdCardComponent } from './ad-card/ad-card.component';
 import { AdCarouselComponent } from './ad-carousel/ad-carousel.component';
 import { AdDialogComponent } from './ad-dialog/ad-dialog.component';
+import { EditAdFormComponent } from './edit-ad-form/edit-ad-form.component';
 
 @NgModule({
   declarations: [
     AdCardComponent,
     AdCarouselComponent,
-    AdDialogComponent
+    AdDialogComponent,
+    EditAdFormComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { AdDialogComponent } from './ad-dialog/ad-dialog.component';
   exports: [
     AdCardComponent,
     AdCarouselComponent,
-    AdDialogComponent
+    AdDialogComponent,
+    EditAdFormComponent
   ]
 })
 export class AdComponentsModule { }

@@ -31,7 +31,7 @@ export class AdCardComponent {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUser$.value;
-    this.isMyAd = this.currentUser.id === parseInt(this.ad?.user?.id);
+    this.isMyAd = this.currentUser.id === parseInt(this.ad.user.id);
 
     this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
       this.isAdmin = rolesList.filter(item => item.roleId === 4).length > 0;
