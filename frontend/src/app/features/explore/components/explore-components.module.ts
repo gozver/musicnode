@@ -1,28 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@shared/modules/material.module';
-
-import { ExploreRoutingModule } from './explore-routing.module';
-import { ExploreComponentsModule } from '../components/explore-components.module';
 import { ComponentsModule } from '@shared/components/components.module';
 
-import { ExploreComponent } from './explore/explore.component'
+import { SearchFormComponent } from './search-form/search-form.component';
 
 @NgModule({
   declarations: [
-    ExploreComponent
+    SearchFormComponent
   ],
   imports: [
     CommonModule,
+    RouterModule,
     ReactiveFormsModule,
     
     MaterialModule,
-
-    ExploreRoutingModule,
-    ExploreComponentsModule,
     ComponentsModule
+  ],
+  exports: [
+    SearchFormComponent
   ]
 })
-export class ExploreModule { }
+export class ExploreComponentsModule { }

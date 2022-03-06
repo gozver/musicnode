@@ -31,8 +31,8 @@ export class ExploreComponent implements OnInit {
   contractorsList: User[] = [];
   adminsList: User[] = [];
   
-  roleSelect:  { id: number, value: string }[] = [
-    { id: -1,  value: 'All Users' },
+  roleDDL:  { id: number, value: string }[] = [
+    { id: -1, value: 'All Users' },
     { id: 1,  value: 'Bands' },
     { id: 2,  value: 'Companies' },
     { id: 3,  value: 'Contractors' },

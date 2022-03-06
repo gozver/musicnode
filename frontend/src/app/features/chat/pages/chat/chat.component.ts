@@ -168,13 +168,6 @@ export class ChatComponent implements OnInit, AfterViewInit, AfterViewChecked, O
     
     // Add the new message to the messageList array
     this.messagesList.push(data);
-
-    // // TO DO: notifications
-    // console.log('--> data:');
-    // console.log(data);
-    // console.log(`--> currentUser: ${this.currentUser.id}`);
-    // console.log('--> this.messagesList:');
-    // console.log(this.messagesList);
     
     // avoid creating a duplicated message in the broadcasted client
     if (this.message) {
