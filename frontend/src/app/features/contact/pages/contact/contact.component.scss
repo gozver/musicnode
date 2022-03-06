@@ -57,32 +57,6 @@ article {
         font-weight: 500;
       }
 
-      .contact-form {
-        font-size: 15px;
-      
-        // white mat-form-field background
-        ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-          background-color: white;
-          border-radius: 4px;
-        }
-
-        mat-form-field {
-          width: 100%;
-          height: 3.1rem;
-          margin-bottom: 20px;
-      
-          mat-icon {
-            color: #555;
-          }
-          
-          mat-icon.message {
-            padding-left: .625rem;
-            padding-right: 1.5rem;
-            transform: translateY(4px);
-          }
-        }
-      }
-
       button {
         width: 100%;
         margin-top: 27px;

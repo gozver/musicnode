@@ -35,7 +35,7 @@
         ></app-edit-ad-form>
 
         <div class="btn-ctnr">
-          <button mat-flat-button class="primary left" (click)="updateAd()" [disabled]="adForm.invalid" *ngIf="adForm">
+          <button mat-flat-button class="primary left" (click)="updateAd()" [disabled]="adForm.invalid || imagesList$.value.length < 1" *ngIf="adForm">
             Update
           </button>
 

@@ -1,0 +1,25 @@
+<form [formGroup]="contactForm" class="contact-form">
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Full Name</mat-label>
+    <input matInput placeholder="Full Name" formControlName="name" />
+    <mat-icon matSuffix><i class="material-icons">person_outline</i></mat-icon>
+  </mat-form-field>
+  
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="Email" formControlName="email" type="email" />
+    <mat-icon matSuffix>email</mat-icon>
+  </mat-form-field>
+  
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Phone</mat-label>
+    <input matInput placeholder="Phone" formControlName="phone" />
+    <mat-icon matSuffix>phone</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Message</mat-label>
+    <textarea matInput placeholder="Message" formControlName="message" rows="3"></textarea>
+    <mat-icon matSuffix class="message">message</mat-icon>
+  </mat-form-field>          
+</form>

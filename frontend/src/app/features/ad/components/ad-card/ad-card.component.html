@@ -22,15 +22,15 @@
   </app-ad-carousel>
   
   <div class="btn-cntr">
-    <button mat-fab color="warn" class="warn" (click)="sendMessage(ad.user.id)" title="Update">
+    <button mat-fab color="warn" class="warn" (click)="sendMessage(ad.user.id)" *ngIf="!isMyAd">
       <mat-icon>email</mat-icon>
     </button>
 
-    <button mat-fab color="primary" (click)="editAd(ad.id)" title="Update" *ngIf="isMyAd || isAdmin ">
+    <button mat-fab color="primary" (click)="editAd(ad.id)" *ngIf="isMyAd || isAdmin ">
       <mat-icon>edit</mat-icon>
     </button>
 
-    <button mat-fab color="warn" (click)="deleteAd(ad.id)" title="Delete" *ngIf="isMyAd || isAdmin ">
+    <button mat-fab color="warn" (click)="deleteAd(ad.id)" *ngIf="isMyAd || isAdmin ">
       <mat-icon>delete</mat-icon>
     </button>
   </div>
