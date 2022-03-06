@@ -14,7 +14,6 @@ import { environment } from '@environments/environment';
 export class AuthService {
   isLogged$ = new BehaviorSubject<boolean>(this.getIsLogged());
   hasRole$ = new BehaviorSubject<boolean>(this.getHasRole());
-  activeRole$ = new BehaviorSubject<number>(this.getActiveRole());
   currentUser$ = new BehaviorSubject<User>(this.getCurrentUser());
 
   constructor(
@@ -36,13 +35,11 @@ export class AuthService {
           // Send BehaviorSubjects values to the next operation
           this.isLogged$.next(true);
           this.hasRole$.next(user.hasRole);
-          this.activeRole$.next(user.activeRole);
           this.currentUser$.next(user);
           
           // Store user details and JWT in local storage to keep user logged in between page refreshes
           localStorage.setItem('isLogged', '1');
           localStorage.setItem('hasRole', JSON.stringify(user.hasRole));
-          localStorage.setItem('activeRole', JSON.stringify(user.activeRole));
           localStorage.setItem('user', JSON.stringify(user));
           localStorage.setItem('token', user.token);
           
@@ -58,12 +55,10 @@ export class AuthService {
   logout(): void {
     this.isLogged$.next(false);
     this.hasRole$.next(false);
-    this.activeRole$.next(null);
     this.currentUser$.next(null);
 
     localStorage.removeItem('isLogged');
     localStorage.removeItem('hasRole');
-    localStorage.removeItem('activeRole');
     localStorage.removeItem('user');
     localStorage.removeItem('token');    
 
@@ -80,11 +75,6 @@ export class AuthService {
     const hasRole = localStorage.getItem('hasRole');
     return JSON.parse(hasRole);
   }
-  
-  private getActiveRole(): number {
-    const activeRole = localStorage.getItem('activeRole');
-    return JSON.parse(activeRole);
-  }
 
   private getCurrentUser(): User {
     const user = localStorage.getItem('user')
@@ -95,11 +85,6 @@ export class AuthService {
   setHasRole(hasRole: boolean): void {
     this.hasRole$.next(hasRole);
     localStorage.setItem('hasRole', JSON.stringify(hasRole));
-  }
-  
-  setActiveRole(activeRole: number): void {
-    this.activeRole$.next(activeRole);
-    localStorage.setItem('activeRole', JSON.stringify(activeRole));
   }
   
   setCurrentUser(user: User): void {

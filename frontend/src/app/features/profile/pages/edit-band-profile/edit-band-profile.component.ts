@@ -17,7 +17,7 @@ export class EditBandProfileComponent implements OnInit {
   profileBand: any;
   currentUser: User;
 
-  updateForm: FormGroup;
+  bandForm: FormGroup;
 
   isAdmin: boolean = false;
   isMyBand: boolean = false;
@@ -81,7 +81,7 @@ export class EditBandProfileComponent implements OnInit {
     const priceRegex = '^[0-9]+$';
     const phoneRegex = '^[0-9\-]+$';
     
-    this.updateForm = this.fb.group({
+    this.bandForm = this.fb.group({
       id:    [ this.profileBand.id ],
       name:  [ this.profileBand.name,  [ Validators.required, Validators.minLength(3) ]],
       desc:  [ this.profileBand.desc,  [ Validators.required, Validators.minLength(3) ]],
@@ -94,7 +94,7 @@ export class EditBandProfileComponent implements OnInit {
   }
 
   update(): void {
-    this.bandService.updateInfo(this.updateForm.value).subscribe(() => {
+    this.bandService.updateInfo(this.bandForm.value).subscribe(() => {
       this.router.navigate([`/profile/band/${this.profileId}`]);
     });
   }

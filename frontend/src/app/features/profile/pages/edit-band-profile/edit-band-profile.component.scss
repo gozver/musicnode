@@ -87,22 +87,6 @@ article {
         flex-direction: column;
         padding: 5px;
 
-        form {
-          mat-form-field {
-            width: 100%;
-            height: 3.1rem;
-            margin-bottom: 20px;
-        
-            &.description {
-              margin-bottom: 56px;
-            }
-            
-            mat-icon {
-              color: #bbb;
-            }
-          }
-        }
-
         .btn-ctnr {
           margin-top: 10px;
           

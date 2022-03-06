@@ -9,11 +9,15 @@ import { ComponentsModule } from '@shared/components/components.module';
 
 import { CarouselComponent } from './carousel/carousel.component';
 import { UserFormComponent } from './user-form/user-form.component';
+import { BandFormComponent } from './band-form/band-form.component';
+import { CompFormComponent } from './comp-form/comp-form.component';
 
 @NgModule({
   declarations: [
     CarouselComponent,
-    UserFormComponent
+    UserFormComponent,
+    BandFormComponent,
+    CompFormComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +30,9 @@ import { UserFormComponent } from './user-form/user-form.component';
   ],
   exports: [
     CarouselComponent,
-    UserFormComponent
+    UserFormComponent,
+    BandFormComponent,
+    CompFormComponent
   ]
 })
 export class ProfileComponentsModule { }

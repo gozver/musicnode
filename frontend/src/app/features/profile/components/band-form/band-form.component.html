@@ -1,0 +1,57 @@
+<form [formGroup]="bandForm" *ngIf="bandForm">
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name" formControlName="name" autocomplete="on" />
+    <button mat-icon-button matSuffix [attr.aria-label]="'Name'" disabled>
+      <mat-icon matSuffix>person</mat-icon>
+    </button>
+  </mat-form-field>
+  
+  <mat-form-field appearance="outline" class="description">
+    <mat-label>Description</mat-label>
+    <textarea matInput placeholder="Description" formControlName="desc" rows="3"></textarea>
+    <button mat-icon-button matSuffix [attr.aria-label]="'Phone'" disabled>
+      <mat-icon matSuffix>description</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Phone</mat-label>
+    <input matInput placeholder="Phone" formControlName="phone" autocomplete="on" />
+    <button mat-icon-button matSuffix [attr.aria-label]="'Phone'" disabled>
+      <mat-icon matSuffix>phone_android</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Price</mat-label>
+    <input matInput placeholder="Price" formControlName="price" autocomplete="on" />
+    <button mat-icon-button matSuffix [attr.aria-label]="'Price'" disabled>
+      <mat-icon matSuffix>euro_symbol</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Type</mat-label>
+    <input matInput placeholder="Type" formControlName="type" autocomplete="on" />
+    <button mat-icon-button matSuffix [attr.aria-label]="'Type'" disabled>
+      <mat-icon matSuffix>merge_type</mat-icon>
+    </button>
+  </mat-form-field>
+  
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Scope</mat-label>
+    <input matInput placeholder="Scope" formControlName="scope" autocomplete="on" />
+    <button mat-icon-button matSuffix [attr.aria-label]="'Scope'" disabled>
+      <mat-icon matSuffix>area_chart</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Video</mat-label>
+    <input matInput placeholder="Video" formControlName="video" autocomplete="on" />
+    <button mat-icon-button matSuffix [attr.aria-label]="'Video'" disabled>
+      <mat-icon matSuffix>ondemand_video</mat-icon>
+    </button>
+  </mat-form-field>
+</form>

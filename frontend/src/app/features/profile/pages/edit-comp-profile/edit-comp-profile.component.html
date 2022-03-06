@@ -24,42 +24,12 @@
   <section class="update-form">
     <div class="card">
       <div class="card-content">
-        <form [formGroup]="updateForm" *ngIf="updateForm">
-          <mat-form-field appearance="outline" class="input-headline">
-            <mat-label>Name</mat-label>
-            <input matInput placeholder="Name" formControlName="name" autocomplete="on" />
-            <button mat-icon-button matSuffix [attr.aria-label]="'Name'" disabled>
-              <mat-icon matSuffix>person</mat-icon>
-            </button>
-          </mat-form-field>
-          
-          <mat-form-field appearance="outline" class="description">
-            <mat-label>Description</mat-label>
-            <textarea matInput placeholder="Description" formControlName="desc" rows="3"></textarea>
-            <button mat-icon-button matSuffix [attr.aria-label]="'Phone'" disabled>
-              <mat-icon matSuffix>description</mat-icon>
-            </button>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="input-headline">
-            <mat-label>Phone</mat-label>
-            <input matInput placeholder="Phone" formControlName="phone" autocomplete="on" />
-            <button mat-icon-button matSuffix [attr.aria-label]="'Phone'" disabled>
-              <mat-icon matSuffix>phone_android</mat-icon>
-            </button>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="input-headline">
-            <mat-label>Address</mat-label>
-            <input matInput placeholder="Address" formControlName="address" autocomplete="on" />
-            <button mat-icon-button matSuffix [attr.aria-label]="'Address'" disabled>
-              <mat-icon matSuffix>location_on</mat-icon>
-            </button>
-          </mat-form-field>
-        </form>
+        <app-comp-form
+          [companyForm]="companyForm"
+        ></app-comp-form>
 
         <div class="btn-ctnr">
-          <button mat-flat-button class="primary left" (click)="update()" [disabled]="updateForm.invalid" *ngIf="updateForm">
+          <button mat-flat-button class="primary left" (click)="update()" [disabled]="companyForm.invalid" *ngIf="companyForm">
             Update
           </button>
 

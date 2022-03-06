@@ -18,7 +18,7 @@ export class EditCompProfileComponent implements OnInit {
   profileComp: any;
   currentUser: User;
   
-  updateForm: FormGroup;
+  companyForm: FormGroup;
 
   isAdmin: boolean = false;
   isMyCompany: boolean = false;
@@ -80,7 +80,7 @@ export class EditCompProfileComponent implements OnInit {
   initCompanyForm(): void {
     const phoneRegex = '^[0-9\-]+$';    
     
-    this.updateForm = this.fb.group({
+    this.companyForm = this.fb.group({
       id:      [ this.profileComp.id ],
       name:    [ this.profileComp.name,    [ Validators.required, Validators.minLength(3) ]],
       desc:    [ this.profileComp.desc,    [ Validators.required, Validators.minLength(3) ]],
@@ -90,7 +90,7 @@ export class EditCompProfileComponent implements OnInit {
   }
 
   update(): void {
-    this.companyService.updateInfo(this.updateForm.value).subscribe(() => {
+    this.companyService.updateInfo(this.companyForm.value).subscribe(() => {
       this.router.navigate([`/profile/company/${this.profileId}`]);
     });
   }
