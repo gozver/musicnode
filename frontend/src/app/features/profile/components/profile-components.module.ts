@@ -8,10 +8,12 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ComponentsModule } from '@shared/components/components.module';
 
 import { CarouselComponent } from './carousel/carousel.component';
+import { UserFormComponent } from './user-form/user-form.component';
 
 @NgModule({
   declarations: [
-    CarouselComponent
+    CarouselComponent,
+    UserFormComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { CarouselComponent } from './carousel/carousel.component';
     ComponentsModule,
   ],
   exports: [
-    CarouselComponent
+    CarouselComponent,
+    UserFormComponent
   ]
 })
 export class ProfileComponentsModule { }

@@ -24,50 +24,12 @@
   <section class="update-form">
     <div class="card">
       <div class="card-content">
-        <form [formGroup]="updateForm" *ngIf="updateForm">
-          <mat-form-field appearance="outline" class="input-headline">
-            <mat-label>Name</mat-label>
-            <input matInput placeholder="Name" formControlName="name" autocomplete="on" />
-            <button mat-icon-button matSuffix [attr.aria-label]="'Name'" disabled>
-              <mat-icon matSuffix>person</mat-icon>
-            </button>
-          </mat-form-field>
-          
-          <mat-form-field appearance="outline" class="input-headline">
-            <mat-label>Surname</mat-label>
-            <input matInput placeholder="Surname" formControlName="surname" autocomplete="on" />
-            <button mat-icon-button matSuffix [attr.aria-label]="'Surname'" disabled>
-              <mat-icon matSuffix>person</mat-icon>
-            </button>
-          </mat-form-field>
-        
-          <mat-form-field appearance="outline" class="input-headline">
-            <mat-label>Phone</mat-label>
-            <input matInput placeholder="Phone" formControlName="phone" autocomplete="on" />
-            <button mat-icon-button matSuffix [attr.aria-label]="'Phone'" disabled>
-              <mat-icon matSuffix>phone</mat-icon>
-            </button>
-          </mat-form-field>
-          
-          <mat-form-field appearance="outline" class="input-headline">
-            <mat-label>Password</mat-label>
-            <input matInput placeholder="Password" formControlName="password" autocomplete="on" disable>
-            <button mat-icon-button matSuffix [attr.aria-label]="'Password'" disabled>
-              <mat-icon>password</mat-icon>
-            </button>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="input-headline">
-            <mat-label>Confirm Password</mat-label>
-            <input matInput placeholder="Confirm Password" formControlName="newPwd" autocomplete="on">
-            <button mat-icon-button matSuffix [attr.aria-label]="'Confirm Password'">
-              <mat-icon>password</mat-icon>
-            </button>
-          </mat-form-field>
-        </form>
+        <app-user-form
+          [userForm]=userForm
+        ></app-user-form>
 
         <div class="btn-ctnr">
-          <button mat-flat-button class="primary left" (click)="update()" [disabled]="updateForm.invalid && !passwordsAreEqual()" *ngIf="updateForm">
+          <button mat-flat-button class="primary left" (click)="update()" [disabled]="userForm.invalid && !passwordsAreEqual()" *ngIf="userForm">
             Update
           </button>
 

@@ -64,14 +64,14 @@ export class EditBandProfileComponent implements OnInit {
           if (!this.isAdmin && !this.isMyBand) {
             console.error('--> unauthorized');
             console.error('--> redirect to home');
-            // this.router.navigate(['/home']);
+            this.router.navigate(['/home']);
           }
         }, 
         error => {
           console.error('--> unauthorized');
           console.error('--> redirect to home');
           console.error('--> error:', error);
-          // this.router.navigate(['/home']);
+          this.router.navigate(['/home']);
         }
       );
     });

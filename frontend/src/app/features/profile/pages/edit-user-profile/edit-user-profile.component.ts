@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 
 import { AuthService } from '@shared/services/auth.service';
 import { UserService } from '@shared/services/user.service';
+import { RoleService } from '@shared/services/role.service';
 import { User } from '@app/shared/interfaces/user.interface';
 
 @Component({
@@ -15,9 +16,12 @@ import { User } from '@app/shared/interfaces/user.interface';
 export class EditUserProfileComponent implements OnInit {
   profileId: number;
   profileUser: User;
-
-  updateForm: FormGroup;
   currentUser: User;
+
+  userForm: FormGroup;
+
+  isAdmin: boolean = false;
+  rolesList: any[] = [];
 
   constructor(
     private readonly fb: FormBuilder,
@@ -26,6 +30,7 @@ export class EditUserProfileComponent implements OnInit {
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly userService: UserService,
+    private readonly roleService: RoleService
   ) {
     this.profileId = parseInt(this.route.snapshot.paramMap.get('id'));
    }
@@ -37,14 +42,36 @@ export class EditUserProfileComponent implements OnInit {
   initComponentData(): void {
     this.currentUser = this.authService.currentUser$.value;
 
-    if (this.currentUser.activeRole !== 4 && this.profileId !== this.currentUser.id) {
-      // this.router.navigate(['/home']);
-      console.log('--> fail...')
-    }
+    this.roleService.getRolesByUserId(this.profileId).subscribe(rolesList => {
+      this.isAdmin = rolesList.filter(item => item.roleId === 4).length > 0;
 
-    this.userService.getUser(this.profileId).subscribe(user => {
-      this.profileUser = user[0];
-      this.initUserForm();
+      console.log('--> roles list:');
+      console.log(rolesList);
+      console.log('--> is admin:');
+      console.log(this.isAdmin);
+
+      this.userService.getUser(this.profileId).subscribe(
+        user => {
+          this.profileUser = user[0];
+          this.initUserForm();
+
+          if (!this.isAdmin && this.currentUser.id !== this.profileId) {
+            console.error('--> unauthorized');
+            console.error('--> redirect to home');
+            this.router.navigate(['/home']);
+          }
+
+          console.log('--> this.profileUser:');
+          console.log(this.profileUser);
+  
+        }, 
+        error => {
+          console.error('--> unauthorized');
+          console.error('--> redirect to home');
+          console.error('--> error:', error);
+          this.router.navigate(['/home']);
+        }
+      );
     });
   }
 
@@ -57,7 +84,7 @@ export class EditUserProfileComponent implements OnInit {
     let surname = this.profileUser.surname
     let phone = this.profileUser.phone    
 
-    this.updateForm = this.fb.group({
+    this.userForm = this.fb.group({
       id:       [ id ],
       name:     [ name,    [ Validators.required, Validators.minLength(3) ]],
       surname:  [ surname, [ Validators.required, Validators.minLength(3) ]],
@@ -68,11 +95,11 @@ export class EditUserProfileComponent implements OnInit {
   }
 
   passwordsAreEqual(): boolean {
-    return this.updateForm.value.password !== '' && this.updateForm.value.password === this.updateForm.value.newPwd; 
+    return this.userForm.value.password !== '' && this.userForm.value.password === this.userForm.value.newPwd; 
   }
 
   update(): void {
-    this.userService.updateInfo(this.updateForm.value).subscribe(() => {
+    this.userService.updateInfo(this.userForm.value).subscribe(() => {
       this.router.navigate([`/profile/user/${this.profileId}`]);
     });
   }

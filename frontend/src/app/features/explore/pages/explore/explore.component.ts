@@ -33,10 +33,10 @@ export class ExploreComponent implements OnInit {
   
   roleDDL:  { id: number, value: string }[] = [
     { id: -1, value: 'All Users' },
-    { id: 1,  value: 'Bands' },
-    { id: 2,  value: 'Companies' },
-    { id: 3,  value: 'Contractors' },
-    { id: 4,  value: 'Administrators' }
+    { id:  1, value: 'Bands' },
+    { id:  2, value: 'Companies' },
+    { id:  3, value: 'Contractors' },
+    { id:  4, value: 'Administrators' }
   ];
 
   constructor(
