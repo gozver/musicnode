@@ -13,11 +13,13 @@ import { CompanyFormComponent } from './company-form/company-form.component';
 
 // Custom Modules
 import { ComponentsModule } from '@shared/components/components.module';
+import { RolesListComponent } from './roles-list/roles-list.component';
 
 @NgModule({
   declarations: [
     BandFormComponent,
-    CompanyFormComponent
+    CompanyFormComponent,
+    RolesListComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { ComponentsModule } from '@shared/components/components.module';
   ],
   exports: [
     BandFormComponent,
-    CompanyFormComponent
+    CompanyFormComponent,
+    RolesListComponent
   ]
 })
 export class RoleComponentsModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+
+import { BehaviorSubject } from 'rxjs';
 
 import { AuthService } from '@shared/services/auth.service';
 import { UserService } from '@shared/services/user.service';
@@ -15,12 +16,11 @@ import { User } from '@shared/interfaces/user.interface';
   styleUrls: ['./manager.component.scss']
 })
 export class ManagerComponent implements OnInit {
+  rolesList$ = new BehaviorSubject([]);
   currentUser: User;
 
   bandForm: FormGroup;
   companyForm: FormGroup;
-
-  rolesList: any[] = [];
 
   priceRegex: string = '^[0-9]+$';
   phoneRegex: string = '^[0-9\-]+$';
@@ -28,7 +28,6 @@ export class ManagerComponent implements OnInit {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly router: Router,
     private readonly authService: AuthService,
     private readonly userService: UserService,
     private readonly roleService: RoleService,
@@ -46,14 +45,11 @@ export class ManagerComponent implements OnInit {
   initComponentData(): void {
     this.currentUser = this.authService.currentUser$.value;
 
-    console.log('--> this.currentUser');
-    console.log(this.currentUser);
-    
     this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
-      this.rolesList = rolesList;
+      this.rolesList$.next([...rolesList]);
 
       console.log('--> this.rolesList');
-      console.log(this.rolesList);
+      console.log(rolesList);
     });
   }
 
@@ -87,7 +83,7 @@ export class ManagerComponent implements OnInit {
   }
 
   createBand(): void {
-    this.bandService.createBand(this.bandForm.value, this.currentUser.id).subscribe(() => {
+    this.bandService.createBand(this.bandForm.value, this.currentUser.id).subscribe(band => {
       this.userService.updateActiveRole(this.currentUser.id, 1).subscribe(user => {
         console.log('--> update active role:')
         console.log(user);
@@ -99,9 +95,19 @@ export class ManagerComponent implements OnInit {
       this.authService.setCurrentUser(this.currentUser);
       this.authService.setHasRole(this.currentUser.hasRole);
       
-      this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/role']);
-      });
+      const role = {
+        roleId: 1,
+        role: "band",
+        bandId: band.id,
+        band: band,
+        companyId: null,
+        company: null,
+        userId: this.currentUser.id,
+        createdAt: Date.now(),
+        updatedAt: Date.now()
+      }
+
+      this.rolesList$.next([...this.rolesList$.value, role]);
     });
   }
 
@@ -116,10 +122,6 @@ export class ManagerComponent implements OnInit {
   
         this.authService.setCurrentUser(this.currentUser);
         this.authService.setHasRole(this.currentUser.hasRole);
-      
-        this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/role']);
-        });
       });
     });
   }

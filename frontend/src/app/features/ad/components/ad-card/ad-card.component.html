@@ -18,8 +18,8 @@
 
   <app-ad-carousel
     class="card-carousel"
-    [data]=imagesList$>
-  </app-ad-carousel>
+    [data]=imagesList$
+  ></app-ad-carousel>
   
   <div class="btn-cntr">
     <button mat-fab color="warn" class="warn" (click)="sendMessage(ad.user.id)" *ngIf="!isMyAd">

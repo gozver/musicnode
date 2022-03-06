@@ -47,13 +47,14 @@
   <section class="roles-list-ctnr" *ngIf="hasRole()">
     <h1>Roles List:</h1>
     
-    <span *ngFor="let role of rolesList">
-      <span [ngSwitch]="+role?.roleId">
-        <p *ngSwitchCase="1" class="role">- This user belongs to <span class="bold">{{ role?.band?.name }}.</span></p>
-        <p *ngSwitchCase="2" class="role">- This user belongs to <span class="bold">{{ role?.company?.name }}.</span></p>
-        <p *ngSwitchCase="3" class="role">- This user has an <span class="bold">contractor</span> role.</p>
-        <p *ngSwitchCase="4" class="role">- This user has an <span class="bold">administrator</span> role.</p>
-      </span>
-    </span>
+    <app-roles-list
+      [data]=rolesList$
+      [currentUser]="currentUser"
+    ></app-roles-list>
+  </section>
+
+  <!-- LIST OF USER ROLES -->
+  <section class="has-role-ctnr" *ngIf="hasRole()">
+    <h1>Add roles:</h1>
   </section>
 <article>

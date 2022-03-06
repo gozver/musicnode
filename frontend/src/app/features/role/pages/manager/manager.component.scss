@@ -68,7 +68,7 @@ article {
 
   .roles-list-ctnr {
     h1 {
-      font-size: 20px;
+      font-size: 22px;
       color: #eeaa24;
       margin-top: 15px;
       margin-bottom: 15px;
@@ -80,6 +80,15 @@ article {
       .bold {
         font-weight: 500;
       }
+    }
+  }
+
+  .has-role-ctnr {
+    h1 {
+      font-size: 22px;
+      color: #eeaa24;
+      margin-top: 30px;
+      margin-bottom: 30px;
     }
   }
 }

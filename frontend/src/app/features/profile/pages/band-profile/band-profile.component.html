@@ -54,8 +54,8 @@
 
   <!-- BAND IMAGES CAROUSEL -->
   <app-carousel
-    [data]=imagesList$>
-  </app-carousel>
+    [data]=imagesList$
+  ></app-carousel>
 
   <section class="carousel-btn-ctnr" *ngIf="isMyBand || isAdmin">
     <input type="file" id="files" name="files" multiple (change)="uploadImages($event)" />

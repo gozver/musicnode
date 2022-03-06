@@ -1,0 +1,53 @@
+<table mat-table [dataSource]="rolesList">
+  <ng-container matColumnDef="role">
+    <th mat-header-cell *matHeaderCellDef class="w-30">
+      <span>Role</span>
+    </th>
+
+    <td mat-cell *matCellDef="let element" class="w-30">
+      <span>{{ element.role | titlecase  }}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef class="w-40">
+      <span>Group</span>
+    </th>
+
+    <td mat-cell *matCellDef="let element" class="w-40">
+      <span [ngSwitch]="+element?.roleId">
+        <p *ngSwitchCase="1" class="role">{{ element?.band?.name }}</p>
+        <p *ngSwitchCase="2" class="role">{{ element?.company?.name }}</p>
+        <p *ngSwitchCase="3" class="role">Unique User</p>
+        <p *ngSwitchCase="4" class="role">Unique User</p>
+      </span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions" class="w-30">
+    <th mat-header-cell *matHeaderCellDef>
+      <span>Actions</span>
+    </th>
+
+    <td mat-cell *matCellDef="let element" class="w-30">
+      <!-- <button mat-fab color="warn" (click)="deleteRole(role.id)" *ngIf="isMyAd || isAdmin "> -->
+      <span>
+        <button mat-fab color="warn" [disabled]="rolesList.length < 2">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </span>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<!-- <span *ngFor="let role of rolesList">
+  <span [ngSwitch]="+role?.roleId">
+    <p *ngSwitchCase="1" class="role">- This user belongs to <span class="bold">{{ role?.band?.name }}.</span></p>
+    <p *ngSwitchCase="2" class="role">- This user belongs to <span class="bold">{{ role?.company?.name }}.</span></p>
+    <p *ngSwitchCase="3" class="role">- This user has an <span class="bold">contractor</span> role.</p>
+    <p *ngSwitchCase="4" class="role">- This user has an <span class="bold">administrator</span> role.</p>
+  </span>
+</span> -->
