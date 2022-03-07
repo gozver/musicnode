@@ -12,17 +12,13 @@ import { environment } from '@environments/environment';
   providedIn: 'root'
 })
 export class AdService {
-  httpOptions: { headers: HttpHeaders} = {
-    headers: new HttpHeaders(environment.headers)
-  };
-
   constructor(
     private http: HttpClient,
     private errorHandlerService: ErrorHandlerService
   ) { }
 
   getAds(): Observable<Ad[]> {
-    return this.http.get<Ad[]>(`${environment.apiUrl}/ad`, this.httpOptions).pipe(
+    return this.http.get<Ad[]>(`${environment.apiUrl}/ad`).pipe(
       catchError(this.errorHandlerService.handleError<any>('getAds', []))
     );
   }
@@ -34,7 +30,7 @@ export class AdService {
   }
 
   createAd(params: Ad): Observable<any> {
-    return this.http.post<Ad>(`${environment.apiUrl}/ad`, params, this.httpOptions).pipe(
+    return this.http.post<Ad>(`${environment.apiUrl}/ad`, params).pipe(
       catchError(this.errorHandlerService.handleError<any>('createAd', null))
     );
   }
@@ -46,7 +42,7 @@ export class AdService {
   }
 
   deleteAd(adId: number): Observable<any> {
-    return this.http.delete<Ad>(`${environment.apiUrl}/ad/${adId}`, this.httpOptions).pipe(
+    return this.http.delete<Ad>(`${environment.apiUrl}/ad/${adId}`).pipe(
       catchError(this.errorHandlerService.handleError<any>('deleteAd'))
     );
   }

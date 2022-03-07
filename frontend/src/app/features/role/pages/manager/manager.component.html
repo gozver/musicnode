@@ -3,7 +3,6 @@
     <div class=title>ROLE MANAGER</div>
     
     <div class="subtitle" *ngIf="!hasRole()">Add a role</div>
-    <!-- <div class="subtitle" *ngIf="hasRole()">Role list</div> -->
     <div class="subtitle" *ngIf="hasRole()">Let's organize</div>
     
     <div class="text">
@@ -50,11 +49,22 @@
     <app-roles-list
       [data]=rolesList$
       [currentUser]="currentUser"
+      (delete)="deleteRole($event)"
     ></app-roles-list>
   </section>
 
-  <!-- LIST OF USER ROLES -->
+  <!-- CREATE A NEW ROLE -->
   <section class="has-role-ctnr" *ngIf="hasRole()">
-    <h1>Add roles:</h1>
+    <h1>Create a new role:</h1>
+
+    <app-role-form
+      [roleForm]=roleForm
+      [roleDDL]=roleDDL
+      [existsDDL]=existsDDL
+    ></app-role-form>
+
+    <button mat-flat-button class="primary" (click)="createRole()" [disabled]="buttonIsDisabled()">
+      Create
+    </button>
   </section>
 <article>

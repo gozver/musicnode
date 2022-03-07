@@ -4,25 +4,24 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@shared/modules/material.module';
 
-import { RoleRoutingModule } from './role-routing.module';
-import { RoleComponentsModule } from '../components/role-components.module';
+import { HelpRoutingModule } from './help-routing.module';
 import { ComponentsModule } from '@shared/components/components.module';
 
-import { ManagerComponent } from './manager/manager.component';
+import { HelpComponent } from './help/help.component';
+
 
 @NgModule({
   declarations: [
-    ManagerComponent
+    HelpComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
 
-    RoleRoutingModule,    
-    RoleComponentsModule,
+    HelpRoutingModule,
     ComponentsModule,
 
     MaterialModule,
   ]
 })
-export class RoleModule { }
+export class HelpModule { }

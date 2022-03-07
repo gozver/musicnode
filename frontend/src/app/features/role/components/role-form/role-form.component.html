@@ -1,0 +1,21 @@
+<form [formGroup]="roleForm" novalidate *ngIf="roleForm">
+  <mat-form-field appearance="outline" class="input-headline">
+    <mat-label>Role</mat-label>
+    <mat-select formControlName="roleId">
+      <mat-option *ngFor="let item of roleDDL" value="{{ item.id }}">{{ item.value }}</mat-option>
+    </mat-select>
+    <button mat-icon-button matSuffix [attr.aria-label]="'Role'" disabled>
+      <mat-icon>category</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="input-headline" *ngIf="+roleForm.value.roleId === 1 || +roleForm.value.roleId === 2">
+    <mat-label>Is new</mat-label>
+    <mat-select formControlName="exists">
+      <mat-option *ngFor="let item of existsDDL" value="{{ item.id }}">{{ item.value }}</mat-option>
+    </mat-select>
+    <button mat-icon-button matSuffix [attr.aria-label]="'Role'" disabled>
+      <mat-icon>category</mat-icon>
+    </button>
+  </mat-form-field>
+</form>

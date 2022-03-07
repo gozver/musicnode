@@ -28,6 +28,10 @@ const routes: Routes = [{
   canActivate: [AuthGuardService, RoleGuardService],
   loadChildren: () => import('@features/ad/pages/ad.module').then(m => m.AdModule)
 }, {
+  path: 'explore',
+  canActivate: [AuthGuardService, RoleGuardService],
+  loadChildren: () => import('@features/explore/pages/explore.module').then(m => m.ExploreModule)
+}, {
   path: 'chat',
   canActivate: [AuthGuardService, RoleGuardService],
   loadChildren: () => import('@features/chat/pages/chat.module').then(m => m.MessageModule)
@@ -36,15 +40,14 @@ const routes: Routes = [{
   canActivate: [AuthGuardService],
   loadChildren: () => import('@features/role/pages/role.module').then(m => m.RoleModule)
 }, {
-  path: 'explore',
-  canActivate: [AuthGuardService, RoleGuardService],
-  loadChildren: () => import('@features/explore/pages/explore.module').then(m => m.ExploreModule)
-}, {
   path: 'about',
   loadChildren: () => import('@features/about/pages/about.module').then(m => m.AdModule)
 }, {
   path: 'contact',
   loadChildren: () => import('@features/contact/pages/contact.module').then(m => m.ContactModule)
+}, {
+  path: 'help',
+  loadChildren: () => import('@features/help/pages/help.module').then(m => m.HelpModule)
 }, {
   path: '**', // Any other path
   redirectTo: '/home'

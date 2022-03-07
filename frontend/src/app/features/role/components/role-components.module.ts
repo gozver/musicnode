@@ -1,24 +1,21 @@
-// Angular Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
-// Angular Material
 import { MaterialModule } from '@shared/modules/material.module';
 
-// Custom Components
 import { BandFormComponent } from './band-form/band-form.component';
 import { CompanyFormComponent } from './company-form/company-form.component';
-
-// Custom Modules
-import { ComponentsModule } from '@shared/components/components.module';
+import { RoleFormComponent } from './role-form/role-form.component';
 import { RolesListComponent } from './roles-list/roles-list.component';
+import { ComponentsModule } from '@shared/components/components.module';
 
 @NgModule({
   declarations: [
     BandFormComponent,
     CompanyFormComponent,
+    RoleFormComponent,
     RolesListComponent
   ],
   imports: [
@@ -32,6 +29,7 @@ import { RolesListComponent } from './roles-list/roles-list.component';
   exports: [
     BandFormComponent,
     CompanyFormComponent,
+    RoleFormComponent,
     RolesListComponent
   ]
 })

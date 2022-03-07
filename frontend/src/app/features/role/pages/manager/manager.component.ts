@@ -21,10 +21,23 @@ export class ManagerComponent implements OnInit {
 
   bandForm: FormGroup;
   companyForm: FormGroup;
+  roleForm: FormGroup;
 
   priceRegex: string = '^[0-9]+$';
   phoneRegex: string = '^[0-9\-]+$';
   emailRegex: string = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+
+  roleDDL:  { id: number, value: string }[] = [
+    { id: 1, value: 'Band' },
+    { id: 2, value: 'Company' },
+    { id: 3, value: 'Contractor' },
+    { id: 4, value: 'Admin' }
+  ];
+
+  existsDDL:  { id: number, value: string }[] = [
+    { id: 1, value: 'A new one' },
+    { id: 2, value: 'An old one' }
+  ];
 
   constructor(
     private readonly fb: FormBuilder,
@@ -40,6 +53,7 @@ export class ManagerComponent implements OnInit {
 
     this.initBandForm();
     this.initCompanyForm();
+    this.initRoleForm();
   }
 
   initComponentData(): void {
@@ -74,6 +88,14 @@ export class ManagerComponent implements OnInit {
       email:   [ '', [ Validators.required, Validators.pattern(this.emailRegex) ]],
       phone:   [ '', [ Validators.required, Validators.pattern(this.phoneRegex) ]],
       address: [ '', [ Validators.required, Validators.minLength(3) ]],
+    });
+  }
+
+  initRoleForm(): void {
+    this.roleForm = this.fb.group({
+      roleId: [ null, [ Validators.required] ],
+      exists: [ null, [ Validators.required] ],
+      userId: [ null ]
     });
   }
 
@@ -123,6 +145,49 @@ export class ManagerComponent implements OnInit {
         this.authService.setCurrentUser(this.currentUser);
         this.authService.setHasRole(this.currentUser.hasRole);
       });
+    });
+  }
+
+  buttonIsDisabled(): boolean {
+    var roleId = parseInt(this.roleForm.value.roleId);
+
+    if (roleId === 3 || roleId === 4) return false;
+
+    if (roleId === 1 || roleId === 2)
+      if (this.roleForm.value.exists) return false;
+    
+    return true;
+  }
+
+  createRole(): void {
+    this.roleForm.value.userId = this.currentUser.id;
+
+    this.roleService.createRole(this.roleForm.value).subscribe(
+      role => {
+        if (role) {
+          console.log('--> new role:');
+          console.log(role);
+
+          this.rolesList$.next([...this.rolesList$.value, role]);
+        }
+      },
+      error => {
+        console.error(`--> error code: ${error.error.err.code}`);
+        console.error(`--> error message: ${error.error.err.message}`);
+        console.error('--> error objet:');
+        console.error(error);
+      });
+  }
+
+  deleteRole(id: number): void {
+    console.log('--> role id:');
+    console.log(id);
+
+    this.roleService.deleteRole(id).subscribe(res => {
+      console.log('--> delete response:');
+      console.log(res);
+
+      this.rolesList$.next([...this.rolesList$.value.filter(item => item.id !== id)]);
     });
   }
 }

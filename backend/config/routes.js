@@ -24,6 +24,8 @@ router
 
   .get    ('/role',                       controllers.role.findAll)
   .get    ('/role/:id', middlewares.auth, controllers.role.findAllByUserId)
+  .post   ('/role',     middlewares.auth, controllers.role.create)
+  .delete ('/role/:id', middlewares.auth, controllers.role.delete)
 
   .get    ('/band',                          controllers.band.findAll)
   .get    ('/band/params', middlewares.auth, controllers.band.findAllByParams)
@@ -58,6 +60,6 @@ router
   .get    ('/review/:bandId', middlewares.auth, controllers.review.findAll)
   .post   ('/review',         middlewares.auth, controllers.review.create)
 
-  .post   ('/email',  controllers.email.sendContactEmail);
+  .post   ('/email', controllers.email.sendContactEmail);
 
 module.exports = router;

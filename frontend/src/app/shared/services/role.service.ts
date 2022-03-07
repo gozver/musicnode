@@ -17,15 +17,19 @@ export class RoleService {
     private errorHandlerService: ErrorHandlerService
   ) { }
 
-  create(name: string): Observable<Role> {
-    return this.http.post<Role>(`${environment.apiUrl}/role`, name).pipe(
-      catchError(this.errorHandlerService.handleError<any>('create', null))
-    );
+  createRole(params: Role): Observable<Role> {
+    return this.http.post<Role>(`${environment.apiUrl}/role`, params);
   }
 
   getRolesByUserId(id: number): Observable<any[]> { // controller return role model with includes
     return this.http.get<any[]>(`${environment.apiUrl}/role/${id}`).pipe(
       catchError(this.errorHandlerService.handleError<any>('getRolesByUserId', []))
+    );
+  }
+
+  deleteRole(id: number): Observable<any> {
+    return this.http.delete<Role>(`${environment.apiUrl}/role/${id}`).pipe(
+      catchError(this.errorHandlerService.handleError<any>('deleteRole'))
     );
   }
 }
