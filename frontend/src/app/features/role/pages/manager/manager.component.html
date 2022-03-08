@@ -68,12 +68,12 @@
 
       <app-band-form
         [bandForm]=bandForm
-        *ngIf="+roleForm.value.exists === 1 && +roleForm.value.roleId === 1"
+        *ngIf="+roleForm.value.roleId === 1 && +roleForm.value.exists === 2"
       ></app-band-form>
 
       <app-company-form
         [companyForm]=companyForm
-        *ngIf="+roleForm.value.exists === 1 && +roleForm.value.roleId === 2"
+        *ngIf="+roleForm.value.roleId === 2 && +roleForm.value.exists === 2"
       ></app-company-form>
 
       <button mat-flat-button class="primary" (click)="createRole()" [disabled]="buttonIsDisabled()">

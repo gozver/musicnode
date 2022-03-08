@@ -23,7 +23,35 @@ exports.create = async (req, res, next) => {
 
     switch (true) {
       case parseInt(roleIn.roleId) === 1:
-        
+        // band exists
+        if (parseInt(roleIn.exists) === 1) {
+          const band = await models.band.findOne({ where: { email: roleIn.email } });
+
+          console.log('--> band');
+          console.log(band);
+        // band doesn't exist
+        } else if (parseInt(roleIn.exists) === 2) {
+          // save the band into the db
+          const band = await models.band.create(bandIn).catch(err => {
+            if (!err.statusCode) err.statusCode = 500;
+            err.message = 'The email already exists';
+      
+            // print error and send it to error controller
+            console.log('--> error:');
+            console.log(err);
+            next(err);
+          });
+            
+          // add the data to the user-band junction table
+          await band.addUser(user);
+
+          // save the new role into the db
+          const role = await models.role.create({ roleId: 1, role: 'band', userId: user.id, bandId: band.id });
+          
+          // return response to the client
+          const roleWithBand = { id: role.id, roleId: role.roleId, role: role.role, userId: role.userId, bandId: role.bandId, band: band }
+          res.json(roleWithBand);
+        }
       break;
 
       case parseInt(roleIn.roleId) === 2:
@@ -32,12 +60,16 @@ exports.create = async (req, res, next) => {
 
       case parseInt(roleIn.roleId) === 3:
         if (isContractor !== null) {
+          // return error to the client
           const err = new Error();
           err.statusCode = 401;
           err.message = 'You already have a contractor role';
           next(err);
         } else {
+          // save the new role into the db
           role = await models.role.create({ roleId: 3, role: 'contractor', userId: user.id });
+
+          // return response to the client
           res.json(role);
         }
       break;
@@ -50,9 +82,13 @@ exports.create = async (req, res, next) => {
           next(err);
         } else {
           if (parseInt(roleIn.code) === 123) {
+            // save the new role into the db
             role = await models.role.create({ roleId: 4, role: 'admin', userId: user.id });
+
+            // return response to the client
             res.json(role);
           } else {
+            // return error to the client
             const err = new Error();
             err.statusCode = 401;
             err.message = 'The administrator code is not correct';
@@ -66,6 +102,7 @@ exports.create = async (req, res, next) => {
         res.json('default');
     }
   } else {
+    // return error to the client
     const err = new Error();
     err.statusCode = 401;
     err.message = 'User not found';

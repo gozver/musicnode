@@ -10,20 +10,28 @@
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="input-headline" *ngIf="+roleForm.value.roleId === 1 || +roleForm.value.roleId === 2">
-    <mat-label>Is new</mat-label>
+    <mat-label>Exists</mat-label>
     <mat-select formControlName="exists">
       <mat-option *ngFor="let item of existsDDL" value="{{ item.id }}">{{ item.value }}</mat-option>
     </mat-select>
     <button mat-icon-button matSuffix [attr.aria-label]="'Role'" disabled>
-      <mat-icon>category</mat-icon>
+      <mat-icon>person</mat-icon>
     </button>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="input-headline" *ngIf="+roleForm.value.roleId === 4">
     <mat-label>Code</mat-label>
-    <input matInput placeholder="Code" formControlName="code" autocomplete="on" type="email" />
+    <input matInput placeholder="Code" formControlName="code" autocomplete="on" />
     <button mat-icon-button matSuffix [attr.aria-label]="'Role'" disabled>
-      <mat-icon>category</mat-icon>
+      <mat-icon>code</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="input-headline" *ngIf="(+roleForm.value.roleId === 1 || +roleForm.value.roleId === 1) && +roleForm.value.exists === 1">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="Email" formControlName="email" autocomplete="on" type="email" />
+    <button mat-icon-button matSuffix [attr.aria-label]="'Role'" disabled>
+      <mat-icon>alternate_email</mat-icon>
     </button>
   </mat-form-field>
 </form>

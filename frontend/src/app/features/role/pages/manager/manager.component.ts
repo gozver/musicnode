@@ -17,9 +17,6 @@ import { ErrorDialogComponent } from '@shared/components/error-dialog/error-dial
 })
 export class ManagerComponent implements OnInit, OnDestroy {
   rolesList$ = new BehaviorSubject([]);
-  isAdmin$ = new BehaviorSubject(false);
-  isContractor$ = new BehaviorSubject(false);
-
   currentUser: User;
 
   bandForm: FormGroup;
@@ -62,21 +59,14 @@ export class ManagerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.rolesList$.complete();
-    this.isContractor$.complete();
-    this.isAdmin$.complete();
   }
 
   initComponentData(): void {
     this.currentUser = this.authService.currentUser$.value;
 
     this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
-      this.rolesList$.next([...rolesList]);
-      this.isContractor$.next(rolesList.filter(item => parseInt(item.roleId) === 3).length > 0);
-      this.isAdmin$.next(rolesList.filter(item => parseInt(item.roleId) === 4).length > 0);
-
-      console.log('--> isContractor:', this.isContractor$.value);
-      console.log('--> isAdmin:', this.isAdmin$.value);
       console.log('--> this.rolesList:', rolesList);
+      this.rolesList$.next([...rolesList]);
     });
   }
 
@@ -110,6 +100,7 @@ export class ManagerComponent implements OnInit, OnDestroy {
       exists: [ null ],
       userId: [ null ],
       code:   [ null ],
+      email:  [ '', [ Validators.pattern(this.emailRegex) ]]
     });
   }
 
@@ -167,12 +158,13 @@ export class ManagerComponent implements OnInit, OnDestroy {
 
     if (roleId === 3) return false;
     
-    if (roleId === 4)
-      if (this.roleForm.value.code) return false;
+    if (roleId === 4) if (this.roleForm.value.code) return false;
 
-    if (roleId === 1 || roleId === 2)
-      if (this.roleForm.value.exists) return false;
+    const emailIsCorrect = this.roleForm.value.email && this.roleForm.controls['email'].valid
+    if ((roleId === 1 || roleId === 2) && emailIsCorrect && parseInt(this.roleForm.value.exists) === 1) return false;
     
+    if (roleId === 1 && parseInt(this.roleForm.value.exists) === 2 && this.bandForm.valid) return false;
+
     return true;
   }
 
@@ -185,12 +177,6 @@ export class ManagerComponent implements OnInit, OnDestroy {
           console.log('--> new role:', role);
 
           this.rolesList$.next([...this.rolesList$.value, role]);
-
-          if (role.roleId === 3) {
-            this.isContractor$.next(true);
-          } else if (role.roleId === 4) {
-            this.isAdmin$.next(true);
-          }
 
           this.roleForm.reset();
           this.bandForm.reset();

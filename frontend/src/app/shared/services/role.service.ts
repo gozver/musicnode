@@ -20,10 +20,10 @@ export class RoleService {
     private errorHandlerService: ErrorHandlerService
   ) { }
 
-  createRole(roleForm: Role, bandForm: Band, companyForm: Company): Observable<Role> {
+  createRole(roleForm: Role, bandForm: Band, companyForm: Company): Observable<any> {
     const params = { roleForm, bandForm, companyForm };
     
-    return this.http.post<Role>(`${environment.apiUrl}/role`, params);
+    return this.http.post<any>(`${environment.apiUrl}/role`, params);
   }
 
   getRolesByUserId(id: number): Observable<any[]> { // controller return role model with includes
