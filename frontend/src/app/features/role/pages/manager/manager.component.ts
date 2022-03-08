@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
 
 import { AuthService } from '@shared/services/auth.service';
@@ -9,14 +9,17 @@ import { RoleService } from '@shared/services/role.service';
 import { BandService } from '@shared/services/band.service';
 import { CompanyService } from '@shared/services/company.service';
 import { User } from '@shared/interfaces/user.interface';
-
+import { ErrorDialogComponent } from '@shared/components/error-dialog/error-dialog.component'
 @Component({
   selector: 'app-manager',
   templateUrl: './manager.component.html',
   styleUrls: ['./manager.component.scss']
 })
-export class ManagerComponent implements OnInit {
+export class ManagerComponent implements OnInit, OnDestroy {
   rolesList$ = new BehaviorSubject([]);
+  isAdmin$ = new BehaviorSubject(false);
+  isContractor$ = new BehaviorSubject(false);
+
   currentUser: User;
 
   bandForm: FormGroup;
@@ -35,12 +38,13 @@ export class ManagerComponent implements OnInit {
   ];
 
   existsDDL:  { id: number, value: string }[] = [
-    { id: 1, value: 'A new one' },
-    { id: 2, value: 'An old one' }
+    { id: 1, value: 'Yes' },
+    { id: 2, value: 'No' }
   ];
 
   constructor(
     private readonly fb: FormBuilder,
+    private readonly dialog: MatDialog,
     private readonly authService: AuthService,
     private readonly userService: UserService,
     private readonly roleService: RoleService,
@@ -56,14 +60,23 @@ export class ManagerComponent implements OnInit {
     this.initRoleForm();
   }
 
+  ngOnDestroy(): void {
+    this.rolesList$.complete();
+    this.isContractor$.complete();
+    this.isAdmin$.complete();
+  }
+
   initComponentData(): void {
     this.currentUser = this.authService.currentUser$.value;
 
     this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
       this.rolesList$.next([...rolesList]);
+      this.isContractor$.next(rolesList.filter(item => parseInt(item.roleId) === 3).length > 0);
+      this.isAdmin$.next(rolesList.filter(item => parseInt(item.roleId) === 4).length > 0);
 
-      console.log('--> this.rolesList');
-      console.log(rolesList);
+      console.log('--> isContractor:', this.isContractor$.value);
+      console.log('--> isAdmin:', this.isAdmin$.value);
+      console.log('--> this.rolesList:', rolesList);
     });
   }
 
@@ -93,9 +106,10 @@ export class ManagerComponent implements OnInit {
 
   initRoleForm(): void {
     this.roleForm = this.fb.group({
-      roleId: [ null, [ Validators.required] ],
-      exists: [ null, [ Validators.required] ],
-      userId: [ null ]
+      roleId: [ null ],
+      exists: [ null ],
+      userId: [ null ],
+      code:   [ null ],
     });
   }
 
@@ -151,7 +165,10 @@ export class ManagerComponent implements OnInit {
   buttonIsDisabled(): boolean {
     var roleId = parseInt(this.roleForm.value.roleId);
 
-    if (roleId === 3 || roleId === 4) return false;
+    if (roleId === 3) return false;
+    
+    if (roleId === 4)
+      if (this.roleForm.value.code) return false;
 
     if (roleId === 1 || roleId === 2)
       if (this.roleForm.value.exists) return false;
@@ -162,13 +179,22 @@ export class ManagerComponent implements OnInit {
   createRole(): void {
     this.roleForm.value.userId = this.currentUser.id;
 
-    this.roleService.createRole(this.roleForm.value).subscribe(
+    this.roleService.createRole(this.roleForm.value, this.bandForm.value, this.companyForm.value).subscribe(
       role => {
         if (role) {
-          console.log('--> new role:');
-          console.log(role);
+          console.log('--> new role:', role);
 
           this.rolesList$.next([...this.rolesList$.value, role]);
+
+          if (role.roleId === 3) {
+            this.isContractor$.next(true);
+          } else if (role.roleId === 4) {
+            this.isAdmin$.next(true);
+          }
+
+          this.roleForm.reset();
+          this.bandForm.reset();
+          this.companyForm.reset();
         }
       },
       error => {
@@ -176,16 +202,26 @@ export class ManagerComponent implements OnInit {
         console.error(`--> error message: ${error.error.err.message}`);
         console.error('--> error objet:');
         console.error(error);
+
+        /**
+         * @definition Opens a mat dialog
+         * @param1 Component to show inside the dialog
+         * @param2 Data sent to the component
+         */
+        this.dialog.open(
+          ErrorDialogComponent, { 
+          data: { 
+            title: 'Create Role Error',
+            code: error.error.err.code,
+            message: error.error.err.message 
+          }
+        });
       });
   }
 
   deleteRole(id: number): void {
-    console.log('--> role id:');
-    console.log(id);
-
     this.roleService.deleteRole(id).subscribe(res => {
-      console.log('--> delete response:');
-      console.log(res);
+      console.log('--> delete role response:', res);
 
       this.rolesList$.next([...this.rolesList$.value.filter(item => item.id !== id)]);
     });

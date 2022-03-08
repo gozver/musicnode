@@ -23,13 +23,13 @@
   <section class="no-role-ctnr" *ngIf="!hasRole()">
     <div class="card">
       <app-band-form
-      [bandForm]=bandForm
-      *ngIf="+currentUser?.activeRole === -1"
+        [bandForm]=bandForm
+        *ngIf="+currentUser?.activeRole === -1"
       ></app-band-form>
       
       <app-company-form
-      [companyForm]=companyForm
-      *ngIf="+currentUser?.activeRole === -2"
+        [companyForm]=companyForm
+        *ngIf="+currentUser?.activeRole === -2"
       ></app-company-form>
       
       <button mat-flat-button class="primary" *ngIf="+currentUser?.activeRole === -1" (click)="createBand()" [disabled]="bandForm.invalid">
@@ -46,25 +46,39 @@
   <section class="roles-list-ctnr" *ngIf="hasRole()">
     <h1>Roles List:</h1>
     
-    <app-roles-list
-      [data]=rolesList$
-      [currentUser]="currentUser"
-      (delete)="deleteRole($event)"
-    ></app-roles-list>
+    <div class="card">
+      <app-roles-list
+        [data]=rolesList$
+        [currentUser]="currentUser"
+        (delete)="deleteRole($event)"
+      ></app-roles-list>
+    </div>
   </section>
 
   <!-- CREATE A NEW ROLE -->
   <section class="has-role-ctnr" *ngIf="hasRole()">
     <h1>Create a new role:</h1>
 
-    <app-role-form
-      [roleForm]=roleForm
-      [roleDDL]=roleDDL
-      [existsDDL]=existsDDL
-    ></app-role-form>
+    <div class="card">
+      <app-role-form
+        [roleForm]=roleForm
+        [roleDDL]=roleDDL
+        [existsDDL]=existsDDL
+      ></app-role-form>
 
-    <button mat-flat-button class="primary" (click)="createRole()" [disabled]="buttonIsDisabled()">
-      Create
-    </button>
+      <app-band-form
+        [bandForm]=bandForm
+        *ngIf="+roleForm.value.exists === 1 && +roleForm.value.roleId === 1"
+      ></app-band-form>
+
+      <app-company-form
+        [companyForm]=companyForm
+        *ngIf="+roleForm.value.exists === 1 && +roleForm.value.roleId === 2"
+      ></app-company-form>
+
+      <button mat-flat-button class="primary" (click)="createRole()" [disabled]="buttonIsDisabled()">
+        Create
+      </button>
+    </div>
   </section>
 <article>

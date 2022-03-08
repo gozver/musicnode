@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
-    private readonly dialog: MatDialog    
+    private readonly dialog: MatDialog
   ) { }
 
   ngOnInit(): void {

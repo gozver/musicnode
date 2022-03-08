@@ -1,4 +1,3 @@
-// global variables
 $primary: #014fa7;
 $primary-shadow: #e7f3ff;
 
@@ -28,11 +27,11 @@ button {
     &:disabled,
     &[disabled]:hover { 
       color: #fff;
-      background: #06548bc9; 
+      background: #06548b9a; 
     }
 
     &:hover { 
-      background: #06548bee; 
+      background: #06548bce; 
     }
 
   }

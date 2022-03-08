@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { Role } from '../interfaces/role.interface'
+import { Band } from '../interfaces/band.interface';
+import { Company } from '../interfaces/company.interface';
+
 import { ErrorHandlerService } from './error-handler.service';
 import { environment } from '@environments/environment';
 
@@ -17,7 +20,9 @@ export class RoleService {
     private errorHandlerService: ErrorHandlerService
   ) { }
 
-  createRole(params: Role): Observable<Role> {
+  createRole(roleForm: Role, bandForm: Band, companyForm: Company): Observable<Role> {
+    const params = { roleForm, bandForm, companyForm };
+    
     return this.http.post<Role>(`${environment.apiUrl}/role`, params);
   }
 

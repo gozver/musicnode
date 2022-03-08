@@ -40,11 +40,11 @@ article {
       display: flex;
       flex-direction: column;
     
+      background: #fff;
       border: 1px solid #dddfe2;
       border-radius: 4px;
       padding: 1rem;
       margin-bottom: 1.5rem;
-      background: #fff;
 
       form {
         mat-form-field {
@@ -68,33 +68,47 @@ article {
 
   .roles-list-ctnr {
     h1 {
-      font-size: 22px;
+      font-size: 20px;
       color: #eeaa24;
       margin-top: 15px;
-      margin-bottom: 15px;
+      margin-bottom: 22px;
     }
 
-    .role {
-      margin: 0 0 10px 0;
+    .card {
+      display: flex;
+      flex-direction: column;
       
-      .bold {
-        font-weight: 500;
-      }
+      background: #fff;
+      border: 1px solid #dddfe2;
+      border-radius: 4px;
+      padding: 0 .5rem;
+      margin-bottom: 1.5rem;
     }
   }
 
   .has-role-ctnr {
     h1 {
-      font-size: 22px;
+      font-size: 20px;
       color: #eeaa24;
       margin-top: 30px;
-      margin-bottom: 30px;
+      margin-bottom: 22px;
     }
 
-    button {
-      width: 100%;
-      margin-top: 8px;
-      padding: 8px;
+    .card {
+      display: flex;
+      flex-direction: column;
+      
+      background: #fff;
+      border: 1px solid #dddfe2;
+      border-radius: 4px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+    
+      button {
+        width: 100%;
+        margin-top: 8px;
+        padding: 8px;
+      }
     }
   }
 }

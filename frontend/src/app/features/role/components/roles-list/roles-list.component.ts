@@ -18,7 +18,6 @@ export class RolesListComponent implements OnInit {
   displayedColumns: string[] = ['role', 'name', 'actions'];
   dataSource = this.rolesList;
 
-
   constructor(
     private readonly cd: ChangeDetectorRef
   ) { }

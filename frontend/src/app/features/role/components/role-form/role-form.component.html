@@ -18,4 +18,12 @@
       <mat-icon>category</mat-icon>
     </button>
   </mat-form-field>
+
+  <mat-form-field appearance="outline" class="input-headline" *ngIf="+roleForm.value.roleId === 4">
+    <mat-label>Code</mat-label>
+    <input matInput placeholder="Code" formControlName="code" autocomplete="on" type="email" />
+    <button mat-icon-button matSuffix [attr.aria-label]="'Role'" disabled>
+      <mat-icon>category</mat-icon>
+    </button>
+  </mat-form-field>
 </form>

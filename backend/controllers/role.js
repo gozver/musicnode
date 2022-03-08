@@ -2,43 +2,63 @@ const models = require('../models');
 
 exports.create = async (req, res, next) => {
   // const bandIn = req.body.band;
-  const userId = req.body.userId;
-  const roleId = parseInt(req.body.roleId);
+  const roleIn = req.body.roleForm;
+  const bandIn = req.body.bandForm;
+  const compIn = req.body.companyForm;
 
-  console.log('--> req.body:');
-  console.log(req.body);
-  console.log('--> userId:');
-  console.log(userId);
-  console.log('--> roleId:');
-  console.log(roleId);
-   
+  console.log('--> req.body.roleForm:');
+  console.log(req.body.roleForm);
+  console.log('--> req.body.bandForm:');
+  console.log(req.body.bandForm);
+  console.log('--> req.body.companyForm:');
+  console.log(req.body.companyForm);
+ 
   // find the user who is going to create the role
-  const user = await models.user.findOne({ where: { id: userId } });
+  const user = await models.user.findOne({ where: { id: roleIn.userId } });
+  const isContractor = await models.role.findOne({ where: { roleId: 3, userId: user.id } });
+  const isAdmin = await models.role.findOne({ where: { roleId: 4, userId: user.id } });
 
   if (user) {
-    console.log('--> user:');
-    console.log(user.id);
-    
     let role = null;
 
     switch (true) {
-      case roleId === 3:
-        console.log('--> roleId = 3')
-
-        // save the new role into the db
-        role = await models.role.create({ roleId: 3, role: 'contractor', userId: user.id });
-
-        // return response to the client
-        res.json(role);
+      case parseInt(roleIn.roleId) === 1:
+        
       break;
 
-      case roleId === 4:
-        console.log('--> roleId = 3')
-        // save the new role into the db
-        role = await models.role.create({ roleId: 4, role: 'admin', userId: user.id });
+      case parseInt(roleIn.roleId) === 2:
+        
+      break;
 
-        // return response to the client
-        res.json(role);
+      case parseInt(roleIn.roleId) === 3:
+        if (isContractor !== null) {
+          const err = new Error();
+          err.statusCode = 401;
+          err.message = 'You already have a contractor role';
+          next(err);
+        } else {
+          role = await models.role.create({ roleId: 3, role: 'contractor', userId: user.id });
+          res.json(role);
+        }
+      break;
+
+      case parseInt(roleIn.roleId) === 4:
+        if (isAdmin !== null) {
+          const err = new Error();
+          err.statusCode = 401;
+          err.message = 'You already have an admin role';
+          next(err);
+        } else {
+          if (parseInt(roleIn.code) === 123) {
+            role = await models.role.create({ roleId: 4, role: 'admin', userId: user.id });
+            res.json(role);
+          } else {
+            const err = new Error();
+            err.statusCode = 401;
+            err.message = 'The administrator code is not correct';
+            next(err);
+          }
+        }
       break;
 
       default:
