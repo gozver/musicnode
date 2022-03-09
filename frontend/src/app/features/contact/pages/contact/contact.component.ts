@@ -86,8 +86,9 @@ export class ContactComponent implements OnInit, OnDestroy {
           }
         });
 
-        console.error('--> message error:');
-        console.error(err);
+        console.error(`--> error code: ${err.error.err.code}`);
+        console.error(`--> error message: ${err.error.err.message}`);
+        console.error('--> error objet:', err);
       });
     this.contactForm.reset();
   }

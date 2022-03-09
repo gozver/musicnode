@@ -9,10 +9,12 @@ import { RoleComponentsModule } from '../components/role-components.module';
 import { ComponentsModule } from '@shared/components/components.module';
 
 import { ManagerComponent } from './manager/manager.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 @NgModule({
   declarations: [
-    ManagerComponent
+    ManagerComponent,
+    AddUserComponent
   ],
   imports: [
     CommonModule,

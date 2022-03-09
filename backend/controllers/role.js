@@ -18,44 +18,54 @@ exports.create = async (req, res, next) => {
   const isContractor = await models.role.findOne({ where: { roleId: 3, userId: user.id } });
   const isAdmin = await models.role.findOne({ where: { roleId: 4, userId: user.id } });
 
-  if (user) {
-    let role = null;
+  let role = null;
 
+  if (user) {
     switch (true) {
       case parseInt(roleIn.roleId) === 1:
-        // band exists
-        if (parseInt(roleIn.exists) === 1) {
-          const band = await models.band.findOne({ where: { email: roleIn.email } });
-
-          console.log('--> band');
-          console.log(band);
-        // band doesn't exist
-        } else if (parseInt(roleIn.exists) === 2) {
-          // save the band into the db
-          const band = await models.band.create(bandIn).catch(err => {
-            if (!err.statusCode) err.statusCode = 500;
-            err.message = 'The email already exists';
-      
-            // print error and send it to error controller
-            console.log('--> error:');
-            console.log(err);
-            next(err);
-          });
-            
-          // add the data to the user-band junction table
-          await band.addUser(user);
-
-          // save the new role into the db
-          const role = await models.role.create({ roleId: 1, role: 'band', userId: user.id, bandId: band.id });
+        // save the band into the db
+        const band = await models.band.create(bandIn).catch(err => {
+          if (!err.statusCode) err.statusCode = 500;
+          err.message = 'The email already exists';
+    
+          // print error and send it to error controller
+          console.log('--> error:');
+          console.log(err);
+          next(err);
+        });
           
-          // return response to the client
-          const roleWithBand = { id: role.id, roleId: role.roleId, role: role.role, userId: role.userId, bandId: role.bandId, band: band }
-          res.json(roleWithBand);
-        }
+        // add the data to the user-band junction table
+        await band.addUser(user);
+
+        // save the new role into the db
+        role = await models.role.create({ roleId: 1, role: 'band', userId: user.id, bandId: band.id });
+        
+        // return response to the client
+        const roleWithBand = { id: role.id, roleId: role.roleId, role: role.role, userId: role.userId, bandId: role.bandId, band: band }
+        res.json(roleWithBand);
       break;
 
       case parseInt(roleIn.roleId) === 2:
+        // save the band into the db
+        const company = await models.company.create(compIn).catch(err => {
+          if (!err.statusCode) err.statusCode = 500;
+          err.message = 'The email already exists';
+    
+          // print error and send it to error controller
+          console.log('--> error:');
+          console.log(err);
+          next(err);
+        });
+          
+        // add the data to the user-band junction table
+        await company.addUser(user);
+
+        // save the new role into the db
+        role = await models.role.create({ roleId: 2, role: 'company', userId: user.id, companyId: company.id });
         
+        // return response to the client
+        const roleWithCompany = { id: role.id, roleId: role.roleId, role: role.role, userId: role.userId, companyId: role.companyId, company: company }
+        res.json(roleWithCompany);
       break;
 
       case parseInt(roleIn.roleId) === 3:
@@ -99,7 +109,7 @@ exports.create = async (req, res, next) => {
 
       default:
         // return response to the client
-        res.json('default');
+        res.json('Role not found');
     }
   } else {
     // return error to the client
@@ -108,26 +118,6 @@ exports.create = async (req, res, next) => {
     err.message = 'User not found';
     next(err);    
   }
-
-  // // save the band into the db
-  // const band = await models.band.create(bandIn)
-  //   .catch(err => {
-  //     if (!err.statusCode) err.statusCode = 500;
-
-  //     // print error and send it to error controller
-  //     console.log('--> error:');
-  //     console.log(err);
-  //     next(err);
-  //   });
-    
-  // // add the data to the user-band junction table
-  // await band.addUser(user);
-
-  // // save the new role into the db
-  // await models.role.create({ roleId: 1, role: 'band', userId, bandId: band.id });
-
-  // // return response to the client
-  // res.json(band);
 }
 
 exports.findAll = async (req, res, next) => {
@@ -166,32 +156,6 @@ exports.findAllByUserId = async (req, res, next) => {
 }
 
 exports.delete = async (req, res, next) => {
-  console.log('--> req.params.id');
-  console.log(req.params.id);
-
-  const roleObj = await models.role.findAll({ where: { id: req.params.id } });
-
-  const { id, roleId, role, userId, bandId, companyId } = roleObj[0].dataValues;
-
-  console.log(`--> id: ${id}`);
-  console.log(`--> roleId: ${roleId}`);
-  console.log(`--> role: ${role}`);
-  console.log(`--> userId: ${userId}`);
-  console.log(`--> bandId: ${bandId}`);
-  console.log(`--> companyId: ${companyId}`);
-  
-  if (bandId) {
-    // TODO
-    const bandObj = await models.band.findAll({ where: { id: bandId } });
-
-    console.log('--> bandObj:');
-    console.log(bandObj);
-  } 
-
-  if (companyId) {
-  // TODO
-  }
-
   models.role.destroy({
     where: {
       id: req.params.id

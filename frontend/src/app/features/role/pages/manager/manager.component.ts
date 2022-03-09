@@ -97,10 +97,8 @@ export class ManagerComponent implements OnInit, OnDestroy {
   initRoleForm(): void {
     this.roleForm = this.fb.group({
       roleId: [ null ],
-      exists: [ null ],
       userId: [ null ],
-      code:   [ null ],
-      email:  [ '', [ Validators.pattern(this.emailRegex) ]]
+      code:   [ null ]
     });
   }
 
@@ -156,14 +154,13 @@ export class ManagerComponent implements OnInit, OnDestroy {
   buttonIsDisabled(): boolean {
     var roleId = parseInt(this.roleForm.value.roleId);
 
+    if (roleId === 1 && this.bandForm.valid) return false;
+    
+    if (roleId === 2 && this.companyForm.valid) return false;
+
     if (roleId === 3) return false;
     
     if (roleId === 4) if (this.roleForm.value.code) return false;
-
-    const emailIsCorrect = this.roleForm.value.email && this.roleForm.controls['email'].valid
-    if ((roleId === 1 || roleId === 2) && emailIsCorrect && parseInt(this.roleForm.value.exists) === 1) return false;
-    
-    if (roleId === 1 && parseInt(this.roleForm.value.exists) === 2 && this.bandForm.valid) return false;
 
     return true;
   }
@@ -186,8 +183,7 @@ export class ManagerComponent implements OnInit, OnDestroy {
       error => {
         console.error(`--> error code: ${error.error.err.code}`);
         console.error(`--> error message: ${error.error.err.message}`);
-        console.error('--> error objet:');
-        console.error(error);
+        console.error('--> error objet:', error);
 
         /**
          * @definition Opens a mat dialog

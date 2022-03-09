@@ -9,5 +9,4 @@ import { FormGroup } from '@angular/forms';
 export class RoleFormComponent {
   @Input() roleForm: FormGroup;
   @Input() roleDDL: { id: number, value: string };
-  @Input() existsDDL: { id: number, value: string };
 }

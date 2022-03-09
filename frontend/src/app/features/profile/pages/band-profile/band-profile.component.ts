@@ -131,7 +131,9 @@ export class BandProfileComponent implements OnInit {
         this.reviewService.getReviews(this.profileBand.id).subscribe(reviewsList => this.reviewsList = reviewsList);
       },
       error => {
-        console.error('--> error:', error);
+        console.error(`--> error code: ${error.error.err.code}`);
+        console.error(`--> error message: ${error.error.err.message}`);
+        console.error('--> error objet:', error);
 
         this.router.navigate(['/home']);
       }

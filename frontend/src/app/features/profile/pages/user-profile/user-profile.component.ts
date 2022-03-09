@@ -62,8 +62,9 @@ export class UserProfileComponent implements OnInit {
         this.initUserForm(this.profileUser);
       }, 
       error => {
-        console.error("--> the user doesn't exist");
-        console.error('--> error:', error);
+        console.error(`--> error code: ${error.error.err.code}`);
+        console.error(`--> error message: ${error.error.err.message}`);
+        console.error('--> error objet:', error);
 
         this.router.navigate(['/home']);
       }

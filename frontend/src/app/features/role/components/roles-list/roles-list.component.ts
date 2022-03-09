@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { User } from '@shared/interfaces/user.interface';
@@ -19,7 +20,8 @@ export class RolesListComponent implements OnInit {
   dataSource = this.rolesList;
 
   constructor(
-    private readonly cd: ChangeDetectorRef
+    private readonly cd: ChangeDetectorRef,
+    private readonly router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -31,5 +33,14 @@ export class RolesListComponent implements OnInit {
 
   deleteRole(id: number): void {
     this.delete.emit(id);
+  }
+
+  goToProfile(role: string, id: number): void {
+    this.router.navigate([`/profile/${role}/${id}`]);
+  }
+
+  goToAddUser(element: any): void {
+    console.log('--> element:');
+    console.log(element);
   }
 }

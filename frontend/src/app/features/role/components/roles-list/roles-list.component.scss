@@ -1,3 +1,5 @@
+@import 'src/styles';
+
 table {
   tr {
     height: 50px !important;    
@@ -14,6 +16,10 @@ table {
 
     &.w-40 {
       width: 40%;
+
+      .pointer {
+        cursor: pointer;
+      }
     }
 
     &.w-30 {
@@ -54,7 +60,6 @@ table {
 
 table {
   width: 100%;
-  // margin-top: 30px;
   border-collapse: collapse;
   border-radius: 4px;
 }

@@ -15,7 +15,7 @@ Company.init({
   phone:   { type: DataTypes.STRING,  allowNull: false, validate: { notEmpty: false } },
   address: { type: DataTypes.STRING,  allowNull: false, validate: { notEmpty: false } },
 
-  avatar:  { type: DataTypes.STRING,  allowNull: true,  defaultValue: 'assets/images/user.png' },
+  avatar:  { type: DataTypes.STRING,  allowNull: true,  defaultValue: 'assets/img/user.png' },
 }, { 
   sequelize,
   modelName: 'company'
