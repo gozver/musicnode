@@ -8,8 +8,10 @@ import { UserService } from '@shared/services/user.service';
 import { RoleService } from '@shared/services/role.service';
 import { BandService } from '@shared/services/band.service';
 import { CompanyService } from '@shared/services/company.service';
+
 import { User } from '@shared/interfaces/user.interface';
 import { ErrorDialogComponent } from '@shared/components/error-dialog/error-dialog.component'
+
 @Component({
   selector: 'app-manager',
   templateUrl: './manager.component.html',
@@ -65,7 +67,9 @@ export class ManagerComponent implements OnInit, OnDestroy {
     this.currentUser = this.authService.currentUser$.value;
 
     this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
-      console.log('--> this.rolesList:', rolesList);
+      console.log('--> this.rolesList:');
+      console.log(rolesList);
+
       this.rolesList$.next([...rolesList]);
     });
   }
@@ -110,7 +114,7 @@ export class ManagerComponent implements OnInit, OnDestroy {
   createBand(): void {
     this.bandService.createBand(this.bandForm.value, this.currentUser.id).subscribe(band => {
       this.userService.updateActiveRole(this.currentUser.id, 1).subscribe(user => {
-        console.log('--> update active role:')
+        console.log('--> update active role:');
         console.log(user);
       });
 
@@ -139,7 +143,7 @@ export class ManagerComponent implements OnInit, OnDestroy {
   createCompany(): void {
     this.companyService.createCompany(this.companyForm.value, this.currentUser.id).subscribe(() => {
       this.userService.updateActiveRole(this.currentUser.id, 1).subscribe(user => {
-        console.log('--> update active role:')
+        console.log('--> update active role:');
         console.log(user);
 
         this.currentUser.hasRole = true;
@@ -168,10 +172,11 @@ export class ManagerComponent implements OnInit, OnDestroy {
   createRole(): void {
     this.roleForm.value.userId = this.currentUser.id;
 
-    this.roleService.createRole(this.roleForm.value, this.bandForm.value, this.companyForm.value).subscribe(
+    this.roleService.createRoleAndEntity(this.roleForm.value, this.bandForm.value, this.companyForm.value).subscribe(
       role => {
         if (role) {
-          console.log('--> new role:', role);
+          console.log('--> new role:');
+          console.log(role);
 
           this.rolesList$.next([...this.rolesList$.value, role]);
 
@@ -181,9 +186,12 @@ export class ManagerComponent implements OnInit, OnDestroy {
         }
       },
       error => {
-        console.error(`--> error code: ${error.error.err.code}`);
-        console.error(`--> error message: ${error.error.err.message}`);
-        console.error('--> error objet:', error);
+        console.error('--> error code:');
+        console.error(error.error.err.code);
+        console.error('--> error message:');
+        console.error(error.error.err.message);
+        console.error('--> error objet:');
+        console.error(error);
 
         /**
          * @definition Opens a mat dialog
@@ -201,11 +209,17 @@ export class ManagerComponent implements OnInit, OnDestroy {
       });
   }
 
-  deleteRole(id: number): void {
-    this.roleService.deleteRole(id).subscribe(res => {
-      console.log('--> delete role response:', res);
+  deleteRole(role: any): void {
+    this.roleService.deleteRole(
+      role.id,
+      this.currentUser.id,
+      role.bandId,
+      role.companyId
+    ).subscribe(res => {
+      console.log('--> delete role response:');
+      console.log(res);
 
-      this.rolesList$.next([...this.rolesList$.value.filter(item => item.id !== id)]);
+      this.rolesList$.next([...this.rolesList$.value.filter(item => item.id !== role.id)]);
     });
   }
 }

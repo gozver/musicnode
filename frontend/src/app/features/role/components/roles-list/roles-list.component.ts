@@ -13,7 +13,7 @@ import { User } from '@shared/interfaces/user.interface';
 export class RolesListComponent implements OnInit {
   @Input() data: Observable<any>;
   @Input() currentUser: User;
-  @Output() delete = new EventEmitter<number>();
+  @Output() delete = new EventEmitter<any>();
   
   rolesList: any[] = [];
   displayedColumns: string[] = ['role', 'name', 'actions'];
@@ -31,16 +31,15 @@ export class RolesListComponent implements OnInit {
     });
   }
 
-  deleteRole(id: number): void {
-    this.delete.emit(id);
+  deleteRole(role: any): void {
+    this.delete.emit(role);
   }
 
   goToProfile(role: string, id: number): void {
     this.router.navigate([`/profile/${role}/${id}`]);
   }
 
-  goToAddUser(element: any): void {
-    console.log('--> element:');
-    console.log(element);
+  goToAddUser(id: number): void {
+    this.router.navigate([`/role/add/${id}`]);
   }
 }

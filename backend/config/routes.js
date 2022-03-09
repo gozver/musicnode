@@ -22,10 +22,12 @@ router
   .patch  ('/user/info',   middlewares.auth, controllers.user.updateInfo)
   .patch  ('/user/role',   middlewares.auth, controllers.user.updateActiveRole)
 
-  .get    ('/role',                       controllers.role.findAll)
-  .get    ('/role/:id', middlewares.auth, controllers.role.findAllByUserId)
-  .post   ('/role',     middlewares.auth, controllers.role.create)
-  .delete ('/role/:id', middlewares.auth, controllers.role.delete)
+  .get    ('/role',                          controllers.role.findAll)
+  .get    ('/role/:id',    middlewares.auth, controllers.role.findAllByUserId)
+  .get    ('/role/id/:id', middlewares.auth, controllers.role.findOne)
+  .post   ('/role/old',    middlewares.auth, controllers.role.createOldEntity)
+  .post   ('/role/new',    middlewares.auth, controllers.role.createNewEntity)
+  .delete ('/role/:id/:uid/:bid/:cid', middlewares.auth, controllers.role.delete)
 
   .get    ('/band',                          controllers.band.findAll)
   .get    ('/band/params', middlewares.auth, controllers.band.findAllByParams)

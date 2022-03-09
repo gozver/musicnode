@@ -1,1 +1,43 @@
-<p>add-user works!</p>
+<article>
+  <section class="top-ctnr">
+    <div class=title>ROLE MANAGER</div>
+    
+    <div class="subtitle">Let's add users</div>
+    
+    <div class="text">
+      In this section you can add a user to a band or company that you belong. Just enter the user email you want to be part of your band or company and click on the add button.
+    </div>
+  </section>
+
+  <section class="bottom-ctnr">
+    <h1>Add a user to {{ role?.company?.name }}:</h1>
+
+    <div class="card">
+      <!-- <app-band-form
+        [bandForm]=bandForm
+        *ngIf="+currentUser?.activeRole === -1"
+      ></app-band-form> -->
+
+      <form [formGroup]="userForm" novalidate>
+        <mat-form-field appearance="outline" class="input-headline">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" formControlName="email" autocomplete="on" type="email" />
+          <button mat-icon-button matSuffix [attr.aria-label]="'Email'" disabled>
+            <mat-icon matSuffix>alternate_email</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+      
+      <div class="btn-ctnr">
+        <!-- <button mat-flat-button class="primary" *ngIf="+currentUser?.activeRole === -2" (click)="createCompany()" [disabled]="companyForm.invalid"> -->
+        <button mat-flat-button class="primary left" (click)="addUser()" [disabled]="userForm.invalid">
+          Add
+        </button>
+
+        <button mat-flat-button class="warn" color="warn" (click)="goBack()">
+          Return
+        </button>
+      </div>
+    </div>
+  </section>
+</article>

@@ -94,9 +94,9 @@ export class BandProfileComponent implements OnInit {
     this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
       this.isAdmin = rolesList.filter(item => item.roleId === 4).length > 0;
       
-      console.log('--> roles list:');
+      console.log('--> rolesList:');
       console.log(rolesList);
-      console.log('--> is admin:');
+      console.log('--> isAdmin:');
       console.log(this.isAdmin);
     });
 
@@ -113,9 +113,9 @@ export class BandProfileComponent implements OnInit {
         // !! => Parse to boolean
         this.isMyBand = !!this.profileBand.users.find((user: { id: number; }) => user.id === this.currentUser.id);
 
-        console.log('--> profile band:');
+        console.log('--> this.profileBand:');
         console.log(this.profileBand);
-        console.log('--> is my band:');
+        console.log('--> this.isMyBand:');
         console.log(this.isMyBand);
 
         // 1) Modify video URL to embed in the HTML: replace('watch?v=', 'embed/')
@@ -125,15 +125,18 @@ export class BandProfileComponent implements OnInit {
         this.profileBand.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.profileBand.video);
         this.videoIsEmbeded = true;
         
-        console.log('--> sanitized profileBand video:');
+        console.log('--> this.profileBand.video:');
         console.log(this.profileBand.video.changingThisBreaksApplicationSecurity);
         
         this.reviewService.getReviews(this.profileBand.id).subscribe(reviewsList => this.reviewsList = reviewsList);
       },
       error => {
-        console.error(`--> error code: ${error.error.err.code}`);
-        console.error(`--> error message: ${error.error.err.message}`);
-        console.error('--> error objet:', error);
+        console.error('--> error code:');
+        console.error(error.error.err.code);
+        console.error('--> error message:');
+        console.error(error.error.err.message);
+        console.error('--> error objet:');
+        console.error(error);
 
         this.router.navigate(['/home']);
       }

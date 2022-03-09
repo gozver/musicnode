@@ -117,6 +117,7 @@ db.sync({ force: true })
     await comp2.addUser(user3);
     await comp2.addUser(user4);
 
+    await comp2.addUser(user1);
     await comp3.addUser(user5);
     await comp3.addUser(user6);
 
@@ -128,6 +129,7 @@ db.sync({ force: true })
     await models.role.create({ roleId: 2, role: 'company', userId:  11, companyId: 2 });
     await models.role.create({ roleId: 2, role: 'company', userId:  12, companyId: 2 });
 
+    await models.role.create({ roleId: 2, role: 'company', userId:  9,  companyId: 3 });
     await models.role.create({ roleId: 2, role: 'company', userId:  13, companyId: 3 });
     await models.role.create({ roleId: 2, role: 'company', userId:  14, companyId: 3 });
   })
@@ -380,6 +382,7 @@ db.sync({ force: true })
     await band02.addUser(user05);
     await band02.addUser(user06);
 
+    await band03.addUser(user01);
     await band03.addUser(user07);
     await band03.addUser(user08);
     await band03.addUser(user09);

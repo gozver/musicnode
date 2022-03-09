@@ -5,7 +5,7 @@
     <div class="subtitle">Let's get info</div>
 
     <div class="text">
-      In this section you can manage your personal information and your roles. You can also search in others users profiles to obtain information and get in touch with them.
+      In this section you can manage your personal information. You can also search in others users profiles to obtain information and get in touch with them.
     </div>
   </section>
 
@@ -61,7 +61,7 @@
       <span [ngSwitch]="+role?.roleId">
         <p *ngSwitchCase="1" class="role">- This user belongs to <span class="bold">{{ role?.band?.name }}.</span></p>
         <p *ngSwitchCase="2" class="role">- This user belongs to <span class="bold">{{ role?.company?.name }}.</span></p>
-        <p *ngSwitchCase="3" class="role">- This user has an <span class="bold">contractor</span> role.</p>
+        <p *ngSwitchCase="3" class="role">- This user has a <span class="bold">contractor</span> role.</p>
         <p *ngSwitchCase="4" class="role">- This user has an <span class="bold">administrator</span> role.</p>
       </span>
     </span>

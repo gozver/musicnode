@@ -99,7 +99,7 @@ export class EditBandProfileComponent implements OnInit {
     });
   }
 
-  goBack() {
+  goBack(): void {
     this.router.navigate([`/profile/band/${this.profileId}`]);
   }
 }

@@ -10,7 +10,7 @@ const routes: Routes = [
     component: ManagerComponent
   },
   {
-    path: '/add',
+    path: 'add/:id',
     component: AddUserComponent
   }
 ];

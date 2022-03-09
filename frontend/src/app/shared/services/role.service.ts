@@ -20,21 +20,33 @@ export class RoleService {
     private errorHandlerService: ErrorHandlerService
   ) { }
 
-  createRole(roleForm: Role, bandForm: Band, companyForm: Company): Observable<any> {
-    const params = { roleForm, bandForm, companyForm };
+  createRole(email: string, role: any): Observable<any> {
+    const params = { email, role };
     
-    return this.http.post<any>(`${environment.apiUrl}/role`, params);
+    return this.http.post<any>(`${environment.apiUrl}/role/old`, params);
   }
 
-  getRolesByUserId(id: number): Observable<any[]> { // controller return role model with includes
+  createRoleAndEntity(roleForm: Role, bandForm: Band, companyForm: Company): Observable<any> {
+    const params = { roleForm, bandForm, companyForm };
+    
+    return this.http.post<any>(`${environment.apiUrl}/role/new`, params);
+  }
+
+  getRolesByUserId(id: number): Observable<any[]> {
     return this.http.get<any[]>(`${environment.apiUrl}/role/${id}`).pipe(
       catchError(this.errorHandlerService.handleError<any>('getRolesByUserId', []))
     );
   }
 
-  deleteRole(id: number): Observable<any> {
-    return this.http.delete<Role>(`${environment.apiUrl}/role/${id}`).pipe(
-      catchError(this.errorHandlerService.handleError<any>('deleteRole'))
+  getRoleById(id: number): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiUrl}/role/id/${id}`).pipe(
+      catchError(this.errorHandlerService.handleError<any>('getRoleById', null))
+    );
+  }
+
+  deleteRole(id: number, uid: number, bid: number, cid: number): Observable<any> {
+    return this.http.delete<Role>(`${environment.apiUrl}/role/${id}/${uid}/${bid}/${cid}`).pipe(
+      catchError(this.errorHandlerService.handleError<any>('deleteRole', null))
     );
   }
 }

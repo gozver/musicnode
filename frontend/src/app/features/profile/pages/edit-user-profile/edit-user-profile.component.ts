@@ -6,7 +6,7 @@ import { Location } from '@angular/common';
 import { AuthService } from '@shared/services/auth.service';
 import { UserService } from '@shared/services/user.service';
 import { RoleService } from '@shared/services/role.service';
-import { User } from '@app/shared/interfaces/user.interface';
+import { User } from '@shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-edit-user-profile',
@@ -45,9 +45,9 @@ export class EditUserProfileComponent implements OnInit {
     this.roleService.getRolesByUserId(this.profileId).subscribe(rolesList => {
       this.isAdmin = rolesList.filter(item => item.roleId === 4).length > 0;
 
-      console.log('--> roles list:');
+      console.log('--> rolesList:');
       console.log(rolesList);
-      console.log('--> is admin:');
+      console.log('--> this.isAdmin:');
       console.log(this.isAdmin);
 
       this.userService.getUser(this.profileId).subscribe(
@@ -104,7 +104,7 @@ export class EditUserProfileComponent implements OnInit {
     });
   }
 
-  goBack() {
+  goBack(): void {
     this.location.back();
   }
 }

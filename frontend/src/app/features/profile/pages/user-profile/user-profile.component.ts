@@ -62,9 +62,12 @@ export class UserProfileComponent implements OnInit {
         this.initUserForm(this.profileUser);
       }, 
       error => {
-        console.error(`--> error code: ${error.error.err.code}`);
-        console.error(`--> error message: ${error.error.err.message}`);
-        console.error('--> error objet:', error);
+        console.error('--> error code:');
+        console.error(error.error.err.code);
+        console.error('--> error message:');
+        console.error(error.error.err.message);
+        console.error('--> error objet:');
+        console.error(error);
 
         this.router.navigate(['/home']);
       }

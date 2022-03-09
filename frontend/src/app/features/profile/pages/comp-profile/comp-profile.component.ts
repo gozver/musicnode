@@ -94,7 +94,9 @@ export class CompProfileComponent implements OnInit {
         console.log(this.isMyCompany);
       },
       error => {
-        console.error('--> error:', error);
+        console.error('--> error:');
+        console.error(error);
+
         this.router.navigate(['/home']);
       }
     );

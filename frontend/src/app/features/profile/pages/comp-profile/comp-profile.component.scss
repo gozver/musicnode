@@ -162,4 +162,22 @@ article {
       }
     }
   }
+
+  .company-workers {
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    h1 {
+      margin-bottom: 10px;
+      color: #eeaa24;
+    }
+
+    ul {
+      list-style-type: none;
+      
+      &.ng-star-inserted {
+        margin: 5px 0 0 -25px;
+      }
+    }
+  }
 }

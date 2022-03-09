@@ -70,4 +70,13 @@
       <mat-icon>delete</mat-icon>
     </button>
   </section>
+
+  <!-- MUSICIAN LIST -->
+  <section class="company-workers">
+    <h1>{{ profileComp?.name }} workers:</h1>
+    
+    <ul *ngFor="let worker of profileComp?.users">
+      <li>- {{ worker?.name }} {{ worker?.surname }}</li>
+    </ul>
+  </section>
 </article>

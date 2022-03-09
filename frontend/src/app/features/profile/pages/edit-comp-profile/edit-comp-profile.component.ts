@@ -66,12 +66,14 @@ export class EditCompProfileComponent implements OnInit {
           if (!this.isAdmin && !this.isMyCompany) {
             console.error('--> unauthorized');
             console.error('--> redirect to home');
-            // this.router.navigate(['/home']);
+            this.router.navigate(['/home']);
           }
         }, 
         error => {
-          console.error('--> error:', error);
-          // this.router.navigate(['/home']);
+          console.error('--> error:');
+          console.error(error);
+          
+          this.router.navigate(['/home']);
         }
       );
     });
@@ -95,7 +97,7 @@ export class EditCompProfileComponent implements OnInit {
     });
   }
 
-  goBack() {
+  goBack(): void {
     this.router.navigate([`/profile/company/${this.profileId}`]);
   }
 }
