@@ -61,6 +61,7 @@ router
 
   .get    ('/review/:bandId', middlewares.auth, controllers.review.findAll)
   .post   ('/review',         middlewares.auth, controllers.review.create)
+  .delete ('/review/:id',     middlewares.auth, controllers.review.delete)
 
   .post   ('/email', controllers.email.sendContactEmail);
 

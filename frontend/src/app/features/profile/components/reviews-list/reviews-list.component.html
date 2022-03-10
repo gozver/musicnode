@@ -1,0 +1,60 @@
+<div class="review" *ngFor="let review of reviewsList">
+  <div class="user-ctnr">
+    <div class="avatar">
+      <img src="{{ review?.user?.avatar }}" alt="{{ review?.user?.name }}" />
+    </div>
+        
+    <div class="user-info">
+      <p class="full-name">{{ review?.user?.name }} {{ review?.user?.surname }}</p>
+
+      <div class="rating" [ngSwitch]="review?.rating">
+        <span *ngSwitchCase="'1'">
+          <i class="material-icons">star</i>
+        </span>
+
+        <span *ngSwitchCase="'2'">
+          <i class="material-icons">star</i>
+          <i class="material-icons">star</i>
+        </span>
+        
+        <span *ngSwitchCase="'3'">
+          <i class="material-icons">star</i>
+          <i class="material-icons">star</i>
+          <i class="material-icons">star</i>
+        </span>
+
+        <span *ngSwitchCase="'4'">
+          <i class="material-icons">star</i>
+          <i class="material-icons">star</i>
+          <i class="material-icons">star</i>
+          <i class="material-icons">star</i>
+        </span>
+
+        <span *ngSwitchCase="'5'">
+          <i class="material-icons">star</i>
+          <i class="material-icons">star</i>
+          <i class="material-icons">star</i>
+          <i class="material-icons">star</i>
+          <i class="material-icons">star</i>
+        </span>
+      </div>
+
+      <div class="date">{{ review.createdAt | date: 'short' }}</div>
+    </div>
+  </div>
+
+  <div class="text">
+    <p>{{ review?.body }}</p>
+  </div>
+
+  <!-- <section class="btn-ctnr" *ngIf="isMyBand || isAdmin"> -->
+  <section class="btn-ctnr" *ngIf="isMyBand || isAdmin">
+    <button mat-fab color="warn" class="warn" (click)="editReview()">
+      <mat-icon>edit</mat-icon>
+    </button>
+
+    <button mat-fab color="warn" (click)="deleteReview(review.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </section>
+</div>

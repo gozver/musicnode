@@ -11,13 +11,15 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { BandFormComponent } from './band-form/band-form.component';
 import { CompFormComponent } from './comp-form/comp-form.component';
+import { ReviewsListComponent } from './reviews-list/reviews-list.component';
 
 @NgModule({
   declarations: [
     CarouselComponent,
     UserFormComponent,
     BandFormComponent,
-    CompFormComponent
+    CompFormComponent,
+    ReviewsListComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { CompFormComponent } from './comp-form/comp-form.component';
     CarouselComponent,
     UserFormComponent,
     BandFormComponent,
-    CompFormComponent
+    CompFormComponent,
+    ReviewsListComponent
   ]
 })
 export class ProfileComponentsModule { }

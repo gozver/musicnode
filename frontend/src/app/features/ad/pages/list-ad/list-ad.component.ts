@@ -122,7 +122,7 @@ export class ListAdComponent implements OnInit {
   deleteAd(adId: number): void {
     // Delete the element from the database
     this.adService.deleteAd(adId).subscribe(res => {
-      console.log('--> Delete ad response:');
+      console.log('--> delete ad response:');
       console.log(res);
 
       // If the ad is deleted in the db, remove from the adList array

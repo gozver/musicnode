@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Review } from '../interfaces/reviwe.interface';
+import { Review } from '../interfaces/review.interface';
 import { ErrorHandlerService } from './error-handler.service';
 import { environment } from '@environments/environment';
 
@@ -27,6 +27,12 @@ export class ReviewService {
   createReview(params: Review): Observable<Review> {
     return this.http.post<Review>(`${environment.apiUrl}/review`, params).pipe(
       catchError(this.errorHandlerService.handleError<any>('createReview', null))
+    );
+  }
+
+  deleteReview(id: number): Observable<any> {
+    return this.http.delete<Review>(`${environment.apiUrl}/review/${id}`).pipe(
+      catchError(this.errorHandlerService.handleError<any>('deleteReview'))
     );
   }
 }

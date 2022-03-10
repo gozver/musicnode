@@ -19,6 +19,7 @@ import { User } from '@shared/interfaces/user.interface';
 })
 export class BandProfileComponent implements OnInit {
   imagesList$ = new BehaviorSubject([]);
+  reviewsList$ = new BehaviorSubject([]);
 
   profileId: number;
   profileBand: any;
@@ -128,7 +129,11 @@ export class BandProfileComponent implements OnInit {
         console.log('--> this.profileBand.video:');
         console.log(this.profileBand.video.changingThisBreaksApplicationSecurity);
         
-        this.reviewService.getReviews(this.profileBand.id).subscribe(reviewsList => this.reviewsList = reviewsList);
+        this.reviewService.getReviews(this.profileBand.id).subscribe(reviewsList => {
+          this.reviewsList = reviewsList;
+
+          this.reviewsList$.next(reviewsList);
+        });
       },
       error => {
         console.error('--> error code:');
@@ -229,8 +234,8 @@ export class BandProfileComponent implements OnInit {
     }
 
     // Ad the new review to the reviewsList array
-    this.reviewsList = [newReview, ...this.reviewsList ];
-
+    this.reviewsList$.next([newReview, ...this.reviewsList ]);
+    
     this.reviewForm.value.userId = this.currentUser.id;
     this.reviewForm.value.bandId = this.profileBand.id;
 
@@ -239,5 +244,19 @@ export class BandProfileComponent implements OnInit {
 
     // Reset the form
     this.reviewForm.reset();
+  }
+
+  deleteReview(id: number): void {
+    console.log('--> id:');
+    console.log(id);
+    
+    // Delete the element from the database
+    this.reviewService.deleteReview(id).subscribe(res => {
+      console.log('--> delete ad response:');
+      console.log(res);
+
+      // Delete the element from the reviewsList array
+      this.reviewsList$.next([...this.reviewsList$.value.filter(item => item.id !== id)]);
+    });
   }
 }

@@ -35,3 +35,19 @@ exports.findAll = async (req, res, next) => {
       next(err); // go to error controller
     });
 }
+
+exports.delete = async (req, res, next) => {
+  models.review.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(data => res.json(data))
+    .catch(err => {
+      if (!err.statusCode) err.statusCode = 500;
+
+      // print error and send it to error controller
+      console.log('--> error:');
+      console.log(err);
+      next(err);
+    });
+}
