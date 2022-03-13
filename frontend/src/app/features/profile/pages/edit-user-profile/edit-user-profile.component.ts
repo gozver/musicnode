@@ -42,7 +42,7 @@ export class EditUserProfileComponent implements OnInit {
   initComponentData(): void {
     this.currentUser = this.authService.currentUser$.value;
 
-    this.roleService.getRolesByUserId(this.profileId).subscribe(rolesList => {
+    this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
       this.isAdmin = rolesList.filter(item => item.roleId === 4).length > 0;
 
       console.log('--> rolesList:');

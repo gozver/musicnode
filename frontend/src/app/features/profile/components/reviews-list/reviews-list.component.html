@@ -47,12 +47,7 @@
     <p>{{ review?.body }}</p>
   </div>
 
-  <!-- <section class="btn-ctnr" *ngIf="isMyBand || isAdmin"> -->
-  <section class="btn-ctnr" *ngIf="isMyBand || isAdmin">
-    <button mat-fab color="warn" class="warn" (click)="editReview()">
-      <mat-icon>edit</mat-icon>
-    </button>
-
+  <section class="btn-ctnr" *ngIf="isAdmin">
     <button mat-fab color="warn" (click)="deleteReview(review.id)">
       <mat-icon>delete</mat-icon>
     </button>

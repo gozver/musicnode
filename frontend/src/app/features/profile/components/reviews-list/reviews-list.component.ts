@@ -10,7 +10,6 @@ import { Observable } from 'rxjs';
 })
 export class ReviewsListComponent implements OnInit {
   @Input() data: Observable<any>;
-  @Input() isMyBand: Observable<boolean>;
   @Input() isAdmin: Observable<boolean>;
   @Output() delete = new EventEmitter<number>();
 
@@ -25,10 +24,6 @@ export class ReviewsListComponent implements OnInit {
       this.reviewsList = [...reviewsList];
       this.cd.markForCheck();
     });
-  }
-
-  editReview(): void {
-
   }
 
   deleteReview(id: number): void {

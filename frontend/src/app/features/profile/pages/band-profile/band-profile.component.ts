@@ -220,30 +220,34 @@ export class BandProfileComponent implements OnInit {
   }
 
   createReview(): void {
-    const newReview = {
-      body: this.reviewForm.value.body,
-      rating: this.reviewForm.value.rating,
-      userId: this.currentUser.id,
-      bandId: this.profileBand.id,
-      user: {
-        name: this.currentUser.name,
-        surname: this.currentUser.surname,
-        avatar: this.currentUser.avatar
-      },
-      createdAt: Date.now()
-    }
-
-    // Ad the new review to the reviewsList array
-    this.reviewsList$.next([newReview, ...this.reviewsList ]);
-    
     this.reviewForm.value.userId = this.currentUser.id;
     this.reviewForm.value.bandId = this.profileBand.id;
 
     // Ad the new review to db
-    this.reviewService.createReview(this.reviewForm.value).subscribe();
+    this.reviewService.createReview(this.reviewForm.value).subscribe(review => {
+      console.log('--> review');
+      console.log(review);
 
-    // Reset the form
-    this.reviewForm.reset();
+      const newReview = {
+        id: review.id,
+        body: this.reviewForm.value.body,
+        rating: this.reviewForm.value.rating,
+        userId: this.currentUser.id,
+        bandId: this.profileBand.id,
+        user: {
+          name: this.currentUser.name,
+          surname: this.currentUser.surname,
+          avatar: this.currentUser.avatar
+        },
+        createdAt: Date.now()
+      }
+
+      // Ad the new review to the reviewsList array
+      this.reviewsList$.next([newReview, ...this.reviewsList ]);
+
+      // Reset the form
+      this.reviewForm.reset();
+    });
   }
 
   deleteReview(id: number): void {
@@ -256,7 +260,8 @@ export class BandProfileComponent implements OnInit {
       console.log(res);
 
       // Delete the element from the reviewsList array
-      this.reviewsList$.next([...this.reviewsList$.value.filter(item => item.id !== id)]);
+      this.reviewsList$.next([...this.reviewsList.filter(item => item.id !== id)]);
+      this.reviewsList = this.reviewsList$.value;
     });
   }
 }

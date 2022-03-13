@@ -46,9 +46,6 @@ const routes: Routes = [{
   path: 'contact',
   loadChildren: () => import('@features/contact/pages/contact.module').then(m => m.ContactModule)
 }, {
-  path: 'help',
-  loadChildren: () => import('@features/help/pages/help.module').then(m => m.HelpModule)
-}, {
   path: '**', // Any other path
   redirectTo: '/home'
 }];

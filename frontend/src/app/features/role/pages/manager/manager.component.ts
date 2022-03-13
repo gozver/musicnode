@@ -116,32 +116,34 @@ export class ManagerComponent implements OnInit, OnDestroy {
       this.userService.updateActiveRole(this.currentUser.id, 1).subscribe(user => {
         console.log('--> update active role:');
         console.log(user);
+
+        this.currentUser.hasRole = true;
+        this.currentUser.activeRole = 1;
+
+        this.authService.setCurrentUser(this.currentUser);
+        this.authService.setHasRole(this.currentUser.hasRole);
+        
+        const role = {
+          roleId: 1,
+          role: "band",
+          bandId: band.id,
+          band: band,
+          companyId: null,
+          company: null,
+          userId: this.currentUser.id,
+          createdAt: Date.now(),
+          updatedAt: Date.now()
+        }
+
+        this.rolesList$.next([...this.rolesList$.value, role]);
+
+        this.bandForm.reset();
       });
-
-      this.currentUser.hasRole = true;
-      this.currentUser.activeRole = 1;
-
-      this.authService.setCurrentUser(this.currentUser);
-      this.authService.setHasRole(this.currentUser.hasRole);
-      
-      const role = {
-        roleId: 1,
-        role: "band",
-        bandId: band.id,
-        band: band,
-        companyId: null,
-        company: null,
-        userId: this.currentUser.id,
-        createdAt: Date.now(),
-        updatedAt: Date.now()
-      }
-
-      this.rolesList$.next([...this.rolesList$.value, role]);
     });
   }
 
   createCompany(): void {
-    this.companyService.createCompany(this.companyForm.value, this.currentUser.id).subscribe(() => {
+    this.companyService.createCompany(this.companyForm.value, this.currentUser.id).subscribe(company => {
       this.userService.updateActiveRole(this.currentUser.id, 1).subscribe(user => {
         console.log('--> update active role:');
         console.log(user);
@@ -151,6 +153,22 @@ export class ManagerComponent implements OnInit, OnDestroy {
   
         this.authService.setCurrentUser(this.currentUser);
         this.authService.setHasRole(this.currentUser.hasRole);
+
+        const role = {
+          roleId: 2,
+          role: "company",
+          bandId: null,
+          band: null,
+          companyId: company.id,
+          company: company,
+          userId: this.currentUser.id,
+          createdAt: Date.now(),
+          updatedAt: Date.now()
+        }
+
+        this.rolesList$.next([...this.rolesList$.value, role]);
+        
+        this.companyForm.reset();
       });
     });
   }
@@ -220,6 +238,12 @@ export class ManagerComponent implements OnInit, OnDestroy {
       console.log(res);
 
       this.rolesList$.next([...this.rolesList$.value.filter(item => item.id !== role.id)]);
+
+      // Change user active role if is deleted
+      if (parseInt(role.roleId) === this.currentUser.activeRole) {
+        this.currentUser.activeRole = this.rolesList$.value[0].roleId;
+        this.authService.setCurrentUser(this.currentUser);
+      }
     });
   }
 }

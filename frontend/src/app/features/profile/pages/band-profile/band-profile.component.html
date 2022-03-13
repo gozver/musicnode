@@ -90,18 +90,17 @@
   </section>
 
   <!-- LIST REVIEWS -->
-  <section class="band-reviews">
+  <section class="band-reviews" *ngIf="reviewsList$.value.length > 0">
     <h1>Reviews:</h1>
 
     <app-reviews-list
       [data]=reviewsList$
-      [isMyBand]=isMyBand
       [isAdmin]=isAdmin
       (delete)="deleteReview($event)"
     ></app-reviews-list>
   </section>
 
-  <div class="separator" *ngIf="isMyBand || isAdmin"></div>
+  <div class="separator" *ngIf="isAdmin"></div>
 
   <!-- CREATE REVIEW -->
   <section class="new-review">

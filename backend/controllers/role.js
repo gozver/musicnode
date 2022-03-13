@@ -257,7 +257,7 @@ exports.delete = async (req, res, next) => {
   console.log('--> cid:');
   console.log(cid);
 
-  if (bid !== 'null') {
+  if (bid !== 'null' && cid !== 'undefined') {
     console.log('--------');
     console.log('--> band')
     console.log('--------');
@@ -277,7 +277,7 @@ exports.delete = async (req, res, next) => {
     band.setUsers(users);
   }
 
-  if (cid !== 'null') {
+  if (cid !== 'null' && cid !== 'undefined') {
     console.log('-----------');
     console.log('--> company')
     console.log('-----------');
@@ -309,7 +309,5 @@ exports.delete = async (req, res, next) => {
       console.log('--> error:');
       console.log(err);
       next(err);
-    });
-
-  res.json('OK');
+    });  
 }
