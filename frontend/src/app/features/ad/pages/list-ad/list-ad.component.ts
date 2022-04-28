@@ -40,11 +40,7 @@ export class ListAdComponent implements OnInit {
 
   getComponentData(): void {
     this.currentUser = this.authService.currentUser$.value;
-    this.adService.getAds().subscribe(adsList => {
-      this.adsList = adsList;
-      console.log('--> this.adsList:');
-      console.log(this.adsList);
-    });
+    this.adService.getAds().subscribe(adsList => this.adsList = adsList);
   }
 
   initAdForm(): void {
@@ -79,17 +75,11 @@ export class ListAdComponent implements OnInit {
 
         // Insert the ad in the database
         this.adService.createAd(this.adForm.value).subscribe(ad => {
-          console.log('--> Create ad response:');
-          console.log(ad);
-
           // Insert ad images in the database
           const files: FileList = this.adForm.value.images;
           this.imagesForm.patchValue({ images: files });
 
           this.adService.updateImages(ad.id, this.imagesForm.value.images).subscribe(imagesList => {
-            console.log('--> uploaded files:');
-            console.log(imagesList);
-      
             // Update adsList in the frontend
             ad.user = this.currentUser;
             ad.images = [];
@@ -122,9 +112,6 @@ export class ListAdComponent implements OnInit {
   deleteAd(adId: number): void {
     // Delete the element from the database
     this.adService.deleteAd(adId).subscribe(res => {
-      console.log('--> delete ad response:');
-      console.log(res);
-
       // If the ad is deleted in the db, remove from the adList array
       this.adsList = this.adsList.filter(item => item.id !== adId);
     });

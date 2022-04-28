@@ -39,15 +39,11 @@ export class LoginComponent implements OnInit {
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(
         res => {
-          console.log('--> login response:')
-          console.log(res);
+          // console.log('--> login response:')
+          // console.log(res);
         },
         err => {
-          console.error('--> error code:');
-          console.error(err.error.err.code);
-          console.error('--> error message:');
-          console.error(err.error.err.message);
-          console.error('--> error objet:');
+          console.error('--> error:');
           console.error(err);
 
           /**

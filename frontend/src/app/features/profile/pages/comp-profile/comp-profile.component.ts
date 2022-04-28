@@ -68,11 +68,6 @@ export class CompProfileComponent implements OnInit {
 
     this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
       this.isAdmin = rolesList.filter(item => item.roleId === 4).length > 0;
-      
-      console.log('--> roles list:');
-      console.log(rolesList);
-      console.log('--> is admin:');
-      console.log(this.isAdmin);
     });
 
     this.companyService.getCompany(this.profileId).subscribe(
@@ -87,11 +82,6 @@ export class CompProfileComponent implements OnInit {
 
         // !! => Parse to boolean
         this.isMyCompany = !!this.profileComp.users.find((user: { id: number; }) => user.id === this.currentUser.id);
-
-        console.log('--> profile company:');
-        console.log(this.profileComp);
-        console.log('--> is my company:');
-        console.log(this.isMyCompany);
       },
       error => {
         console.error('--> error:');
@@ -135,9 +125,6 @@ export class CompProfileComponent implements OnInit {
     this.imagesForm.patchValue({ images: files });
 
     this.companyService.updateImages(this.profileComp.id, this.imagesForm.value.images).subscribe(imagesList => {
-      console.log('--> uploaded files:');
-      console.log(imagesList);
-
       // Update images in frontend
       let newImagesList: any = imagesList;
 
@@ -153,15 +140,8 @@ export class CompProfileComponent implements OnInit {
   deleteImages(): void {
     // Delete images in backend
     this.companyService.deleteImages(this.profileComp.id).subscribe(res => {
-      console.log('--> res:');
-      console.log(res);
-
       // Delete images in frontend
-      const noImage = [{
-        image: "assets/img/no-image-2.png",
-      }]
-
-      this.imagesList$.next(noImage);
+      this.imagesList$.next([]);
     });
   }
 

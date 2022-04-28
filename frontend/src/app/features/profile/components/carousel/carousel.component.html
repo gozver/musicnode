@@ -1,12 +1,12 @@
 <section class="carousel">
   <div class="images-ctnr">
-    <owl-carousel-o [options]="customOptions" *ngIf="imagesList[0] || imagesList[0]?.image !== 'assets/img/no-image-2.png'">
+    <owl-carousel-o [options]="customOptions" *ngIf="imagesList[0]">
       <ng-template carouselSlide class="slide owl-carousel owl-theme owl-centered" *ngFor="let images of imagesList">
         <img src="{{ images?.image }}" alt="No Image" />
       </ng-template>  
     </owl-carousel-o>
 
-    <owl-carousel-o [options]="customOptions" *ngIf="!imagesList[0] || imagesList[0]?.image === 'assets/img/no-image-2.png'">
+    <owl-carousel-o [options]="customOptions" *ngIf="!imagesList[0]">
       <ng-template carouselSlide class="slide owl-carousel owl-theme owl-centered">
         <img src="assets/img/no-image-2.png" alt="No Image" />
       </ng-template>  

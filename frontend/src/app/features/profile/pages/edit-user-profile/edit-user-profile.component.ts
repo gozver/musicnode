@@ -45,11 +45,6 @@ export class EditUserProfileComponent implements OnInit {
     this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
       this.isAdmin = rolesList.filter(item => item.roleId === 4).length > 0;
 
-      console.log('--> rolesList:');
-      console.log(rolesList);
-      console.log('--> this.isAdmin:');
-      console.log(this.isAdmin);
-
       this.userService.getUser(this.profileId).subscribe(
         user => {
           this.profileUser = user[0];
@@ -60,15 +55,11 @@ export class EditUserProfileComponent implements OnInit {
             console.error('--> redirect to home');
             this.router.navigate(['/home']);
           }
-
-          console.log('--> this.profileUser:');
-          console.log(this.profileUser);
-  
         }, 
         error => {
-          console.error('--> unauthorized');
-          console.error('--> redirect to home');
-          console.error('--> error:', error);
+          console.error('--> error:');
+          console.error(error);
+          
           this.router.navigate(['/home']);
         }
       );

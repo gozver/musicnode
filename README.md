@@ -1,5 +1,5 @@
 # Musicnode: 
-Web Application Development Final Proyect (IES Trassierra).
+Web Application Development Final Proyect.
 
 ### Description:
 Professional business drive network for musicians and music events management companies or free market contractors.  

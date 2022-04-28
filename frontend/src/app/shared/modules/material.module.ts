@@ -1,8 +1,6 @@
-// Angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// Angular Material
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
@@ -22,7 +20,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
-
 
 const modules: any[] = [
   MatInputModule,

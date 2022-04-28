@@ -32,16 +32,7 @@ export class AddUserComponent implements OnInit {
 
   initComponentData(): void {
     this.initUserForm();
-
-    console.log('--> this.id:');
-    console.log(this.id);
-
-    this.roleService.getRoleById(this.id).subscribe(role => {
-      this.role = role[0];
-
-      console.log('--> this.role');
-      console.log(this.role);
-    });
+    this.roleService.getRoleById(this.id).subscribe(role => this.role = role[0]);
   }
 
   initUserForm(): void {
@@ -55,17 +46,10 @@ export class AddUserComponent implements OnInit {
   addUser(): void {
     this.roleService.createRole(this.userForm.value.email, this.role).subscribe(
       res => {
-        console.log('--> add user response:');
-        console.log(res);
-
         this.router.navigate(['/role']);
       },
       err => {
-        console.error('--> error code:');
-        console.error(err.error.err.code);
-        console.error('--> error message:');
-        console.error(err.error.err.message);
-        console.error('--> error objet:');
+        console.error('--> error:');
         console.error(err);
 
         /**

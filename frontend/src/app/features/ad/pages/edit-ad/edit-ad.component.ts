@@ -55,9 +55,6 @@ export class EditAdComponent implements OnInit, OnDestroy {
 
       if (this.paramId) {
         this.adService.getAd(this.paramId).subscribe(ad => {
-          console.log('--> ad:');
-          console.log(ad);
-
           if (ad) {
             this.initAdForm(ad);
             
@@ -68,11 +65,6 @@ export class EditAdComponent implements OnInit, OnDestroy {
             this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
               this.isAdmin = rolesList.filter(item => item.roleId === 4).length > 0;
               
-              console.log('--> this.isAdmin:');
-              console.log(this.isAdmin);
-              console.log('--> this.isMyAd:');
-              console.log(this.isMyAd);
-
               if (!this.isMyAd && !this.isAdmin) {
                 this.router.navigate(['/ad']);
               }
@@ -111,9 +103,6 @@ export class EditAdComponent implements OnInit, OnDestroy {
 
     // Update images in backend
     this.adService.updateImages(this.ad.id, this.imagesForm.value.images).subscribe(imagesList => {
-      console.log('--> uploaded files:');
-      console.log(imagesList);
-
       // Update images in frontend
       let newImagesList: any = imagesList;
 
@@ -129,9 +118,6 @@ export class EditAdComponent implements OnInit, OnDestroy {
   deleteImages(): void {
     // Delete images in backend
     this.adService.deleteImages(this.ad.id).subscribe(res => {
-      console.log('--> res:');
-      console.log(res);
-
       // Delete images in frontend
       this.imagesList$.next([]);
     });

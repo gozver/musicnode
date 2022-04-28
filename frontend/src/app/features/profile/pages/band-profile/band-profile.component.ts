@@ -36,8 +36,6 @@ export class BandProfileComponent implements OnInit {
   avatarSelected: boolean = false;
   videoIsEmbeded: boolean = false;
 
-  reviewsList: any[] = [];
-
   ratingsList: { value: number }[] = [
     { value: 1 },
     { value: 2 },
@@ -94,11 +92,6 @@ export class BandProfileComponent implements OnInit {
 
     this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
       this.isAdmin = rolesList.filter(item => item.roleId === 4).length > 0;
-      
-      console.log('--> rolesList:');
-      console.log(rolesList);
-      console.log('--> isAdmin:');
-      console.log(this.isAdmin);
     });
 
     this.bandService.getBand(this.profileId).subscribe(
@@ -114,11 +107,6 @@ export class BandProfileComponent implements OnInit {
         // !! => Parse to boolean
         this.isMyBand = !!this.profileBand.users.find((user: { id: number; }) => user.id === this.currentUser.id);
 
-        console.log('--> this.profileBand:');
-        console.log(this.profileBand);
-        console.log('--> this.isMyBand:');
-        console.log(this.isMyBand);
-
         // 1) Modify video URL to embed in the HTML: replace('watch?v=', 'embed/')
         // 2) Angular DomSanitizer:
         // https://stackoverflow.com/questions/47193997/im-trying-to-dynamically-change-the-url-of-an-iframe-but-im-getting-an-error-un/47194242
@@ -126,21 +114,12 @@ export class BandProfileComponent implements OnInit {
         this.profileBand.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.profileBand.video);
         this.videoIsEmbeded = true;
         
-        console.log('--> this.profileBand.video:');
-        console.log(this.profileBand.video.changingThisBreaksApplicationSecurity);
-        
         this.reviewService.getReviews(this.profileBand.id).subscribe(reviewsList => {
-          this.reviewsList = reviewsList;
-
           this.reviewsList$.next(reviewsList);
         });
       },
       error => {
-        console.error('--> error code:');
-        console.error(error.error.err.code);
-        console.error('--> error message:');
-        console.error(error.error.err.message);
-        console.error('--> error objet:');
+        console.error('--> error:');
         console.error(error);
 
         this.router.navigate(['/home']);
@@ -181,9 +160,6 @@ export class BandProfileComponent implements OnInit {
     this.imagesForm.patchValue({ images: files });
 
     this.bandService.updateImages(this.profileBand.id, this.imagesForm.value.images).subscribe(imagesList => {
-      console.log('--> uploaded files:');
-      console.log(imagesList);
-
       // Update images in frontend
       let newImagesList: any = imagesList;
 
@@ -199,15 +175,8 @@ export class BandProfileComponent implements OnInit {
   deleteImages(): void {
     // Delete images in backend
     this.bandService.deleteImages(this.profileBand.id).subscribe(res => {
-      console.log('--> res:');
-      console.log(res);
-
       // Delete images in frontend
-      const noImage = [{
-        image: "assets/img/no-image-2.png",
-      }]
-
-      this.imagesList$.next(noImage);
+      this.imagesList$.next([]);
     });
   }
 
@@ -225,9 +194,6 @@ export class BandProfileComponent implements OnInit {
 
     // Ad the new review to db
     this.reviewService.createReview(this.reviewForm.value).subscribe(review => {
-      console.log('--> review');
-      console.log(review);
-
       const newReview = {
         id: review.id,
         body: this.reviewForm.value.body,
@@ -243,7 +209,7 @@ export class BandProfileComponent implements OnInit {
       }
 
       // Ad the new review to the reviewsList array
-      this.reviewsList$.next([newReview, ...this.reviewsList ]);
+      this.reviewsList$.next([newReview, ...this.reviewsList$.value ]);
 
       // Reset the form
       this.reviewForm.reset();
@@ -251,17 +217,10 @@ export class BandProfileComponent implements OnInit {
   }
 
   deleteReview(id: number): void {
-    console.log('--> id:');
-    console.log(id);
-    
     // Delete the element from the database
     this.reviewService.deleteReview(id).subscribe(res => {
-      console.log('--> delete ad response:');
-      console.log(res);
-
       // Delete the element from the reviewsList array
-      this.reviewsList$.next([...this.reviewsList.filter(item => item.id !== id)]);
-      this.reviewsList = this.reviewsList$.value;
+      this.reviewsList$.next([...this.reviewsList$.value.filter(item => item.id !== id)]);
     });
   }
 }

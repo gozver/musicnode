@@ -66,11 +66,7 @@ export class HomeDialogComponent implements OnInit {
           }
         });
 
-        console.error('--> error code:'); 
-        console.error(err.error.err.code);
-        console.error('--> error message:');
-        console.error(err.error.err.message);
-        console.error('--> error objet:')
+        console.error('--> error:');
         console.error(err);
       });
     this.contactForm.reset();

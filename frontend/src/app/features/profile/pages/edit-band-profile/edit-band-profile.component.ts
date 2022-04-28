@@ -43,11 +43,6 @@ export class EditBandProfileComponent implements OnInit {
     this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
       this.isAdmin = rolesList.filter(item => item.roleId === 4).length > 0;
 
-      console.log('--> roles list:');
-      console.log(rolesList);
-      console.log('--> is admin:');
-      console.log(this.isAdmin);
-
       this.bandService.getBand(this.profileId).subscribe(
         band => {
           this.profileBand = band[0];
@@ -56,11 +51,6 @@ export class EditBandProfileComponent implements OnInit {
           // !! => Parse to boolean
           this.isMyBand = !!this.profileBand.users.find((user: { id: number; }) => user.id === this.currentUser.id);
 
-          console.log('--> profile band:');
-          console.log(this.profileBand);
-          console.log('--> is my band:');
-          console.log(this.isMyBand);
-
           if (!this.isAdmin && !this.isMyBand) {
             console.error('--> unauthorized');
             console.error('--> redirect to home');
@@ -68,9 +58,9 @@ export class EditBandProfileComponent implements OnInit {
           }
         }, 
         error => {
-          console.error('--> unauthorized');
-          console.error('--> redirect to home');
-          console.error('--> error:', error);
+          console.error('--> error:');
+          console.error(error);
+
           this.router.navigate(['/home']);
         }
       );

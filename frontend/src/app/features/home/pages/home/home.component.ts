@@ -37,9 +37,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.bandsList = bandsList;
       this.bandsList = this.shuffle(this.bandsList);
 
-      console.log('--> this.bandsList');
-      console.log(this.bandsList);
-
       // Calculate average rating
       this.bandsList.forEach(band => {
         let averageRating = 0;

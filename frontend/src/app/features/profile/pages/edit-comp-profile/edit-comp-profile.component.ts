@@ -45,11 +45,6 @@ export class EditCompProfileComponent implements OnInit {
     this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
       this.isAdmin = rolesList.filter(item => item.roleId === 4).length > 0;
       
-      console.log('--> roles list:');
-      console.log(rolesList);
-      console.log('--> is admin:');
-      console.log(this.isAdmin);
-
       this.companyService.getCompany(this.profileId).subscribe(
         company => {
           this.profileComp = company[0];
@@ -58,11 +53,6 @@ export class EditCompProfileComponent implements OnInit {
           // !! => Parse to boolean
           this.isMyCompany = !!this.profileComp.users.find((user: { id: number; }) => user.id === this.currentUser.id);
           
-          console.log('--> profile company:');
-          console.log(this.profileComp);
-          console.log('--> is my company:');
-          console.log(this.isMyCompany);
-
           if (!this.isAdmin && !this.isMyCompany) {
             console.error('--> unauthorized');
             console.error('--> redirect to home');

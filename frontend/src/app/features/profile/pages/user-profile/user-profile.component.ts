@@ -41,32 +41,17 @@ export class UserProfileComponent implements OnInit {
   initComponentData(): void {
     this.currentUser = this.authService.currentUser$.value;
 
-    console.log('--> this.currentUser:');
-    console.log(this.currentUser);
-
     this.userService.getUser(this.profileId).subscribe(
       user => {
         this.profileUser = user[0];
 
-        console.log('--> this.profileUser:');
-        console.log(this.profileUser);
-
-        this.roleService.getRolesByUserId(this.profileId).subscribe(rolesList => {
-          this.rolesList = rolesList;
-
-          console.log('--> this.rolesList');
-          console.log(this.rolesList);
-        });
+        this.roleService.getRolesByUserId(this.profileId).subscribe(rolesList => this.rolesList = rolesList);
 
         this.imageData = this.profileUser.avatar;
         this.initUserForm(this.profileUser);
       }, 
       error => {
-        console.error('--> error code:');
-        console.error(error.error.err.code);
-        console.error('--> error message:');
-        console.error(error.error.err.message);
-        console.error('--> error objet:');
+        console.error('--> error:');
         console.error(error);
 
         this.router.navigate(['/home']);

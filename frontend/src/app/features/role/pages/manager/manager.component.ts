@@ -67,9 +67,6 @@ export class ManagerComponent implements OnInit, OnDestroy {
     this.currentUser = this.authService.currentUser$.value;
 
     this.roleService.getRolesByUserId(this.currentUser.id).subscribe(rolesList => {
-      console.log('--> this.rolesList:');
-      console.log(rolesList);
-
       this.rolesList$.next([...rolesList]);
     });
   }
@@ -114,9 +111,6 @@ export class ManagerComponent implements OnInit, OnDestroy {
   createBand(): void {
     this.bandService.createBand(this.bandForm.value, this.currentUser.id).subscribe(band => {
       this.userService.updateActiveRole(this.currentUser.id, 1).subscribe(user => {
-        console.log('--> update active role:');
-        console.log(user);
-
         this.currentUser.hasRole = true;
         this.currentUser.activeRole = 1;
 
@@ -145,9 +139,6 @@ export class ManagerComponent implements OnInit, OnDestroy {
   createCompany(): void {
     this.companyService.createCompany(this.companyForm.value, this.currentUser.id).subscribe(company => {
       this.userService.updateActiveRole(this.currentUser.id, 1).subscribe(user => {
-        console.log('--> update active role:');
-        console.log(user);
-
         this.currentUser.hasRole = true;
         this.currentUser.activeRole = 2;
   
@@ -193,9 +184,6 @@ export class ManagerComponent implements OnInit, OnDestroy {
     this.roleService.createRoleAndEntity(this.roleForm.value, this.bandForm.value, this.companyForm.value).subscribe(
       role => {
         if (role) {
-          console.log('--> new role:');
-          console.log(role);
-
           this.rolesList$.next([...this.rolesList$.value, role]);
 
           this.roleForm.reset();
@@ -204,11 +192,7 @@ export class ManagerComponent implements OnInit, OnDestroy {
         }
       },
       error => {
-        console.error('--> error code:');
-        console.error(error.error.err.code);
-        console.error('--> error message:');
-        console.error(error.error.err.message);
-        console.error('--> error objet:');
+        console.error('--> error:');
         console.error(error);
 
         /**
@@ -234,15 +218,13 @@ export class ManagerComponent implements OnInit, OnDestroy {
       role.bandId,
       role.companyId
     ).subscribe(res => {
-      console.log('--> delete role response:');
-      console.log(res);
-
       this.rolesList$.next([...this.rolesList$.value.filter(item => item.id !== role.id)]);
 
       // Change user active role if is deleted
       if (parseInt(role.roleId) === this.currentUser.activeRole) {
         this.currentUser.activeRole = this.rolesList$.value[0].roleId;
         this.authService.setCurrentUser(this.currentUser);
+        this.userService.updateActiveRole(this.currentUser.id, this.currentUser.activeRole).subscribe();
       }
     });
   }
